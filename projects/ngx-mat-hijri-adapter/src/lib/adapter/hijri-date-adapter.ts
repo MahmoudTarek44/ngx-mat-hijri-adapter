@@ -13,10 +13,11 @@ import {
 } from '../calendar/calendar-date';
 import type { SupportedCalendar } from '../calendar/supported-calendars';
 import {
-  normalizeMonthLabel,
-  umalquraMonthNames,
-  umalquraMonthNumber,
-} from '../locale/month-names';
+  calendarMonthNames,
+  formatCalendarDate,
+  formatNumber,
+} from '../formats/format-calendar-date';
+import { normalizeMonthLabel, umalquraMonthNumber } from '../locale/month-names';
 import { HIJRI_DATE_ADAPTER_OPTIONS } from './hijri-date-adapter-options';
 
 const invalidDates = new WeakSet<CalendarDate>();
@@ -31,7 +32,7 @@ const ISO_DATE = /^(\d{4})-(\d{2})-(\d{2})$/;
  */
 @Injectable()
 export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
-  private readonly calendarId: SupportedCalendar;
+  private calendarId: SupportedCalendar;
   private readonly timeZone: string;
 
   constructor() {
@@ -42,16 +43,34 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
     this.setLocale(options.locale ?? 'ar-SA');
   }
 
+  /** The calendar that owns parsing, display, and the dates this adapter creates. */
+  get calendar(): SupportedCalendar {
+    return this.calendarId;
+  }
+
+  /**
+   * Switches the calendar at runtime and notifies Material through `localeChanges`.
+   * Dates passed to the adapter afterwards are converted to the new calendar.
+   */
+  setCalendar(calendar: SupportedCalendar): void {
+    if (calendar === this.calendarId) {
+      return;
+    }
+
+    this.calendarId = calendar;
+    this._localeChanges.next();
+  }
+
   override getYear(date: CalendarDate): number {
-    return this.isValid(date) ? date.year : Number.NaN;
+    return this.isValid(date) ? this.inCalendar(date).year : Number.NaN;
   }
 
   override getMonth(date: CalendarDate): number {
-    return this.isValid(date) ? date.month - 1 : Number.NaN;
+    return this.isValid(date) ? this.inCalendar(date).month - 1 : Number.NaN;
   }
 
   override getDate(date: CalendarDate): number {
-    return this.isValid(date) ? date.day : Number.NaN;
+    return this.isValid(date) ? this.inCalendar(date).day : Number.NaN;
   }
 
   override getDayOfWeek(date: CalendarDate): number {
@@ -63,14 +82,7 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
   }
 
   override getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
-    if (this.calendarId === 'gregorian') {
-      const formatter = new Intl.DateTimeFormat(this.locale, { month: style, timeZone: 'UTC' });
-      return Array.from({ length: 12 }, (_, month) =>
-        formatter.format(new Date(Date.UTC(2024, month, 1))),
-      );
-    }
-
-    return umalquraMonthNames(this.locale, style);
+    return calendarMonthNames(this.calendarId, this.locale, style);
   }
 
   override getDateNames(): string[] {
@@ -94,7 +106,7 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
   }
 
   override getNumDaysInMonth(date: CalendarDate): number {
-    return this.isValid(date) ? daysInCalendarMonth(date) : Number.NaN;
+    return this.isValid(date) ? daysInCalendarMonth(this.inCalendar(date)) : Number.NaN;
   }
 
   override clone(date: CalendarDate): CalendarDate {
@@ -102,7 +114,7 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
       return this.invalid();
     }
 
-    const converted = convertCalendarDate(date, this.calendarId);
+    const converted = this.inCalendar(date);
     return createCalendarDate(this.calendarId, converted.year, converted.month, converted.day);
   }
 
@@ -156,25 +168,7 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
       throw new Error('HijriDateAdapter: Cannot format invalid date.');
     }
 
-    const options = readFormatOptions(displayFormat);
-    const day = options.day ? formatNumber(date.day, this.locale) : '';
-    const year = options.year ? formatNumber(date.year, this.locale) : '';
-    const month = this.formatMonth(date.month, options.month);
-    const numericMonth = options.month === 'numeric' || options.month === '2-digit';
-
-    if (day && month && year) {
-      return numericMonth ? `${day}/${month}/${year}` : `${day} ${month}, ${year}`;
-    }
-
-    if (month && year) {
-      return `${month} ${year}`;
-    }
-
-    if (day && month) {
-      return `${day} ${month}`;
-    }
-
-    return day || month || year;
+    return formatCalendarDate(this.inCalendar(date), this.locale, readFormatOptions(displayFormat));
   }
 
   override addCalendarYears(date: CalendarDate, years: number): CalendarDate {
@@ -237,6 +231,11 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
     }
 
     return compareCalendarDates(first, second);
+  }
+
+  /** The same day in this adapter's calendar. */
+  private inCalendar(date: CalendarDate): CalendarDate {
+    return convertCalendarDate(date, this.calendarId);
   }
 
   private adopt(date: CalendarDate): CalendarDate {
@@ -307,22 +306,6 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
     return null;
   }
 
-  private formatMonth(month: number, style: Intl.DateTimeFormatOptions['month']): string {
-    if (!style) {
-      return '';
-    }
-
-    if (style === 'numeric' || style === '2-digit') {
-      const text = formatNumber(month, this.locale);
-      return style === '2-digit' && /^\d+$/.test(text) ? text.padStart(2, '0') : text;
-    }
-
-    const names = this.getMonthNames(
-      style === 'long' || style === 'short' || style === 'narrow' ? style : 'long',
-    );
-    return names[month - 1] ?? '';
-  }
-
   private shift(date: CalendarDate, duration: DateDuration): CalendarDate {
     if (!this.isValid(date)) {
       return this.invalid();
@@ -338,10 +321,6 @@ function readFormatOptions(displayFormat: unknown): Intl.DateTimeFormatOptions {
   }
 
   return displayFormat as Intl.DateTimeFormatOptions;
-}
-
-function formatNumber(value: number, locale: string): string {
-  return new Intl.NumberFormat(locale, { useGrouping: false }).format(value);
 }
 
 function firstDayOfWeek(locale: string): number {

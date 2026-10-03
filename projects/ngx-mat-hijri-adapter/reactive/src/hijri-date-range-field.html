@@ -1,0 +1,65 @@
+<mat-form-field subscriptSizing="dynamic">
+  @if (label()) {
+    <mat-label>{{ label() }}</mat-label>
+  }
+
+  <mat-date-range-input
+    [formGroup]="range"
+    [rangePicker]="picker"
+    [min]="pickerMin()"
+    [max]="pickerMax()"
+    [dateFilter]="filter()"
+  >
+    <input
+      matStartDate
+      formControlName="start"
+      [placeholder]="startPlaceholder()"
+      [errorStateMatcher]="errorState"
+      (blur)="touch()"
+    />
+    <input
+      matEndDate
+      formControlName="end"
+      [placeholder]="endPlaceholder()"
+      [errorStateMatcher]="errorState"
+      (blur)="touch()"
+    />
+  </mat-date-range-input>
+
+  @if (calendarToggle()) {
+    <span matIconSuffix class="hijri-field-calendars">
+      <button
+        type="button"
+        mat-icon-button
+        [disabled]="disabled()"
+        [attr.aria-pressed]="display() === 'islamic-umalqura'"
+        [attr.aria-label]="labels().hijriAriaLabel"
+        (click)="openIn('islamic-umalqura', picker)"
+      >
+        {{ labels().hijri }}
+      </button>
+      <button
+        type="button"
+        mat-icon-button
+        [disabled]="disabled()"
+        [attr.aria-pressed]="display() === 'gregorian'"
+        [attr.aria-label]="labels().gregorianAriaLabel"
+        (click)="openIn('gregorian', picker)"
+      >
+        {{ labels().gregorian }}
+      </button>
+    </span>
+  } @else {
+    <mat-datepicker-toggle matIconSuffix [for]="picker" />
+  }
+
+  <mat-date-range-picker #picker [touchUi]="touchUi()" (closed)="touch()" />
+
+  @if (equivalent()) {
+    <mat-hint>{{ equivalent() }}</mat-hint>
+  }
+
+  @if (errorMessage()) {
+    <mat-error>{{ errorMessage() }}</mat-error>
+  }
+</mat-form-field>

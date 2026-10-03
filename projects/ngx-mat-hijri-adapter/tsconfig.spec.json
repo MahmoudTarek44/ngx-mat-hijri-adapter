@@ -3,9 +3,13 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": "./src",
+    "rootDir": ".",
     "outDir": "../../out-tsc/spec",
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+    "paths": {
+      "ngx-mat-hijri-adapter": ["./src/public-api.ts"],
+      "ngx-mat-hijri-adapter/*": ["./*/src/public-api.ts"]
+    }
   },
-  "include": ["src/**/*.d.ts", "src/**/*.spec.ts"]
+  "include": ["src/**/*.d.ts", "src/**/*.spec.ts", "reactive/src/**/*.spec.ts"]
 }

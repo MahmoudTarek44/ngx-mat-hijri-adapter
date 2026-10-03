@@ -32,5 +32,18 @@ describe('App', () => {
     expect(gregorian?.querySelector('input')?.value).toBe('11/3/2024');
     expect(gregorian?.textContent).toContain('Fridays are unavailable.');
     expect(gregorian?.textContent).toContain('Gregorian 2024-03-11 is Umm al-Qura 1445-09-01.');
+
+    const reactive = compiled.querySelector('[data-demo="reactive"]');
+    const [appointment, start, end] = Array.from(reactive?.querySelectorAll('input') ?? []);
+
+    expect(appointment?.value).toBe('١/٩/١٤٤٥');
+    expect(start?.value).toBe('١١/٣/٢٠٢٤');
+    expect(end?.value).toBe('٢٠/٣/٢٠٢٤');
+    expect(reactive?.querySelector('[data-value="appointment"]')?.textContent).toBe(
+      'islamic-umalqura 1445-09-01',
+    );
+    expect(reactive?.querySelector('[data-value="stay"]')?.textContent).toBe(
+      'gregorian 2024-03-11 → gregorian 2024-03-20',
+    );
   });
 });

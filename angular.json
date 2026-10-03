@@ -27,7 +27,8 @@
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {
-            "tsConfig": "projects/ngx-mat-hijri-adapter/tsconfig.spec.json"
+            "tsConfig": "projects/ngx-mat-hijri-adapter/tsconfig.spec.json",
+            "include": ["**/*.spec.ts", "../reactive/**/*.spec.ts"]
           }
         }
       }
@@ -81,6 +82,11 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "prebundle": {
+              "exclude": ["ngx-mat-hijri-adapter"]
+            }
+          },
           "configurations": {
             "production": {
               "buildTarget": "demo:build:production"

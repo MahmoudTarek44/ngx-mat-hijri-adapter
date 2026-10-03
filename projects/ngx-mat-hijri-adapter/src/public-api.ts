@@ -23,6 +23,7 @@ export {
   type HijriDateAdapterOptions,
 } from './lib/adapter/hijri-date-adapter-options';
 export { HIJRI_DATE_FORMATS } from './lib/formats/date-formats';
+export { formatCalendarDate } from './lib/formats/format-calendar-date';
 export {
   provideHijriDateAdapter,
   type ProvideHijriDateAdapterOptions,

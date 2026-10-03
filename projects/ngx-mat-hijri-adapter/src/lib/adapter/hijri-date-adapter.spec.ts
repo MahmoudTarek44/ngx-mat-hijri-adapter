@@ -124,6 +124,29 @@ describe('HijriDateAdapter', () => {
     expect(dates.getYear(dates.createDate(1445, 8, 1))).toBe(1445);
   });
 
+  it('switches the calendar at runtime and converts dates it receives', () => {
+    const dates = adapter();
+    const ramadan = dates.createDate(1445, 8, 1);
+    let notified = 0;
+    dates.localeChanges.subscribe(() => notified++);
+
+    dates.setCalendar('islamic-umalqura');
+    expect(notified).toBe(0);
+
+    dates.setCalendar('gregorian');
+    expect(notified).toBe(1);
+    expect(dates.calendar).toBe('gregorian');
+    expect(dates.getMonthNames('long')[2]).toBe('March');
+    expect(dates.getYear(ramadan)).toBe(2024);
+    expect(dates.getMonth(ramadan)).toBe(2);
+    expect(dates.getDate(ramadan)).toBe(11);
+    expect(dates.getNumDaysInMonth(ramadan)).toBe(31);
+    expect(dates.toIso8601(dates.clone(ramadan))).toBe('2024-03-11');
+    expect(dates.format(ramadan, HIJRI_DATE_FORMATS.display.dateInput)).toBe('11/3/2024');
+    expect(dates.sameDate(dates.parse('11/3/2024', null), ramadan)).toBe(true);
+    expect(dates.getYear(dates.createDate(2024, 2, 11))).toBe(2024);
+  });
+
   it('clamps short months and rejects dates outside the Umm al-Qura table', () => {
     const dates = adapter();
     const shawwal = dates.addCalendarMonths(dates.createDate(1445, 8, 30), 1);
