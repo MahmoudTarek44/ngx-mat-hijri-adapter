@@ -1,6 +1,6 @@
 # ngx-mat-hijri-adapter
 
-[![Version](https://img.shields.io/github/v/tag/MahmoudTarek44/ngx-mat-hijri-adapter?label=version&color=006d3b)](https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.1.0)
+[![Version](https://img.shields.io/github/v/tag/MahmoudTarek44/ngx-mat-hijri-adapter?label=version&color=006d3b)](https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.0)
 [![Angular](https://img.shields.io/badge/Angular-22-dd0031)](https://angular.dev)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Documentation](https://img.shields.io/badge/docs-live%20demo-006d3b)](https://mahmoudtarek44.github.io/ngx-mat-hijri-adapter/)
@@ -19,7 +19,7 @@ Angular Material date adapter and form fields for the Gregorian and Umm al-Qura 
 
 ## Status and installation
 
-Version 0.1.0 is tagged on [GitHub](https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.1.0). It is not yet published to npm. Once it is, install it with its peer dependency:
+Version 0.2.0 is tagged on [GitHub](https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.0). It is not yet published to npm. Once it is, install it with its peer dependency:
 
 ```bash
 npm install ngx-mat-hijri-adapter @internationalized/date

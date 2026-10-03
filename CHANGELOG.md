@@ -5,6 +5,129 @@ All notable changes to ngx-mat-hijri-adapter will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-10-03
+
+### ✨ Demo, Documentation & Release Process
+
+This release adds a documentation site and a redesigned live demo, published to GitHub Pages on every release tag. The library code is unchanged from 0.1.0; the package ships the shorter README and this changelog. Each commit below is a squash of one branch into `development`. The branches held work-in-progress commits only, so there are no original subjects to list.
+
+#### Changes by Commit
+
+| Commit    | Type       | Description                                                                                                                      |
+| --------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `ffa6a08` | ✨ Feature | **Demo Redesign**: Material 3 theme with light, dark, and system modes, a hero, a playground, and example cards with code tabs   |
+| `28201d4` | ✨ Feature | **Documentation Pages**: Ten docs pages with side navigation, and the demo styled with Tailwind CSS on top of the Material theme |
+| `62e21b1` | ✨ Feature | **Live Preview**: The hero calendar opens on today's date in the visitor's time zone and keeps one height for every month        |
+| `a4c387a` | 🏗️ Build   | **GitHub Pages**: Deploy the demo when a release tag is pushed or the workflow is run by hand                                    |
+| `f889c72` | 🏗️ Build   | **Release Tags**: Release tags are numbers only, such as `0.2.0`                                                                 |
+| `369930a` | 📝 Docs    | **README**: Shortened to an overview with a link to the documentation site                                                       |
+| `943bdd4` | 📝 Docs    | **Changelog Format**: Entries use a commit table, a summary, and a modified files list                                           |
+
+### 📝 Summary of Changes
+
+#### ✨ Added
+
+- **Documentation Site**: Getting started, calendar values, date adapter, parsing and formatting, form fields, reactive fields, signal fields, right-to-left, API reference, and gotchas, at [mahmoudtarek44.github.io/ngx-mat-hijri-adapter](https://mahmoudtarek44.github.io/ngx-mat-hijri-adapter/)
+- **Playground**: Change the calendar, locale, direction, period, calendar toggle, equivalent-date hint, and touch UI, and see the values and the matching provider and template code
+- **Example Cards**: Live Umm al-Qura and Gregorian datepickers and the reactive and signal fields, each with TypeScript and HTML tabs and a copy button
+- **Theme**: Light, dark, and system modes, saved in the browser
+- **Live Preview**: An inline calendar that switches between Hijri and Gregorian and shows the selected date in both
+
+#### 🔧 Changed
+
+- **Demo Styling**: Tailwind CSS 4 replaces the custom stylesheets. Colors and type come from the Material 3 theme, so both follow light and dark mode
+- **README**: Features, installation, requirements, a quick start, and the entry points, with the details moved to the documentation site
+- **Changelog**: Rewritten in the commit-table format
+
+#### 🏗️ Build
+
+- **Pages Workflow**: `.github/workflows/pages.yml` builds the library and the demo with the `/ngx-mat-hijri-adapter/` base path, adds a `404.html` fallback for deep links, and deploys to GitHub Pages
+- **Tag Format**: Tags such as `0.2.0` trigger the deploy; there is no `v` prefix
+- **Demo Dependencies**: `tailwindcss`, `@tailwindcss/postcss`, and `postcss` as development dependencies, configured only for the demo
+
+### 📦 Modified Files
+
+<details>
+<summary><strong>Demo Shell and Theme</strong></summary>
+
+- `projects/demo/src/app/app.ts` - Top bar, version chip, theme menu, and footer
+- `projects/demo/src/app/app.html` - Shell template
+- `projects/demo/src/app/app.routes.ts` - Home and docs routes, loaded on demand
+- `projects/demo/src/app/app.config.ts` - Router with anchor scrolling and the Material Symbols icon font
+- `projects/demo/src/app/theme/theme.ts` - Light, dark, and system mode service
+- `projects/demo/src/app/links.ts` - Repository link
+- `projects/demo/src/index.html` - Fonts, description, and theme color
+- `projects/demo/src/app/app.spec.ts` - Version chip, navigation, and theme tests
+
+</details>
+
+<details>
+<summary><strong>Home</strong></summary>
+
+- `projects/demo/src/app/home/home.ts` - Home page with outlined form fields
+- `projects/demo/src/app/home/home.html` - Hero, features, playground, and examples
+- `projects/demo/src/app/home/hero-calendar.ts` - Live preview calendar that opens on today's date at a fixed height
+- `projects/demo/src/app/home/playground/playground.ts` - Playground state and generated code
+- `projects/demo/src/app/home/playground/playground.html` - Playground controls and preview
+- `projects/demo/src/app/home/home.spec.ts` - Hero, playground, and example tests
+
+</details>
+
+<details>
+<summary><strong>Examples and Shared Components</strong></summary>
+
+- `projects/demo/src/app/examples/calendar-demo/calendar-demo.ts` - Umm al-Qura and Gregorian datepicker examples, moved from `calendar-demo/`
+- `projects/demo/src/app/examples/reactive-fields-demo/reactive-fields-demo.ts` - Reactive fields example, moved from `reactive-fields-demo/`
+- `projects/demo/src/app/examples/signal-fields-demo/signal-fields-demo.ts` - Signal fields example, moved from `signal-fields-demo/`
+- `projects/demo/src/app/examples/snippets.ts` - Code shown in the example tabs
+- `projects/demo/src/app/shared/code-block.ts` - Code block with a copy button
+- `projects/demo/src/app/shared/example-card.ts` - Card with demo and code tabs
+- `projects/demo/src/app/shared/demo-controls.ts` - Locale and direction switches
+
+</details>
+
+<details>
+<summary><strong>Documentation</strong></summary>
+
+- `projects/demo/src/app/docs/doc-pages.ts` - Page list and routes
+- `projects/demo/src/app/docs/docs-layout.ts` - Side navigation, mobile menu, and previous and next links
+- `projects/demo/src/app/docs/pages/*.ts` and `*.html` - The ten documentation pages
+- `projects/demo/src/app/docs/docs-layout.spec.ts` - Navigation and page tests
+
+</details>
+
+<details>
+<summary><strong>Styles</strong></summary>
+
+- `projects/demo/src/tailwind.css` - Tailwind setup with the Material color and type tokens
+- `projects/demo/src/styles.scss` - Material 3 theme with light and dark modes, replacing `styles.css`
+- `projects/demo/.postcssrc.json` - Tailwind PostCSS plugin for the demo
+- `projects/demo/src/app/app.css` and `calendar-demo/calendar-demo.css` - Removed
+
+</details>
+
+<details>
+<summary><strong>Workspace and Package</strong></summary>
+
+- `.github/workflows/pages.yml` - GitHub Pages deploy on release tags and manual runs
+- `angular.json` - Demo stylesheets
+- `package.json` - Version 0.2.0 and the Tailwind development dependencies
+- `package-lock.json` - Version 0.2.0 and the Tailwind packages
+- `projects/ngx-mat-hijri-adapter/package.json` - Version 0.2.0
+- `projects/ngx-mat-hijri-adapter/src/lib/version.ts` - `NGX_MAT_HIJRI_ADAPTER_VERSION` is 0.2.0
+- `README.md` - Shorter overview with the documentation link and version 0.2.0
+- `CHANGELOG.md` - Commit-table format and this entry
+
+</details>
+
+---
+
+**Version**: 0.2.0  
+**Release Date**: October 3, 2026  
+**Maintained by**: Mahmoud
+
+---
+
 ## [0.1.0] - 2026-10-03
 
 ### ✨ New Features
@@ -153,4 +276,5 @@ First release. One Angular Material date adapter for the Gregorian and Umm al-Qu
 
 ---
 
+[0.2.0]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.0
 [0.1.0]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.1.0
