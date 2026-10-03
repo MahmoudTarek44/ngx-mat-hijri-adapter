@@ -17,3 +17,13 @@ export {
   daysInCalendarMonth,
   monthsInCalendarYear,
 } from './lib/calendar/calendar-date';
+export { HijriDateAdapter } from './lib/adapter/hijri-date-adapter';
+export {
+  HIJRI_DATE_ADAPTER_OPTIONS,
+  type HijriDateAdapterOptions,
+} from './lib/adapter/hijri-date-adapter-options';
+export { HIJRI_DATE_FORMATS } from './lib/formats/date-formats';
+export {
+  provideHijriDateAdapter,
+  type ProvideHijriDateAdapterOptions,
+} from './lib/adapter/provide-hijri-date-adapter';
