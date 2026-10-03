@@ -15,7 +15,7 @@ describe('App', () => {
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.querySelector('h1')?.textContent).toContain('ngx-mat-hijri-adapter');
-    expect(compiled.textContent).toContain('Workspace version 0.0.0.');
+    expect(compiled.textContent).toContain('Workspace version 0.1.0.');
     expect(compiled.textContent).toContain('Umm al-Qura 1445-09-01 is Gregorian 2024-03-11.');
 
     const umalqura = compiled.querySelector('[data-calendar="islamic-umalqura"]');

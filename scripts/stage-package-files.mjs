@@ -4,3 +4,4 @@ const libraryRoot = 'projects/ngx-mat-hijri-adapter';
 
 copyFileSync('README.md', `${libraryRoot}/README.md`);
 copyFileSync('LICENSE', `${libraryRoot}/LICENSE`);
+copyFileSync('CHANGELOG.md', `${libraryRoot}/CHANGELOG.md`);
