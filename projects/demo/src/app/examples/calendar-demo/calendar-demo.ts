@@ -1,5 +1,5 @@
 import { Dir } from '@angular/cdk/bidi';
-import { Component, InjectionToken, inject, signal } from '@angular/core';
+import { Component, InjectionToken, effect, inject, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import {
@@ -19,8 +19,7 @@ import {
   type SupportedCalendar,
 } from 'ngx-mat-hijri-adapter';
 
-type DemoLocale = 'ar-SA' | 'en-US';
-type DemoDirection = 'rtl' | 'ltr';
+import { DemoControls, type DemoDirection, type DemoLocale } from '../../shared/demo-controls';
 
 const DEMO_CALENDAR = new InjectionToken<SupportedCalendar>('DEMO_CALENDAR');
 
@@ -38,9 +37,9 @@ const DEMO_CALENDAR = new InjectionToken<SupportedCalendar>('DEMO_CALENDAR');
     MatDatepicker,
     MatDatepickerInput,
     MatDatepickerToggle,
+    DemoControls,
   ],
   templateUrl: './calendar-demo.html',
-  styleUrl: './calendar-demo.css',
 })
 export class CalendarDemo {
   private readonly adapter = inject<DateAdapter<CalendarDate, string>>(DateAdapter);
@@ -63,15 +62,7 @@ export class CalendarDemo {
     }
 
     this.date = new FormControl(this.min);
-  }
-
-  protected useLocale(locale: DemoLocale): void {
-    this.locale.set(locale);
-    this.adapter.setLocale(locale);
-  }
-
-  protected useDirection(direction: DemoDirection): void {
-    this.direction.set(direction);
+    effect(() => this.adapter.setLocale(this.locale()));
   }
 
   protected readonly disableFridays = (date: CalendarDate | null): boolean =>

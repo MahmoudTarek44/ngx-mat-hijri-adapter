@@ -1,30 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { MatTooltip } from '@angular/material/tooltip';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
-import {
-  convertCalendarDate,
-  createCalendarDate,
-  NGX_MAT_HIJRI_ADAPTER_VERSION,
-} from 'ngx-mat-hijri-adapter';
+import { NGX_MAT_HIJRI_ADAPTER_VERSION } from 'ngx-mat-hijri-adapter';
 
-import { GregorianDemo, UmalquraDemo } from './calendar-demo/calendar-demo';
-import { ReactiveFieldsDemo } from './reactive-fields-demo/reactive-fields-demo';
-import { SignalFieldsDemo } from './signal-fields-demo/signal-fields-demo';
+import { REPOSITORY_URL } from './links';
+import { Theme, type ThemeMode } from './theme/theme';
 
-const hijri = createCalendarDate('islamic-umalqura', 1445, 9, 1);
-const gregorian = convertCalendarDate(hijri, 'gregorian');
+const THEME_ICONS: Record<ThemeMode, string> = {
+  light: 'light_mode',
+  dark: 'dark_mode',
+  system: 'contrast',
+};
 
 @Component({
   selector: 'root',
-  imports: [UmalquraDemo, GregorianDemo, ReactiveFieldsDemo, SignalFieldsDemo],
+  imports: [
+    RouterOutlet,
+    RouterLink,
+    MatButton,
+    MatIconButton,
+    MatIcon,
+    MatMenu,
+    MatMenuItem,
+    MatMenuTrigger,
+    MatTooltip,
+  ],
   templateUrl: './app.html',
-  styleUrl: './app.css',
 })
 export class App {
+  protected readonly theme = inject(Theme);
   protected readonly version = NGX_MAT_HIJRI_ADAPTER_VERSION;
-  protected readonly hijriLabel = isoDate(hijri.year, hijri.month, hijri.day);
-  protected readonly gregorianLabel = isoDate(gregorian.year, gregorian.month, gregorian.day);
-}
-
-function isoDate(year: number, month: number, day: number): string {
-  return [year, month, day].map((part) => String(part).padStart(2, '0')).join('-');
+  protected readonly repositoryUrl = REPOSITORY_URL;
+  protected readonly themeIcons = THEME_ICONS;
+  protected readonly themeModes: readonly ThemeMode[] = ['light', 'dark', 'system'];
 }

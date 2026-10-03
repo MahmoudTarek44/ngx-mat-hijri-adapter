@@ -1,0 +1,26 @@
+<section class="example-body" data-demo="signals" [attr.lang]="locale()" [dir]="direction()">
+  <demo-controls [(locale)]="locale" [(direction)]="direction" />
+
+  <ngx-mat-signal-date-field
+    [formField]="form.appointment"
+    valueCalendar="islamic-umalqura"
+    calendarToggle
+    [label]="text().date"
+    [locale]="locale()"
+    [dateFilter]="notFriday"
+    [errorMessages]="text().errors"
+  />
+  <p class="value-output" dir="ltr" data-value="appointment">{{ appointmentValue() }}</p>
+
+  <ngx-mat-signal-date-range-field
+    [formField]="form.stay"
+    valueCalendar="gregorian"
+    calendarToggle
+    [label]="text().range"
+    [startPlaceholder]="text().start"
+    [endPlaceholder]="text().end"
+    [locale]="locale()"
+    [errorMessages]="text().errors"
+  />
+  <p class="value-output" dir="ltr" data-value="stay">{{ stayValue() }}</p>
+</section>

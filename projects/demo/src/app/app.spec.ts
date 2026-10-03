@@ -1,51 +1,44 @@
+import { DOCUMENT } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { App } from './app';
+import { routes } from './app.routes';
+import { Theme } from './theme/theme';
 
 describe('App', () => {
   beforeEach(async () => {
+    localStorage.clear();
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [provideRouter(routes)],
     }).compileComponents();
   });
 
-  it('shows the unpublished package version', async () => {
+  it('shows the package version and the main navigation', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.querySelector('h1')?.textContent).toContain('ngx-mat-hijri-adapter');
-    expect(compiled.textContent).toContain('Workspace version 0.1.0.');
-    expect(compiled.textContent).toContain('Umm al-Qura 1445-09-01 is Gregorian 2024-03-11.');
+    expect(compiled.querySelector('[data-version]')?.textContent?.trim()).toBe('0.1.0');
+    const links = Array.from(compiled.querySelectorAll('nav a')).map((a) => a.textContent?.trim());
+    expect(links).toEqual(['Playground', 'Examples']);
+  });
 
-    const umalqura = compiled.querySelector('[data-calendar="islamic-umalqura"]');
-    const gregorian = compiled.querySelector('[data-calendar="gregorian"]');
+  it('applies and remembers the chosen theme', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const theme = TestBed.inject(Theme);
+    const root = TestBed.inject(DOCUMENT).documentElement;
 
-    expect(umalqura?.getAttribute('lang')).toBe('ar-SA');
-    expect(umalqura?.getAttribute('dir')).toBe('rtl');
-    expect(umalqura?.querySelector('input')?.value).toBe('١/٩/١٤٤٥');
-    expect(umalqura?.textContent).toContain('يوم الجمعة غير متاح');
-    expect(umalqura?.textContent).toContain('Umm al-Qura 1445-09-01 is Gregorian 2024-03-11.');
+    theme.mode.set('dark');
+    TestBed.tick();
+    expect(root.classList.contains('dark')).toBe(true);
+    expect(localStorage.getItem('ngx-mat-hijri-adapter-theme')).toBe('dark');
 
-    expect(gregorian?.getAttribute('lang')).toBe('en-US');
-    expect(gregorian?.getAttribute('dir')).toBe('ltr');
-    expect(gregorian?.querySelector('input')?.value).toBe('11/3/2024');
-    expect(gregorian?.textContent).toContain('Fridays are unavailable.');
-    expect(gregorian?.textContent).toContain('Gregorian 2024-03-11 is Umm al-Qura 1445-09-01.');
-
-    for (const name of ['reactive', 'signals']) {
-      const fields = compiled.querySelector(`[data-demo="${name}"]`);
-      const [appointment, start, end] = Array.from(fields?.querySelectorAll('input') ?? []);
-
-      expect(appointment?.value).toBe('١/٩/١٤٤٥');
-      expect(start?.value).toBe('١١/٣/٢٠٢٤');
-      expect(end?.value).toBe('٢٠/٣/٢٠٢٤');
-      expect(fields?.querySelector('[data-value="appointment"]')?.textContent).toBe(
-        'islamic-umalqura 1445-09-01',
-      );
-      expect(fields?.querySelector('[data-value="stay"]')?.textContent).toBe(
-        'gregorian 2024-03-11 → gregorian 2024-03-20',
-      );
-    }
+    theme.mode.set('system');
+    TestBed.tick();
+    expect(root.classList.contains('dark')).toBe(false);
+    expect(root.classList.contains('light')).toBe(false);
   });
 });

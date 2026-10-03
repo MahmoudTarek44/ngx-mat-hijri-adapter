@@ -1,0 +1,111 @@
+<div class="playground-controls">
+  <div class="control">
+    <span id="pg-calendar">Calendar</span>
+    <mat-button-toggle-group
+      hideSingleSelectionIndicator
+      aria-labelledby="pg-calendar"
+      [value]="calendar()"
+      (change)="useCalendar($event.value)"
+    >
+      <mat-button-toggle [value]="calendarCode.umalqura">Umm al-Qura</mat-button-toggle>
+      <mat-button-toggle [value]="calendarCode.gregorian">Gregorian</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <mat-form-field appearance="outline" subscriptSizing="dynamic">
+    <mat-label>Locale</mat-label>
+    <mat-select [value]="locale()" (selectionChange)="useLocale($event.value)">
+      @for (option of locales; track option.value) {
+        <mat-option [value]="option.value">{{ option.label }}</mat-option>
+      }
+    </mat-select>
+    <mat-hint>Digits, names, and week start. Never the calendar.</mat-hint>
+  </mat-form-field>
+
+  <div class="control">
+    <span id="pg-direction">Direction</span>
+    <mat-button-toggle-group
+      hideSingleSelectionIndicator
+      aria-labelledby="pg-direction"
+      [value]="direction()"
+      (change)="direction.set($event.value)"
+    >
+      <mat-button-toggle value="rtl">RTL</mat-button-toggle>
+      <mat-button-toggle value="ltr">LTR</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <div class="control">
+    <span id="pg-period">Period</span>
+    <mat-button-toggle-group
+      hideSingleSelectionIndicator
+      aria-labelledby="pg-period"
+      [value]="period()"
+      (change)="period.set($event.value)"
+    >
+      <mat-button-toggle value="all">All</mat-button-toggle>
+      <mat-button-toggle value="past">Past</mat-button-toggle>
+      <mat-button-toggle value="future">Future</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <mat-slide-toggle [checked]="calendarToggle()" (change)="calendarToggle.set($event.checked)">
+    Calendar toggle
+  </mat-slide-toggle>
+  <mat-slide-toggle [checked]="equivalentHint()" (change)="equivalentHint.set($event.checked)">
+    Equivalent-date hint
+  </mat-slide-toggle>
+  <mat-slide-toggle [checked]="touchUi()" (change)="touchUi.set($event.checked)">
+    Touch UI dialog
+  </mat-slide-toggle>
+</div>
+
+<div class="playground-preview">
+  <div class="preview-stage" data-playground-stage [dir]="direction()" [attr.lang]="locale()">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>{{ text().picker }}</mat-label>
+      <input matInput [matDatepicker]="datepicker" [formControl]="pickerDate" />
+      <mat-datepicker-toggle matIconSuffix [for]="datepicker" />
+      <mat-datepicker #datepicker [touchUi]="touchUi()" />
+      <mat-hint>mat-datepicker + HijriDateAdapter</mat-hint>
+    </mat-form-field>
+
+    @for (current of [calendar()]; track current) {
+      <ngx-mat-reactive-date-field
+        [formControl]="fieldDate"
+        [label]="text().field"
+        [valueCalendar]="current"
+        [locale]="locale()"
+        [calendarToggle]="calendarToggle()"
+        [equivalentHint]="equivalentHint()"
+        [period]="period()"
+        [touchUi]="touchUi()"
+        [errors]="text().errors"
+      />
+
+      <ngx-mat-reactive-date-range-field
+        [formControl]="range"
+        [label]="text().range"
+        [startPlaceholder]="text().start"
+        [endPlaceholder]="text().end"
+        [valueCalendar]="current"
+        [locale]="locale()"
+        [calendarToggle]="calendarToggle()"
+        [equivalentHint]="equivalentHint()"
+        [period]="period()"
+        [touchUi]="touchUi()"
+        [errors]="text().errors"
+      />
+    }
+  </div>
+
+  <dl class="value-list" data-playground-values>
+    @for (item of values(); track item.label) {
+      <dt>{{ item.label }}</dt>
+      <dd>{{ item.value }}</dd>
+    }
+  </dl>
+
+  <code-block [code]="providerSnippet()" language="ts" />
+  <code-block [code]="templateSnippet()" language="html" />
+</div>

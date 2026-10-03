@@ -1,0 +1,94 @@
+<section class="hero pattern">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow">Angular 22 · Material 3 · Signal forms</p>
+      <h1><em>Hijri</em> and Gregorian dates for Angular Material</h1>
+      <p class="lead">
+        One date adapter for the Umm al-Qura and Gregorian calendars, with ready-made fields for
+        reactive and signal forms. Built on <code>&#64;internationalized/date</code>.
+      </p>
+      <code-block class="hero-install" language="bash" [code]="installCommand" />
+      <div class="hero-actions">
+        <a mat-flat-button routerLink="/" fragment="playground">
+          <mat-icon>play_arrow</mat-icon>
+          Try the playground
+        </a>
+        <a mat-stroked-button [href]="repositoryUrl">View on GitHub</a>
+      </div>
+      <p class="hero-note">
+        Version {{ version }} is tagged on GitHub. Publishing to npm comes next.
+      </p>
+    </div>
+    <hero-calendar />
+  </div>
+</section>
+
+<section class="section container" aria-labelledby="features-title">
+  <p class="eyebrow">Why this package</p>
+  <h2 class="section-title" id="features-title">Built for both calendars from day one</h2>
+  <p class="section-lead">
+    The name says Hijri, but every part handles the Gregorian calendar too. Values are
+    <code>CalendarDate</code> objects, never a JavaScript <code>Date</code>, so no time zone shifts
+    a day.
+  </p>
+  <div class="feature-grid">
+    @for (feature of features; track feature.title) {
+      <article class="feature surface-card">
+        <mat-icon aria-hidden="true">{{ feature.icon }}</mat-icon>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.text }}</p>
+      </article>
+    }
+  </div>
+</section>
+
+<section id="playground" class="section container" aria-labelledby="playground-title">
+  <p class="eyebrow">Playground</p>
+  <h2 class="section-title" id="playground-title">Try every option live</h2>
+  <p class="section-lead">
+    Change the calendar, locale, and field options. The values and the code below update as you go.
+  </p>
+  <playground />
+</section>
+
+<section id="examples" class="section container" aria-labelledby="examples-title">
+  <p class="eyebrow">Examples</p>
+  <h2 class="section-title" id="examples-title">Copy, paste, ship</h2>
+  <p class="section-lead">
+    Each example runs live. Switch to the code tabs for the component and template behind it.
+  </p>
+  <div class="example-grid">
+    <example-card
+      heading="Umm al-Qura datepicker"
+      description="A plain mat-datepicker with a range and a Friday filter."
+      entryPoint="ngx-mat-hijri-adapter"
+      [snippets]="snippets.umalqura"
+    >
+      <umalqura-demo />
+    </example-card>
+    <example-card
+      heading="Gregorian datepicker"
+      description="The same adapter in the Gregorian calendar."
+      entryPoint="ngx-mat-hijri-adapter"
+      [snippets]="snippets.gregorian"
+    >
+      <gregorian-demo />
+    </example-card>
+    <example-card
+      heading="Reactive form fields"
+      description="Date and range fields with the calendar toggle."
+      entryPoint="ngx-mat-hijri-adapter/reactive"
+      [snippets]="snippets.reactive"
+    >
+      <reactive-fields-demo />
+    </example-card>
+    <example-card
+      heading="Signal form fields"
+      description="The same fields bound with [formField]."
+      entryPoint="ngx-mat-hijri-adapter/signals"
+      [snippets]="snippets.signals"
+    >
+      <signal-fields-demo />
+    </example-card>
+  </div>
+</section>

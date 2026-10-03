@@ -1,0 +1,32 @@
+<section
+  class="example-body"
+  data-demo="reactive"
+  [attr.lang]="locale()"
+  [dir]="direction()"
+  [formGroup]="form"
+>
+  <demo-controls [(locale)]="locale" [(direction)]="direction" />
+
+  <ngx-mat-reactive-date-field
+    formControlName="appointment"
+    valueCalendar="islamic-umalqura"
+    calendarToggle
+    [label]="text().date"
+    [locale]="locale()"
+    [dateFilter]="notFriday"
+    [errors]="text().errors"
+  />
+  <p class="value-output" dir="ltr" data-value="appointment">{{ appointmentValue() }}</p>
+
+  <ngx-mat-reactive-date-range-field
+    formControlName="stay"
+    valueCalendar="gregorian"
+    calendarToggle
+    [label]="text().range"
+    [startPlaceholder]="text().start"
+    [endPlaceholder]="text().end"
+    [locale]="locale()"
+    [errors]="text().errors"
+  />
+  <p class="value-output" dir="ltr" data-value="stay">{{ stayValue() }}</p>
+</section>

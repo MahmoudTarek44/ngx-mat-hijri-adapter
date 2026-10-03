@@ -1,0 +1,28 @@
+<section
+  class="example-body"
+  [attr.data-calendar]="calendar"
+  [attr.lang]="locale()"
+  [dir]="direction()"
+>
+  <demo-controls [(locale)]="locale" [(direction)]="direction" />
+
+  <mat-form-field appearance="outline" subscriptSizing="dynamic">
+    <mat-label>{{ fieldLabel() }}</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      [formControl]="date"
+      [min]="min"
+      [max]="max"
+      [matDatepickerFilter]="disableFridays"
+    />
+    <mat-datepicker-toggle matIconSuffix [for]="picker" />
+    <mat-datepicker #picker />
+    <mat-hint>{{ hint() }}</mat-hint>
+    @if (date.invalid) {
+      <mat-error>{{ error() }}</mat-error>
+    }
+  </mat-form-field>
+
+  <p class="value-output" data-equivalent dir="ltr">{{ equivalent() }}</p>
+</section>
