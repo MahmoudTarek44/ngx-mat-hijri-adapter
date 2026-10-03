@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.1"><img src="https://img.shields.io/github/v/tag/MahmoudTarek44/ngx-mat-hijri-adapter?label=version&amp;color=006d33" alt="Version" /></a>
+  <a href="https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.2"><img src="https://img.shields.io/github/v/tag/MahmoudTarek44/ngx-mat-hijri-adapter?label=version&amp;color=006d33" alt="Version" /></a>
   <a href="https://angular.dev"><img src="https://img.shields.io/badge/Angular-22-dd0031" alt="Angular" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT" /></a>
   <a href="https://mahmoudtarek44.github.io/ngx-mat-hijri-adapter/"><img src="https://img.shields.io/badge/docs-live%20demo-006d33" alt="Documentation" /></a>
@@ -29,7 +29,7 @@
 
 ## Status and installation
 
-Version 0.2.1 is tagged on [GitHub](https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.1). It is not yet published to npm. Once it is, install it with its peer dependency:
+Version 0.2.2 is tagged on [GitHub](https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.2). It is not yet published to npm. Once it is, install it with its peer dependency:
 
 ```bash
 npm install ngx-mat-hijri-adapter @internationalized/date

@@ -5,6 +5,65 @@ All notable changes to ngx-mat-hijri-adapter will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.2] - 2026-10-04
+
+### ✨ Package Logo
+
+This release gives the package a logo: an Angular-style shield with a calendar page and a crescent moon, colored from the demo's Material 3 theme. The library code is unchanged from 0.2.1; the package ships the new README header.
+
+#### Changes by Commit
+
+| Commit    | Type       | Description                                                                                           |
+| --------- | ---------- | ----------------------------------------------------------------------------------------------------- |
+| `a1932dc` | ✨ Feature | **Package Logo**: The logo in the top bar, the hero, the favicon, and the README, in the theme colors |
+
+### 📝 Summary of Changes
+
+#### ✨ Added
+
+- **Logo**: A two-tone shield in the theme's spring green, a calendar page, and a cyan crescent and star. It follows light and dark mode
+- **Favicon**: An SVG favicon cropped to the shield, with larger shapes so it reads at 16px, replacing the default Angular icon
+- **README Header**: A centered logo, title, description, and badges
+
+#### 🔧 Changed
+
+- **Hero**: The logo sits next to the title, or above it on phones. The text column is wider, the live preview aligns to the right edge, and the Angular, Material, and signal forms line moved below the description
+- **Theme Color**: The browser theme color and the README badges use the theme's primary color `#006d33`
+
+### 📦 Modified Files
+
+<details>
+<summary><strong>Demo</strong></summary>
+
+- `projects/demo/public/logo.svg` - The logo, with light and dark colors
+- `projects/demo/public/favicon.svg` - The favicon, replacing `favicon.ico`
+- `projects/demo/src/app/shared/logo.ts` - Logo component in the theme colors
+- `projects/demo/src/app/app.html` and `app.ts` - Logo next to the wordmark in the top bar
+- `projects/demo/src/app/home/home.html` and `home.ts` - Logo next to the hero title, wider text column, and the line below the description
+- `projects/demo/src/app/home/hero-calendar.ts` - Live preview aligned to the right on large screens
+- `projects/demo/src/index.html` - SVG favicon and theme color `#006d33`
+
+</details>
+
+<details>
+<summary><strong>Workspace and Package</strong></summary>
+
+- `README.md` - Centered logo header, badge colors, and version 0.2.2
+- `package.json`, `package-lock.json`, and `projects/ngx-mat-hijri-adapter/package.json` - Version 0.2.2
+- `projects/ngx-mat-hijri-adapter/src/lib/version.ts` - `NGX_MAT_HIJRI_ADAPTER_VERSION` is 0.2.2
+- `projects/ngx-mat-hijri-adapter/src/lib/version.spec.ts` and `projects/demo/src/app/app.spec.ts` - Expect version 0.2.2
+- `CHANGELOG.md` - This entry
+
+</details>
+
+---
+
+**Version**: 0.2.2  
+**Release Date**: October 4, 2026  
+**Maintained by**: Mahmoud
+
+---
+
 ## [0.2.1] - 2026-10-03
 
 ### 🐛 Gregorian Month Names on Safari
@@ -323,6 +382,7 @@ First release. One Angular Material date adapter for the Gregorian and Umm al-Qu
 
 ---
 
+[0.2.2]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.2
 [0.2.1]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.1
 [0.2.0]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.0
 [0.1.0]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.1.0
