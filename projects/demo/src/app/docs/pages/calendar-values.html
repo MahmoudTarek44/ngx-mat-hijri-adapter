@@ -1,0 +1,45 @@
+<article class="doc-page">
+  <h1>Calendar values</h1>
+  <p class="doc-lead">
+    Every value in this package is a <code>CalendarDate</code> from
+    <code>&#64;internationalized/date</code>, in the Gregorian or Umm al-Qura calendar.
+  </p>
+
+  <h2 id="calendar-date">CalendarDate</h2>
+  <p>
+    A <code>CalendarDate</code> is a year, month, and day in a calendar, with no time and no time
+    zone. A JavaScript <code>Date</code> is not a calendar value. The helpers create, convert,
+    compare, and add to these dates. Their months are 1-indexed.
+  </p>
+  <code-block language="ts" [code]="code.create" />
+  <p>
+    The other helpers are <code>compareCalendarDates</code>, <code>addCalendarDate</code>,
+    <code>daysInCalendarMonth</code>, <code>monthsInCalendarYear</code>, and
+    <code>calendarToday</code>.
+  </p>
+
+  <h2 id="constants">CalendarCode and CalendarLocale</h2>
+  <p>
+    <code>CalendarCode</code> names the supported calendars, so string literals are not needed.
+    <code>SupportedCalendar</code> is the type of its values. <code>CalendarLocale</code> holds the
+    locales used as defaults. Any BCP 47 locale works wherever a locale is accepted.
+  </p>
+  <code-block language="ts" [code]="code.constants" />
+
+  <h2 id="range">The Umm al-Qura range</h2>
+  <p>
+    Umm al-Qura years are limited to AH 1300–1599 (<code>UMALQURA_MIN_YEAR</code> and
+    <code>UMALQURA_MAX_YEAR</code>). AH 1600 is rejected because the underlying table falls back to
+    the civil Islamic calendar there.
+  </p>
+  <ul>
+    <li>
+      Creating, converting, or adding to a date outside that range throws
+      <code>UmalquraDateRangeError</code>.
+    </li>
+    <li>
+      Creating a day that does not exist, such as 30 in a 29-day month, throws
+      <code>InvalidCalendarDateError</code>.
+    </li>
+  </ul>
+</article>

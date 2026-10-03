@@ -1,0 +1,39 @@
+<article class="doc-page">
+  <h1>Gotchas</h1>
+  <p class="doc-lead">Details that surprise people the first time.</p>
+
+  <h2 id="gregory">The Gregorian identifier is <code>gregory</code></h2>
+  <p>
+    <code>&#64;internationalized/date</code> reports a Gregorian <code>CalendarDate</code> with
+    <code>calendar.identifier === 'gregory'</code>, while this package names the calendar
+    <code>gregorian</code>.
+  </p>
+
+  <h2 id="to-string"><code>toString()</code> prints the Gregorian date</h2>
+  <p>
+    <code>CalendarDate#toString()</code> always prints the Gregorian ISO date, even for an Umm
+    al-Qura date. Read <code>year</code>, <code>month</code>, and <code>day</code> to get the Hijri
+    numbers, or use the adapter's <code>toIso8601</code>.
+  </p>
+
+  <h2 id="months">0-based and 1-based months</h2>
+  <p>
+    Material adapter months are 0-based: <code>createDate(1445, 8, 1)</code> is 1 Ramadan. The
+    calendar helpers are 1-based: <code>createCalendarDate('islamic-umalqura', 1445, 9, 1)</code> is
+    the same day.
+  </p>
+
+  <h2 id="invalid">Invalid dates throw</h2>
+  <p>
+    Formatting or converting an invalid date throws, and so does creating a date outside AH
+    1300–1599. Parsing typed text does not throw: unreadable or out-of-range text returns an invalid
+    date instead.
+  </p>
+
+  <h2 id="locale">Locale never picks the calendar</h2>
+  <p>
+    <code>ar-SA</code> does not select the Hijri calendar and <code>en-US</code> does not select
+    Gregorian. Always set <code>calendar</code> or <code>valueCalendar</code> explicitly when the
+    default is not what you want.
+  </p>
+</article>

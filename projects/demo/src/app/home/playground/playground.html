@@ -1,7 +1,11 @@
-<div class="playground-controls">
-  <div class="control">
-    <span id="pg-calendar">Calendar</span>
+<div
+  class="grid content-start gap-5 border-b bg-surface-container p-6 lg:border-e lg:border-b-0"
+  data-playground-controls
+>
+  <div class="grid gap-2">
+    <span class="text-label-large text-on-surface-variant" id="pg-calendar">Calendar</span>
     <mat-button-toggle-group
+      class="w-full *:flex-1"
       hideSingleSelectionIndicator
       aria-labelledby="pg-calendar"
       [value]="calendar()"
@@ -22,9 +26,10 @@
     <mat-hint>Digits, names, and week start. Never the calendar.</mat-hint>
   </mat-form-field>
 
-  <div class="control">
-    <span id="pg-direction">Direction</span>
+  <div class="grid gap-2">
+    <span class="text-label-large text-on-surface-variant" id="pg-direction">Direction</span>
     <mat-button-toggle-group
+      class="w-full *:flex-1"
       hideSingleSelectionIndicator
       aria-labelledby="pg-direction"
       [value]="direction()"
@@ -35,9 +40,10 @@
     </mat-button-toggle-group>
   </div>
 
-  <div class="control">
-    <span id="pg-period">Period</span>
+  <div class="grid gap-2">
+    <span class="text-label-large text-on-surface-variant" id="pg-period">Period</span>
     <mat-button-toggle-group
+      class="w-full *:flex-1"
       hideSingleSelectionIndicator
       aria-labelledby="pg-period"
       [value]="period()"
@@ -60,8 +66,13 @@
   </mat-slide-toggle>
 </div>
 
-<div class="playground-preview">
-  <div class="preview-stage" data-playground-stage [dir]="direction()" [attr.lang]="locale()">
+<div class="grid min-w-0 grid-cols-1 content-start gap-6 p-6">
+  <div
+    class="grid grid-cols-1 gap-5 rounded-2xl border border-dashed bg-surface p-6 *:w-full"
+    data-playground-stage
+    [dir]="direction()"
+    [attr.lang]="locale()"
+  >
     <mat-form-field appearance="outline" subscriptSizing="dynamic">
       <mat-label>{{ text().picker }}</mat-label>
       <input matInput [matDatepicker]="datepicker" [formControl]="pickerDate" />
@@ -99,10 +110,13 @@
     }
   </div>
 
-  <dl class="value-list" data-playground-values>
+  <dl
+    class="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1.5 text-body-medium"
+    data-playground-values
+  >
     @for (item of values(); track item.label) {
-      <dt>{{ item.label }}</dt>
-      <dd>{{ item.value }}</dd>
+      <dt class="text-on-surface-variant">{{ item.label }}</dt>
+      <dd class="font-mono wrap-anywhere">{{ item.value }}</dd>
     }
   </dl>
 

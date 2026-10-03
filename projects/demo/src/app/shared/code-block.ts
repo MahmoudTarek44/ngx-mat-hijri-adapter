@@ -7,12 +7,16 @@ import { MatTooltip } from '@angular/material/tooltip';
 @Component({
   selector: 'code-block',
   imports: [CdkCopyToClipboard, MatIconButton, MatIcon, MatTooltip],
+  host: { class: 'block' },
   template: `
-    <div class="code-block">
-      <div class="code-head">
+    <div class="overflow-hidden rounded-[14px] bg-code text-code-text">
+      <div
+        class="flex items-center justify-between border-b border-white/8 py-0.5 ps-4 pe-1 font-mono text-label-medium text-code-muted uppercase"
+      >
         <span>{{ language() }}</span>
         <button
           type="button"
+          class="text-code-action!"
           mat-icon-button
           matTooltip="Copy"
           [attr.aria-label]="'Copy ' + language() + ' code'"
@@ -22,8 +26,10 @@ import { MatTooltip } from '@angular/material/tooltip';
           <mat-icon>{{ copied() ? 'check' : 'content_copy' }}</mat-icon>
         </button>
       </div>
-      <pre><code>{{ code() }}</code></pre>
-      <span class="cdk-visually-hidden" aria-live="polite">{{ copied() ? 'Copied' : '' }}</span>
+      <pre
+        class="overflow-x-auto px-5 pt-4 pb-5 text-left text-[0.85rem] leading-[1.65] [direction:ltr]"
+      ><code>{{ code() }}</code></pre>
+      <span class="sr-only" aria-live="polite">{{ copied() ? 'Copied' : '' }}</span>
     </div>
   `,
 })

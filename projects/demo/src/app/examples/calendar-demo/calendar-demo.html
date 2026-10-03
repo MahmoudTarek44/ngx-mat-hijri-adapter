@@ -1,5 +1,5 @@
 <section
-  class="example-body"
+  class="grid grid-cols-1 gap-4 px-6 pt-5 pb-6 *:w-full"
   [attr.data-calendar]="calendar"
   [attr.lang]="locale()"
   [dir]="direction()"
@@ -24,5 +24,10 @@
     }
   </mat-form-field>
 
-  <p class="value-output" data-equivalent dir="ltr">{{ equivalent() }}</p>
+  <output
+    class="-mt-1 block rounded-[10px] bg-surface-container-high px-3 py-2 font-mono text-body-small text-on-surface-variant"
+    data-equivalent
+    dir="ltr"
+    >{{ equivalent() }}</output
+  >
 </section>

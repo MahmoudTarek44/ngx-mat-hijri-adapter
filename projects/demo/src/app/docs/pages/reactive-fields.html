@@ -1,0 +1,31 @@
+<article class="doc-page">
+  <h1>Reactive fields</h1>
+  <p class="doc-lead">
+    <code>ReactiveDateField</code> and <code>ReactiveDateRangeField</code> from
+    <code>ngx-mat-hijri-adapter/reactive</code> are <code>ControlValueAccessor</code>s for
+    <code>formControl</code> and <code>formControlName</code>.
+  </p>
+
+  <example-card
+    heading="Booking form"
+    description="An appointment date in Umm al-Qura and a stay range in Gregorian."
+    entryPoint="ngx-mat-hijri-adapter/reactive"
+    [snippets]="snippets"
+  >
+    <reactive-fields-demo />
+  </example-card>
+
+  <h2 id="errors">Error messages</h2>
+  <p>
+    <code>errors</code> maps validation error keys to messages. Datepicker validation errors are
+    merged into the form control's errors. Datepicker errors such as
+    <code>matDatepickerParse</code>, <code>matDatepickerMin</code>,
+    <code>matDatepickerFilter</code>, and <code>matEndDateInvalid</code> are shown before the
+    control's own errors such as <code>required</code>.
+  </p>
+
+  <p>
+    The other inputs, the value calendar, and the toggle are described in
+    <a routerLink="/docs/form-fields">Form fields</a>.
+  </p>
+</article>

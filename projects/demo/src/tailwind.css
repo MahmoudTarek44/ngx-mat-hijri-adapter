@@ -1,0 +1,200 @@
+@import 'tailwindcss' source('./');
+
+@theme {
+  --color-*: initial;
+  --color-code: #0f1d17;
+  --color-code-text: #d7efe2;
+  --color-code-muted: #8fb5a2;
+  --color-code-action: #b9d9c8;
+
+  --font-sans: Inter, 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
+
+  --breakpoint-lg: 60rem;
+  --container-page: 76rem;
+  --radius-card: 1.25rem;
+}
+
+/* Material 3 system tokens, so utilities follow the theme and the light or dark scheme. */
+@theme inline {
+  --color-primary: var(--mat-sys-primary);
+  --color-on-primary: var(--mat-sys-on-primary);
+  --color-primary-container: var(--mat-sys-primary-container);
+  --color-on-primary-container: var(--mat-sys-on-primary-container);
+  --color-secondary-container: var(--mat-sys-secondary-container);
+  --color-on-secondary-container: var(--mat-sys-on-secondary-container);
+  --color-tertiary: var(--mat-sys-tertiary);
+  --color-surface: var(--mat-sys-surface);
+  --color-on-surface: var(--mat-sys-on-surface);
+  --color-on-surface-variant: var(--mat-sys-on-surface-variant);
+  --color-surface-container-low: var(--mat-sys-surface-container-low);
+  --color-surface-container: var(--mat-sys-surface-container);
+  --color-surface-container-high: var(--mat-sys-surface-container-high);
+  --color-outline: var(--mat-sys-outline);
+  --color-outline-variant: var(--mat-sys-outline-variant);
+
+  --text-display-medium: var(--mat-sys-display-medium-size);
+  --text-display-medium--line-height: var(--mat-sys-display-medium-line-height);
+  --text-display-medium--letter-spacing: var(--mat-sys-display-medium-tracking);
+  --text-display-medium--font-weight: var(--mat-sys-display-medium-weight);
+  --text-display-small: var(--mat-sys-display-small-size);
+  --text-display-small--line-height: var(--mat-sys-display-small-line-height);
+  --text-display-small--letter-spacing: var(--mat-sys-display-small-tracking);
+  --text-display-small--font-weight: var(--mat-sys-display-small-weight);
+  --text-headline-large: var(--mat-sys-headline-large-size);
+  --text-headline-large--line-height: var(--mat-sys-headline-large-line-height);
+  --text-headline-large--letter-spacing: var(--mat-sys-headline-large-tracking);
+  --text-headline-large--font-weight: var(--mat-sys-headline-large-weight);
+  --text-headline-small: var(--mat-sys-headline-small-size);
+  --text-headline-small--line-height: var(--mat-sys-headline-small-line-height);
+  --text-headline-small--letter-spacing: var(--mat-sys-headline-small-tracking);
+  --text-headline-small--font-weight: var(--mat-sys-headline-small-weight);
+  --text-title-large: var(--mat-sys-title-large-size);
+  --text-title-large--line-height: var(--mat-sys-title-large-line-height);
+  --text-title-large--letter-spacing: var(--mat-sys-title-large-tracking);
+  --text-title-large--font-weight: var(--mat-sys-title-large-weight);
+  --text-title-medium: var(--mat-sys-title-medium-size);
+  --text-title-medium--line-height: var(--mat-sys-title-medium-line-height);
+  --text-title-medium--letter-spacing: var(--mat-sys-title-medium-tracking);
+  --text-title-medium--font-weight: var(--mat-sys-title-medium-weight);
+  --text-title-small: var(--mat-sys-title-small-size);
+  --text-title-small--line-height: var(--mat-sys-title-small-line-height);
+  --text-title-small--letter-spacing: var(--mat-sys-title-small-tracking);
+  --text-title-small--font-weight: var(--mat-sys-title-small-weight);
+  --text-body-large: var(--mat-sys-body-large-size);
+  --text-body-large--line-height: var(--mat-sys-body-large-line-height);
+  --text-body-large--letter-spacing: var(--mat-sys-body-large-tracking);
+  --text-body-large--font-weight: var(--mat-sys-body-large-weight);
+  --text-body-medium: var(--mat-sys-body-medium-size);
+  --text-body-medium--line-height: var(--mat-sys-body-medium-line-height);
+  --text-body-medium--letter-spacing: var(--mat-sys-body-medium-tracking);
+  --text-body-medium--font-weight: var(--mat-sys-body-medium-weight);
+  --text-body-small: var(--mat-sys-body-small-size);
+  --text-body-small--line-height: var(--mat-sys-body-small-line-height);
+  --text-body-small--letter-spacing: var(--mat-sys-body-small-tracking);
+  --text-body-small--font-weight: var(--mat-sys-body-small-weight);
+  --text-label-large: var(--mat-sys-label-large-size);
+  --text-label-large--line-height: var(--mat-sys-label-large-line-height);
+  --text-label-large--letter-spacing: var(--mat-sys-label-large-tracking);
+  --text-label-large--font-weight: var(--mat-sys-label-large-weight);
+  --text-label-medium: var(--mat-sys-label-medium-size);
+  --text-label-medium--line-height: var(--mat-sys-label-medium-line-height);
+  --text-label-medium--letter-spacing: var(--mat-sys-label-medium-tracking);
+  --text-label-medium--font-weight: var(--mat-sys-label-medium-weight);
+}
+
+@utility star-pattern {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: var(--color-primary);
+    opacity: 0.08;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='black' stroke-width='1.2'%3E%3Crect x='21' y='21' width='30' height='30'/%3E%3Crect x='21' y='21' width='30' height='30' transform='rotate(45 36 36)'/%3E%3Ccircle cx='36' cy='36' r='7'/%3E%3Cpath d='M0 0l10 10M72 0L62 10M0 72l10-10M72 72L62 62'/%3E%3C/g%3E%3C/svg%3E");
+    mask-size: 72px;
+    pointer-events: none;
+  }
+}
+
+@utility hero-glow {
+  background:
+    radial-gradient(
+      60rem 30rem at 85% 10%,
+      color-mix(in srgb, var(--color-tertiary) 16%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      50rem 30rem at 10% 90%,
+      color-mix(in srgb, var(--color-primary) 18%, transparent),
+      transparent 70%
+    );
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+
+    @media (prefers-reduced-motion: reduce) {
+      scroll-behavior: auto;
+    }
+  }
+
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-outline-variant);
+  }
+
+  body {
+    @apply bg-surface font-sans text-body-large text-on-surface antialiased;
+  }
+
+  a {
+    @apply text-primary underline underline-offset-2;
+  }
+
+  :not(pre) > code {
+    @apply rounded-md bg-surface-container-high px-[0.4em] py-[0.1em] text-[0.88em];
+  }
+}
+
+/* Long-form documentation content written as plain HTML. */
+@layer components {
+  .doc-page {
+    @apply leading-[1.7];
+
+    & h1 {
+      @apply mb-3 text-display-small font-extrabold tracking-[-0.03em];
+    }
+
+    & .doc-lead {
+      @apply mb-8 text-title-medium leading-relaxed font-normal text-on-surface-variant;
+    }
+
+    & h2 {
+      @apply mt-10 mb-3 scroll-mt-20 border-t pt-6 text-headline-small font-bold;
+    }
+
+    & p,
+    & ul {
+      @apply mb-4;
+    }
+
+    & ul {
+      @apply list-disc ps-6;
+    }
+
+    & li {
+      @apply mb-1.5;
+    }
+
+    & code-block {
+      @apply mb-4;
+    }
+
+    & example-card {
+      @apply mb-6;
+    }
+  }
+
+  .doc-table {
+    @apply mb-6 w-full border-collapse text-body-medium max-sm:block max-sm:overflow-x-auto;
+
+    & th,
+    & td {
+      @apply border-b px-3 py-2.5 text-start align-top;
+    }
+
+    & th {
+      @apply text-label-large text-on-surface-variant;
+    }
+
+    & td:first-child {
+      @apply whitespace-nowrap;
+    }
+  }
+}

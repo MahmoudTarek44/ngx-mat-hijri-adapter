@@ -1,0 +1,21 @@
+<article class="doc-page">
+  <h1>Right-to-left</h1>
+  <p class="doc-lead">Direction is a layout choice, separate from the calendar and the locale.</p>
+
+  <h2 id="dir">Use the CDK Dir directive</h2>
+  <p>
+    Set direction with the CDK <code>Dir</code> directive, or on the document root. The datepicker
+    popup renders in an overlay outside the field, so a plain <code>dir</code> attribute on a
+    wrapper element does not flip the popup. With <code>Dir</code> imported, the same
+    <code>dir</code> attribute reaches the overlay too.
+  </p>
+  <code-block language="ts" [code]="code.ts" />
+  <code-block language="html" [code]="code.html" />
+
+  <h2 id="independent">Direction, locale, and calendar are independent</h2>
+  <p>
+    An Arabic locale does not set right-to-left, and right-to-left does not select the Hijri
+    calendar. Choose each one on purpose. The playground on the home page lets you combine them
+    freely.
+  </p>
+</article>

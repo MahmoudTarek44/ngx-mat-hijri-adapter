@@ -1,4 +1,9 @@
-<section class="example-body" data-demo="signals" [attr.lang]="locale()" [dir]="direction()">
+<section
+  class="grid grid-cols-1 gap-4 px-6 pt-5 pb-6 *:w-full"
+  data-demo="signals"
+  [attr.lang]="locale()"
+  [dir]="direction()"
+>
   <demo-controls [(locale)]="locale" [(direction)]="direction" />
 
   <ngx-mat-signal-date-field
@@ -10,7 +15,12 @@
     [dateFilter]="notFriday"
     [errorMessages]="text().errors"
   />
-  <p class="value-output" dir="ltr" data-value="appointment">{{ appointmentValue() }}</p>
+  <output
+    class="-mt-1 block rounded-[10px] bg-surface-container-high px-3 py-2 font-mono text-body-small text-on-surface-variant"
+    dir="ltr"
+    data-value="appointment"
+    >{{ appointmentValue() }}</output
+  >
 
   <ngx-mat-signal-date-range-field
     [formField]="form.stay"
@@ -22,5 +32,10 @@
     [locale]="locale()"
     [errorMessages]="text().errors"
   />
-  <p class="value-output" dir="ltr" data-value="stay">{{ stayValue() }}</p>
+  <output
+    class="-mt-1 block rounded-[10px] bg-surface-container-high px-3 py-2 font-mono text-body-small text-on-surface-variant"
+    dir="ltr"
+    data-value="stay"
+    >{{ stayValue() }}</output
+  >
 </section>

@@ -1,0 +1,64 @@
+<article class="doc-page">
+  <h1>Parsing and formatting</h1>
+  <p class="doc-lead">
+    Typed text is read in the adapter calendar, and dates are formatted in their own calendar.
+    Neither step goes through a JavaScript <code>Date</code>.
+  </p>
+
+  <h2 id="parsing">Parsing</h2>
+  <p>
+    <code>parse</code> reads user text in the adapter calendar. It does not use
+    <code>Date.parse</code>.
+  </p>
+  <ul>
+    <li>
+      <code>null</code> and blank text parse to <code>null</code>. Any other unrecognized value,
+      including a JavaScript <code>Date</code> or a timestamp, parses to an invalid date.
+    </li>
+    <li>
+      <code>YYYY-MM-DD</code> is year, month, and day in the adapter calendar. On an Umm al-Qura
+      adapter, <code>1445-09-01</code> is 1 Ramadan 1445, and <code>2024-03-11</code> is an invalid
+      date because AH 2024 is outside 1300–1599.
+    </li>
+    <li>
+      <code>D/M/YYYY</code>, <code>D-M-YYYY</code>, and <code>D.M.YYYY</code> are day, month, and
+      year. When the first number is greater than 31, the same separators are read as year, month,
+      and day, so <code>1447/10/15</code> is 15 Shawwal 1447.
+    </li>
+    <li>
+      <code>D Month YYYY</code> accepts the fixed English and Arabic Umm al-Qura month names on an
+      Umm al-Qura adapter, and the active locale's month names on a Gregorian adapter.
+    </li>
+    <li>
+      Arabic-Indic digits (<code>٠</code>–<code>٩</code>) and Persian digits
+      (<code>۰</code>–<code>۹</code>) are accepted.
+    </li>
+    <li>Text outside AH 1300–1599 parses to an invalid date.</li>
+  </ul>
+
+  <h2 id="serialization">Serialization</h2>
+  <p>
+    <code>deserialize</code> accepts <code>null</code>, <code>''</code>, a
+    <code>CalendarDate</code>, or a zero-padded <code>YYYY-MM-DD</code> in the adapter calendar.
+    <code>toIso8601</code> returns that same <code>YYYY-MM-DD</code> with ASCII digits. It is the
+    adapter calendar's date, not a Gregorian conversion and not <code>Date#toISOString</code>.
+  </p>
+
+  <h2 id="formatting">Formatting</h2>
+  <p>
+    <code>HIJRI_DATE_FORMATS</code> follows Material's format slots. A numeric month renders as
+    <code>day/month/year</code>. A long, short, or narrow month renders as
+    <code>day month, year</code>, with the Arabic comma <code>،</code> for Arabic locales. Digits
+    follow the locale.
+  </p>
+  <p>
+    <code>formatCalendarDate(date, locale, options)</code> applies the same rules outside the
+    adapter:
+  </p>
+  <code-block language="ts" [code]="code.format" />
+  <p>
+    Umm al-Qura month names are fixed: Arabic when the locale starts with <code>ar</code>, English
+    otherwise. Gregorian month names and all weekday names come from <code>Intl</code>. Formatting
+    an invalid date throws.
+  </p>
+</article>

@@ -29,10 +29,13 @@ const LONG_DATE = { day: 'numeric', month: 'long', year: 'numeric' } as const;
       timeZone: 'UTC',
     }),
   ],
-  host: { class: 'hero-calendar surface-card' },
+  host: {
+    class:
+      'block w-full max-w-96 justify-self-center rounded-card border bg-surface-container-low p-5 shadow-[0_24px_60px_-24px_color-mix(in_srgb,var(--color-primary)_45%,transparent)]',
+  },
   template: `
-    <div class="hero-calendar-head">
-      <span class="eyebrow">Live preview</span>
+    <div class="mb-2 flex items-center justify-between gap-4">
+      <span class="text-label-large tracking-[0.08em] text-primary uppercase">Live preview</span>
       <mat-button-toggle-group
         hideSingleSelectionIndicator
         aria-label="Calendar"
@@ -50,7 +53,9 @@ const LONG_DATE = { day: 'numeric', month: 'long', year: 'numeric' } as const;
         (selectedChange)="select($event)"
       />
     </div>
-    <p class="hero-equivalent">
+    <p
+      class="mt-3 rounded-[14px] bg-primary-container px-4 py-3 text-center text-body-medium text-on-primary-container"
+    >
       <span lang="ar-SA" dir="rtl">{{ hijriText() }}</span>
       <br />
       <span>{{ gregorianText() }}</span>

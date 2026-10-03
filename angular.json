@@ -49,7 +49,7 @@
                 "input": "projects/demo/public"
               }
             ],
-            "styles": ["projects/demo/src/styles.scss"]
+            "styles": ["projects/demo/src/styles.scss", "projects/demo/src/tailwind.css"]
           },
           "configurations": {
             "production": {

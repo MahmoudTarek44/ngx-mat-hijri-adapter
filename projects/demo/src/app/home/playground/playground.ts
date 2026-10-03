@@ -92,7 +92,10 @@ const TEXT = {
     CodeBlock,
   ],
   providers: [provideHijriDateAdapter({ timeZone: 'UTC' })],
-  host: { class: 'playground surface-card' },
+  host: {
+    class:
+      'grid grid-cols-1 overflow-hidden rounded-card border bg-surface-container-low lg:grid-cols-[20rem_minmax(0,1fr)]',
+  },
   templateUrl: './playground.html',
 })
 export class Playground {

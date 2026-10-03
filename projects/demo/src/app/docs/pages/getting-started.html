@@ -1,0 +1,50 @@
+<article class="doc-page">
+  <h1>Getting started</h1>
+  <p class="doc-lead">
+    Add a Hijri or Gregorian datepicker to an Angular Material app in three steps.
+  </p>
+
+  <h2 id="install">Install</h2>
+  <p>
+    Version {{ version }} is tagged on GitHub and not yet published to npm. Once it is, install it
+    with its peer dependency:
+  </p>
+  <code-block language="bash" [code]="code.install" />
+  <p>
+    Angular <code>core</code>, <code>forms</code>, <code>material</code>, and <code>cdk</code> are
+    peer dependencies too, and are expected to be in the app already.
+  </p>
+
+  <h2 id="requirements">Requirements</h2>
+  <ul>
+    <li>
+      Angular <code>core</code>, <code>forms</code>, <code>material</code>, and <code>cdk</code>
+      22.0.0 or newer. Signal forms are stable from this version; Angular 21 is not supported.
+    </li>
+    <li>
+      <code>&#64;internationalized/date</code> 3.12.0 or newer. <code>CalendarDate</code> is part of
+      the public value type, so it is a peer dependency.
+    </li>
+  </ul>
+
+  <h2 id="provider">Register the adapter</h2>
+  <p>
+    Register the adapter once in the application providers. The defaults are the Umm al-Qura
+    calendar and the <code>ar-SA</code> locale.
+  </p>
+  <code-block language="ts" [code]="code.provider" />
+
+  <h2 id="datepicker">Use a Material datepicker</h2>
+  <p>A plain Material datepicker now works with <code>CalendarDate</code> values:</p>
+  <code-block language="ts" [code]="code.datepickerTs" />
+  <code-block language="html" [code]="code.datepickerHtml" />
+
+  <h2 id="field">Or use a ready-made field</h2>
+  <p>The fields add the calendar toggle, an equivalent-date hint, and error messages.</p>
+  <code-block language="ts" [code]="code.fieldTs" />
+  <code-block language="html" [code]="code.fieldHtml" />
+  <p>
+    Next, read about <a routerLink="/docs/calendar-values">calendar values</a> or jump to the
+    <a routerLink="/docs/form-fields">form fields</a>.
+  </p>
+</article>

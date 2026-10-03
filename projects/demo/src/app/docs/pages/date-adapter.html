@@ -1,0 +1,57 @@
+<article class="doc-page">
+  <h1>Date adapter</h1>
+  <p class="doc-lead">
+    <code>HijriDateAdapter</code> implements Material's <code>DateAdapter&lt;CalendarDate&gt;</code>
+    for both calendars.
+  </p>
+
+  <h2 id="configuration">Configuration</h2>
+  <p>
+    <code>provideHijriDateAdapter()</code> registers the adapter together with
+    <code>MAT_DATE_FORMATS</code> and <code>MAT_DATE_LOCALE</code>. Its options are:
+  </p>
+  <ul>
+    <li>
+      <code>calendar</code>: <code>'gregorian'</code> or <code>'islamic-umalqura'</code>. Defaults
+      to <code>islamic-umalqura</code>.
+    </li>
+    <li>
+      <code>locale</code>: digits, Gregorian month names, weekday names, and the first day of the
+      week. Defaults to <code>ar-SA</code>.
+    </li>
+    <li><code>timeZone</code>: used by <code>today()</code>. Defaults to the runtime time zone.</li>
+    <li>
+      <code>formats</code>: Material format slots. Defaults to <code>HIJRI_DATE_FORMATS</code>.
+    </li>
+  </ul>
+  <code-block language="ts" [code]="code.config" />
+
+  <h2 id="locale">Locale is not the calendar</h2>
+  <p>
+    Calendar and locale are independent. <code>ar-SA</code> does not select the Hijri calendar,
+    <code>en-US</code> does not select Gregorian, and a Hijri calendar does not force Saturday as
+    the week start. In this runtime, <code>en-US</code> and <code>ar-SA</code> start the week on
+    Sunday, and <code>ar-EG</code> starts it on Saturday. <code>setLocale</code> updates those rules
+    and never changes the calendar.
+  </p>
+
+  <h2 id="switching">Switching calendars</h2>
+  <p>
+    <code>setCalendar()</code> switches an adapter instance at runtime, and
+    <code>calendar</code> reads the current one. Material redraws through
+    <code>localeChanges</code>. After a switch, the adapter reads, formats, and clones any
+    <code>CalendarDate</code> in its new calendar. Use it on an adapter provided to a single
+    component, as the <a routerLink="/docs/form-fields">form fields</a> do.
+  </p>
+  <code-block language="ts" [code]="code.switch" />
+
+  <h2 id="months">Month indexing</h2>
+  <p>
+    Material month indexes are 0-based, unlike the calendar helpers. <code>createDate</code> throws
+    for a month outside 0–11, a day outside that month, or an Umm al-Qura year outside 1300–1599.
+    Adding months clamps to the last valid day. Adding a year or month that leaves AH 1300–1599
+    throws.
+  </p>
+  <code-block language="ts" [code]="code.months" />
+  <p>Time methods are not implemented.</p>
+</article>

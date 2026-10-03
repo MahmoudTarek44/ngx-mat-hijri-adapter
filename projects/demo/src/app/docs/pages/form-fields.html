@@ -1,0 +1,139 @@
+<article class="doc-page">
+  <h1>Form fields</h1>
+  <p class="doc-lead">
+    Ready-made date and date range fields that wrap a Material form field and datepicker. Two sets
+    share one template and the same inputs.
+  </p>
+
+  <ul class="grid list-none grid-cols-[repeat(auto-fit,minmax(16rem,1fr))] gap-4 ps-0">
+    <li class="mb-0">
+      <a
+        class="grid h-full gap-1.5 rounded-card border bg-surface-container-low p-5 text-on-surface no-underline hover:border-primary"
+        routerLink="/docs/reactive-fields"
+      >
+        <strong class="text-title-medium font-semibold">Reactive fields</strong>
+        <code class="justify-self-start">ngx-mat-hijri-adapter/reactive</code>
+        <span class="text-body-medium text-on-surface-variant"
+          >For <code>formControl</code> and <code>formControlName</code>.</span
+        >
+      </a>
+    </li>
+    <li class="mb-0">
+      <a
+        class="grid h-full gap-1.5 rounded-card border bg-surface-container-low p-5 text-on-surface no-underline hover:border-primary"
+        routerLink="/docs/signal-fields"
+      >
+        <strong class="text-title-medium font-semibold">Signal fields</strong>
+        <code class="justify-self-start">ngx-mat-hijri-adapter/signals</code>
+        <span class="text-body-medium text-on-surface-variant"
+          >For the <code>[formField]</code> directive.</span
+        >
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Each field provides its own <code>HijriDateAdapter</code>, reading the calendar and locale
+    defaults from <code>provideHijriDateAdapter()</code> when it is present.
+  </p>
+
+  <h2 id="values">Values</h2>
+  <p>
+    The value of a date field is a <code>CalendarDate</code> or <code>null</code>. The value of a
+    range field is a <code>CalendarDateRange</code> with <code>start</code> and <code>end</code>,
+    each a <code>CalendarDate</code> or <code>null</code>.
+  </p>
+  <p>
+    Values are always emitted in <code>valueCalendar</code>, which defaults to the provider
+    calendar. A written value may be in either calendar. Anything other than a
+    <code>CalendarDate</code>, <code>null</code>, or <code>''</code> throws.
+  </p>
+
+  <h2 id="toggle">Calendar toggle and hint</h2>
+  <p>
+    With <code>calendarToggle</code>, Hijri and Gregorian buttons replace the calendar icon.
+    Pressing one switches the displayed and typed calendar, then opens the picker. Switching does
+    not change the form value and does not mark the control dirty. A typed <code>20/3/2024</code> in
+    the Gregorian view stores 10 Ramadan 1445 when <code>valueCalendar</code> is
+    <code>islamic-umalqura</code>.
+  </p>
+  <p>
+    With the toggle on, the hint shows the selected date in the calendar that is not displayed, such
+    as <code>10 Ramadan, 1445 AH</code>. Set <code>equivalentHint</code> to <code>false</code> to
+    hide it.
+  </p>
+
+  <h2 id="inputs">Inputs</h2>
+  <table class="doc-table">
+    <thead>
+      <tr>
+        <th scope="col">Input</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>label</code></td>
+        <td>The form field label.</td>
+      </tr>
+      <tr>
+        <td><code>placeholder</code></td>
+        <td>Date fields only.</td>
+      </tr>
+      <tr>
+        <td><code>startPlaceholder</code>, <code>endPlaceholder</code></td>
+        <td>Range fields only.</td>
+      </tr>
+      <tr>
+        <td><code>valueCalendar</code></td>
+        <td>The calendar of emitted values. Defaults to the provider calendar.</td>
+      </tr>
+      <tr>
+        <td><code>calendarToggle</code></td>
+        <td>Shows the Hijri and Gregorian buttons.</td>
+      </tr>
+      <tr>
+        <td><code>equivalentHint</code></td>
+        <td>Shows the date in the other calendar while the toggle is on. Defaults to true.</td>
+      </tr>
+      <tr>
+        <td><code>locale</code></td>
+        <td>Overrides the provider locale for digits, names, week start, and button text.</td>
+      </tr>
+      <tr>
+        <td><code>minDate</code>, <code>maxDate</code></td>
+        <td>A <code>CalendarDate</code> in either calendar.</td>
+      </tr>
+      <tr>
+        <td><code>period</code></td>
+        <td>
+          <code>'all'</code>, <code>'past'</code>, or <code>'future'</code>. Past and future both
+          exclude today.
+        </td>
+      </tr>
+      <tr>
+        <td><code>dateFilter</code></td>
+        <td>Receives each day in <code>valueCalendar</code>.</td>
+      </tr>
+      <tr>
+        <td><code>touchUi</code></td>
+        <td>Opens the calendar in a dialog.</td>
+      </tr>
+      <tr>
+        <td><code>calendarLabels</code></td>
+        <td>
+          Overrides the button text and accessible names. Defaults are <code>هـ</code> and
+          <code>م</code> for Arabic locales, and <code>AH</code> and <code>AD</code> otherwise.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="range-limits">Range limits and unreadable dates</h2>
+  <p>
+    When Umm al-Qura is involved, through <code>valueCalendar</code> or the toggle, the picker is
+    limited to AH 1300–1599. A Gregorian date outside that table reports
+    <code>matDatepickerMin</code> or <code>matDatepickerMax</code>, and the value is
+    <code>null</code>. An unreadable date also sets the value to <code>null</code>.
+  </p>
+</article>

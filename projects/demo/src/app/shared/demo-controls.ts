@@ -9,7 +9,7 @@ export type DemoDirection = 'rtl' | 'ltr';
 @Component({
   selector: 'demo-controls',
   imports: [MatButtonToggleGroup, MatButtonToggle],
-  host: { class: 'demo-controls' },
+  host: { class: 'flex flex-wrap gap-2' },
   template: `
     <mat-button-toggle-group
       hideSingleSelectionIndicator

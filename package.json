@@ -38,9 +38,12 @@
     "@angular/compiler-cli": "^22.2.0",
     "@angular/material": "^22.2.1",
     "@internationalized/date": "^3.12.4",
+    "@tailwindcss/postcss": "^4.3.3",
     "jsdom": "^30.0.0",
     "ng-packagr": "^22.2.0",
+    "postcss": "^8.5.28",
     "prettier": "^3.8.1",
+    "tailwindcss": "^4.3.3",
     "typescript": "~6.0.2",
     "vitest": "^5.0.0"
   }

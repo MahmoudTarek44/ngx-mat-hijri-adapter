@@ -1,5 +1,5 @@
 <section
-  class="example-body"
+  class="grid grid-cols-1 gap-4 px-6 pt-5 pb-6 *:w-full"
   data-demo="reactive"
   [attr.lang]="locale()"
   [dir]="direction()"
@@ -16,7 +16,12 @@
     [dateFilter]="notFriday"
     [errors]="text().errors"
   />
-  <p class="value-output" dir="ltr" data-value="appointment">{{ appointmentValue() }}</p>
+  <output
+    class="-mt-1 block rounded-[10px] bg-surface-container-high px-3 py-2 font-mono text-body-small text-on-surface-variant"
+    dir="ltr"
+    data-value="appointment"
+    >{{ appointmentValue() }}</output
+  >
 
   <ngx-mat-reactive-date-range-field
     formControlName="stay"
@@ -28,5 +33,10 @@
     [locale]="locale()"
     [errors]="text().errors"
   />
-  <p class="value-output" dir="ltr" data-value="stay">{{ stayValue() }}</p>
+  <output
+    class="-mt-1 block rounded-[10px] bg-surface-container-high px-3 py-2 font-mono text-body-small text-on-surface-variant"
+    dir="ltr"
+    data-value="stay"
+    >{{ stayValue() }}</output
+  >
 </section>

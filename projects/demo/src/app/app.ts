@@ -3,7 +3,7 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { MatTooltip } from '@angular/material/tooltip';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 import { NGX_MAT_HIJRI_ADAPTER_VERSION } from 'ngx-mat-hijri-adapter';
 
@@ -21,6 +21,7 @@ const THEME_ICONS: Record<ThemeMode, string> = {
   imports: [
     RouterOutlet,
     RouterLink,
+    RouterLinkActive,
     MatButton,
     MatIconButton,
     MatIcon,

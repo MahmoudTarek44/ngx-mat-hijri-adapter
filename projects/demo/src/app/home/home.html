@@ -1,21 +1,33 @@
-<section class="hero pattern">
-  <div class="container hero-grid">
+<section class="star-pattern hero-glow overflow-hidden border-b pt-20 pb-16">
+  <div
+    class="mx-auto grid w-full max-w-page grid-cols-1 items-center gap-12 px-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]"
+  >
     <div>
-      <p class="eyebrow">Angular 22 · Material 3 · Signal forms</p>
-      <h1><em>Hijri</em> and Gregorian dates for Angular Material</h1>
-      <p class="lead">
+      <p class="mb-3 text-label-large tracking-[0.08em] text-primary uppercase">
+        Angular 22 · Material 3 · Signal forms
+      </p>
+      <h1 class="mb-5 text-display-medium font-extrabold tracking-[-0.035em]">
+        <em class="bg-linear-to-r from-primary to-tertiary bg-clip-text text-transparent not-italic"
+          >Hijri</em
+        >
+        and Gregorian dates for Angular Material
+      </h1>
+      <p
+        class="mb-8 max-w-[38rem] text-title-medium leading-relaxed font-normal text-on-surface-variant"
+      >
         One date adapter for the Umm al-Qura and Gregorian calendars, with ready-made fields for
         reactive and signal forms. Built on <code>&#64;internationalized/date</code>.
       </p>
-      <code-block class="hero-install" language="bash" [code]="installCommand" />
-      <div class="hero-actions">
-        <a mat-flat-button routerLink="/" fragment="playground">
-          <mat-icon>play_arrow</mat-icon>
-          Try the playground
+      <code-block class="max-w-[34rem]" language="bash" [code]="installCommand" />
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a mat-flat-button routerLink="/docs">
+          <mat-icon>rocket_launch</mat-icon>
+          Get started
         </a>
+        <a mat-stroked-button routerLink="/" fragment="playground">Try the playground</a>
         <a mat-stroked-button [href]="repositoryUrl">View on GitHub</a>
       </div>
-      <p class="hero-note">
+      <p class="mt-5 text-body-small text-on-surface-variant">
         Version {{ version }} is tagged on GitHub. Publishing to npm comes next.
       </p>
     </div>
@@ -23,41 +35,59 @@
   </div>
 </section>
 
-<section class="section container" aria-labelledby="features-title">
-  <p class="eyebrow">Why this package</p>
-  <h2 class="section-title" id="features-title">Built for both calendars from day one</h2>
-  <p class="section-lead">
+<section class="mx-auto w-full max-w-page px-6 pt-20 pb-4" aria-labelledby="features-title">
+  <p class="mb-3 text-label-large tracking-[0.08em] text-primary uppercase">Why this package</p>
+  <h2 class="mb-3 text-headline-large font-bold tracking-[-0.02em]" id="features-title">
+    Built for both calendars from day one
+  </h2>
+  <p class="mb-10 max-w-[44rem] text-on-surface-variant">
     The name says Hijri, but every part handles the Gregorian calendar too. Values are
     <code>CalendarDate</code> objects, never a JavaScript <code>Date</code>, so no time zone shifts
     a day.
   </p>
-  <div class="feature-grid">
+  <div class="grid grid-cols-[repeat(auto-fit,minmax(16rem,1fr))] gap-4">
     @for (feature of features; track feature.title) {
-      <article class="feature surface-card">
-        <mat-icon aria-hidden="true">{{ feature.icon }}</mat-icon>
-        <h3>{{ feature.title }}</h3>
-        <p>{{ feature.text }}</p>
+      <article class="rounded-card border bg-surface-container-low p-6">
+        <mat-icon
+          class="mb-4 grid! size-11! place-items-center rounded-xl bg-primary-container text-on-primary-container"
+          aria-hidden="true"
+          >{{ feature.icon }}</mat-icon
+        >
+        <h3 class="mb-2 text-title-medium font-semibold">{{ feature.title }}</h3>
+        <p class="text-body-medium text-on-surface-variant">{{ feature.text }}</p>
       </article>
     }
   </div>
 </section>
 
-<section id="playground" class="section container" aria-labelledby="playground-title">
-  <p class="eyebrow">Playground</p>
-  <h2 class="section-title" id="playground-title">Try every option live</h2>
-  <p class="section-lead">
+<section
+  id="playground"
+  class="mx-auto w-full max-w-page scroll-mt-16 px-6 pt-20 pb-4"
+  aria-labelledby="playground-title"
+>
+  <p class="mb-3 text-label-large tracking-[0.08em] text-primary uppercase">Playground</p>
+  <h2 class="mb-3 text-headline-large font-bold tracking-[-0.02em]" id="playground-title">
+    Try every option live
+  </h2>
+  <p class="mb-10 max-w-[44rem] text-on-surface-variant">
     Change the calendar, locale, and field options. The values and the code below update as you go.
   </p>
   <playground />
 </section>
 
-<section id="examples" class="section container" aria-labelledby="examples-title">
-  <p class="eyebrow">Examples</p>
-  <h2 class="section-title" id="examples-title">Copy, paste, ship</h2>
-  <p class="section-lead">
+<section
+  id="examples"
+  class="mx-auto w-full max-w-page scroll-mt-16 px-6 pt-20 pb-4"
+  aria-labelledby="examples-title"
+>
+  <p class="mb-3 text-label-large tracking-[0.08em] text-primary uppercase">Examples</p>
+  <h2 class="mb-3 text-headline-large font-bold tracking-[-0.02em]" id="examples-title">
+    Copy, paste, ship
+  </h2>
+  <p class="mb-10 max-w-[44rem] text-on-surface-variant">
     Each example runs live. Switch to the code tabs for the component and template behind it.
   </p>
-  <div class="example-grid">
+  <div class="grid grid-cols-1 gap-6 min-[1100px]:grid-cols-2">
     <example-card
       heading="Umm al-Qura datepicker"
       description="A plain mat-datepicker with a range and a Friday filter."

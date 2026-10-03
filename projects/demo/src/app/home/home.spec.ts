@@ -63,7 +63,7 @@ describe('Home', () => {
 
     expect(values()).toContain('islamic-umalqura');
     const gregorian = Array.from(
-      compiled.querySelectorAll<HTMLButtonElement>('.playground-controls button'),
+      compiled.querySelectorAll<HTMLButtonElement>('[data-playground-controls] button'),
     ).find((button) => button.textContent?.trim() === 'Gregorian');
     gregorian?.click();
     await fixture.whenStable();

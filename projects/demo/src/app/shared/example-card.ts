@@ -12,14 +12,16 @@ export interface Snippet {
 @Component({
   selector: 'example-card',
   imports: [MatTabGroup, MatTab, CodeBlock],
-  host: { class: 'example-card surface-card' },
+  host: {
+    class: 'flex min-w-0 flex-col overflow-hidden rounded-card border bg-surface-container-low',
+  },
   template: `
-    <header>
+    <header class="flex flex-wrap items-start justify-between gap-x-4 gap-y-2 px-6 pt-5 pb-2">
       <div>
-        <h3>{{ heading() }}</h3>
-        <p>{{ description() }}</p>
+        <h3 class="mb-1 text-title-large font-semibold">{{ heading() }}</h3>
+        <p class="text-body-medium text-on-surface-variant">{{ description() }}</p>
       </div>
-      <code class="entry-point">{{ entryPoint() }}</code>
+      <code class="text-primary">{{ entryPoint() }}</code>
     </header>
     <mat-tab-group mat-stretch-tabs="false" animationDuration="0ms" [preserveContent]="true">
       <mat-tab label="Demo">
@@ -27,7 +29,7 @@ export interface Snippet {
       </mat-tab>
       @for (snippet of snippets(); track snippet.label) {
         <mat-tab [label]="snippet.label">
-          <code-block [code]="snippet.code" [language]="snippet.language" />
+          <code-block class="mx-6 mt-4 mb-6" [code]="snippet.code" [language]="snippet.language" />
         </mat-tab>
       }
     </mat-tab-group>
