@@ -5,7 +5,7 @@ import type { CalendarDate } from '@internationalized/date';
 import { createCalendarDate, provideHijriDateAdapter } from 'ngx-mat-hijri-adapter';
 
 import { HijriDateField } from './hijri-date-field';
-import type { HijriDatePeriod } from './field-support';
+import type { HijriDatePeriod } from './public-api';
 
 @Component({
   imports: [ReactiveFormsModule, HijriDateField],
@@ -14,7 +14,7 @@ import type { HijriDatePeriod } from './field-support';
       label="Date"
       [formControl]="date"
       [calendarToggle]="toggle()"
-      [min]="min()"
+      [minDate]="min()"
       [period]="period()"
       [errors]="{
         required: 'Required',

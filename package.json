@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve demo",
-    "build": "node scripts/stage-package-files.mjs && ng build ngx-mat-hijri-adapter",
+    "build": "node scripts/check-entry-boundaries.mjs && node scripts/stage-package-files.mjs && ng build ngx-mat-hijri-adapter",
     "build:demo": "ng build demo",
     "watch": "ng build ngx-mat-hijri-adapter --watch --configuration development",
     "test": "ng test ngx-mat-hijri-adapter --watch=false",

@@ -28,7 +28,7 @@
           "builder": "@angular/build:unit-test",
           "options": {
             "tsConfig": "projects/ngx-mat-hijri-adapter/tsconfig.spec.json",
-            "include": ["**/*.spec.ts", "../reactive/**/*.spec.ts"]
+            "include": ["**/*.spec.ts", "../reactive/**/*.spec.ts", "../signals/**/*.spec.ts"]
           }
         }
       }
@@ -61,7 +61,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "600kB",
+                  "maximumWarning": "700kB",
                   "maximumError": "1MB"
                 },
                 {

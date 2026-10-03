@@ -3,5 +3,9 @@
  */
 
 export { HijriDateField } from './hijri-date-field';
-export { HijriDateRangeField, type CalendarDateRange } from './hijri-date-range-field';
-export type { HijriCalendarLabels, HijriDatePeriod } from './field-support';
+export { HijriDateRangeField } from './hijri-date-range-field';
+export type {
+  ɵCalendarDateRange as CalendarDateRange,
+  ɵHijriCalendarLabels as HijriCalendarLabels,
+  ɵHijriDatePeriod as HijriDatePeriod,
+} from 'ngx-mat-hijri-adapter/internal';

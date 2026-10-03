@@ -11,6 +11,12 @@ import {
 } from 'ngx-mat-hijri-adapter';
 
 /** Which days a field offers relative to today. `past` and `future` both exclude today. */
+/** Value of a date range field. Each end is a `CalendarDate` in the value calendar, or null. */
+export interface CalendarDateRange {
+  start: CalendarDate | null;
+  end: CalendarDate | null;
+}
+
 export type HijriDatePeriod = 'all' | 'past' | 'future';
 
 /** Text for the calendar toggle buttons and the equivalent-date hint. */

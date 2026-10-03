@@ -15,14 +15,14 @@
       formControlName="start"
       [placeholder]="startPlaceholder()"
       [errorStateMatcher]="errorState"
-      (blur)="touch()"
+      (blur)="markTouched()"
     />
     <input
       matEndDate
       formControlName="end"
       [placeholder]="endPlaceholder()"
       [errorStateMatcher]="errorState"
-      (blur)="touch()"
+      (blur)="markTouched()"
     />
   </mat-date-range-input>
 
@@ -53,7 +53,7 @@
     <mat-datepicker-toggle matIconSuffix [for]="picker" />
   }
 
-  <mat-date-range-picker #picker [touchUi]="touchUi()" (closed)="touch()" />
+  <mat-date-range-picker #picker [touchUi]="touchUi()" (closed)="markTouched()" />
 
   @if (equivalent()) {
     <mat-hint>{{ equivalent() }}</mat-hint>

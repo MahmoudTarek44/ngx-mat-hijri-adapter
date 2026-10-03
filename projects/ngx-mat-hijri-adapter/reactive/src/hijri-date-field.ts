@@ -19,9 +19,15 @@ import { MatInput } from '@angular/material/input';
 import type { CalendarDate } from '@internationalized/date';
 import { HijriDateAdapter, type SupportedCalendar } from 'ngx-mat-hijri-adapter';
 
-import { provideFieldDateFormats } from './field-providers';
-import { convertOrNull, equivalentText, readCalendarDate, sameValue } from './field-support';
-import { HijriFieldBase } from './hijri-field-base';
+import {
+  ɵconvertOrNull as convertOrNull,
+  ɵequivalentText as equivalentText,
+  ɵprovideFieldDateFormats as provideFieldDateFormats,
+  ɵreadCalendarDate as readCalendarDate,
+  ɵsameValue as sameValue,
+} from 'ngx-mat-hijri-adapter/internal';
+
+import { ReactiveDateFieldBase } from './reactive-date-field-base';
 
 /**
  * Material datepicker field for reactive forms. The form value is a `CalendarDate` in
@@ -49,10 +55,10 @@ import { HijriFieldBase } from './hijri-field-base';
     MatDatepickerInput,
     MatDatepickerToggle,
   ],
-  templateUrl: './hijri-date-field.html',
-  styleUrl: './hijri-field.css',
+  templateUrl: '../../internal/src/hijri-date-field.html',
+  styleUrl: '../../internal/src/hijri-field.css',
 })
-export class HijriDateField extends HijriFieldBase<CalendarDate | null> {
+export class HijriDateField extends ReactiveDateFieldBase<CalendarDate | null> {
   /** Input placeholder. */
   readonly placeholder = input('');
 

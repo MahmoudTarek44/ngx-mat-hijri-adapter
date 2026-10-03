@@ -21,15 +21,16 @@ import { MatError, MatFormField, MatHint, MatLabel, MatSuffix } from '@angular/m
 import type { CalendarDate } from '@internationalized/date';
 import { HijriDateAdapter, type SupportedCalendar } from 'ngx-mat-hijri-adapter';
 
-import { provideFieldDateFormats } from './field-providers';
-import { convertOrNull, equivalentText, readCalendarDate, sameValue } from './field-support';
-import { HijriFieldBase } from './hijri-field-base';
+import {
+  type ɵCalendarDateRange as CalendarDateRange,
+  ɵconvertOrNull as convertOrNull,
+  ɵequivalentText as equivalentText,
+  ɵprovideFieldDateFormats as provideFieldDateFormats,
+  ɵreadCalendarDate as readCalendarDate,
+  ɵsameValue as sameValue,
+} from 'ngx-mat-hijri-adapter/internal';
 
-/** Value of a date range field. Each end is a `CalendarDate` in the value calendar, or null. */
-export interface CalendarDateRange {
-  start: CalendarDate | null;
-  end: CalendarDate | null;
-}
+import { ReactiveDateFieldBase } from './reactive-date-field-base';
 
 /**
  * Material date range field for reactive forms. The form value is a {@link CalendarDateRange}
@@ -62,10 +63,10 @@ export interface CalendarDateRange {
     MatEndDate,
     MatDatepickerToggle,
   ],
-  templateUrl: './hijri-date-range-field.html',
-  styleUrl: './hijri-field.css',
+  templateUrl: '../../internal/src/hijri-date-range-field.html',
+  styleUrl: '../../internal/src/hijri-field.css',
 })
-export class HijriDateRangeField extends HijriFieldBase<CalendarDateRange> {
+export class HijriDateRangeField extends ReactiveDateFieldBase<CalendarDateRange> {
   /** Placeholder of the start input. */
   readonly startPlaceholder = input('');
   /** Placeholder of the end input. */

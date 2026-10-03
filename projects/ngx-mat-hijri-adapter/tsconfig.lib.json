@@ -9,6 +9,6 @@
     "declarationMap": true,
     "types": []
   },
-  "include": ["src/**/*.ts", "reactive/src/**/*.ts"],
+  "include": ["src/**/*.ts", "internal/src/**/*.ts", "reactive/src/**/*.ts", "signals/src/**/*.ts"],
   "exclude": ["**/*.spec.ts"]
 }

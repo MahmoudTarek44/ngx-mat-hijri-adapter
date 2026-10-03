@@ -12,7 +12,7 @@
     [matDatepickerFilter]="filter()"
     [placeholder]="placeholder()"
     [errorStateMatcher]="errorState"
-    (blur)="touch()"
+    (blur)="markTouched()"
   />
 
   @if (calendarToggle()) {
@@ -42,7 +42,7 @@
     <mat-datepicker-toggle matIconSuffix [for]="picker" />
   }
 
-  <mat-datepicker #picker [touchUi]="touchUi()" (closed)="touch()" />
+  <mat-datepicker #picker [touchUi]="touchUi()" (closed)="markTouched()" />
 
   @if (equivalent()) {
     <mat-hint>{{ equivalent() }}</mat-hint>

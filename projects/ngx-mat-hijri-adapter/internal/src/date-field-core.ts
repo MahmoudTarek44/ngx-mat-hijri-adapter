@@ -1,10 +1,6 @@
 import {
-  ChangeDetectorRef,
-  DestroyRef,
   Directive,
-  Injector,
-  afterNextRender,
-  afterRenderEffect,
+  type Signal,
   booleanAttribute,
   computed,
   effect,
@@ -13,16 +9,6 @@ import {
   signal,
   untracked,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  type AbstractControl,
-  type ControlValueAccessor,
-  FormGroupDirective,
-  NgControl,
-  NgForm,
-  type ValidationErrors,
-  type Validator,
-} from '@angular/forms';
 import type { ErrorStateMatcher } from '@angular/material/core';
 import type { CalendarDate } from '@internationalized/date';
 import {
@@ -40,14 +26,13 @@ import {
   pickerBound,
 } from './field-support';
 
+/**
+ * Calendar switching, bounds, filtering, and labels shared by the reactive and signal fields.
+ * Subclasses connect the displayed value to a form.
+ */
 @Directive()
-export abstract class HijriFieldBase<TValue> implements ControlValueAccessor, Validator {
+export abstract class DateFieldCore {
   protected readonly adapter = inject(HijriDateAdapter);
-  private readonly injector = inject(Injector);
-  private readonly changeDetector = inject(ChangeDetectorRef);
-  private readonly destroyRef = inject(DestroyRef);
-  private readonly parentForm =
-    inject(FormGroupDirective, { optional: true }) ?? inject(NgForm, { optional: true });
   private readonly defaultCalendar = this.adapter.calendar;
   private readonly defaultLocale =
     inject(HIJRI_DATE_ADAPTER_OPTIONS, { optional: true })?.locale ?? 'ar-SA';
@@ -63,25 +48,19 @@ export abstract class HijriFieldBase<TValue> implements ControlValueAccessor, Va
   /** Locale for digits, names, and week start. Defaults to the provider locale. */
   readonly locale = input<string>();
   /** Earliest selectable day, in any supported calendar. */
-  readonly min = input<CalendarDate | null>();
+  readonly minDate = input<CalendarDate | null>();
   /** Latest selectable day, in any supported calendar. */
-  readonly max = input<CalendarDate | null>();
+  readonly maxDate = input<CalendarDate | null>();
   /** Restricts days relative to today. */
   readonly period = input<HijriDatePeriod>('all');
   /** Extra day filter. It receives dates in the value calendar. */
   readonly dateFilter = input<((date: CalendarDate) => boolean) | null>(null);
   /** Opens the calendar in a dialog instead of a popup. */
   readonly touchUi = input(false, { transform: booleanAttribute });
-  /**
-   * Messages keyed by validation error. Datepicker errors such as `matDatepickerParse` take
-   * precedence over the form control's own validators, such as `required`.
-   */
-  readonly errors = input<Record<string, string>>({});
   /** Overrides the toggle and hint text. */
   readonly calendarLabels = input<Partial<HijriCalendarLabels>>({});
 
   protected readonly display = signal<SupportedCalendar>(this.defaultCalendar);
-  protected readonly disabled = signal(false);
   protected readonly activeLocale = computed(() => this.locale() ?? this.defaultLocale);
   protected readonly labels = computed(() =>
     calendarLabels(this.activeLocale(), this.calendarLabels()),
@@ -93,10 +72,10 @@ export abstract class HijriFieldBase<TValue> implements ControlValueAccessor, Va
     () => this.calendarToggle() || this.resolvedValueCalendar() === 'islamic-umalqura',
   );
   protected readonly pickerMin = computed(() =>
-    pickerBound('min', this.min(), this.display(), this.umalqura()),
+    pickerBound('min', this.minDate(), this.display(), this.umalqura()),
   );
   protected readonly pickerMax = computed(() =>
-    pickerBound('max', this.max(), this.display(), this.umalqura()),
+    pickerBound('max', this.maxDate(), this.display(), this.umalqura()),
   );
   protected readonly filter = computed(() => {
     const period = this.period();
@@ -120,27 +99,18 @@ export abstract class HijriFieldBase<TValue> implements ControlValueAccessor, Va
       return value !== null && custom(value);
     };
   });
-
-  private readonly controlErrors = signal<ValidationErrors | null>(null);
-  protected readonly errorMessage = computed(() => {
-    const errors = this.controlErrors();
-    const messages = this.errors();
-    const key = Object.keys(errors ?? {}).find((name) => messages[name] !== undefined);
-    return key === undefined ? '' : (messages[key] ?? '');
-  });
   protected readonly errorState: ErrorStateMatcher = {
-    isErrorState: () => {
-      const control = this.control();
-      return !!control?.invalid && (control.touched || !!this.parentForm?.submitted);
-    },
+    isErrorState: () => this.isErrorState(),
   };
 
-  protected onChange: (value: TValue) => void = () => {};
   /** True while the displayed calendar changes, when Material re-emits the same day. */
   protected switching = false;
-  private onTouched: () => void = () => {};
-  private validatorChange?: () => void;
   private started = false;
+
+  /** Whether the inner inputs and calendar buttons are disabled. */
+  protected abstract readonly disabled: Signal<boolean>;
+  /** Text of the `mat-error`, or an empty string. */
+  protected abstract readonly errorMessage: Signal<string>;
 
   constructor() {
     effect(() => this.adapter.setLocale(this.activeLocale()));
@@ -155,58 +125,22 @@ export abstract class HijriFieldBase<TValue> implements ControlValueAccessor, Va
         this.started = true;
       });
     });
-
-    afterRenderEffect(() => {
-      this.pickerMin();
-      this.pickerMax();
-      this.filter();
-      untracked(() => this.revalidate());
-    });
-
-    afterNextRender(() => this.watchControl());
   }
-
-  abstract writeValue(value: unknown): void;
 
   /** Re-expresses the displayed value in `calendar` without changing the form value. */
   protected abstract showValueIn(calendar: SupportedCalendar): void;
 
-  protected abstract innerErrors(): ValidationErrors | null;
+  protected abstract isErrorState(): boolean;
 
-  protected abstract setInnerDisabled(disabled: boolean): void;
-
-  registerOnChange(fn: (value: TValue) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(disabled: boolean): void {
-    this.disabled.set(disabled);
-    this.setInnerDisabled(disabled);
-  }
-
-  validate(): ValidationErrors | null {
-    return this.innerErrors();
-  }
-
-  registerOnValidatorChange(fn: () => void): void {
-    this.validatorChange = fn;
-  }
+  protected abstract notifyTouched(): void;
 
   protected openIn(calendar: SupportedCalendar, picker: { open(): void }): void {
     this.showCalendar(calendar);
     picker.open();
   }
 
-  protected touch(): void {
-    this.onTouched();
-  }
-
-  protected revalidate(): void {
-    this.validatorChange?.();
+  protected markTouched(): void {
+    this.notifyTouched();
   }
 
   protected toValue(date: CalendarDate | null): CalendarDate | null {
@@ -226,24 +160,5 @@ export abstract class HijriFieldBase<TValue> implements ControlValueAccessor, Va
     } finally {
       this.switching = false;
     }
-  }
-
-  private control(): AbstractControl | null {
-    return this.injector.get(NgControl, null, { self: true, optional: true })?.control ?? null;
-  }
-
-  private watchControl(): void {
-    const control = this.control();
-    if (!control) {
-      return;
-    }
-
-    const refresh = () => {
-      this.controlErrors.set(control.errors && { ...this.innerErrors(), ...control.errors });
-      this.changeDetector.markForCheck();
-    };
-    control.events.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(refresh);
-    this.parentForm?.ngSubmit.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(refresh);
-    refresh();
   }
 }
