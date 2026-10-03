@@ -12,7 +12,7 @@ The package and its adapter carry "Hijri" in their names, but every part handles
 
 ## Status and installation
 
-Version 0.1.0 is tagged on [GitHub](https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/v0.1.0). It is not yet published to npm. Once it is, install it with its peer dependencies:
+Version 0.1.0 is tagged on [GitHub](https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.1.0). It is not yet published to npm. Once it is, install it with its peer dependencies:
 
 ```bash
 npm install ngx-mat-hijri-adapter @internationalized/date

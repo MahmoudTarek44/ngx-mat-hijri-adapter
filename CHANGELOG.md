@@ -23,4 +23,4 @@ First release.
 
 `ngx-mat-hijri-adapter/internal` holds code shared by the field entry points. It is not public API and may change in any release.
 
-[0.1.0]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/v0.1.0
+[0.1.0]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.1.0
