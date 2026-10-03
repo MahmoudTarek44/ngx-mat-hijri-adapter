@@ -1,5 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { getLocalTimeZone } from '@internationalized/date';
+import {
+  CalendarCode,
+  CalendarLocale,
+  calendarToday,
+  formatCalendarDate,
+} from 'ngx-mat-hijri-adapter';
 
 import { Home } from './home';
 
@@ -20,6 +27,14 @@ describe('Home', () => {
       'Hijri and Gregorian dates for Angular Material',
     );
     expect(compiled.querySelector('mat-calendar')).not.toBeNull();
+    const today = calendarToday(CalendarCode.gregorian, getLocalTimeZone());
+    expect(compiled.querySelector('[data-hero-equivalent]')?.textContent).toContain(
+      formatCalendarDate(today, CalendarLocale.enUS, {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      }),
+    );
     expect(compiled.querySelector('#playground playground')).not.toBeNull();
     expect(compiled.querySelectorAll('[data-playground-stage] input').length).toBe(4);
     expect(compiled.querySelectorAll('#examples example-card').length).toBe(4);

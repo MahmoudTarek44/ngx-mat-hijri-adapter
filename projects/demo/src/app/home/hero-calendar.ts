@@ -9,7 +9,6 @@ import {
   CalendarCode,
   CalendarLocale,
   convertCalendarDate,
-  createCalendarDate,
   formatCalendarDate,
   HijriDateAdapter,
   provideHijriDateAdapter,
@@ -26,7 +25,6 @@ const LONG_DATE = { day: 'numeric', month: 'long', year: 'numeric' } as const;
     provideHijriDateAdapter({
       calendar: CalendarCode.umalqura,
       locale: CalendarLocale.arSA,
-      timeZone: 'UTC',
     }),
   ],
   host: {
@@ -46,14 +44,17 @@ const LONG_DATE = { day: 'numeric', month: 'long', year: 'numeric' } as const;
         <mat-button-toggle [value]="calendarCode.gregorian">Gregorian</mat-button-toggle>
       </mat-button-toggle-group>
     </div>
-    <div dir="rtl" lang="ar-SA">
+    <!-- Header height plus six week rows, each a seventh of the table width. -->
+    <div class="@container" dir="rtl" lang="ar-SA">
       <mat-calendar
+        class="min-h-[calc(125.6px+(100cqw-16px)*6/7)]"
         [startAt]="selected()"
         [selected]="selected()"
         (selectedChange)="select($event)"
       />
     </div>
     <p
+      data-hero-equivalent
       class="mt-3 rounded-[14px] bg-primary-container px-4 py-3 text-center text-body-medium text-on-primary-container"
     >
       <span lang="ar-SA" dir="rtl">{{ hijriText() }}</span>
@@ -67,9 +68,7 @@ export class HeroCalendar {
 
   protected readonly calendarCode = CalendarCode;
   protected readonly calendar = signal<SupportedCalendar>(CalendarCode.umalqura);
-  protected readonly selected = signal<CalendarDate>(
-    createCalendarDate(CalendarCode.umalqura, 1445, 9, 1),
-  );
+  protected readonly selected = signal<CalendarDate>(this.adapter.today());
   protected readonly hijriText = computed(() =>
     formatCalendarDate(
       convertCalendarDate(this.selected(), CalendarCode.umalqura),
