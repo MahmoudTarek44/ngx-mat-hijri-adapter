@@ -29,7 +29,7 @@ const LONG_DATE = { day: 'numeric', month: 'long', year: 'numeric' } as const;
   ],
   host: {
     class:
-      'block w-full max-w-96 justify-self-center rounded-card border bg-surface-container-low p-5 shadow-[0_24px_60px_-24px_color-mix(in_srgb,var(--color-primary)_45%,transparent)]',
+      'block w-full max-w-96 justify-self-center lg:justify-self-end rounded-card border bg-surface-container-low p-5 shadow-[0_24px_60px_-24px_color-mix(in_srgb,var(--color-primary)_45%,transparent)]',
   },
   template: `
     <div class="mb-2 flex items-center justify-between gap-4">

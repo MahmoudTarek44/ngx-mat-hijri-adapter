@@ -1,13 +1,23 @@
-# ngx-mat-hijri-adapter
+<p align="center">
+  <img src="projects/demo/public/logo.svg" alt="ngx-mat-hijri-adapter logo" width="120" />
+</p>
 
-[![Version](https://img.shields.io/github/v/tag/MahmoudTarek44/ngx-mat-hijri-adapter?label=version&color=006d3b)](https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.1)
-[![Angular](https://img.shields.io/badge/Angular-22-dd0031)](https://angular.dev)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-[![Documentation](https://img.shields.io/badge/docs-live%20demo-006d3b)](https://mahmoudtarek44.github.io/ngx-mat-hijri-adapter/)
+<h1 align="center">ngx-mat-hijri-adapter</h1>
 
-Angular Material date adapter and form fields for the Gregorian and Umm al-Qura Hijri calendars, built on [`@internationalized/date`](https://github.com/adobe/react-spectrum/tree/main/packages/@internationalized/date).
+<p align="center">
+  Angular Material date adapter and form fields for the Gregorian and Umm al-Qura Hijri calendars, built on <a href="https://github.com/adobe/react-spectrum/tree/main/packages/@internationalized/date"><code>@internationalized/date</code></a>.
+</p>
 
-**[Documentation and live demo →](https://mahmoudtarek44.github.io/ngx-mat-hijri-adapter/)**
+<p align="center">
+  <a href="https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.1"><img src="https://img.shields.io/github/v/tag/MahmoudTarek44/ngx-mat-hijri-adapter?label=version&amp;color=006d33" alt="Version" /></a>
+  <a href="https://angular.dev"><img src="https://img.shields.io/badge/Angular-22-dd0031" alt="Angular" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT" /></a>
+  <a href="https://mahmoudtarek44.github.io/ngx-mat-hijri-adapter/"><img src="https://img.shields.io/badge/docs-live%20demo-006d33" alt="Documentation" /></a>
+</p>
+
+<p align="center">
+  <strong><a href="https://mahmoudtarek44.github.io/ngx-mat-hijri-adapter/">Documentation and live demo →</a></strong>
+</p>
 
 ## Features
 

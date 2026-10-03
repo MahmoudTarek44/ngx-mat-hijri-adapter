@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="25 30 200 200">
+  <style>
+    .shield { fill: #006d33; }
+    .shield-dark { fill: #005225; }
+    .page { fill: #ffffff; }
+    .crescent { fill: #006a6a; }
+    @media (prefers-color-scheme: dark) {
+      .shield { fill: #00e472; }
+      .shield-dark { fill: #00a751; }
+      .page { fill: #003917; }
+      .crescent { fill: #00dddd; }
+    }
+  </style>
+  <path class="shield" d="M125 30 31.9 63.2l14.2 123.1L125 230Z" />
+  <path class="shield-dark" d="m125 30 93.1 33.2-14.2 123.1L125 230Z" />
+  <rect class="page" x="60" y="74" width="130" height="118" rx="16" />
+  <rect class="page" x="84" y="54" width="22" height="34" rx="11" />
+  <rect class="page" x="144" y="54" width="22" height="34" rx="11" />
+  <circle class="crescent" cx="119" cy="137" r="40" />
+  <circle class="page" cx="138" cy="125" r="33" />
+</svg>

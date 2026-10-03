@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250" role="img" aria-label="ngx-mat-hijri-adapter">
+  <style>
+    .shield { fill: #006d33; }
+    .shield-dark { fill: #005225; }
+    .page { fill: #ffffff; }
+    .crescent { fill: #006a6a; }
+    .ring { fill: #ffffff; stroke: #006d33; }
+    .ring-dark { fill: #ffffff; stroke: #005225; }
+    @media (prefers-color-scheme: dark) {
+      .shield { fill: #00e472; }
+      .shield-dark { fill: #00a751; }
+      .page { fill: #003917; }
+      .crescent { fill: #00dddd; }
+      .ring { fill: #003917; stroke: #00e472; }
+      .ring-dark { fill: #003917; stroke: #00a751; }
+    }
+  </style>
+  <path class="shield" d="M125 30 31.9 63.2l14.2 123.1L125 230Z" />
+  <path class="shield-dark" d="m125 30 93.1 33.2-14.2 123.1L125 230Z" />
+  <rect class="page" x="70" y="84" width="110" height="100" rx="14" />
+  <rect class="shield" x="70" y="108" width="55" height="8" />
+  <rect class="shield-dark" x="125" y="108" width="55" height="8" />
+  <rect class="ring" x="92" y="66" width="14" height="32" rx="7" stroke-width="5" />
+  <rect class="ring-dark" x="144" y="66" width="14" height="32" rx="7" stroke-width="5" />
+  <circle class="crescent" cx="122" cy="150" r="24" />
+  <circle class="page" cx="133" cy="143" r="20" />
+  <path class="crescent" d="m148 129 2.2 6.8 6.8 2.2-6.8 2.2-2.2 6.8-2.2-6.8-6.8-2.2 6.8-2.2Z" />
+</svg>

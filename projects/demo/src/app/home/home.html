@@ -1,22 +1,29 @@
 <section class="star-pattern hero-glow overflow-hidden border-b pt-20 pb-16">
   <div
-    class="mx-auto grid w-full max-w-page grid-cols-1 items-center gap-12 px-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]"
+    class="mx-auto grid w-full max-w-page grid-cols-1 items-center gap-12 px-6 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]"
   >
     <div>
-      <p class="mb-3 text-label-large tracking-[0.08em] text-primary uppercase">
-        Angular 22 · Material 3 · Signal forms
-      </p>
-      <h1 class="mb-5 text-display-medium font-extrabold tracking-[-0.035em]">
-        <em class="bg-linear-to-r from-primary to-tertiary bg-clip-text text-transparent not-italic"
-          >Hijri</em
-        >
-        and Gregorian dates for Angular Material
-      </h1>
+      <div class="mb-5 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6">
+        <package-logo
+          class="size-16 drop-shadow-[0_12px_28px_color-mix(in_srgb,var(--color-primary)_40%,transparent)] sm:size-28"
+          data-hero-logo
+        />
+        <h1 class="text-display-medium font-extrabold tracking-[-0.035em]">
+          <em
+            class="bg-linear-to-r from-primary to-tertiary bg-clip-text text-transparent not-italic"
+            >Hijri</em
+          >
+          and Gregorian dates for Angular Material
+        </h1>
+      </div>
       <p
-        class="mb-8 max-w-[38rem] text-title-medium leading-relaxed font-normal text-on-surface-variant"
+        class="mb-3 max-w-[38rem] text-title-medium leading-relaxed font-normal text-on-surface-variant"
       >
         One date adapter for the Umm al-Qura and Gregorian calendars, with ready-made fields for
         reactive and signal forms. Built on <code>&#64;internationalized/date</code>.
+      </p>
+      <p class="mb-8 text-label-large tracking-[0.08em] text-primary uppercase">
+        Angular 22 · Material 3 · Signal forms
       </p>
       <code-block class="max-w-[34rem]" language="bash" [code]="installCommand" />
       <div class="mt-6 flex flex-wrap gap-3">

@@ -8,6 +8,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { NGX_MAT_HIJRI_ADAPTER_VERSION } from 'ngx-mat-hijri-adapter';
 
 import { REPOSITORY_URL } from './links';
+import { Logo } from './shared/logo';
 import { Theme, type ThemeMode } from './theme/theme';
 
 const THEME_ICONS: Record<ThemeMode, string> = {
@@ -29,6 +30,7 @@ const THEME_ICONS: Record<ThemeMode, string> = {
     MatMenuItem,
     MatMenuTrigger,
     MatTooltip,
+    Logo,
   ],
   templateUrl: './app.html',
 })
