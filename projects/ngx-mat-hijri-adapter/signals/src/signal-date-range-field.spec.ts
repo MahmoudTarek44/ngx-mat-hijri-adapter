@@ -4,12 +4,12 @@ import { FormField, form } from '@angular/forms/signals';
 import { createCalendarDate, provideHijriDateAdapter } from 'ngx-mat-hijri-adapter';
 import type { CalendarDateRange } from './public-api';
 
-import { HijriSignalDateRangeField } from './hijri-signal-date-range-field';
+import { SignalDateRangeField } from './signal-date-range-field';
 
 @Component({
-  imports: [FormField, HijriSignalDateRangeField],
+  imports: [FormField, SignalDateRangeField],
   template: `
-    <hijri-signal-date-range-field
+    <ngx-mat-signal-date-range-field
       label="Stay"
       valueCalendar="gregorian"
       calendarToggle
@@ -51,7 +51,7 @@ async function setup() {
   return { host: fixture.componentInstance, start: start!, end: end!, type, press, hint };
 }
 
-describe('HijriSignalDateRangeField', () => {
+describe('SignalDateRangeField', () => {
   it('keeps a Gregorian model while the Hijri calendar is displayed', async () => {
     const { host, start, end, type, press, hint } = await setup();
 

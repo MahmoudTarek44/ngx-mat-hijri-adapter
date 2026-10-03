@@ -6,7 +6,9 @@ import {
   type MatDateFormats,
 } from '@angular/material/core';
 
+import { CalendarCode } from '../calendar/supported-calendars';
 import { HIJRI_DATE_FORMATS } from '../formats/date-formats';
+import { CalendarLocale } from '../locale/calendar-locale';
 import { HijriDateAdapter } from './hijri-date-adapter';
 import {
   HIJRI_DATE_ADAPTER_OPTIONS,
@@ -24,8 +26,8 @@ export interface ProvideHijriDateAdapterOptions extends HijriDateAdapterOptions 
  * Defaults are the Umm al-Qura calendar and the `ar-SA` locale.
  */
 export function provideHijriDateAdapter(options: ProvideHijriDateAdapterOptions = {}): Provider[] {
-  const calendar = options.calendar ?? 'islamic-umalqura';
-  const locale = options.locale ?? 'ar-SA';
+  const calendar = options.calendar ?? CalendarCode.umalqura;
+  const locale = options.locale ?? CalendarLocale.arSA;
   const adapterOptions: HijriDateAdapterOptions = { calendar, locale };
 
   if (options.timeZone !== undefined) {

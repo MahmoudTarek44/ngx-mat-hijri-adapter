@@ -4,16 +4,16 @@ import { FormField, disabled, form, required } from '@angular/forms/signals';
 import type { CalendarDate } from '@internationalized/date';
 import { createCalendarDate, provideHijriDateAdapter } from 'ngx-mat-hijri-adapter';
 
-import { HijriSignalDateField } from './hijri-signal-date-field';
+import { SignalDateField } from './signal-date-field';
 
 interface Model {
   date: CalendarDate | null;
 }
 
 @Component({
-  imports: [FormField, HijriSignalDateField],
+  imports: [FormField, SignalDateField],
   template: `
-    <hijri-signal-date-field
+    <ngx-mat-signal-date-field
       label="Date"
       calendarToggle
       [formField]="f.date"
@@ -56,7 +56,7 @@ function ymd(date: CalendarDate | null): string {
   return date ? `${date.calendar.identifier}:${date.year}-${date.month}-${date.day}` : 'null';
 }
 
-describe('HijriSignalDateField', () => {
+describe('SignalDateField', () => {
   it('shows the field value and writes typed dates back to the model', async () => {
     const { host, input, type } = await setup();
 
@@ -120,8 +120,8 @@ describe('HijriSignalDateField', () => {
     TestBed.configureTestingModule({ providers: [provideHijriDateAdapter({ locale: 'en-US' })] });
 
     @Component({
-      imports: [FormField, HijriSignalDateField],
-      template: `<hijri-signal-date-field [formField]="f.date" />`,
+      imports: [FormField, SignalDateField],
+      template: `<ngx-mat-signal-date-field [formField]="f.date" />`,
     })
     class DisabledHost {
       readonly model = signal<Model>({ date: null });

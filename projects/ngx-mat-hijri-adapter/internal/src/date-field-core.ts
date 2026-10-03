@@ -12,14 +12,16 @@ import {
 import type { ErrorStateMatcher } from '@angular/material/core';
 import type { CalendarDate } from '@internationalized/date';
 import {
+  CalendarCode,
+  CalendarLocale,
   HIJRI_DATE_ADAPTER_OPTIONS,
   HijriDateAdapter,
   type SupportedCalendar,
 } from 'ngx-mat-hijri-adapter';
 
 import {
-  type HijriCalendarLabels,
-  type HijriDatePeriod,
+  type DateFieldLabels,
+  type DateFieldPeriod,
   calendarLabels,
   convertOrNull,
   periodAllows,
@@ -35,7 +37,7 @@ export abstract class DateFieldCore {
   protected readonly adapter = inject(HijriDateAdapter);
   private readonly defaultCalendar = this.adapter.calendar;
   private readonly defaultLocale =
-    inject(HIJRI_DATE_ADAPTER_OPTIONS, { optional: true })?.locale ?? 'ar-SA';
+    inject(HIJRI_DATE_ADAPTER_OPTIONS, { optional: true })?.locale ?? CalendarLocale.arSA;
 
   /** Floating label text. */
   readonly label = input<string>();
@@ -52,14 +54,15 @@ export abstract class DateFieldCore {
   /** Latest selectable day, in any supported calendar. */
   readonly maxDate = input<CalendarDate | null>();
   /** Restricts days relative to today. */
-  readonly period = input<HijriDatePeriod>('all');
+  readonly period = input<DateFieldPeriod>('all');
   /** Extra day filter. It receives dates in the value calendar. */
   readonly dateFilter = input<((date: CalendarDate) => boolean) | null>(null);
   /** Opens the calendar in a dialog instead of a popup. */
   readonly touchUi = input(false, { transform: booleanAttribute });
   /** Overrides the toggle and hint text. */
-  readonly calendarLabels = input<Partial<HijriCalendarLabels>>({});
+  readonly calendarLabels = input<Partial<DateFieldLabels>>({});
 
+  protected readonly calendarCode = CalendarCode;
   protected readonly display = signal<SupportedCalendar>(this.defaultCalendar);
   protected readonly activeLocale = computed(() => this.locale() ?? this.defaultLocale);
   protected readonly labels = computed(() =>
@@ -69,7 +72,7 @@ export abstract class DateFieldCore {
     () => this.valueCalendar() ?? this.defaultCalendar,
   );
   private readonly umalqura = computed(
-    () => this.calendarToggle() || this.resolvedValueCalendar() === 'islamic-umalqura',
+    () => this.calendarToggle() || this.resolvedValueCalendar() === CalendarCode.umalqura,
   );
   protected readonly pickerMin = computed(() =>
     pickerBound('min', this.minDate(), this.display(), this.umalqura()),

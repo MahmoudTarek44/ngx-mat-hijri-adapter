@@ -1,11 +1,6 @@
-import {
-  CalendarDate,
-  toCalendar,
-  today,
-  type DateDuration,
-} from '@internationalized/date';
+import { CalendarDate, toCalendar, today, type DateDuration } from '@internationalized/date';
 
-import { supportedCalendar, type SupportedCalendar } from './supported-calendars';
+import { CalendarCode, supportedCalendar, type SupportedCalendar } from './supported-calendars';
 
 /** Adobe's Umm al-Qura table includes AH 1300–1600, and AH 1600 falls back to the civil calendar. */
 export const UMALQURA_MIN_YEAR = 1300;
@@ -33,7 +28,7 @@ export function createCalendarDate(
   month: number,
   day: number,
 ): CalendarDate {
-  if (calendar === 'islamic-umalqura') {
+  if (calendar === CalendarCode.umalqura) {
     assertUmalquraYear(year);
   }
 
@@ -47,7 +42,7 @@ export function createCalendarDate(
 
 export function convertCalendarDate(date: CalendarDate, calendar: SupportedCalendar): CalendarDate {
   const converted = toCalendar(date, supportedCalendar(calendar));
-  if (calendar === 'islamic-umalqura') {
+  if (calendar === CalendarCode.umalqura) {
     assertUmalquraYear(converted.year);
   }
 
@@ -60,7 +55,7 @@ export function compareCalendarDates(left: CalendarDate, right: CalendarDate): n
 
 export function addCalendarDate(date: CalendarDate, duration: DateDuration): CalendarDate {
   const next = date.add(duration);
-  if (next.calendar.identifier === 'islamic-umalqura') {
+  if (next.calendar.identifier === CalendarCode.umalqura) {
     assertUmalquraYear(next.year);
   }
 

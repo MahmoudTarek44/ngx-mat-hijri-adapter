@@ -51,7 +51,7 @@ const EMPTY_RANGE: CalendarDateRange = { start: null, end: null };
  * typed. Datepicker errors are reported to the field as parse errors.
  */
 @Component({
-  selector: 'hijri-signal-date-range-field',
+  selector: 'ngx-mat-signal-date-range-field',
   providers: [
     HijriDateAdapter,
     { provide: DateAdapter, useExisting: HijriDateAdapter },
@@ -71,10 +71,10 @@ const EMPTY_RANGE: CalendarDateRange = { start: null, end: null };
     MatEndDate,
     MatDatepickerToggle,
   ],
-  templateUrl: '../../internal/src/hijri-date-range-field.html',
-  styleUrl: '../../internal/src/hijri-field.css',
+  templateUrl: '../../internal/src/date-range-field.html',
+  styleUrl: '../../internal/src/date-field.css',
 })
-export class HijriSignalDateRangeField
+export class SignalDateRangeField
   extends DateFieldCore
   implements FormValueControl<CalendarDateRange>
 {
@@ -116,8 +116,8 @@ export class HijriSignalDateRangeField
     },
     format: (value) => {
       const display = this.display();
-      const start = readCalendarDate(value?.start, 'HijriSignalDateRangeField');
-      const end = readCalendarDate(value?.end, 'HijriSignalDateRangeField');
+      const start = readCalendarDate(value?.start, 'SignalDateRangeField');
+      const end = readCalendarDate(value?.end, 'SignalDateRangeField');
       return {
         start: start && convertCalendarDate(start, display),
         end: end && convertCalendarDate(end, display),

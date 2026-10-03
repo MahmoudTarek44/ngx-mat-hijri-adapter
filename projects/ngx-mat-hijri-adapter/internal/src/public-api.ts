@@ -11,6 +11,6 @@ export {
   readCalendarDate as ɵreadCalendarDate,
   sameValue as ɵsameValue,
   type CalendarDateRange as ɵCalendarDateRange,
-  type HijriCalendarLabels as ɵHijriCalendarLabels,
-  type HijriDatePeriod as ɵHijriDatePeriod,
+  type DateFieldLabels as ɵDateFieldLabels,
+  type DateFieldPeriod as ɵDateFieldPeriod,
 } from './field-support';

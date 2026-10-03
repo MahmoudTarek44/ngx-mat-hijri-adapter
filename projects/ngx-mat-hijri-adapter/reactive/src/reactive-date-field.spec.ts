@@ -4,13 +4,13 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import type { CalendarDate } from '@internationalized/date';
 import { createCalendarDate, provideHijriDateAdapter } from 'ngx-mat-hijri-adapter';
 
-import { HijriDateField } from './hijri-date-field';
-import type { HijriDatePeriod } from './public-api';
+import { ReactiveDateField } from './reactive-date-field';
+import type { DateFieldPeriod } from './public-api';
 
 @Component({
-  imports: [ReactiveFormsModule, HijriDateField],
+  imports: [ReactiveFormsModule, ReactiveDateField],
   template: `
-    <hijri-date-field
+    <ngx-mat-reactive-date-field
       label="Date"
       [formControl]="date"
       [calendarToggle]="toggle()"
@@ -30,7 +30,7 @@ class Host {
   );
   readonly toggle = signal(true);
   readonly min = signal<CalendarDate | null>(null);
-  readonly period = signal<HijriDatePeriod>('all');
+  readonly period = signal<DateFieldPeriod>('all');
 }
 
 async function setup() {
@@ -68,7 +68,7 @@ function iso(date: CalendarDate | null | undefined): string {
   return `${date.calendar.identifier}:${date.year}-${pad(date.month)}-${pad(date.day)}`;
 }
 
-describe('HijriDateField', () => {
+describe('ReactiveDateField', () => {
   it('shows a Hijri form value and writes typed Hijri dates back', async () => {
     const { host, input, type } = await setup();
 

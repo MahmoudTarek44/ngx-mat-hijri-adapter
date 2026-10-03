@@ -37,17 +37,17 @@ import { ReactiveDateFieldBase } from './reactive-date-field-base';
  * in `valueCalendar`. The calendar toggle changes only what is displayed and typed.
  */
 @Component({
-  selector: 'hijri-date-range-field',
+  selector: 'ngx-mat-reactive-date-range-field',
   providers: [
     HijriDateAdapter,
     { provide: DateAdapter, useExisting: HijriDateAdapter },
     provideFieldDateFormats(),
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => HijriDateRangeField),
+      useExisting: forwardRef(() => ReactiveDateRangeField),
       multi: true,
     },
-    { provide: NG_VALIDATORS, useExisting: forwardRef(() => HijriDateRangeField), multi: true },
+    { provide: NG_VALIDATORS, useExisting: forwardRef(() => ReactiveDateRangeField), multi: true },
   ],
   imports: [
     ReactiveFormsModule,
@@ -63,10 +63,10 @@ import { ReactiveDateFieldBase } from './reactive-date-field-base';
     MatEndDate,
     MatDatepickerToggle,
   ],
-  templateUrl: '../../internal/src/hijri-date-range-field.html',
-  styleUrl: '../../internal/src/hijri-field.css',
+  templateUrl: '../../internal/src/date-range-field.html',
+  styleUrl: '../../internal/src/date-field.css',
 })
-export class HijriDateRangeField extends ReactiveDateFieldBase<CalendarDateRange> {
+export class ReactiveDateRangeField extends ReactiveDateFieldBase<CalendarDateRange> {
   /** Placeholder of the start input. */
   readonly startPlaceholder = input('');
   /** Placeholder of the end input. */
@@ -110,8 +110,8 @@ export class HijriDateRangeField extends ReactiveDateFieldBase<CalendarDateRange
 
   writeValue(value: unknown): void {
     const range = (value ?? {}) as Partial<CalendarDateRange>;
-    const start = readCalendarDate(range.start, 'HijriDateRangeField');
-    const end = readCalendarDate(range.end, 'HijriDateRangeField');
+    const start = readCalendarDate(range.start, 'ReactiveDateRangeField');
+    const end = readCalendarDate(range.end, 'ReactiveDateRangeField');
     this.show({
       start: start && this.adapter.clone(start),
       end: end && this.adapter.clone(end),

@@ -27,14 +27,14 @@
   </mat-date-range-input>
 
   @if (calendarToggle()) {
-    <span matIconSuffix class="hijri-field-calendars">
+    <span matIconSuffix class="date-field-calendars">
       <button
         type="button"
         mat-icon-button
         [disabled]="disabled()"
-        [attr.aria-pressed]="display() === 'islamic-umalqura'"
+        [attr.aria-pressed]="display() === calendarCode.umalqura"
         [attr.aria-label]="labels().hijriAriaLabel"
-        (click)="openIn('islamic-umalqura', picker)"
+        (click)="openIn(calendarCode.umalqura, picker)"
       >
         {{ labels().hijri }}
       </button>
@@ -42,9 +42,9 @@
         type="button"
         mat-icon-button
         [disabled]="disabled()"
-        [attr.aria-pressed]="display() === 'gregorian'"
+        [attr.aria-pressed]="display() === calendarCode.gregorian"
         [attr.aria-label]="labels().gregorianAriaLabel"
-        (click)="openIn('gregorian', picker)"
+        (click)="openIn(calendarCode.gregorian, picker)"
       >
         {{ labels().gregorian }}
       </button>

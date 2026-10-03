@@ -3,13 +3,13 @@ import { TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { createCalendarDate, provideHijriDateAdapter } from 'ngx-mat-hijri-adapter';
 
-import { HijriDateRangeField } from './hijri-date-range-field';
+import { ReactiveDateRangeField } from './reactive-date-range-field';
 import type { CalendarDateRange } from './public-api';
 
 @Component({
-  imports: [ReactiveFormsModule, HijriDateRangeField],
+  imports: [ReactiveFormsModule, ReactiveDateRangeField],
   template: `
-    <hijri-date-range-field
+    <ngx-mat-reactive-date-range-field
       label="Period"
       valueCalendar="gregorian"
       calendarToggle
@@ -48,7 +48,7 @@ async function setup() {
   return { host: fixture.componentInstance, start: start!, end: end!, type, press, hint };
 }
 
-describe('HijriDateRangeField', () => {
+describe('ReactiveDateRangeField', () => {
   it('keeps a Gregorian value while the Hijri calendar is displayed', async () => {
     const { host, start, end, type, press, hint } = await setup();
 

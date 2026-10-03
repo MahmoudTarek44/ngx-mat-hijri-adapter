@@ -10,7 +10,6 @@
       "projectType": "library",
       "root": "projects/ngx-mat-hijri-adapter",
       "sourceRoot": "projects/ngx-mat-hijri-adapter/src",
-      "prefix": "hijri",
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
@@ -38,7 +37,6 @@
       "schematics": {},
       "root": "projects/demo",
       "sourceRoot": "projects/demo/src",
-      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular/build:application",

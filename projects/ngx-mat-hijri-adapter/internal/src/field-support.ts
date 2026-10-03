@@ -1,5 +1,6 @@
 import { CalendarDate } from '@internationalized/date';
 import {
+  CalendarCode,
   HIJRI_DATE_FORMATS,
   UMALQURA_MAX_YEAR,
   UMALQURA_MIN_YEAR,
@@ -10,50 +11,50 @@ import {
   type SupportedCalendar,
 } from 'ngx-mat-hijri-adapter';
 
-/** Which days a field offers relative to today. `past` and `future` both exclude today. */
 /** Value of a date range field. Each end is a `CalendarDate` in the value calendar, or null. */
 export interface CalendarDateRange {
   start: CalendarDate | null;
   end: CalendarDate | null;
 }
 
-export type HijriDatePeriod = 'all' | 'past' | 'future';
+/** Which days a field offers relative to today. `past` and `future` both exclude today. */
+export type DateFieldPeriod = 'all' | 'past' | 'future';
 
 /** Text for the calendar toggle buttons and the equivalent-date hint. */
-export interface HijriCalendarLabels {
+export interface DateFieldLabels {
   hijri: string;
   gregorian: string;
   hijriAriaLabel: string;
   gregorianAriaLabel: string;
 }
 
-const ARABIC_LABELS: HijriCalendarLabels = {
+const ARABIC_LABELS: DateFieldLabels = {
   hijri: 'هـ',
   gregorian: 'م',
   hijriAriaLabel: 'التقويم الهجري',
   gregorianAriaLabel: 'التقويم الميلادي',
 };
 
-const ENGLISH_LABELS: HijriCalendarLabels = {
+const ENGLISH_LABELS: DateFieldLabels = {
   hijri: 'AH',
   gregorian: 'AD',
   hijriAriaLabel: 'Hijri calendar',
   gregorianAriaLabel: 'Gregorian calendar',
 };
 
-const UMALQURA_FIRST_DAY = createCalendarDate('islamic-umalqura', UMALQURA_MIN_YEAR, 1, 1);
+const UMALQURA_FIRST_DAY = createCalendarDate(CalendarCode.umalqura, UMALQURA_MIN_YEAR, 1, 1);
 const UMALQURA_LAST_DAY = lastDayOfYear(UMALQURA_MAX_YEAR);
 
 export function calendarLabels(
   locale: string,
-  overrides: Partial<HijriCalendarLabels>,
-): HijriCalendarLabels {
+  overrides: Partial<DateFieldLabels>,
+): DateFieldLabels {
   const arabic = locale.toLowerCase().startsWith('ar');
   return { ...(arabic ? ARABIC_LABELS : ENGLISH_LABELS), ...overrides };
 }
 
 export function otherCalendar(calendar: SupportedCalendar): SupportedCalendar {
-  return calendar === 'gregorian' ? 'islamic-umalqura' : 'gregorian';
+  return calendar === CalendarCode.gregorian ? CalendarCode.umalqura : CalendarCode.gregorian;
 }
 
 /** Converts a date, or returns null when the target calendar cannot represent it. */
@@ -114,7 +115,7 @@ export function pickerBound(
   return convertOrNull(limit, display);
 }
 
-export function periodAllows(date: CalendarDate, period: HijriDatePeriod, today: CalendarDate) {
+export function periodAllows(date: CalendarDate, period: DateFieldPeriod, today: CalendarDate) {
   if (period === 'past') {
     return date.compare(today) < 0;
   }
@@ -131,7 +132,7 @@ export function equivalentText(
   date: CalendarDate | null,
   display: SupportedCalendar,
   locale: string,
-  labels: HijriCalendarLabels,
+  labels: DateFieldLabels,
 ): string {
   const other = otherCalendar(display);
   const converted = convertOrNull(date, other);
@@ -144,10 +145,10 @@ export function equivalentText(
     locale,
     HIJRI_DATE_FORMATS.display.dateA11yLabel as Intl.DateTimeFormatOptions,
   );
-  return `${text} ${other === 'gregorian' ? labels.gregorian : labels.hijri}`;
+  return `${text} ${other === CalendarCode.gregorian ? labels.gregorian : labels.hijri}`;
 }
 
 function lastDayOfYear(year: number): CalendarDate {
-  const lastMonth = createCalendarDate('islamic-umalqura', year, 12, 1);
-  return createCalendarDate('islamic-umalqura', year, 12, daysInCalendarMonth(lastMonth));
+  const lastMonth = createCalendarDate(CalendarCode.umalqura, year, 12, 1);
+  return createCalendarDate(CalendarCode.umalqura, year, 12, daysInCalendarMonth(lastMonth));
 }

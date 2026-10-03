@@ -1,6 +1,6 @@
 import type { CalendarDate } from '@internationalized/date';
 
-import type { SupportedCalendar } from '../calendar/supported-calendars';
+import { CalendarCode, type SupportedCalendar } from '../calendar/supported-calendars';
 import { umalquraMonthNames } from '../locale/month-names';
 
 /**
@@ -14,7 +14,9 @@ export function formatCalendarDate(
   options: Intl.DateTimeFormatOptions,
 ): string {
   const calendar: SupportedCalendar =
-    date.calendar.identifier === 'islamic-umalqura' ? 'islamic-umalqura' : 'gregorian';
+    date.calendar.identifier === CalendarCode.umalqura
+      ? CalendarCode.umalqura
+      : CalendarCode.gregorian;
   const day = options.day ? formatNumber(date.day, locale) : '';
   const year = options.year ? formatNumber(date.year, locale) : '';
   const month = formatMonth(calendar, locale, date.month, options.month);
@@ -41,7 +43,7 @@ export function calendarMonthNames(
   locale: string,
   style: 'long' | 'short' | 'narrow',
 ): string[] {
-  if (calendar === 'islamic-umalqura') {
+  if (calendar === CalendarCode.umalqura) {
     return umalquraMonthNames(locale, style);
   }
 

@@ -34,13 +34,13 @@ import { ReactiveDateFieldBase } from './reactive-date-field-base';
  * `valueCalendar`, or null. The calendar toggle changes only what is displayed and typed.
  */
 @Component({
-  selector: 'hijri-date-field',
+  selector: 'ngx-mat-reactive-date-field',
   providers: [
     HijriDateAdapter,
     { provide: DateAdapter, useExisting: HijriDateAdapter },
     provideFieldDateFormats(),
-    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => HijriDateField), multi: true },
-    { provide: NG_VALIDATORS, useExisting: forwardRef(() => HijriDateField), multi: true },
+    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => ReactiveDateField), multi: true },
+    { provide: NG_VALIDATORS, useExisting: forwardRef(() => ReactiveDateField), multi: true },
   ],
   imports: [
     ReactiveFormsModule,
@@ -55,10 +55,10 @@ import { ReactiveDateFieldBase } from './reactive-date-field-base';
     MatDatepickerInput,
     MatDatepickerToggle,
   ],
-  templateUrl: '../../internal/src/hijri-date-field.html',
-  styleUrl: '../../internal/src/hijri-field.css',
+  templateUrl: '../../internal/src/date-field.html',
+  styleUrl: '../../internal/src/date-field.css',
 })
-export class HijriDateField extends ReactiveDateFieldBase<CalendarDate | null> {
+export class ReactiveDateField extends ReactiveDateFieldBase<CalendarDate | null> {
   /** Input placeholder. */
   readonly placeholder = input('');
 
@@ -88,7 +88,7 @@ export class HijriDateField extends ReactiveDateFieldBase<CalendarDate | null> {
   }
 
   writeValue(value: unknown): void {
-    const date = readCalendarDate(value, 'HijriDateField');
+    const date = readCalendarDate(value, 'ReactiveDateField');
     this.show(date && this.adapter.clone(date));
   }
 

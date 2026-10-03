@@ -6,17 +6,17 @@ mat-form-field {
   width: 100%;
 }
 
-.hijri-field-calendars {
+.date-field-calendars {
   display: inline-flex;
   align-items: center;
 }
 
-.hijri-field-calendars button {
+.date-field-calendars button {
   font-size: 0.875rem;
   font-weight: 500;
 }
 
-.hijri-field-calendars button[aria-pressed='true'] {
+.date-field-calendars button[aria-pressed='true'] {
   color: var(--mat-sys-primary);
   background: var(--mat-sys-secondary-container);
 }

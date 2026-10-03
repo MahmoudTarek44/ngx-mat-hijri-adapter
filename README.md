@@ -2,6 +2,8 @@
 
 Modern Angular Material date adapter for Gregorian and Umm al-Qura Hijri calendars, powered by [`@internationalized/date`](https://github.com/adobe/react-spectrum/tree/main/packages/@internationalized/date).
 
+The package and its adapter are named for the Hijri calendar, but every part works with both calendars. `HijriDateAdapter` runs in Gregorian or Umm al-Qura, and the form fields store their value in either calendar and can switch the displayed calendar while in use. The field components carry no calendar in their names: `ReactiveDateField` and `SignalDateField` handle both.
+
 **Version 0.0.0 is not published.** This version exports calendar helpers, `HijriDateAdapter`, `provideHijriDateAdapter()`, reactive form fields from `ngx-mat-hijri-adapter/reactive`, and signal form fields from `ngx-mat-hijri-adapter/signals`. The demo app uses both calendars in a Material datepicker and in those fields.
 
 ## Requirements
@@ -21,13 +23,21 @@ const hijri = createCalendarDate('islamic-umalqura', 1445, 9, 1);
 const gregorian = convertCalendarDate(hijri, 'gregorian');
 ```
 
+`CalendarCode` names the supported calendars, so the string literals are not needed: `CalendarCode.gregorian` is `'gregorian'` and `CalendarCode.umalqura` is `'islamic-umalqura'`. `SupportedCalendar` is the type of its values. `CalendarLocale` holds the locales used as defaults, `CalendarLocale.arSA` (`'ar-SA'`) and `CalendarLocale.enUS` (`'en-US'`). Any BCP 47 locale works wherever a locale is accepted.
+
+```ts
+import { CalendarCode, CalendarLocale, provideHijriDateAdapter } from 'ngx-mat-hijri-adapter';
+
+provideHijriDateAdapter({ calendar: CalendarCode.gregorian, locale: CalendarLocale.enUS });
+```
+
 `1445-09-01` Umm al-Qura is `2024-03-11` Gregorian. Months in these helpers are 1-indexed. `NGX_MAT_HIJRI_ADAPTER_VERSION` is `'0.0.0'`.
 
 The package names calendars `gregorian` and `islamic-umalqura`. `@internationalized/date` reports a Gregorian `CalendarDate` with `calendar.identifier === 'gregory'`. `CalendarDate#toString()` always prints the Gregorian ISO date, even for an Umm al-Qura date, so read `year`, `month`, and `day` to get the Hijri numbers.
 
 ## Date adapter
 
-`HijriDateAdapter` implements Material's `DateAdapter<CalendarDate>`. The configured calendar owns numeric dates. The locale chooses digits, Gregorian month names, weekday names, and the first day of the week. `ar-SA` does not select the Hijri calendar, and a Hijri calendar does not force Saturday as the week start.
+`HijriDateAdapter` implements Material's `DateAdapter<CalendarDate>`. Despite its name, it is one adapter for both calendars. Set `calendar: 'gregorian'` or `calendar: 'islamic-umalqura'`, or switch at runtime with `setCalendar()`. The configured calendar owns numeric dates. The locale chooses digits, Gregorian month names, weekday names, and the first day of the week. `ar-SA` does not select the Hijri calendar, and a Hijri calendar does not force Saturday as the week start.
 
 `provideHijriDateAdapter()` registers the adapter, `MAT_DATE_FORMATS`, and `MAT_DATE_LOCALE`. Defaults are `islamic-umalqura`, `ar-SA`, and the runtime time zone. `today()` uses the configured time zone. Passing `locale: 'en-US'` does not switch the calendar to Gregorian, and passing `calendar: 'gregorian'` does not switch the locale away from `ar-SA`.
 
@@ -82,10 +92,10 @@ Formatting or converting an invalid date throws. Time methods are not implemente
 
 ## Reactive form fields
 
-`ngx-mat-hijri-adapter/reactive` exports `HijriDateField` and `HijriDateRangeField`. Each is a `ControlValueAccessor` for `formControl` or `formControlName`, wrapping a Material form field and datepicker. Each field provides its own `HijriDateAdapter`, reading calendar and locale defaults from `provideHijriDateAdapter()` when it is present.
+`ngx-mat-hijri-adapter/reactive` exports `ReactiveDateField` and `ReactiveDateRangeField`. Each is a `ControlValueAccessor` for `formControl` or `formControlName`, wrapping a Material form field and datepicker. Each field provides its own `HijriDateAdapter`, reading calendar and locale defaults from `provideHijriDateAdapter()` when it is present.
 
 ```ts
-import { HijriDateField, HijriDateRangeField, type CalendarDateRange } from 'ngx-mat-hijri-adapter/reactive';
+import { ReactiveDateField, ReactiveDateRangeField, type CalendarDateRange } from 'ngx-mat-hijri-adapter/reactive';
 
 form = new FormGroup({
   appointment: new FormControl<CalendarDate | null>(null, Validators.required),
@@ -94,14 +104,14 @@ form = new FormGroup({
 ````
 
 ```html
-<hijri-date-field
+<ngx-mat-reactive-date-field
   formControlName="appointment"
   label="Appointment"
   valueCalendar="islamic-umalqura"
   calendarToggle
   [errors]="{ required: 'A date is required.', matDatepickerFilter: 'Fridays are unavailable.' }"
 />
-<hijri-date-range-field
+<ngx-mat-reactive-date-range-field
   formControlName="stay"
   label="Stay"
   valueCalendar="gregorian"
@@ -109,7 +119,7 @@ form = new FormGroup({
 />
 ```
 
-The value of `HijriDateField` is a `CalendarDate` or `null`. The value of `HijriDateRangeField` is `{ start, end }`, and each end is a `CalendarDate` or `null`. Values are always emitted in `valueCalendar`, which defaults to the provider calendar. A written value may be in either calendar. Anything other than a `CalendarDate`, `null`, or `''` throws.
+The value of `ReactiveDateField` is a `CalendarDate` or `null`. The value of `ReactiveDateRangeField` is `{ start, end }`, and each end is a `CalendarDate` or `null`. Values are always emitted in `valueCalendar`, which defaults to the provider calendar. A written value may be in either calendar. Anything other than a `CalendarDate`, `null`, or `''` throws.
 
 With `calendarToggle`, Hijri and Gregorian buttons replace the calendar icon. Pressing one switches the displayed and typed calendar, then opens the picker. Switching does not change the form value and does not mark the control dirty. A typed `20/3/2024` in the Gregorian view stores 10 Ramadan 1445 when `valueCalendar` is `islamic-umalqura`. With the toggle on, the hint shows the selected date in the calendar that is not displayed, such as `10 Ramadan, 1445 AH`. Set `equivalentHint` to `false` to hide it.
 
@@ -128,14 +138,14 @@ Datepicker validation errors are merged into the form control's errors. When Umm
 
 ## Signal form fields
 
-`ngx-mat-hijri-adapter/signals` exports `HijriSignalDateField` and `HijriSignalDateRangeField`. They have the same template, calendar toggle, hint, and inputs as the reactive fields, and they implement `FormValueControl` for the `[formField]` directive from `@angular/forms/signals`.
+`ngx-mat-hijri-adapter/signals` exports `SignalDateField` and `SignalDateRangeField`. They have the same template, calendar toggle, hint, and inputs as the reactive fields, and they implement `FormValueControl` for the `[formField]` directive from `@angular/forms/signals`.
 
 ```ts
 import { FormField, form, required } from '@angular/forms/signals';
 import {
   type CalendarDateRange,
-  HijriSignalDateField,
-  HijriSignalDateRangeField,
+  SignalDateField,
+  SignalDateRangeField,
 } from 'ngx-mat-hijri-adapter/signals';
 
 booking = signal<{ appointment: CalendarDate | null; stay: CalendarDateRange }>({
@@ -146,14 +156,14 @@ form = form(this.booking, (path) => required(path.appointment));
 ```
 
 ```html
-<hijri-signal-date-field
+<ngx-mat-signal-date-field
   [formField]="form.appointment"
   label="Appointment"
   valueCalendar="islamic-umalqura"
   calendarToggle
   [errorMessages]="{ required: 'A date is required.' }"
 />
-<hijri-signal-date-range-field
+<ngx-mat-signal-date-range-field
   [formField]="form.stay"
   label="Stay"
   valueCalendar="gregorian"
@@ -163,7 +173,7 @@ form = form(this.booking, (path) => required(path.appointment));
 
 The model holds the same values as the reactive fields, always in `valueCalendar`. Disabled, touched, and error state come from the field. Datepicker errors such as `matDatepickerParse` and `matEndDateInvalid` are reported to the field as errors of that `kind`. As with the reactive fields, an unreadable or out-of-table date sets the model to `null`. `errorMessages` maps error kinds to messages, because `errors` is set by `[formField]`. Without an entry, the field shows the error's own `message`. Datepicker errors are shown first.
 
-`ngx-mat-hijri-adapter/reactive` and `ngx-mat-hijri-adapter/signals` do not depend on each other. Both export `CalendarDateRange`, `HijriCalendarLabels`, and `HijriDatePeriod`. Code they share lives in `ngx-mat-hijri-adapter/internal`, which is not public API: its exports carry the `ɵ` prefix and may change in any release.
+`ngx-mat-hijri-adapter/reactive` and `ngx-mat-hijri-adapter/signals` do not depend on each other. Both export `CalendarDateRange`, `DateFieldLabels`, and `DateFieldPeriod`. Code they share lives in `ngx-mat-hijri-adapter/internal`, which is not public API: its exports carry the `ɵ` prefix and may change in any release.
 
 Use `minDate` and `maxDate` for picker bounds. The `min()` and `max()` signal form rules work on numbers and JavaScript `Date` values, not `CalendarDate`, and these fields do not read them.
 
@@ -171,7 +181,7 @@ Use `minDate` and `maxDate` for picker bounds. The `min()` and `max()` signal fo
 
 The demo app shows one Umm al-Qura picker and one Gregorian picker. Each picker is a reactive form control with a minimum, a maximum, and a Friday filter. Locale (`ar-SA` or `en-US`) and direction (`rtl` or `ltr`) are separate controls on each picker. Changing them does not change that picker's calendar.
 
-A third card uses `HijriDateField` and `HijriDateRangeField` in one reactive form, with the calendar toggle on and the current form values printed below each field. A fourth card shows `HijriSignalDateField` and `HijriSignalDateRangeField` bound to one signal form.
+A third card uses `ReactiveDateField` and `ReactiveDateRangeField` in one reactive form, with the calendar toggle on and the current form values printed below each field. A fourth card shows `SignalDateField` and `SignalDateRangeField` bound to one signal form.
 
 Set direction with the CDK `Dir` directive (`[dir]` with `Dir` from `@angular/cdk/bidi` imported), or on the document root. The datepicker popup renders in an overlay outside the field, so a plain `dir` attribute on a wrapper element does not flip the popup.
 

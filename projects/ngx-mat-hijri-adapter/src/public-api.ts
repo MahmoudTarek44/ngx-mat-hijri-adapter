@@ -3,7 +3,8 @@
  */
 
 export { NGX_MAT_HIJRI_ADAPTER_VERSION } from './lib/version';
-export type { SupportedCalendar } from './lib/calendar/supported-calendars';
+export { CalendarCode, type SupportedCalendar } from './lib/calendar/supported-calendars';
+export { CalendarLocale } from './lib/locale/calendar-locale';
 export {
   UMALQURA_MAX_YEAR,
   UMALQURA_MIN_YEAR,

@@ -11,12 +11,13 @@ import {
   createCalendarDate,
   daysInCalendarMonth,
 } from '../calendar/calendar-date';
-import type { SupportedCalendar } from '../calendar/supported-calendars';
+import { CalendarCode, type SupportedCalendar } from '../calendar/supported-calendars';
 import {
   calendarMonthNames,
   formatCalendarDate,
   formatNumber,
 } from '../formats/format-calendar-date';
+import { CalendarLocale } from '../locale/calendar-locale';
 import { normalizeMonthLabel, umalquraMonthNumber } from '../locale/month-names';
 import { HIJRI_DATE_ADAPTER_OPTIONS } from './hijri-date-adapter-options';
 
@@ -38,9 +39,9 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
   constructor() {
     super();
     const options = inject(HIJRI_DATE_ADAPTER_OPTIONS, { optional: true }) ?? {};
-    this.calendarId = options.calendar ?? 'islamic-umalqura';
+    this.calendarId = options.calendar ?? CalendarCode.umalqura;
     this.timeZone = options.timeZone ?? Intl.DateTimeFormat().resolvedOptions().timeZone;
-    this.setLocale(options.locale ?? 'ar-SA');
+    this.setLocale(options.locale ?? CalendarLocale.arSA);
   }
 
   /** The calendar that owns parsing, display, and the dates this adapter creates. */
@@ -78,7 +79,7 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
       return Number.NaN;
     }
 
-    return convertCalendarDate(date, 'gregorian').toDate('UTC').getUTCDay();
+    return convertCalendarDate(date, CalendarCode.gregorian).toDate('UTC').getUTCDay();
   }
 
   override getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
@@ -204,7 +205,7 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
   }
 
   override invalid(): CalendarDate {
-    const date = createCalendarDate('gregorian', 1970, 1, 1);
+    const date = createCalendarDate(CalendarCode.gregorian, 1970, 1, 1);
     invalidDates.add(date);
     return date;
   }
@@ -289,7 +290,7 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
   }
 
   private monthNumber(label: string): number | null {
-    if (this.calendarId === 'islamic-umalqura') {
+    if (this.calendarId === CalendarCode.umalqura) {
       return umalquraMonthNumber(label);
     }
 

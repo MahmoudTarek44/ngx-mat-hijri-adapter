@@ -12,6 +12,8 @@ import { MatInput } from '@angular/material/input';
 import type { CalendarDate } from '@internationalized/date';
 
 import {
+  CalendarCode,
+  CalendarLocale,
   convertCalendarDate,
   provideHijriDateAdapter,
   type SupportedCalendar,
@@ -23,7 +25,7 @@ type DemoDirection = 'rtl' | 'ltr';
 const DEMO_CALENDAR = new InjectionToken<SupportedCalendar>('DEMO_CALENDAR');
 
 @Component({
-  selector: 'app-calendar-demo',
+  selector: 'calendar-demo',
   imports: [
     Dir,
     ReactiveFormsModule,
@@ -114,24 +116,32 @@ export class CalendarDemo {
 }
 
 @Component({
-  selector: 'app-umalqura-demo',
+  selector: 'umalqura-demo',
   imports: [CalendarDemo],
   providers: [
     { provide: DEMO_CALENDAR, useValue: 'islamic-umalqura' },
-    provideHijriDateAdapter({ calendar: 'islamic-umalqura', locale: 'ar-SA', timeZone: 'UTC' }),
+    provideHijriDateAdapter({
+      calendar: CalendarCode.umalqura,
+      locale: CalendarLocale.arSA,
+      timeZone: 'UTC',
+    }),
   ],
-  template: '<app-calendar-demo />',
+  template: '<calendar-demo />',
 })
 export class UmalquraDemo {}
 
 @Component({
-  selector: 'app-gregorian-demo',
+  selector: 'gregorian-demo',
   imports: [CalendarDemo],
   providers: [
     { provide: DEMO_CALENDAR, useValue: 'gregorian' },
-    provideHijriDateAdapter({ calendar: 'gregorian', locale: 'en-US', timeZone: 'UTC' }),
+    provideHijriDateAdapter({
+      calendar: CalendarCode.gregorian,
+      locale: CalendarLocale.enUS,
+      timeZone: 'UTC',
+    }),
   ],
-  template: '<app-calendar-demo />',
+  template: '<calendar-demo />',
 })
 export class GregorianDemo {}
 

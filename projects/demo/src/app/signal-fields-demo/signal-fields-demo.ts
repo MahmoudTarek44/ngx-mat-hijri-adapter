@@ -3,11 +3,16 @@ import { Component, computed, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
 import type { CalendarDate } from '@internationalized/date';
 
-import { createCalendarDate, provideHijriDateAdapter } from 'ngx-mat-hijri-adapter';
+import {
+  CalendarCode,
+  CalendarLocale,
+  createCalendarDate,
+  provideHijriDateAdapter,
+} from 'ngx-mat-hijri-adapter';
 import {
   type CalendarDateRange,
-  HijriSignalDateField,
-  HijriSignalDateRangeField,
+  SignalDateField,
+  SignalDateRangeField,
 } from 'ngx-mat-hijri-adapter/signals';
 
 type DemoLocale = 'ar-SA' | 'en-US';
@@ -54,9 +59,9 @@ const TEXT = {
 } as const;
 
 @Component({
-  selector: 'app-signal-fields-demo',
-  imports: [Dir, FormField, HijriSignalDateField, HijriSignalDateRangeField],
-  providers: [provideHijriDateAdapter({ locale: 'ar-SA', timeZone: 'UTC' })],
+  selector: 'signal-fields-demo',
+  imports: [Dir, FormField, SignalDateField, SignalDateRangeField],
+  providers: [provideHijriDateAdapter({ locale: CalendarLocale.arSA, timeZone: 'UTC' })],
   templateUrl: './signal-fields-demo.html',
   styleUrl: '../calendar-demo/calendar-demo.css',
 })
@@ -66,10 +71,10 @@ export class SignalFieldsDemo {
   protected readonly text = computed(() => TEXT[this.locale()]);
 
   private readonly booking = signal<Booking>({
-    appointment: createCalendarDate('islamic-umalqura', 1445, 9, 1),
+    appointment: createCalendarDate(CalendarCode.umalqura, 1445, 9, 1),
     stay: {
-      start: createCalendarDate('gregorian', 2024, 3, 11),
-      end: createCalendarDate('gregorian', 2024, 3, 20),
+      start: createCalendarDate(CalendarCode.gregorian, 2024, 3, 11),
+      end: createCalendarDate(CalendarCode.gregorian, 2024, 3, 20),
     },
   });
   protected readonly form = form(this.booking, (path) => required(path.appointment));

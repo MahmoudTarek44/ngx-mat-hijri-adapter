@@ -14,7 +14,7 @@ const hijri = createCalendarDate('islamic-umalqura', 1445, 9, 1);
 const gregorian = convertCalendarDate(hijri, 'gregorian');
 
 @Component({
-  selector: 'app-root',
+  selector: 'root',
   imports: [UmalquraDemo, GregorianDemo, ReactiveFieldsDemo, SignalFieldsDemo],
   templateUrl: './app.html',
   styleUrl: './app.css',

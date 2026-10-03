@@ -47,7 +47,7 @@ import { datepickerErrors, firstErrorMessage } from './signal-errors';
  * and typed. Datepicker errors are reported to the field as parse errors.
  */
 @Component({
-  selector: 'hijri-signal-date-field',
+  selector: 'ngx-mat-signal-date-field',
   providers: [
     HijriDateAdapter,
     { provide: DateAdapter, useExisting: HijriDateAdapter },
@@ -66,10 +66,10 @@ import { datepickerErrors, firstErrorMessage } from './signal-errors';
     MatDatepickerInput,
     MatDatepickerToggle,
   ],
-  templateUrl: '../../internal/src/hijri-date-field.html',
-  styleUrl: '../../internal/src/hijri-field.css',
+  templateUrl: '../../internal/src/date-field.html',
+  styleUrl: '../../internal/src/date-field.css',
 })
-export class HijriSignalDateField
+export class SignalDateField
   extends DateFieldCore
   implements FormValueControl<CalendarDate | null>
 {
@@ -100,7 +100,7 @@ export class HijriSignalDateField
       };
     },
     format: (value) => {
-      const date = readCalendarDate(value, 'HijriSignalDateField');
+      const date = readCalendarDate(value, 'SignalDateField');
       return date && convertCalendarDate(date, this.display());
     },
   });
