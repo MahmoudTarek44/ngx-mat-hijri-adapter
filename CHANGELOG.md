@@ -5,6 +5,53 @@ All notable changes to ngx-mat-hijri-adapter will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2026-10-03
+
+### 🐛 Gregorian Month Names on Safari
+
+This hotfix fixes Gregorian month names in Arabic on iPhone and other Safari browsers. For `ar-SA`, Safari defaults to the Umm al-Qura calendar, so Gregorian months showed Hijri names such as شعبان in place of مارس. Day numbers and years were always correct, and Chrome and Android were not affected.
+
+#### Changes by Commit
+
+| Commit    | Type   | Description                                                                                             |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------- |
+| `2b2b9e1` | 🐛 Fix | **Gregorian Month Names**: Always format Gregorian month names in the Gregorian calendar, in any locale |
+
+### 📝 Summary of Changes
+
+#### 🐛 Fixed
+
+- **Gregorian Month Names**: The calendar header, day labels, and formatted dates show Gregorian month names in browsers whose default calendar for the locale is not Gregorian
+
+### 📦 Modified Files
+
+<details>
+<summary><strong>Library</strong></summary>
+
+- `projects/ngx-mat-hijri-adapter/src/lib/formats/format-calendar-date.ts` - Gregorian month names request the Gregorian calendar
+- `projects/ngx-mat-hijri-adapter/src/lib/formats/format-calendar-date.spec.ts` - Test with a locale that defaults to Umm al-Qura
+- `projects/ngx-mat-hijri-adapter/src/lib/version.ts` - `NGX_MAT_HIJRI_ADAPTER_VERSION` is 0.2.1
+- `projects/ngx-mat-hijri-adapter/src/lib/version.spec.ts` and `projects/demo/src/app/app.spec.ts` - Expect version 0.2.1
+
+</details>
+
+<details>
+<summary><strong>Workspace and Package</strong></summary>
+
+- `package.json`, `package-lock.json`, and `projects/ngx-mat-hijri-adapter/package.json` - Version 0.2.1
+- `README.md` - Version 0.2.1
+- `CHANGELOG.md` - This entry
+
+</details>
+
+---
+
+**Version**: 0.2.1  
+**Release Date**: October 3, 2026  
+**Maintained by**: Mahmoud
+
+---
+
 ## [0.2.0] - 2026-10-03
 
 ### ✨ Demo, Documentation & Release Process
@@ -276,5 +323,6 @@ First release. One Angular Material date adapter for the Gregorian and Umm al-Qu
 
 ---
 
+[0.2.1]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.1
 [0.2.0]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.0
 [0.1.0]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.1.0
