@@ -11,13 +11,22 @@ Modern Angular Material date adapter for Gregorian and Umm al-Qura Hijri calenda
 
 ## What this version exports
 
+Calendar values are `CalendarDate` objects from `@internationalized/date`. A JavaScript `Date` is not the calendar value. Supported calendars are `gregorian` and `islamic-umalqura`. Umm al-Qura years are AH 1300–1599. AH 1600 is rejected because the underlying table falls back to the civil Islamic calendar.
+
 ```ts
-import { NGX_MAT_HIJRI_ADAPTER_VERSION } from 'ngx-mat-hijri-adapter';
+import {
+  createCalendarDate,
+  convertCalendarDate,
+  NGX_MAT_HIJRI_ADAPTER_VERSION,
+} from 'ngx-mat-hijri-adapter';
+
+const hijri = createCalendarDate('islamic-umalqura', 1445, 9, 1);
+const gregorian = convertCalendarDate(hijri, 'gregorian');
 ```
 
-`NGX_MAT_HIJRI_ADAPTER_VERSION` is `'0.0.0'`.
+`NGX_MAT_HIJRI_ADAPTER_VERSION` is `'0.0.0'`. `1445-09-01` Umm al-Qura is `2024-03-11` Gregorian.
 
-`provideHijriDateAdapter()`, calendar conversion, parsing, and the `reactive` and `signals` entry points are not in this version.
+Locale does not select the calendar. `provideHijriDateAdapter()`, parsing, formatting, and the `reactive` and `signals` entry points are not in this version.
 
 ## Develop
 

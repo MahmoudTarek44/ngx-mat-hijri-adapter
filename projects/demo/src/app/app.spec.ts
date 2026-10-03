@@ -16,5 +16,6 @@ describe('App', () => {
 
     expect(compiled.querySelector('h1')?.textContent).toContain('ngx-mat-hijri-adapter');
     expect(compiled.textContent).toContain('Workspace version 0.0.0.');
+    expect(compiled.textContent).toContain('Umm al-Qura 1445-09-01 is Gregorian 2024-03-11.');
   });
 });
