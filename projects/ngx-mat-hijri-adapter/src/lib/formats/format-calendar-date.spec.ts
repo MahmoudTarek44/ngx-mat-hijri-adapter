@@ -1,6 +1,6 @@
 import { createCalendarDate } from '../calendar/calendar-date';
 import { HIJRI_DATE_FORMATS } from './date-formats';
-import { formatCalendarDate } from './format-calendar-date';
+import { calendarMonthNames, formatCalendarDate } from './format-calendar-date';
 
 const long = HIJRI_DATE_FORMATS.display.dateA11yLabel as Intl.DateTimeFormatOptions;
 const numeric = HIJRI_DATE_FORMATS.display.dateInput as Intl.DateTimeFormatOptions;
@@ -20,5 +20,12 @@ describe('formatCalendarDate', () => {
 
     expect(formatCalendarDate(ramadan, 'ar-SA', long)).toBe('١ رمضان، ١٤٤٥');
     expect(formatCalendarDate(ramadan, 'ar-SA', numeric)).toBe('١/٩/١٤٤٥');
+  });
+
+  it('names Gregorian months even when the locale defaults to a Hijri calendar', () => {
+    const march = createCalendarDate('gregorian', 2024, 3, 11);
+
+    expect(formatCalendarDate(march, 'ar-SA-u-ca-islamic-umalqura', long)).toBe('١١ مارس، ٢٠٢٤');
+    expect(calendarMonthNames('gregorian', 'ar-SA-u-ca-islamic-umalqura', 'long')[0]).toBe('يناير');
   });
 });

@@ -47,7 +47,11 @@ export function calendarMonthNames(
     return umalquraMonthNames(locale, style);
   }
 
-  const formatter = new Intl.DateTimeFormat(locale, { month: style, timeZone: 'UTC' });
+  const formatter = new Intl.DateTimeFormat(locale, {
+    month: style,
+    timeZone: 'UTC',
+    calendar: 'gregory',
+  });
   return Array.from({ length: 12 }, (_, month) =>
     formatter.format(new Date(Date.UTC(2024, month, 1))),
   );
