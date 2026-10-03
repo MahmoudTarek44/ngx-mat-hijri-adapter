@@ -2,7 +2,7 @@
 
 Modern Angular Material date adapter for Gregorian and Umm al-Qura Hijri calendars, powered by [`@internationalized/date`](https://github.com/adobe/react-spectrum/tree/main/packages/@internationalized/date).
 
-**Version 0.0.0 is not published.** This version exports calendar helpers, `HijriDateAdapter`, and `provideHijriDateAdapter()`. The demo datepicker and the `reactive` and `signals` entry points are not included.
+**Version 0.0.0 is not published.** This version exports calendar helpers, `HijriDateAdapter`, and `provideHijriDateAdapter()`. The demo app uses both calendars in a Material datepicker. The `reactive` and `signals` entry points are not included.
 
 ## Requirements
 
@@ -63,6 +63,12 @@ Material month indexes are 0-based. `createDate(1445, 8, 1)` is 1 Ramadan 1445. 
 In this runtime, `en-US` and `ar-SA` start the week on Sunday, and `ar-EG` starts it on Saturday. `setLocale` updates those locale rules and does not change the calendar.
 
 Formatting or converting an invalid date throws. Time methods are not implemented.
+
+## Demo
+
+The demo app shows one Umm al-Qura picker and one Gregorian picker. Each picker is a reactive form control with a minimum, a maximum, and a Friday filter. Locale (`ar-SA` or `en-US`) and direction (`rtl` or `ltr`) are separate controls on each picker. Changing them does not change that picker's calendar.
+
+Set direction with the CDK `Dir` directive (`[dir]` with `Dir` from `@angular/cdk/bidi` imported), or on the document root. The datepicker popup renders in an overlay outside the field, so a plain `dir` attribute on a wrapper element does not flip the popup.
 
 ## Develop
 

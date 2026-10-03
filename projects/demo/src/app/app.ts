@@ -6,11 +6,14 @@ import {
   NGX_MAT_HIJRI_ADAPTER_VERSION,
 } from 'ngx-mat-hijri-adapter';
 
+import { GregorianDemo, UmalquraDemo } from './calendar-demo/calendar-demo';
+
 const hijri = createCalendarDate('islamic-umalqura', 1445, 9, 1);
 const gregorian = convertCalendarDate(hijri, 'gregorian');
 
 @Component({
   selector: 'app-root',
+  imports: [UmalquraDemo, GregorianDemo],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

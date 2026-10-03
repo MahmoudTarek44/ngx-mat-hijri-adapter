@@ -17,5 +17,20 @@ describe('App', () => {
     expect(compiled.querySelector('h1')?.textContent).toContain('ngx-mat-hijri-adapter');
     expect(compiled.textContent).toContain('Workspace version 0.0.0.');
     expect(compiled.textContent).toContain('Umm al-Qura 1445-09-01 is Gregorian 2024-03-11.');
+
+    const umalqura = compiled.querySelector('[data-calendar="islamic-umalqura"]');
+    const gregorian = compiled.querySelector('[data-calendar="gregorian"]');
+
+    expect(umalqura?.getAttribute('lang')).toBe('ar-SA');
+    expect(umalqura?.getAttribute('dir')).toBe('rtl');
+    expect(umalqura?.querySelector('input')?.value).toBe('١/٩/١٤٤٥');
+    expect(umalqura?.textContent).toContain('يوم الجمعة غير متاح');
+    expect(umalqura?.textContent).toContain('Umm al-Qura 1445-09-01 is Gregorian 2024-03-11.');
+
+    expect(gregorian?.getAttribute('lang')).toBe('en-US');
+    expect(gregorian?.getAttribute('dir')).toBe('ltr');
+    expect(gregorian?.querySelector('input')?.value).toBe('11/3/2024');
+    expect(gregorian?.textContent).toContain('Fridays are unavailable.');
+    expect(gregorian?.textContent).toContain('Gregorian 2024-03-11 is Umm al-Qura 1445-09-01.');
   });
 });

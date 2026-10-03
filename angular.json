@@ -50,14 +50,17 @@
                 "input": "projects/demo/public"
               }
             ],
-            "styles": ["projects/demo/src/styles.css"]
+            "styles": [
+              "node_modules/@angular/material/prebuilt-themes/azure-blue.css",
+              "projects/demo/src/styles.css"
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
+                  "maximumWarning": "600kB",
                   "maximumError": "1MB"
                 },
                 {

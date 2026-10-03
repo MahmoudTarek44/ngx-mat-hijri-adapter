@@ -5,10 +5,22 @@
 }
 
 main {
-  max-width: 40rem;
+  max-width: 64rem;
   margin: 3rem auto;
   padding: 0 1.5rem;
   line-height: 1.5;
+}
+
+.demos {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 800px) {
+  .demos {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 h1 {
