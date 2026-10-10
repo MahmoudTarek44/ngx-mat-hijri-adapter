@@ -37,7 +37,7 @@ When a task is squash-merged, set its status here to `Done` in the same breath a
 
 ## Decisions already settled
 
-- The current minor version (0.2.2) is tagged on GitHub and is not on npm. The first npm release is the stable 1.0.0.
+- The current minor version (0.3.0) is tagged on GitHub and is not on npm. The first npm release is the stable 1.0.0.
 - `ng add ngx-mat-hijri-adapter` is the default install command in the docs. `npm install ngx-mat-hijri-adapter @internationalized/date` stays as the manual alternative. Both apply once 1.0.0 is published.
 - Getting started currently shows only a reactive field. That block is replaced with links to `/docs/reactive-fields` and `/docs/signal-fields`.
 - The home page already runs live cards for both reactive and signal fields. Those cards stay. The same two links are added above that grid.

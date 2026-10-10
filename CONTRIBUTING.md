@@ -71,7 +71,7 @@ Pull requests run the same checks in CI: library tests, the library build, the d
 
 ## Releases
 
-npm publishing starts at the stable 1.0.0. Version 0.2.2 is tagged on GitHub and is not published on npm. A pull request does not publish a package.
+npm publishing starts at the stable 1.0.0. Version 0.3.0 is tagged on GitHub and is not published on npm. A pull request does not publish a package.
 
 ## Code of conduct
 

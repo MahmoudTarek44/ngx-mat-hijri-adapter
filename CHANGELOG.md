@@ -5,6 +5,90 @@ All notable changes to ngx-mat-hijri-adapter will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-10-10
+
+### ✨ Adapter, install, and docs
+
+This minor release is tagged on GitHub and is not published on npm. The first npm release remains the stable 1.0.0. Each commit below is a squash of one branch into `development`.
+
+#### Changes by Commit
+
+| Commit    | Type       | Description                                                                                                                          |
+| --------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `1701276` | 🔧 Chore   | **Delivery skill**: Private workflow for shipping each task from `development`                                                       |
+| `9f9148a` | 🐛 Fix     | **Date fields**: Keep both sides in sync when the calendar changes or parsing fails                                                 |
+| `85b5231` | ✨ Feature | **Month name**: Date fields can show the locale's month name                                                                        |
+| `213eb2e` | 🔧 Chore   | **Docs app**: Rename the demo app to the docs app                                                                                   |
+| `49b087d` | ✨ Feature | **Unpublished version**: The docs site says this tag is not on npm and that 1.0.0 is the first npm release                          |
+| `eed9a52` | ✨ Feature | **Form guides**: Getting started and the home examples link to both reactive and signal fields                                      |
+| `a35efb2` | ✨ Feature | **ng add**: Install the calendar peer when it is missing and register the adapter once. `ng update` to 1.0.0 does nothing           |
+| `66d0ca9` | ✨ Feature | **Agent skill**: The package ships a skill for installing the adapter and storing dates                                             |
+| `4f94e07` | 📝 Docs    | **Contributing**: Target branch, the checks CI runs, a code of conduct, and the pull request rules                                  |
+| `cf3e6f4` | ✨ Feature | **Roadmap**: A public page of shipped features, the next native Hijri adapter, and ideas that are not scheduled                     |
+
+### 📝 Summary of Changes
+
+#### ✨ Added
+
+- **Month name**: A display format that writes the locale's month name instead of a number
+- **Unpublished-version banner**: Shown on every docs page. It names the tagged version and states that npm publishing starts at 1.0.0
+- **Form guides**: Links to the reactive and signal field pages from getting started and the home examples
+- **ng add**: Adds `@internationalized/date` when it is missing and registers `provideHijriDateAdapter()` once. It stops if Angular Material is missing
+- **ng update**: The 1.0.0 migration is a no-op, so the command works before a breaking change
+- **Agent skill**: Shipped in the package, with a docs page at `/docs/ai-agents`
+- **Roadmap**: `/docs/roadmap` lists what ships, the next adapter built on the JavaScript `Intl` APIs and the `Date` object, and unscheduled ideas
+- **Contribution policy**: `CONTRIBUTING.md`, a pull request template, and the Contributor Covenant
+
+#### 🐛 Fixed
+
+- **Date fields**: Switching calendars or failing to parse no longer leaves the displayed value and the stored value apart
+
+#### 🔧 Changed
+
+- **Docs app**: The demo project is now the docs app
+- **Version chip**: The header version uses the same border, surface, and shadow as the hero calendar
+- **Release link**: The banner links to the git tag, such as `0.3.0`, with no `v` prefix
+
+### 📦 Modified Files
+
+<details>
+<summary><strong>Library</strong></summary>
+
+- Date field sync across calendars and parse errors
+- Month-name display format
+- `ng add` and the no-op `ng update` migration
+- `agents/SKILL.md` shipped with the package
+- `projects/ngx-mat-hijri-adapter/package.json` and `src/lib/version.ts` - Version 0.3.0
+
+</details>
+
+<details>
+<summary><strong>Docs</strong></summary>
+
+- Docs app rename, unpublished-version banner, and links to both form guides
+- AI agents page, product roadmap, version chip, and the AI agents and Roadmap navigation
+- `projects/docs/src/app/app.spec.ts` - Expects version 0.3.0 and the tag URL without a `v` prefix
+
+</details>
+
+<details>
+<summary><strong>Workspace</strong></summary>
+
+- `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and `.github/PULL_REQUEST_TEMPLATE.md`
+- `README.md` - Version 0.3.0
+- `package.json` and `package-lock.json` - Version 0.3.0
+- `CHANGELOG.md` - This entry
+
+</details>
+
+---
+
+**Version**: 0.3.0  
+**Release Date**: October 10, 2026  
+**Maintained by**: Mahmoud
+
+---
+
 ## [0.2.2] - 2026-10-04
 
 ### ✨ Package Logo
@@ -382,6 +466,7 @@ First release. One Angular Material date adapter for the Gregorian and Umm al-Qu
 
 ---
 
+[0.3.0]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.0
 [0.2.2]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.2
 [0.2.1]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.1
 [0.2.0]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.0
