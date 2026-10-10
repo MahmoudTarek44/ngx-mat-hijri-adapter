@@ -22,7 +22,7 @@ One task is one branch and one commit. Do not start the next task until the prev
 | 1   | Adapter refactor                               | `fix/hijri-adapter-review`         | Done        |
 | 1a  | Display format on date fields                  | `feat/date-display-format`         | Done        |
 | 2   | Rename the demo into the docs app              | `chore/docs-site`                  | Done        |
-| 3   | Unpublished-version warning                    | `feat/release-warning`             | Open        |
+| 3   | Unpublished-version warning                    | `feat/release-warning`             | Done        |
 | 4   | Links to both form guides                      | `feat/forms-docs-nav`              | Open        |
 | 5   | `ng add` and `ng update`                       | `feat/ng-add`                      | Open        |
 | 6   | Agent skill for people who install the package | `feat/agent-skill`                 | Open        |
