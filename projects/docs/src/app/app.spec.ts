@@ -20,13 +20,13 @@ describe('App', () => {
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.querySelector('[data-version]')?.textContent?.trim()).toBe('0.3.0');
+    expect(compiled.querySelector('[data-version]')?.textContent?.trim()).toBe('0.3.1');
     const banner = compiled.querySelector('[data-release-banner]');
     const notice = banner?.textContent?.replace(/\s+/g, ' ') ?? '';
-    expect(notice).toContain('0.3.0 is tagged on GitHub and is not published on npm');
+    expect(notice).toContain('0.3.1 is tagged on GitHub and is not published on npm');
     expect(notice).toContain('The first npm release will be the stable 1.0.0.');
     expect(banner?.querySelector('a')?.getAttribute('href')).toBe(
-      'https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.0',
+      'https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.1',
     );
     const links = Array.from(compiled.querySelectorAll('nav a')).map((a) => a.textContent?.trim());
     expect(links).toEqual(['Docs', 'Playground', 'Examples']);

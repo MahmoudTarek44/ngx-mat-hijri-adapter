@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.0"><img src="https://img.shields.io/github/v/tag/MahmoudTarek44/ngx-mat-hijri-adapter?label=version&amp;color=006d33" alt="Version" /></a>
+  <a href="https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.1"><img src="https://img.shields.io/github/v/tag/MahmoudTarek44/ngx-mat-hijri-adapter?label=version&amp;color=006d33" alt="Version" /></a>
   <a href="https://angular.dev"><img src="https://img.shields.io/badge/Angular-22-dd0031" alt="Angular" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT" /></a>
   <a href="https://mahmoudtarek44.github.io/ngx-mat-hijri-adapter/"><img src="https://img.shields.io/badge/docs-live%20demo-006d33" alt="Documentation" /></a>
@@ -25,11 +25,11 @@
 - Locale is independent of calendar: an English Hijri picker or an Arabic Gregorian picker both work.
 - Ready-made date and date range fields for reactive forms and for signal forms.
 - An optional Hijri/Gregorian toggle on each field, with a hint showing the date in the other calendar.
-- Values are `CalendarDate` objects, never a JavaScript `Date`, so no time zone shifts a day.
+- The default adapter stores `CalendarDate` objects, so no time zone shifts a day. `ngx-mat-hijri-adapter/native` stores a JavaScript `Date` at UTC noon.
 
 ## Status and installation
 
-Version 0.3.0 is tagged on [GitHub](https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.0). It is not yet published to npm. Once it is, add it to an Angular Material app:
+Version 0.3.1 is tagged on [GitHub](https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.1). It is not yet published to npm. Once it is, add it to an Angular Material app:
 
 ```bash
 ng add ngx-mat-hijri-adapter

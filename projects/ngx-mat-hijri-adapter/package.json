@@ -1,6 +1,6 @@
 {
   "name": "ngx-mat-hijri-adapter",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Modern Angular Material date adapter for Gregorian and Umm al-Qura Hijri calendars, powered by @internationalized/date.",
   "author": "Mahmoud",
   "license": "MIT",

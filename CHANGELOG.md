@@ -5,6 +5,71 @@ All notable changes to ngx-mat-hijri-adapter will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.1] - 2026-10-10
+
+### Native adapter and agent instructions
+
+This patch is tagged on GitHub and is not published on npm. The first npm release remains the stable 1.0.0. `provideHijriDateAdapter()` still stores a `CalendarDate`. A second provider stores a JavaScript `Date` when a form needs one. The agent skill page no longer assumes one editor.
+
+#### Changes by Commit
+
+| Commit    | Type       | Description                                                                                                                |
+| --------- | ---------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `c9f15fb` | ✨ Feature | **Native adapter**: `provideNativeHijriDateAdapter()` from `ngx-mat-hijri-adapter/native` stores a `Date` at UTC noon      |
+| `7d2230a` | 📝 Docs    | **AI agents**: Copy the shipped skill to `AGENTS.md`, so any coding agent can follow it                                   |
+
+### 📝 Summary of Changes
+
+#### ✨ Added
+
+- **Native Hijri adapter**: `provideNativeHijriDateAdapter()` registers a `DateAdapter<Date>`. `Intl` formats and parses the day with `islamic-umalqura` or `gregory`. An in-repo Umm al-Qura table does the day math for AH 1300–1599. Each value is stored at UTC noon, so a time zone cannot move the civil day. `createDate(1445, 8, 1)` is 1 Ramadan 1445, which is 11 March 2024 at 12:00 UTC
+- **Docs examples**: The date adapter page shows both providers. The home page runs a native Umm al-Qura datepicker and a native Gregorian datepicker. The API reference lists the `/native` entry
+- **Roadmap**: The native adapter is listed under Implemented. `calendarOf()` and custom calendar-toggle templates are under development. A package MCP server is an unscheduled idea
+
+#### 🔧 Changed
+
+- **AI agents**: After `ng add`, copy `agents/SKILL.md` to `AGENTS.md` at the project root. If that file already exists, add the skill to it. A skills folder is only an example for agents that load `SKILL.md` themselves
+- **Default value**: The README states that the default adapter stores `CalendarDate`, and that `/native` stores a `Date` at UTC noon
+
+### 📦 Modified Files
+
+<details>
+<summary><strong>Library</strong></summary>
+
+- `projects/ngx-mat-hijri-adapter/native/` - `NativeHijriDateAdapter`, `provideNativeHijriDateAdapter()`, and the Umm al-Qura month-length table
+- `projects/ngx-mat-hijri-adapter/src/lib/calendar/calendar-constants.ts` - Shared calendar codes and the AH 1300–1599 limits, with no `@internationalized/date` import
+- `projects/ngx-mat-hijri-adapter/agents/SKILL.md` - The native provider stores a `Date` and does not replace `CalendarDate`
+- `projects/ngx-mat-hijri-adapter/package.json` and `src/lib/version.ts` - Version 0.3.1
+
+</details>
+
+<details>
+<summary><strong>Docs</strong></summary>
+
+- Date adapter page, home examples, and API group for `ngx-mat-hijri-adapter/native`
+- AI agents page leads with `AGENTS.md`
+- Roadmap: native adapter implemented, two items under development, MCP server listed as future
+- `projects/docs/src/app/app.spec.ts` - Expects version 0.3.1 and the tag URL without a `v` prefix
+
+</details>
+
+<details>
+<summary><strong>Workspace</strong></summary>
+
+- `README.md` - Version 0.3.1 and the native `Date` adapter
+- `package.json` and `package-lock.json` - Version 0.3.1
+- `CHANGELOG.md` - This entry
+
+</details>
+
+---
+
+**Version**: 0.3.1  
+**Release Date**: October 10, 2026  
+**Maintained by**: Mahmoud
+
+---
+
 ## [0.3.0] - 2026-10-10
 
 ### ✨ Date fields, install, and docs
@@ -539,6 +604,7 @@ First release. One Angular Material date adapter for the Gregorian and Umm al-Qu
 
 ---
 
+[0.3.1]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.1
 [0.3.0]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.0
 [0.2.2]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.2
 [0.2.1]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.1

@@ -1,1 +1,1 @@
-export const NGX_MAT_HIJRI_ADAPTER_VERSION = '0.3.0';
+export const NGX_MAT_HIJRI_ADAPTER_VERSION = '0.3.1';

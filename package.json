@@ -1,6 +1,6 @@
 {
   "name": "ngx-mat-hijri-adapter",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Workspace for the Angular Material Umm al-Qura date adapter.",
   "scripts": {
     "ng": "ng",
