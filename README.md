@@ -89,6 +89,10 @@ npm run build
 npm start
 ```
 
+## Contributing
+
+Pull requests target `development`. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md).
