@@ -25,11 +25,11 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      - run: npx ng build demo --base-href /ngx-mat-hijri-adapter/
-      - run: cp dist/demo/browser/index.html dist/demo/browser/404.html
+      - run: npx ng build docs --base-href /ngx-mat-hijri-adapter/
+      - run: cp dist/docs/browser/index.html dist/docs/browser/404.html
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/demo/browser
+          path: dist/docs/browser
 
   deploy:
     needs: build

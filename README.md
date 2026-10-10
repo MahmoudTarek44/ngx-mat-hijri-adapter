@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="projects/demo/public/logo.svg" alt="ngx-mat-hijri-adapter logo" width="120" />
+  <img src="projects/docs/public/logo.svg" alt="ngx-mat-hijri-adapter logo" width="120" />
 </p>
 
 <h1 align="center">ngx-mat-hijri-adapter</h1>
@@ -74,7 +74,7 @@ Configuration, parsing, formatting, field inputs, right-to-left, and the full AP
 
 ## Development
 
-Building this workspace needs Node.js `^22.22.3`, `^24.15.0`, or `26` or newer. The demo imports the built package from `dist/`, so build the library first:
+Building this workspace needs Node.js `^22.22.3`, `^24.15.0`, or `26` or newer. The docs app imports the built package from `dist/`, so build the library first:
 
 ```bash
 npm ci

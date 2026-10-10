@@ -4,12 +4,12 @@
   "description": "Workspace for the Angular Material Umm al-Qura date adapter.",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve demo",
+    "start": "ng serve docs",
     "build": "node scripts/check-entry-boundaries.mjs && node scripts/stage-package-files.mjs && ng build ngx-mat-hijri-adapter",
-    "build:demo": "ng build demo",
+    "build:docs": "ng build docs",
     "watch": "ng build ngx-mat-hijri-adapter --watch --configuration development",
     "test": "ng test ngx-mat-hijri-adapter --watch=false",
-    "test:demo": "ng test demo --watch=false"
+    "test:docs": "ng test docs --watch=false"
   },
   "private": true,
   "license": "MIT",

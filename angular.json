@@ -32,24 +32,24 @@
         }
       }
     },
-    "demo": {
+    "docs": {
       "projectType": "application",
       "schematics": {},
-      "root": "projects/demo",
-      "sourceRoot": "projects/demo/src",
+      "root": "projects/docs",
+      "sourceRoot": "projects/docs/src",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "browser": "projects/demo/src/main.ts",
-            "tsConfig": "projects/demo/tsconfig.app.json",
+            "browser": "projects/docs/src/main.ts",
+            "tsConfig": "projects/docs/tsconfig.app.json",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/demo/public"
+                "input": "projects/docs/public"
               }
             ],
-            "styles": ["projects/demo/src/styles.scss", "projects/demo/src/tailwind.css"]
+            "styles": ["projects/docs/src/styles.scss", "projects/docs/src/tailwind.css"]
           },
           "configurations": {
             "production": {
@@ -84,10 +84,10 @@
           },
           "configurations": {
             "production": {
-              "buildTarget": "demo:build:production"
+              "buildTarget": "docs:build:production"
             },
             "development": {
-              "buildTarget": "demo:build:development"
+              "buildTarget": "docs:build:development"
             }
           },
           "defaultConfiguration": "development"
