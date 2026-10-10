@@ -19,7 +19,7 @@ One task is one branch and one commit. Do not start the next task until the prev
 | # | Task | Branch | Status |
 | - | ---- | ------ | ------ |
 | 0 | Delivery skill for this repo | `chore/development-delivery-skill` | Done |
-| 1 | Adapter refactor | `fix/hijri-adapter-review` | Open |
+| 1 | Adapter refactor | `fix/hijri-adapter-review` | Done |
 | 2 | Rename the demo into the docs app | `chore/docs-site` | Open |
 | 3 | Unpublished-version warning | `feat/release-warning` | Open |
 | 4 | Links to both form guides | `feat/forms-docs-nav` | Open |

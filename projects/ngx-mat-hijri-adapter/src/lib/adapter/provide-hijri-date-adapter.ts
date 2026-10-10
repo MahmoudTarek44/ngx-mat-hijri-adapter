@@ -34,6 +34,10 @@ export function provideHijriDateAdapter(options: ProvideHijriDateAdapterOptions 
     adapterOptions.timeZone = options.timeZone;
   }
 
+  if (options.firstDayOfWeek !== undefined) {
+    adapterOptions.firstDayOfWeek = options.firstDayOfWeek;
+  }
+
   return [
     { provide: DateAdapter, useClass: HijriDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: options.formats ?? HIJRI_DATE_FORMATS },

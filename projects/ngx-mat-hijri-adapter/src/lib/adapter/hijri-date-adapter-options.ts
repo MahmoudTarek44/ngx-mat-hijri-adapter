@@ -8,6 +8,11 @@ export interface HijriDateAdapterOptions {
   calendar?: SupportedCalendar;
   /** Locale for digits, Gregorian month names, weekday names, and week start. Defaults to `ar-SA`. */
   locale?: string;
+  /**
+   * Week start, `0` for Sunday through `6` for Saturday.
+   * Defaults to the locale's week info.
+   */
+  firstDayOfWeek?: number;
   /** Time zone used by `today()`. Defaults to the runtime time zone. */
   timeZone?: string;
 }

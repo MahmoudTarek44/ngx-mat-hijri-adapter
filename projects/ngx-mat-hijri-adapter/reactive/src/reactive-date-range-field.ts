@@ -77,6 +77,7 @@ export class ReactiveDateRangeField extends ReactiveDateFieldBase<CalendarDateRa
     end: new FormControl<CalendarDate | null>(null),
   });
   protected readonly shown = signal<CalendarDateRange>({ start: null, end: null });
+  private stored: CalendarDateRange = { start: null, end: null };
   protected readonly equivalent = computed(() => {
     if (!this.calendarToggle() || !this.equivalentHint()) {
       return '';
@@ -104,7 +105,8 @@ export class ReactiveDateRangeField extends ReactiveDateFieldBase<CalendarDateRa
       }
 
       this.shown.set(next);
-      this.onChange({ start: this.toValue(next.start), end: this.toValue(next.end) });
+      this.stored = { start: this.toValue(next.start), end: this.toValue(next.end) };
+      this.onChange(this.stored);
     });
   }
 
@@ -112,15 +114,33 @@ export class ReactiveDateRangeField extends ReactiveDateFieldBase<CalendarDateRa
     const range = (value ?? {}) as Partial<CalendarDateRange>;
     const start = readCalendarDate(range.start, 'ReactiveDateRangeField');
     const end = readCalendarDate(range.end, 'ReactiveDateRangeField');
+    const accepted = {
+      start: start && convertOrNull(start, this.resolvedValueCalendar()) ? start : null,
+      end: end && convertOrNull(end, this.resolvedValueCalendar()) ? end : null,
+    };
+    this.stored = accepted;
     this.show({
-      start: start && this.adapter.clone(start),
-      end: end && this.adapter.clone(end),
+      start: convertOrNull(accepted.start, this.display()),
+      end: convertOrNull(accepted.end, this.display()),
     });
+    if (start !== accepted.start || end !== accepted.end) {
+      this.onChange(accepted);
+    }
   }
 
   protected showValueIn(calendar: SupportedCalendar): void {
-    const { start, end } = this.range.getRawValue();
-    this.show({ start: convertOrNull(start, calendar), end: convertOrNull(end, calendar) });
+    const next = {
+      start: convertOrNull(this.stored.start, calendar),
+      end: convertOrNull(this.stored.end, calendar),
+    };
+    this.show(next);
+    if ((this.stored.start && !next.start) || (this.stored.end && !next.end)) {
+      this.stored = {
+        start: next.start ? this.stored.start : null,
+        end: next.end ? this.stored.end : null,
+      };
+      this.onChange(this.stored);
+    }
   }
 
   protected innerErrors(): ValidationErrors | null {

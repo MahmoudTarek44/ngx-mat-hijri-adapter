@@ -155,4 +155,50 @@ describe('ReactiveDateField', () => {
       /expected a CalendarDate/,
     );
   });
+
+  it('clears a value the Umm al-Qura calendar cannot store', async () => {
+    const { fixture, host, input } = await setup();
+
+    host.date.setValue(createCalendarDate('gregorian', 1800, 1, 1));
+    await fixture.whenStable();
+
+    expect(host.date.value).toBeNull();
+    expect(input.value).toBe('');
+  });
+
+  it('keeps two fields on different calendars', async () => {
+    @Component({
+      imports: [ReactiveFormsModule, ReactiveDateField],
+      template: `
+        <ngx-mat-reactive-date-field [formControl]="hijri" />
+        <ngx-mat-reactive-date-field [formControl]="gregorian" valueCalendar="gregorian" calendarToggle />
+      `,
+    })
+    class TwoFields {
+      readonly hijri = new FormControl<CalendarDate | null>(
+        createCalendarDate('islamic-umalqura', 1445, 9, 1),
+      );
+      readonly gregorian = new FormControl<CalendarDate | null>(
+        createCalendarDate('gregorian', 2024, 3, 11),
+      );
+    }
+
+    TestBed.configureTestingModule({
+      providers: [provideHijriDateAdapter({ locale: 'en-US', timeZone: 'UTC' })],
+    });
+    const fixture = TestBed.createComponent(TwoFields);
+    await fixture.whenStable();
+    const element: HTMLElement = fixture.nativeElement;
+    const [hijri, gregorian] = Array.from(element.querySelectorAll('input'));
+
+    expect(hijri?.value).toBe('1/9/1445');
+    expect(gregorian?.value).toBe('11/3/2024');
+
+    (element.querySelector('button[aria-label="Hijri calendar"]') as HTMLButtonElement).click();
+    await fixture.whenStable();
+
+    expect(hijri?.value).toBe('1/9/1445');
+    expect(gregorian?.value).toBe('1/9/1445');
+    expect(fixture.componentInstance.gregorian.value?.calendar.identifier).toBe('gregory');
+  });
 });

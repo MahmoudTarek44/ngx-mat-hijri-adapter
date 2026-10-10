@@ -8,6 +8,7 @@ export { provideFieldDateFormats as ɵprovideFieldDateFormats } from './field-pr
 export {
   convertOrNull as ɵconvertOrNull,
   equivalentText as ɵequivalentText,
+  fieldErrorText as ɵfieldErrorText,
   readCalendarDate as ɵreadCalendarDate,
   sameValue as ɵsameValue,
   type CalendarDateRange as ɵCalendarDateRange,

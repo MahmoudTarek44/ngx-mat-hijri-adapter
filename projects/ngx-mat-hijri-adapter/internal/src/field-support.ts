@@ -86,6 +86,24 @@ export function readCalendarDate(value: unknown, field: string): CalendarDate | 
   throw new TypeError(`${field}: expected a CalendarDate or null, got ${String(value)}.`);
 }
 
+const DATE_FIELD_ERROR_FALLBACKS: Record<string, string> = {
+  matDatepickerParse: 'Enter a valid date.',
+  matDatepickerMin: 'Date is too early.',
+  matDatepickerMax: 'Date is too late.',
+  matDatepickerFilter: 'Date is not available.',
+  matStartDateInvalid: 'Enter a valid start date.',
+  matEndDateInvalid: 'Enter a valid end date.',
+};
+
+/** Caller text, then the error's own message, then a datepicker fallback. */
+export function fieldErrorText(
+  kind: string,
+  messages: Record<string, string | undefined>,
+  errorMessage?: string,
+): string {
+  return messages[kind] || errorMessage || DATE_FIELD_ERROR_FALLBACKS[kind] || '';
+}
+
 export function sameValue(left: CalendarDate | null, right: CalendarDate | null): boolean {
   if (!left || !right) {
     return left === right;

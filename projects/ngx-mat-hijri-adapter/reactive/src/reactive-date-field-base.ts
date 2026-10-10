@@ -22,7 +22,10 @@ import {
   type Validator,
 } from '@angular/forms';
 
-import { ɵDateFieldCore as DateFieldCore } from 'ngx-mat-hijri-adapter/internal';
+import {
+  ɵDateFieldCore as DateFieldCore,
+  ɵfieldErrorText as fieldErrorText,
+} from 'ngx-mat-hijri-adapter/internal';
 
 /** Connects a field to reactive forms as a `ControlValueAccessor` and `Validator`. */
 @Directive()
@@ -47,8 +50,13 @@ export abstract class ReactiveDateFieldBase<TValue>
   protected readonly errorMessage = computed(() => {
     const errors = this.controlErrors();
     const messages = this.errors();
-    const key = Object.keys(errors ?? {}).find((name) => messages[name] !== undefined);
-    return key === undefined ? '' : (messages[key] ?? '');
+    for (const name of Object.keys(errors ?? {})) {
+      const text = fieldErrorText(name, messages);
+      if (text) {
+        return text;
+      }
+    }
+    return '';
   });
 
   protected onChange: (value: TValue) => void = () => {};

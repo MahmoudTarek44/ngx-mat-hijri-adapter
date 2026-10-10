@@ -100,7 +100,7 @@ describe('SignalDateField', () => {
       .map((error) => error.kind);
     expect(kinds).toContain('matDatepickerParse');
     expect(kinds).toContain('required');
-    expect(text('mat-error')).toBe('Required');
+    expect(text('mat-error')).toBe('Enter a valid date.');
 
     await type('29/8/1445');
     expect(
@@ -114,6 +114,16 @@ describe('SignalDateField', () => {
     await type('5/9/1445');
     expect(host.f.date().errors()).toEqual([]);
     expect(text('mat-error')).toBe('');
+  });
+
+  it('clears a model value the Umm al-Qura calendar cannot store', async () => {
+    const { fixture, host, input } = await setup();
+
+    host.model.set({ date: createCalendarDate('gregorian', 1800, 1, 1) });
+    await fixture.whenStable();
+
+    expect(host.model().date).toBeNull();
+    expect(input.value).toBe('');
   });
 
   it('follows the disabled state of the field', async () => {

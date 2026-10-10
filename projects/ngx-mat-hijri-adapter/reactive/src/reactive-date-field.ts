@@ -64,6 +64,7 @@ export class ReactiveDateField extends ReactiveDateFieldBase<CalendarDate | null
 
   protected readonly input = new FormControl<CalendarDate | null>(null);
   protected readonly shown = signal<CalendarDate | null>(null);
+  private stored: CalendarDate | null = null;
   protected readonly equivalent = computed(() =>
     this.calendarToggle() && this.equivalentHint()
       ? equivalentText(this.shown(), this.display(), this.activeLocale(), this.labels())
@@ -83,17 +84,31 @@ export class ReactiveDateField extends ReactiveDateFieldBase<CalendarDate | null
       }
 
       this.shown.set(date);
-      this.onChange(this.toValue(date));
+      this.stored = this.toValue(date);
+      this.onChange(this.stored);
     });
   }
 
   writeValue(value: unknown): void {
     const date = readCalendarDate(value, 'ReactiveDateField');
-    this.show(date && this.adapter.clone(date));
+    if (date && !convertOrNull(date, this.resolvedValueCalendar())) {
+      this.stored = null;
+      this.show(null);
+      this.onChange(null);
+      return;
+    }
+
+    this.stored = date;
+    this.show(convertOrNull(date, this.display()));
   }
 
   protected showValueIn(calendar: SupportedCalendar): void {
-    this.show(convertOrNull(this.input.value, calendar));
+    const next = convertOrNull(this.stored, calendar);
+    this.show(next);
+    if (this.stored && !next) {
+      this.stored = null;
+      this.onChange(null);
+    }
   }
 
   protected innerErrors(): ValidationErrors | null {

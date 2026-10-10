@@ -35,12 +35,14 @@ const ISO_DATE = /^(\d{4})-(\d{2})-(\d{2})$/;
 export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
   private calendarId: SupportedCalendar;
   private readonly timeZone: string;
+  private readonly weekStartsOn: number | null;
 
   constructor() {
     super();
     const options = inject(HIJRI_DATE_ADAPTER_OPTIONS, { optional: true }) ?? {};
     this.calendarId = options.calendar ?? CalendarCode.umalqura;
     this.timeZone = options.timeZone ?? Intl.DateTimeFormat().resolvedOptions().timeZone;
+    this.weekStartsOn = weekStart(options.firstDayOfWeek);
     this.setLocale(options.locale ?? CalendarLocale.arSA);
   }
 
@@ -103,7 +105,7 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
   }
 
   override getFirstDayOfWeek(): number {
-    return firstDayOfWeek(this.locale);
+    return this.weekStartsOn ?? firstDayOfWeek(this.locale);
   }
 
   override getNumDaysInMonth(date: CalendarDate): number {
@@ -190,9 +192,10 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
       throw new Error('HijriDateAdapter: Cannot convert invalid date to ISO 8601.');
     }
 
-    const year = String(date.year).padStart(4, '0');
-    const month = String(date.month).padStart(2, '0');
-    const day = String(date.day).padStart(2, '0');
+    const converted = this.inCalendar(date);
+    const year = String(converted.year).padStart(4, '0');
+    const month = String(converted.month).padStart(2, '0');
+    const day = String(converted.day).padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
 
@@ -312,8 +315,24 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
       return this.invalid();
     }
 
-    return addCalendarDate(date, duration);
+    try {
+      return addCalendarDate(this.inCalendar(date), duration);
+    } catch (error) {
+      if (error instanceof UmalquraDateRangeError) {
+        return this.invalid();
+      }
+
+      throw error;
+    }
   }
+}
+
+function weekStart(day: number | undefined): number | null {
+  if (day === undefined || !Number.isInteger(day) || day < 0 || day > 6) {
+    return null;
+  }
+
+  return day;
 }
 
 function readFormatOptions(displayFormat: unknown): Intl.DateTimeFormatOptions {

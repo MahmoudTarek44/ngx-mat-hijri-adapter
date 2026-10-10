@@ -43,25 +43,74 @@ const ARABIC_LONG = [
   'ذو الحجة',
 ] as const;
 
-const ARABIC_SHORT = [
-  'محرم',
-  'صفر',
-  'ربيع ١',
-  'ربيع ٢',
-  'جمادى ١',
-  'جمادى ٢',
-  'رجب',
-  'شعبان',
-  'رمضان',
-  'شوال',
-  'ذو القعدة',
-  'ذو الحجة',
+const ENGLISH_NARROW = [
+  'Muh',
+  'Saf',
+  'R1',
+  'R2',
+  'J1',
+  'J2',
+  'Raj',
+  'Shb',
+  'Ram',
+  'Shw',
+  'Qid',
+  'Hij',
 ] as const;
+
+const ALIASES: readonly (readonly [string, number])[] = [
+  ['ذي الحجة', 12],
+  ['ذي الحجه', 12],
+  ["rabi' al-awwal", 3],
+  ['rabi’ al-awwal', 3],
+  ['dhul hijjah', 12],
+  ['dhul-hijjah', 12],
+  ["dhu'l-hijjah", 12],
+  ['thul hijjah', 12],
+  ['ramadhan', 9],
+  ["sha'ban", 8],
+];
 
 const monthNumbers = new Map<string, number>();
 
-for (const names of [ENGLISH_LONG, ENGLISH_SHORT, ARABIC_LONG, ARABIC_SHORT]) {
+for (const names of [
+  ENGLISH_LONG,
+  ENGLISH_SHORT,
+  ENGLISH_NARROW,
+  ARABIC_LONG,
+  arabicShort((value) => String(value)),
+  arabicShort(easternDigit),
+]) {
   names.forEach((name, index) => monthNumbers.set(normalizeMonthLabel(name), index + 1));
+}
+
+for (const [label, month] of ALIASES) {
+  monthNumbers.set(normalizeMonthLabel(label), month);
+}
+
+function arabicShort(digit: (value: number) => string): string[] {
+  return [
+    'محرم',
+    'صفر',
+    `ربيع ${digit(1)}`,
+    `ربيع ${digit(2)}`,
+    `جمادى ${digit(1)}`,
+    `جمادى ${digit(2)}`,
+    'رجب',
+    'شعبان',
+    'رمضان',
+    'شوال',
+    'ذو القعدة',
+    'ذو الحجة',
+  ];
+}
+
+function easternDigit(value: number): string {
+  return String(value).replace(/\d/g, (digit) => '٠١٢٣٤٥٦٧٨٩'[Number(digit)] ?? digit);
+}
+
+function localeDigit(value: number, locale: string): string {
+  return new Intl.NumberFormat(locale, { useGrouping: false }).format(value);
 }
 
 export function umalquraMonthNames(locale: string, style: 'long' | 'short' | 'narrow'): string[] {
@@ -72,11 +121,14 @@ export function umalquraMonthNames(locale: string, style: 'long' | 'short' | 'na
   }
 
   if (style === 'short') {
-    return [...(arabic ? ARABIC_SHORT : ENGLISH_SHORT)];
+    return arabic ? arabicShort((value) => localeDigit(value, locale)) : [...ENGLISH_SHORT];
   }
 
-  const source = arabic ? ARABIC_SHORT : ENGLISH_SHORT;
-  return source.map((name) => Array.from(name)[0] ?? name);
+  if (arabic) {
+    return Array.from({ length: 12 }, (_, index) => localeDigit(index + 1, locale));
+  }
+
+  return [...ENGLISH_NARROW];
 }
 
 /** Month number from a fixed Umm al-Qura name, or null when the label is not one of those names. */

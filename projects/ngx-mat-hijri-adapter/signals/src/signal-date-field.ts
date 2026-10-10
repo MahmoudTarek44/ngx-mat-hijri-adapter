@@ -25,11 +25,7 @@ import {
 import { MatError, MatFormField, MatHint, MatLabel, MatSuffix } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import type { CalendarDate } from '@internationalized/date';
-import {
-  HijriDateAdapter,
-  type SupportedCalendar,
-  convertCalendarDate,
-} from 'ngx-mat-hijri-adapter';
+import { HijriDateAdapter, type SupportedCalendar } from 'ngx-mat-hijri-adapter';
 import {
   ɵDateFieldCore as DateFieldCore,
   ɵconvertOrNull as convertOrNull,
@@ -101,7 +97,7 @@ export class SignalDateField
     },
     format: (value) => {
       const date = readCalendarDate(value, 'SignalDateField');
-      return date && convertCalendarDate(date, this.display());
+      return convertOrNull(date, this.display());
     },
   });
   protected readonly errorMessage = computed(() =>
@@ -137,10 +133,23 @@ export class SignalDateField
         this.input.enable({ emitEvent: false });
       }
     });
+
+    effect(() => {
+      const value = this.value();
+      const calendar = this.resolvedValueCalendar();
+      if (value && !convertOrNull(value, calendar)) {
+        untracked(() => this.value.set(null));
+      }
+    });
   }
 
   protected showValueIn(calendar: SupportedCalendar): void {
-    this.input.setValue(convertOrNull(this.input.value, calendar), { emitEvent: false });
+    const current = this.value();
+    const next = convertOrNull(current, calendar);
+    this.input.setValue(next, { emitEvent: false });
+    if (current && !next) {
+      this.value.set(null);
+    }
   }
 
   protected isErrorState(): boolean {

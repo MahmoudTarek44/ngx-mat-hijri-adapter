@@ -1,5 +1,6 @@
 import type { ValidationErrors } from '@angular/forms';
 import type { ValidationError } from '@angular/forms/signals';
+import { ɵfieldErrorText as fieldErrorText } from 'ngx-mat-hijri-adapter/internal';
 
 /** Datepicker errors from the inner Material control, as signal forms parse errors. */
 export function datepickerErrors(
@@ -22,7 +23,7 @@ export function firstErrorMessage(
   ];
 
   for (const error of ordered) {
-    const message = messages[error.kind] ?? error.message;
+    const message = fieldErrorText(error.kind, messages, error.message);
     if (message) {
       return message;
     }

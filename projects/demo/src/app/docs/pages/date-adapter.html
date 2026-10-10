@@ -21,6 +21,10 @@
     </li>
     <li><code>timeZone</code>: used by <code>today()</code>. Defaults to the runtime time zone.</li>
     <li>
+      <code>firstDayOfWeek</code>: <code>0</code> for Sunday through <code>6</code> for Saturday.
+      Defaults to the locale's week info.
+    </li>
+    <li>
       <code>formats</code>: Material format slots. Defaults to <code>HIJRI_DATE_FORMATS</code>.
     </li>
   </ul>
@@ -50,7 +54,7 @@
     Material month indexes are 0-based, unlike the calendar helpers. <code>createDate</code> throws
     for a month outside 0–11, a day outside that month, or an Umm al-Qura year outside 1300–1599.
     Adding months clamps to the last valid day. Adding a year or month that leaves AH 1300–1599
-    throws.
+    returns an invalid date.
   </p>
   <code-block language="ts" [code]="code.months" />
   <p>Time methods are not implemented.</p>

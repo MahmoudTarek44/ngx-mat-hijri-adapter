@@ -72,6 +72,15 @@ describe('HijriDateAdapter', () => {
 
     expect(dates.sameDate(dates.parse('1 Ramadan, 1445', null), ramadan)).toBe(true);
     expect(dates.sameDate(dates.parse('1 رمضان 1445', null), ramadan)).toBe(true);
+    expect(dates.sameDate(dates.parse("1 Rabi' al-Awwal, 1445", null), dates.createDate(1445, 2, 1))).toBe(
+      true,
+    );
+    expect(dates.sameDate(dates.parse('1 ذي الحجة 1445', null), dates.createDate(1445, 11, 1))).toBe(
+      true,
+    );
+    expect(dates.sameDate(dates.parse('1 Dhul Hijjah, 1445', null), dates.createDate(1445, 11, 1))).toBe(
+      true,
+    );
     expect(
       dates.sameDate(dates.parse('1 Rabi al-Awwal, 1445', null), dates.createDate(1445, 2, 1)),
     ).toBe(true);
@@ -121,6 +130,9 @@ describe('HijriDateAdapter', () => {
 
     dates.setLocale('ar-EG');
     expect(dates.getFirstDayOfWeek()).toBe(6);
+    expect(new Set(dates.getMonthNames('narrow')).size).toBe(12);
+    expect(adapter({ locale: 'ar-SA-u-nu-latn' }).getMonthNames('short')[2]).toBe('ربيع 1');
+    expect(adapter({ firstDayOfWeek: 6 }).getFirstDayOfWeek()).toBe(6);
     expect(dates.getYear(dates.createDate(1445, 8, 1))).toBe(1445);
   });
 
@@ -141,7 +153,12 @@ describe('HijriDateAdapter', () => {
     expect(dates.getMonth(ramadan)).toBe(2);
     expect(dates.getDate(ramadan)).toBe(11);
     expect(dates.getNumDaysInMonth(ramadan)).toBe(31);
-    expect(dates.toIso8601(dates.clone(ramadan))).toBe('2024-03-11');
+    expect(dates.toIso8601(ramadan)).toBe('2024-03-11');
+    const nextMonth = dates.addCalendarMonths(ramadan, 1);
+    expect(dates.getYear(nextMonth)).toBe(2024);
+    expect(dates.getMonth(nextMonth)).toBe(3);
+    expect(dates.getDate(nextMonth)).toBe(11);
+    expect(nextMonth.calendar.identifier).toBe('gregory');
     expect(dates.format(ramadan, HIJRI_DATE_FORMATS.display.dateInput)).toBe('11/3/2024');
     expect(dates.sameDate(dates.parse('11/3/2024', null), ramadan)).toBe(true);
     expect(dates.getYear(dates.createDate(2024, 2, 11))).toBe(2024);
@@ -159,9 +176,7 @@ describe('HijriDateAdapter', () => {
     expect(dates.getDate(nextDay)).toBe(1);
     expect(() => dates.createDate(1600, 0, 1)).toThrow(UmalquraDateRangeError);
     expect(() => dates.createDate(1299, 0, 1)).toThrow(UmalquraDateRangeError);
-    expect(() => dates.addCalendarYears(dates.createDate(1599, 0, 1), 1)).toThrow(
-      UmalquraDateRangeError,
-    );
+    expect(dates.isValid(dates.addCalendarYears(dates.createDate(1599, 0, 1), 1))).toBe(false);
     expect(() => dates.createDate(1445, 12, 1)).toThrow(/Month index/);
     expect(() => dates.createDate(1445, 9, 30)).toThrow(/Invalid date/);
   });

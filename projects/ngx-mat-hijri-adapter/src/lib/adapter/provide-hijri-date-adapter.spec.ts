@@ -44,6 +44,14 @@ describe('provideHijriDateAdapter', () => {
     expect(TestBed.inject(MAT_DATE_LOCALE)).toBe('ar-SA');
   });
 
+  it('uses an explicit week start', () => {
+    TestBed.configureTestingModule({
+      providers: [provideHijriDateAdapter({ locale: 'en-US', firstDayOfWeek: 6, timeZone: 'UTC' })],
+    });
+
+    expect((TestBed.inject(DateAdapter) as HijriDateAdapter).getFirstDayOfWeek()).toBe(6);
+  });
+
   it('uses custom format slots when they are provided', () => {
     const formats = {
       ...HIJRI_DATE_FORMATS,

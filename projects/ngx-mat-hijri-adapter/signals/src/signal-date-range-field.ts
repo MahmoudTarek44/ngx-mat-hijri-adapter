@@ -26,11 +26,7 @@ import {
 } from '@angular/material/datepicker';
 import { MatError, MatFormField, MatHint, MatLabel, MatSuffix } from '@angular/material/form-field';
 import type { CalendarDate } from '@internationalized/date';
-import {
-  HijriDateAdapter,
-  type SupportedCalendar,
-  convertCalendarDate,
-} from 'ngx-mat-hijri-adapter';
+import { HijriDateAdapter, type SupportedCalendar } from 'ngx-mat-hijri-adapter';
 import {
   type ɵCalendarDateRange as CalendarDateRange,
   ɵDateFieldCore as DateFieldCore,
@@ -119,8 +115,8 @@ export class SignalDateRangeField
       const start = readCalendarDate(value?.start, 'SignalDateRangeField');
       const end = readCalendarDate(value?.end, 'SignalDateRangeField');
       return {
-        start: start && convertCalendarDate(start, display),
-        end: end && convertCalendarDate(end, display),
+        start: convertOrNull(start, display),
+        end: convertOrNull(end, display),
       };
     },
   });
@@ -164,14 +160,31 @@ export class SignalDateRangeField
         this.range.enable({ emitEvent: false });
       }
     });
+
+    effect(() => {
+      const value = this.value();
+      const calendar = this.resolvedValueCalendar();
+      const start = value.start && convertOrNull(value.start, calendar) ? value.start : null;
+      const end = value.end && convertOrNull(value.end, calendar) ? value.end : null;
+      if (start !== value.start || end !== value.end) {
+        untracked(() => this.value.set({ start, end }));
+      }
+    });
   }
 
   protected showValueIn(calendar: SupportedCalendar): void {
-    const { start, end } = this.range.getRawValue();
-    this.range.setValue(
-      { start: convertOrNull(start, calendar), end: convertOrNull(end, calendar) },
-      { emitEvent: false },
-    );
+    const current = this.value();
+    const next = {
+      start: convertOrNull(current.start, calendar),
+      end: convertOrNull(current.end, calendar),
+    };
+    this.range.setValue(next, { emitEvent: false });
+    if ((current.start && !next.start) || (current.end && !next.end)) {
+      this.value.set({
+        start: next.start ? current.start : null,
+        end: next.end ? current.end : null,
+      });
+    }
   }
 
   protected isErrorState(): boolean {
