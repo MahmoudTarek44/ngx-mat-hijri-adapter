@@ -44,7 +44,8 @@ When a task is squash-merged, set its status here to `Done` in the same breath a
 - One agent skill ships inside the npm package and is explained on the docs site. A skill that exists only in this repo would not help other developers.
 - This library is TypeScript and ng-packagr emits `.d.ts` files. DefinitelyTyped hosts `@types/*` for JavaScript libraries that do not ship types. A `@types/ngx-mat-hijri-adapter` package would duplicate the built-in types, so nothing is submitted there.
 - The public names `gregorian` (this package) and `gregory` (the runtime calendar identifier) stay as they are. The AH 1300–1599 Umm al-Qura limit stays as it is.
-- The next main feature is a native Hijri adapter based on the JavaScript `Intl` APIs and the `Date` object. The current adapter keeps `CalendarDate` from `@internationalized/date`.
+- Hijri month names stay Arabic and English. Persian and Urdu month names are not planned.
+- `ngx-mat-hijri-adapter/native` provides `provideNativeHijriDateAdapter()` for a JavaScript `Date` at UTC noon. Formatting uses `Intl` with `islamic-umalqura` or `gregory`. Month lengths and day arithmetic use an in-repo Umm al-Qura table for AH 1300–1599. `provideHijriDateAdapter()` keeps `CalendarDate` from `@internationalized/date`.
 - Historical paths in `CHANGELOG.md` are not rewritten when the demo project is renamed.
 
 ## 0. Delivery skill
@@ -151,7 +152,7 @@ Add a docs page at `/docs/roadmap` and a nav entry named Roadmap. The page is pu
 The page has three sections:
 
 - **Implemented.** The main features that already ship: both calendars, locale separate from calendar, `CalendarDate` values, the Material datepicker, reactive and signal fields, the calendar toggle, display formats, strict parsing, right-to-left, `ng add`, and the agent skill. Task 8 is shown once as a decision that a `@types` package will not be published.
-- **Under development.** The next main feature: a native Hijri adapter based on the JavaScript `Intl` APIs and the `Date` object.
+- **Under development.** A `calendarOf()` helper, and custom templates for the calendar-toggle buttons. The native Hijri adapter now ships from `ngx-mat-hijri-adapter/native`.
 - **Future.** The unscheduled ideas below. Nothing there is a commitment.
 
 ## 10. Closing workspace check
@@ -168,9 +169,6 @@ When the review is accepted, mark task 10 `Done` here.
 
 Choose these after the closing check. They come from the current package and from what Angular Material apps need. They are not branches yet.
 
-- A `calendarOf()` helper so application code can ask which supported calendar a `CalendarDate` uses, without comparing `gregory` and `gregorian` by hand.
-- Hijri month names for Persian and Urdu. The built-in names are Arabic and English only.
 - The 1.0.0 npm release itself: version, changelog, tag, and the docs site, which retires the unpublished-version banner.
 - A changelog page on the docs site, fed by `CHANGELOG.md`.
-- Clearer calendar-toggle buttons. They open the picker, and the accessible name should say so.
 - `ng update` migrations kept current when a future Angular Material `DateAdapter` change requires one.

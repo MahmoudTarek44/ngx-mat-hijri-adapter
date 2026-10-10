@@ -120,6 +120,37 @@ const GROUPS: readonly ApiGroup[] = [
     ],
   },
   {
+    entryPoint: 'ngx-mat-hijri-adapter/native',
+    summary: 'A DateAdapter<Date> that formats with Intl and counts Umm al-Qura days from an in-repo table.',
+    entries: [
+      {
+        name: 'NativeHijriDateAdapter',
+        kind: 'class',
+        description: 'Material DateAdapter for a JavaScript Date at UTC noon.',
+      },
+      {
+        name: 'provideNativeHijriDateAdapter',
+        kind: 'function',
+        description: 'Registers the native adapter, formats, and locale.',
+      },
+      {
+        name: 'ProvideNativeHijriDateAdapterOptions',
+        kind: 'type',
+        description: 'Provider options, including formats.',
+      },
+      {
+        name: 'NativeHijriDateAdapterOptions',
+        kind: 'type',
+        description: 'Calendar, locale, week start, and time zone.',
+      },
+      {
+        name: 'NATIVE_HIJRI_DATE_ADAPTER_OPTIONS',
+        kind: 'constant',
+        description: 'Injection token for the native adapter options.',
+      },
+    ],
+  },
+  {
     entryPoint: 'ngx-mat-hijri-adapter/reactive',
     summary: 'Fields for reactive forms.',
     entries: [

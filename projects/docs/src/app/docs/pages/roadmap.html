@@ -59,17 +59,20 @@
   <section class="relative mt-14 border-t pt-10">
     <span id="under-development" class="absolute -top-24 block size-px" aria-hidden="true"></span>
     <h2>Under development</h2>
-    @for (feature of inDevelopment; track feature.title) {
-      <article
-        class="rounded-card border border-primary bg-[color-mix(in_srgb,var(--color-primary)_8%,transparent)] p-6"
-        data-roadmap-next
-      >
-        <p class="mb-2! text-label-large tracking-[0.12em] text-primary uppercase">
-          Next main feature
-        </p>
-        <h3 class="mb-2 text-title-large font-semibold">{{ feature.title }}</h3>
-        <p class="max-w-[40rem] text-body-large text-on-surface-variant">{{ feature.detail }}</p>
-      </article>
+    @if (inDevelopment.length === 0) {
+      <p class="text-body-large text-on-surface-variant">Nothing is in progress.</p>
+    } @else {
+      <div class="grid gap-3 sm:grid-cols-2">
+        @for (feature of inDevelopment; track feature.title) {
+          <article
+            class="rounded-card border border-primary bg-[color-mix(in_srgb,var(--color-primary)_8%,transparent)] p-5"
+            data-roadmap-next
+          >
+            <h3 class="mb-1.5 text-title-small font-semibold">{{ feature.title }}</h3>
+            <p class="text-body-medium text-on-surface-variant">{{ feature.detail }}</p>
+          </article>
+        }
+      </div>
     }
   </section>
 

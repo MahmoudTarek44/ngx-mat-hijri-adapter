@@ -36,15 +36,16 @@ describe('Docs', () => {
   it('lists shipped features, the next adapter, and unscheduled ideas', async () => {
     const harness = await RouterTestingHarness.create('/docs/roadmap');
     const element = harness.routeNativeElement as HTMLElement;
-    const next = element.querySelector('[data-roadmap-next]')?.textContent ?? '';
-
     expect(element.querySelector('h1')?.textContent).toBe('Roadmap');
     expect(element.querySelector('#implemented + h2')?.textContent?.trim()).toBe('Implemented');
     expect(element.textContent).toContain('Two calendars, one adapter');
     expect(element.textContent).toContain('CalendarDate');
-    expect(next).toContain('Native Hijri adapter');
-    expect(next).toContain('Intl');
-    expect(next).toContain('Date');
+    expect(element.textContent).toContain('Native Hijri adapter');
+    expect(element.textContent).toContain('ngx-mat-hijri-adapter/native');
+    expect(element.textContent).toContain('Intl');
+    expect(element.textContent).not.toContain('Nothing is in progress.');
+    expect(element.querySelectorAll('[data-roadmap-next]').length).toBe(2);
+    expect(element.textContent).toContain('Custom calendar-toggle templates');
     expect(element.querySelector('[data-types-decision]')?.textContent).toContain(
       'will not be published',
     );

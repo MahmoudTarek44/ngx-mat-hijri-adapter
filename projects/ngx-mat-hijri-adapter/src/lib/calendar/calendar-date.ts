@@ -1,19 +1,17 @@
 import { CalendarDate, toCalendar, today, type DateDuration } from '@internationalized/date';
 
+export {
+  UMALQURA_MAX_YEAR,
+  UMALQURA_MIN_YEAR,
+  UmalquraDateRangeError,
+} from './calendar-constants';
+
+import {
+  UMALQURA_MAX_YEAR,
+  UMALQURA_MIN_YEAR,
+  UmalquraDateRangeError,
+} from './calendar-constants';
 import { CalendarCode, supportedCalendar, type SupportedCalendar } from './supported-calendars';
-
-/** Adobe's Umm al-Qura table includes AH 1300–1600, and AH 1600 falls back to the civil calendar. */
-export const UMALQURA_MIN_YEAR = 1300;
-export const UMALQURA_MAX_YEAR = 1599;
-
-export class UmalquraDateRangeError extends Error {
-  constructor(year: number) {
-    super(
-      `Hijri year ${year} is outside the Umm al-Qura table (${UMALQURA_MIN_YEAR}–${UMALQURA_MAX_YEAR}).`,
-    );
-    this.name = 'UmalquraDateRangeError';
-  }
-}
 
 export class InvalidCalendarDateError extends Error {
   constructor(calendar: SupportedCalendar, year: number, month: number, day: number) {

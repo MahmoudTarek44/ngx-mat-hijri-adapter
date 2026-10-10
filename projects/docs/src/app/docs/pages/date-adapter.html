@@ -1,14 +1,94 @@
 <article class="doc-page">
   <h1>Date adapter</h1>
   <p class="doc-lead">
-    <code>HijriDateAdapter</code> implements Material's <code>DateAdapter&lt;CalendarDate&gt;</code>
-    for both calendars.
+    Two adapters can drive a Material datepicker. Register one of them.
+    <code>HijriDateAdapter</code> is the main adapter.
+    <code>NativeHijriDateAdapter</code> is the alternative when the stored value has to be a
+    JavaScript <code>Date</code>.
   </p>
 
-  <h2 id="configuration">Configuration</h2>
+  <nav class="mb-8 grid gap-3 sm:grid-cols-2" aria-label="Adapters">
+    <a
+      class="rounded-card border border-primary bg-surface-container-low p-5 no-underline"
+      routerLink="/docs/date-adapter"
+      fragment="hijri"
+    >
+      <p class="mb-1! text-label-large tracking-[0.12em] text-primary uppercase">Main adapter</p>
+      <p class="mb-1! text-title-medium font-semibold text-on-surface">HijriDateAdapter</p>
+      <p class="mb-0! text-body-medium text-on-surface-variant">
+        Stores a <code>CalendarDate</code>. Reactive fields, signal fields, and
+        <code>ng add</code> use this adapter.
+      </p>
+    </a>
+    <a
+      class="rounded-card border bg-surface-container-low p-5 no-underline"
+      routerLink="/docs/date-adapter"
+      fragment="native"
+    >
+      <p class="mb-1! text-label-large tracking-[0.12em] text-on-surface-variant uppercase">
+        Alternative
+      </p>
+      <p class="mb-1! text-title-medium font-semibold text-on-surface">NativeHijriDateAdapter</p>
+      <p class="mb-0! text-body-medium text-on-surface-variant">
+        Stores a JavaScript <code>Date</code> at UTC noon. Use it for a datepicker whose form value
+        has to be a <code>Date</code>.
+      </p>
+    </a>
+  </nav>
+
+  <table class="doc-table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Main adapter</th>
+        <th scope="col">Alternative</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Provider</th>
+        <td><code>provideHijriDateAdapter()</code></td>
+        <td><code>provideNativeHijriDateAdapter()</code></td>
+      </tr>
+      <tr>
+        <th scope="row">Import</th>
+        <td><code>ngx-mat-hijri-adapter</code></td>
+        <td><code>ngx-mat-hijri-adapter/native</code></td>
+      </tr>
+      <tr>
+        <th scope="row">Stored value</th>
+        <td><code>CalendarDate</code></td>
+        <td><code>Date</code> at UTC noon</td>
+      </tr>
+      <tr>
+        <th scope="row">Calendar math</th>
+        <td><code>&#64;internationalized/date</code></td>
+        <td>In-repo Umm al-Qura table</td>
+      </tr>
+      <tr>
+        <th scope="row">Names and formatting</th>
+        <td>Package month names and digits</td>
+        <td><code>Intl</code></td>
+      </tr>
+      <tr>
+        <th scope="row">Works with</th>
+        <td>Datepicker, reactive fields, signal fields</td>
+        <td>Datepicker</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="hijri">HijriDateAdapter</h2>
+  <p>
+    This is the main adapter. It implements <code>DateAdapter&lt;CalendarDate&gt;</code> for the
+    Umm al-Qura and Gregorian calendars. <code>ng add</code> registers it, and the
+    <a routerLink="/docs/form-fields">reactive and signal fields</a> provide their own instance of
+    it.
+  </p>
   <p>
     <code>provideHijriDateAdapter()</code> registers the adapter together with
-    <code>MAT_DATE_FORMATS</code> and <code>MAT_DATE_LOCALE</code>. Its options are:
+    <code>MAT_DATE_FORMATS</code> and <code>MAT_DATE_LOCALE</code>. Call it once from the
+    application providers. Its options are:
   </p>
   <ul>
     <li>
@@ -17,7 +97,8 @@
     </li>
     <li>
       <code>locale</code>: digits, Gregorian month names, weekday names, and the first day of the
-      week. Defaults to <code>ar-SA</code>.
+      week. Hijri month names stay the package's Arabic and English names. Defaults to
+      <code>ar-SA</code>.
     </li>
     <li><code>timeZone</code>: used by <code>today()</code>. Defaults to the runtime time zone.</li>
     <li>
@@ -26,35 +107,109 @@
     </li>
     <li>
       <code>formats</code>: Material format slots. Defaults to <code>HIJRI_DATE_FORMATS</code>.
+      Numeric dates render as day/month/year. Named dates render as <code>day month, year</code>.
     </li>
   </ul>
   <code-block language="ts" [code]="code.config" />
+  <p>
+    A datepicker then stores a <code>CalendarDate</code>. Parsing accepts numeric dates, ISO
+    <code>YYYY-MM-DD</code> in the adapter calendar, and Hijri month names, including Arabic-Indic
+    and Persian digits.
+  </p>
+  <code-block language="ts" [code]="code.hijriDatepicker" />
+  <code-block language="html" [code]="code.datepickerHtml" />
+
+  <h2 id="native">NativeHijriDateAdapter</h2>
+  <p>
+    This is the alternative. It implements <code>DateAdapter&lt;Date&gt;</code> for the same two
+    calendars. Use it when a datepicker's form value has to be a JavaScript <code>Date</code>.
+    Reactive and signal fields keep using <code>HijriDateAdapter</code>.
+  </p>
+  <p>
+    <code>provideNativeHijriDateAdapter()</code> from <code>ngx-mat-hijri-adapter/native</code>
+    registers that adapter with <code>MAT_DATE_FORMATS</code> and <code>MAT_DATE_LOCALE</code>.
+    Register it instead of <code>provideHijriDateAdapter()</code>. Both providers supply
+    <code>DateAdapter</code>, so the one registered for that injector is the one Material uses.
+  </p>
+  <p>The options have the same names and defaults:</p>
+  <ul>
+    <li>
+      <code>calendar</code>: <code>'gregorian'</code> or <code>'islamic-umalqura'</code>. Defaults
+      to <code>islamic-umalqura</code>. <code>Intl</code> receives <code>gregory</code> or
+      <code>islamic-umalqura</code>.
+    </li>
+    <li>
+      <code>locale</code>: digits, month names, weekday names, and the first day of the week.
+      Month names come from <code>Intl</code> for the active calendar, so an English short name
+      such as Ramadan is <code>Ram.</code>. Defaults to <code>ar-SA</code>.
+    </li>
+    <li>
+      <code>timeZone</code>: the civil day <code>today()</code> reads. The stored value is still
+      UTC noon of that day. Defaults to the runtime time zone.
+    </li>
+    <li>
+      <code>firstDayOfWeek</code>: <code>0</code> for Sunday through <code>6</code> for Saturday.
+      Defaults to the locale's week info.
+    </li>
+    <li>
+      <code>formats</code>: the same Material slots, defaulting to <code>HIJRI_DATE_FORMATS</code>.
+    </li>
+  </ul>
+  <p>
+    <code>Intl</code> formats and parses the day, with <code>timeZone: 'UTC'</code>. Month lengths
+    and adding days, months, and years use an in-repo Umm al-Qura table for AH 1300–1599, the same
+    range as the main adapter. Each stored <code>Date</code> is UTC noon, so a time zone cannot
+    move the civil day. <code>toIso8601()</code> returns <code>YYYY-MM-DD</code> in the adapter
+    calendar. <code>deserialize</code> accepts that string, or a <code>Date</code>, which it
+    normalizes to UTC noon of that UTC day.
+  </p>
+  <p>Both calendars run here. Each form value is a <code>Date</code>.</p>
+  <div class="mb-6 grid grid-cols-1 gap-6 min-[1100px]:grid-cols-2">
+    <example-card
+      heading="Umm al-Qura"
+      description="A datepicker on the native adapter, with a Ramadan 1445 range and a Friday filter."
+      entryPoint="ngx-mat-hijri-adapter/native"
+      [snippets]="code.nativeUmalqura"
+    >
+      <native-umalqura-demo />
+    </example-card>
+    <example-card
+      heading="Gregorian"
+      description="The same adapter in the Gregorian calendar. 11 March 2024 is 1 Ramadan 1445."
+      entryPoint="ngx-mat-hijri-adapter/native"
+      [snippets]="code.nativeGregorian"
+    >
+      <native-gregorian-demo />
+    </example-card>
+  </div>
 
   <h2 id="locale">Locale is not the calendar</h2>
   <p>
-    Calendar and locale are independent. <code>ar-SA</code> does not select the Hijri calendar,
-    <code>en-US</code> does not select Gregorian, and a Hijri calendar does not force Saturday as
-    the week start. In this runtime, <code>en-US</code> and <code>ar-SA</code> start the week on
-    Sunday, and <code>ar-EG</code> starts it on Saturday. <code>setLocale</code> updates those rules
-    and never changes the calendar.
+    On both adapters, calendar and locale are independent. <code>ar-SA</code> does not select the
+    Hijri calendar, <code>en-US</code> does not select Gregorian, and a Hijri calendar does not
+    force Saturday as the week start. In this runtime, <code>en-US</code> and <code>ar-SA</code>
+    start the week on Sunday, and <code>ar-EG</code> starts it on Saturday. <code>setLocale</code>
+    updates those rules and leaves the calendar as it is.
   </p>
 
   <h2 id="switching">Switching calendars</h2>
   <p>
     <code>setCalendar()</code> switches an adapter instance at runtime, and
     <code>calendar</code> reads the current one. Material redraws through
-    <code>localeChanges</code>. After a switch, the adapter reads, formats, and clones any
-    <code>CalendarDate</code> in its new calendar. Use it on an adapter provided to a single
+    <code>localeChanges</code>. On <code>HijriDateAdapter</code>, later reads convert the
+    <code>CalendarDate</code> into the new calendar. On <code>NativeHijriDateAdapter</code>, the
+    <code>Date</code> stays the same instant and later reads use the new calendar, so 1 Ramadan
+    1445 reads as 11 March 2024. Use <code>setCalendar()</code> on an adapter provided to a single
     component, as the <a routerLink="/docs/form-fields">form fields</a> do.
   </p>
   <code-block language="ts" [code]="code.switch" />
 
   <h2 id="months">Month indexing</h2>
   <p>
-    Material month indexes are 0-based, unlike the calendar helpers. <code>createDate</code> throws
-    for a month outside 0–11, a day outside that month, or an Umm al-Qura year outside 1300–1599.
-    Adding months clamps to the last valid day. Adding a year or month that leaves AH 1300–1599
-    returns an invalid date.
+    Both adapters follow Material's 0-based months. The calendar helpers on the main entry are
+    1-based. <code>createDate</code> throws for a month outside 0–11, a day outside that month, or
+    an Umm al-Qura year outside 1300–1599. Adding months clamps to the last valid day. Adding a
+    year or month that leaves AH 1300–1599 returns an invalid date.
   </p>
   <code-block language="ts" [code]="code.months" />
   <p>Time methods are not implemented.</p>

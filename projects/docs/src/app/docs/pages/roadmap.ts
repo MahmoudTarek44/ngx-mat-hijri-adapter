@@ -31,7 +31,12 @@ export class Roadmap {
     {
       title: 'CalendarDate values',
       detail:
-        'Stored dates are CalendarDate objects from @internationalized/date, never a JavaScript Date, so a time zone cannot shift the day.',
+        'HijriDateAdapter stores CalendarDate objects from @internationalized/date, so a time zone cannot shift the day.',
+    },
+    {
+      title: 'Native Hijri adapter',
+      detail:
+        'provideNativeHijriDateAdapter() from ngx-mat-hijri-adapter/native stores a JavaScript Date at UTC noon. Intl formats and parses it, and an in-repo Umm al-Qura table does the day math.',
     },
     {
       title: 'Material datepicker',
@@ -73,22 +78,18 @@ export class Roadmap {
 
   protected readonly inDevelopment: readonly RoadmapFeature[] = [
     {
-      title: 'Native Hijri adapter',
-      detail:
-        'A Hijri adapter built on the JavaScript Intl APIs and the Date object, rather than @internationalized/date and CalendarDate.',
-    },
-  ];
-
-  protected readonly future: readonly RoadmapIdea[] = [
-    {
       title: 'calendarOf() helper',
       detail:
         'Application code can ask which supported calendar a CalendarDate uses, without comparing gregory and gregorian by hand.',
     },
     {
-      title: 'Persian and Urdu month names',
-      detail: 'Hijri month names for Persian and Urdu. The built-in names are Arabic and English only.',
+      title: 'Custom calendar-toggle templates',
+      detail:
+        'A field can pass a template for the Hijri and Gregorian toggle. The buttons still switch the displayed calendar and open the picker.',
     },
+  ];
+
+  protected readonly future: readonly RoadmapIdea[] = [
     {
       title: 'Stable 1.0.0 release',
       detail:
@@ -97,10 +98,6 @@ export class Roadmap {
     {
       title: 'Changelog page',
       detail: 'A changelog page on the docs site, fed by CHANGELOG.md.',
-    },
-    {
-      title: 'Clearer calendar-toggle buttons',
-      detail: 'They open the picker, and the accessible name should say so.',
     },
     {
       title: 'ng update migrations',

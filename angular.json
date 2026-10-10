@@ -31,6 +31,7 @@
               "**/*.spec.ts",
               "../reactive/**/*.spec.ts",
               "../signals/**/*.spec.ts",
+              "../native/**/*.spec.ts",
               "../schematics/**/*.spec.ts"
             ]
           }

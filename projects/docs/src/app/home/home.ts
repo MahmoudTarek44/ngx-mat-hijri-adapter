@@ -7,12 +7,18 @@ import { RouterLink } from '@angular/router';
 import { NGX_MAT_HIJRI_ADAPTER_VERSION } from 'ngx-mat-hijri-adapter';
 
 import { GregorianDemo, UmalquraDemo } from '../examples/calendar-demo/calendar-demo';
+import {
+  NativeGregorianDemo,
+  NativeUmalquraDemo,
+} from '../examples/native-demo/native-demo';
 import { ReactiveFieldsDemo } from '../examples/reactive-fields-demo/reactive-fields-demo';
 import { SignalFieldsDemo } from '../examples/signal-fields-demo/signal-fields-demo';
 import {
   GREGORIAN_SNIPPETS,
   INSTALL_COMMAND,
   MANUAL_INSTALL_COMMAND,
+  NATIVE_GREGORIAN_SNIPPETS,
+  NATIVE_UMALQURA_SNIPPETS,
   REACTIVE_SNIPPETS,
   SIGNAL_SNIPPETS,
   UMALQURA_SNIPPETS,
@@ -72,6 +78,8 @@ const FEATURES = [
     Playground,
     UmalquraDemo,
     GregorianDemo,
+    NativeUmalquraDemo,
+    NativeGregorianDemo,
     ReactiveFieldsDemo,
     SignalFieldsDemo,
   ],
@@ -87,6 +95,8 @@ export class Home {
   protected readonly snippets = {
     umalqura: UMALQURA_SNIPPETS,
     gregorian: GREGORIAN_SNIPPETS,
+    nativeUmalqura: NATIVE_UMALQURA_SNIPPETS,
+    nativeGregorian: NATIVE_GREGORIAN_SNIPPETS,
     reactive: REACTIVE_SNIPPETS,
     signals: SIGNAL_SNIPPETS,
   };

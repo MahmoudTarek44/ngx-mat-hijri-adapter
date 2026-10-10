@@ -18,7 +18,7 @@ describe('Home', () => {
     }).compileComponents();
   });
 
-  it('renders the hero, playground, and four live examples', async () => {
+  it('renders the hero, playground, and live examples', async () => {
     const fixture = TestBed.createComponent(Home);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
@@ -49,7 +49,7 @@ describe('Home', () => {
       (link) => link.getAttribute('href'),
     );
     expect(guides).toEqual(['/docs/reactive-fields', '/docs/signal-fields']);
-    expect(compiled.querySelectorAll('#examples example-card').length).toBe(4);
+    expect(compiled.querySelectorAll('#examples example-card').length).toBe(6);
 
     const umalqura = compiled.querySelector('[data-calendar="islamic-umalqura"]');
     const gregorian = compiled.querySelector('[data-calendar="gregorian"]');
@@ -65,6 +65,22 @@ describe('Home', () => {
     expect(gregorian?.querySelector('input')?.value).toBe('11/3/2024');
     expect(gregorian?.textContent).toContain('Fridays are unavailable.');
     expect(gregorian?.textContent).toContain('Gregorian 2024-03-11 is Umm al-Qura 1445-09-01.');
+
+    const nativeUmalqura = compiled.querySelector(
+      '[data-adapter="native"][data-calendar="islamic-umalqura"]',
+    );
+    const nativeGregorian = compiled.querySelector(
+      '[data-adapter="native"][data-calendar="gregorian"]',
+    );
+
+    expect(nativeUmalqura?.querySelector('input')?.value).toBe('١/٩/١٤٤٥');
+    expect(nativeUmalqura?.textContent).toContain(
+      'Umm al-Qura 1445-09-01 is Gregorian 2024-03-11.',
+    );
+    expect(nativeGregorian?.querySelector('input')?.value).toBe('11/3/2024');
+    expect(nativeGregorian?.textContent).toContain(
+      'Gregorian 2024-03-11 is Umm al-Qura 1445-09-01.',
+    );
 
     for (const name of ['reactive', 'signals']) {
       const fields = compiled.querySelector(`[data-demo="${name}"]`);

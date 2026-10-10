@@ -1,12 +1,8 @@
 import { GregorianCalendar, IslamicUmalquraCalendar, type Calendar } from '@internationalized/date';
 
-/** Calendar codes accepted by this package. */
-export const CalendarCode = {
-  gregorian: 'gregorian',
-  umalqura: 'islamic-umalqura',
-} as const;
+export { CalendarCode, type SupportedCalendar } from './calendar-constants';
 
-export type SupportedCalendar = (typeof CalendarCode)[keyof typeof CalendarCode];
+import { CalendarCode, type SupportedCalendar } from './calendar-constants';
 
 const calendars = {
   [CalendarCode.gregorian]: new GregorianCalendar(),

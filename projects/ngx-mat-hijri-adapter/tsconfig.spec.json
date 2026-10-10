@@ -16,6 +16,7 @@
     "src/**/*.spec.ts",
     "reactive/src/**/*.spec.ts",
     "signals/src/**/*.spec.ts",
+    "native/src/**/*.spec.ts",
     "schematics/**/*.spec.ts"
   ]
 }

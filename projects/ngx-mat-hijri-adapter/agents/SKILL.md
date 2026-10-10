@@ -18,13 +18,16 @@ Do not add `@types/ngx-mat-hijri-adapter`. The package publishes its own `.d.ts`
 
 ## Values
 
-Store a `CalendarDate` from `@internationalized/date`. Do not store a JavaScript `Date`.
+`provideHijriDateAdapter()` stores a `CalendarDate` from `@internationalized/date`. Do not store a JavaScript `Date` with that provider.
 
-`provideHijriDateAdapter()` defaults to the Umm al-Qura calendar and the `ar-SA` locale. The locale does not select the calendar.
+`provideNativeHijriDateAdapter()` from `ngx-mat-hijri-adapter/native` stores a JavaScript `Date` at UTC noon. Use it when the form value has to be a `Date`. It does not replace the `CalendarDate` adapter. Reactive and signal fields stay on `CalendarDate`.
+
+Both providers default to the Umm al-Qura calendar and the `ar-SA` locale. The locale does not select the calendar.
 
 ## Entry points
 
 - `ngx-mat-hijri-adapter` exports `HijriDateAdapter`, `provideHijriDateAdapter()`, and the calendar helpers.
+- `ngx-mat-hijri-adapter/native` exports `NativeHijriDateAdapter` and `provideNativeHijriDateAdapter()`.
 - `ngx-mat-hijri-adapter/reactive` exports date and range fields for reactive forms.
 - `ngx-mat-hijri-adapter/signals` exports the same fields for signal forms.
 

@@ -9,6 +9,7 @@ const allowed = {
   internal: ['src'],
   reactive: ['src', 'internal'],
   signals: ['src', 'internal'],
+  native: ['src'],
 };
 
 const packageEntry = {
@@ -16,6 +17,7 @@ const packageEntry = {
   'ngx-mat-hijri-adapter/internal': 'internal',
   'ngx-mat-hijri-adapter/reactive': 'reactive',
   'ngx-mat-hijri-adapter/signals': 'signals',
+  'ngx-mat-hijri-adapter/native': 'native',
 };
 
 const files = (dir) =>
@@ -42,6 +44,11 @@ for (const [entry, imports] of Object.entries(allowed)) {
         const path = relative(libraryRoot, join(file, '..', specifier)).replaceAll('\\', '/');
         target = path.startsWith('src/') ? 'src' : path.split('/')[0];
       } else {
+        if (entry === 'native' && specifier === '@internationalized/date') {
+          problems.push(
+            `${file.replaceAll('\\', '/')}: 'native' must not import '@internationalized/date'`,
+          );
+        }
         continue;
       }
 

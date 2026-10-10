@@ -84,6 +84,86 @@ export class GregorianPicker {
   },
 ];
 
+export const NATIVE_UMALQURA_SNIPPETS: readonly Snippet[] = [
+  {
+    label: 'TypeScript',
+    language: 'ts',
+    code: `import { provideNativeHijriDateAdapter } from 'ngx-mat-hijri-adapter/native';
+
+@Component({
+  selector: 'umalqura-date-picker',
+  // Dir (from @angular/cdk/bidi) makes dir="rtl" reach the datepicker overlay too.
+  imports: [Dir, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatDatepickerModule],
+  providers: [
+    provideNativeHijriDateAdapter({ calendar: 'islamic-umalqura', locale: 'ar-SA', timeZone: 'UTC' }),
+  ],
+  templateUrl: './umalqura-date-picker.html',
+})
+export class UmalquraDatePicker {
+  private readonly adapter = inject<DateAdapter<Date>>(DateAdapter);
+
+  readonly min = this.adapter.createDate(1445, 8, 1); // 1 Ramadan 1445, stored at UTC noon
+  readonly max = this.adapter.createDate(1445, 8, 30);
+  readonly date = new FormControl<Date | null>(this.min);
+
+  readonly notFriday = (date: Date | null) =>
+    date != null && this.adapter.getDayOfWeek(date) !== 5;
+}`,
+  },
+  {
+    label: 'HTML',
+    language: 'html',
+    code: `<mat-form-field appearance="outline" dir="rtl">
+  <mat-label>التاريخ</mat-label>
+  <input
+    matInput
+    [matDatepicker]="picker"
+    [formControl]="date"
+    [min]="min"
+    [max]="max"
+    [matDatepickerFilter]="notFriday"
+  />
+  <mat-datepicker-toggle matIconSuffix [for]="picker" />
+  <mat-datepicker #picker />
+</mat-form-field>`,
+  },
+];
+
+export const NATIVE_GREGORIAN_SNIPPETS: readonly Snippet[] = [
+  {
+    label: 'TypeScript',
+    language: 'ts',
+    code: `import { provideNativeHijriDateAdapter } from 'ngx-mat-hijri-adapter/native';
+
+@Component({
+  selector: 'gregorian-date-picker',
+  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatDatepickerModule],
+  providers: [
+    // The same native adapter, in the Gregorian calendar. Locale never selects the calendar.
+    provideNativeHijriDateAdapter({ calendar: 'gregorian', locale: 'en-US', timeZone: 'UTC' }),
+  ],
+  templateUrl: './gregorian-date-picker.html',
+})
+export class GregorianDatePicker {
+  private readonly adapter = inject<DateAdapter<Date>>(DateAdapter);
+
+  readonly min = this.adapter.createDate(2024, 2, 11); // 11 March 2024, stored at UTC noon
+  readonly max = this.adapter.createDate(2024, 2, 31);
+  readonly date = new FormControl<Date | null>(this.min);
+}`,
+  },
+  {
+    label: 'HTML',
+    language: 'html',
+    code: `<mat-form-field appearance="outline">
+  <mat-label>Date</mat-label>
+  <input matInput [matDatepicker]="picker" [formControl]="date" [min]="min" [max]="max" />
+  <mat-datepicker-toggle matIconSuffix [for]="picker" />
+  <mat-datepicker #picker />
+</mat-form-field>`,
+  },
+];
+
 export const REACTIVE_SNIPPETS: readonly Snippet[] = [
   {
     label: 'TypeScript',

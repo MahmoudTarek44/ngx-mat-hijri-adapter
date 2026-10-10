@@ -59,9 +59,10 @@
     Built for both calendars from day one
   </h2>
   <p class="mb-10 max-w-[44rem] text-on-surface-variant">
-    The name says Hijri, but every part handles the Gregorian calendar too. Values are
-    <code>CalendarDate</code> objects, never a JavaScript <code>Date</code>, so no time zone shifts
-    a day.
+    The name says Hijri, but every part handles the Gregorian calendar too. The default adapter
+    stores <code>CalendarDate</code> objects, so no time zone shifts a day. Use
+    <code>ngx-mat-hijri-adapter/native</code> when a form needs a JavaScript <code>Date</code>
+    stored at UTC noon.
   </p>
   <div class="grid grid-cols-[repeat(auto-fit,minmax(16rem,1fr))] gap-4">
     @for (feature of features; track feature.title) {
@@ -122,6 +123,22 @@
       [snippets]="snippets.gregorian"
     >
       <gregorian-demo />
+    </example-card>
+    <example-card
+      heading="Native Umm al-Qura datepicker"
+      description="The alternative adapter. The form value is a Date at UTC noon, with the same range and Friday filter."
+      entryPoint="ngx-mat-hijri-adapter/native"
+      [snippets]="snippets.nativeUmalqura"
+    >
+      <native-umalqura-demo />
+    </example-card>
+    <example-card
+      heading="Native Gregorian datepicker"
+      description="The same native adapter in the Gregorian calendar."
+      entryPoint="ngx-mat-hijri-adapter/native"
+      [snippets]="snippets.nativeGregorian"
+    >
+      <native-gregorian-demo />
     </example-card>
     <example-card
       heading="Reactive form fields"
