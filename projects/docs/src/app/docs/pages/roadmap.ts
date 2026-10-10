@@ -72,7 +72,7 @@ export class Roadmap {
     {
       title: 'Agent skill',
       detail:
-        'The package ships a skill that tells a coding agent how to install the adapter and store dates.',
+        'The package ships a markdown skill any coding agent can follow to install the adapter and store dates.',
     },
   ];
 
@@ -102,6 +102,11 @@ export class Roadmap {
     {
       title: 'ng update migrations',
       detail: 'Kept current when a future Angular Material DateAdapter change requires one.',
+    },
+    {
+      title: 'Package MCP server',
+      detail:
+        'A small server an agent can call for setup, the stored date type, and calendar checks. The markdown skill stays the way those rules are installed.',
     },
   ];
 }

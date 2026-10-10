@@ -172,3 +172,4 @@ Choose these after the closing check. They come from the current package and fro
 - The 1.0.0 npm release itself: version, changelog, tag, and the docs site, which retires the unpublished-version banner.
 - A changelog page on the docs site, fed by `CHANGELOG.md`.
 - `ng update` migrations kept current when a future Angular Material `DateAdapter` change requires one.
+- A package MCP server an agent can call for setup, the stored date type, and calendar checks. The markdown skill stays the way those rules are installed.

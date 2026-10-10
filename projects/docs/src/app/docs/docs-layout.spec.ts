@@ -50,8 +50,21 @@ describe('Docs', () => {
       'will not be published',
     );
     expect(element.textContent).toContain('calendarOf()');
+    expect(element.textContent).toContain('Package MCP server');
     expect(element.textContent).toContain('Nothing in this list is a commitment');
     expect(element.textContent).not.toContain('Delivery skill');
+  });
+
+  it('explains the agent skill for any coding agent', async () => {
+    const harness = await RouterTestingHarness.create('/docs/ai-agents');
+    const element = harness.routeNativeElement as HTMLElement;
+
+    expect(element.querySelector('h1')?.textContent).toBe('AI agents');
+    expect(element.querySelector('#agents-md')).not.toBeNull();
+    expect(element.querySelector('#cursor')).toBeNull();
+    expect(element.textContent).toContain('AGENTS.md');
+    expect(element.textContent).toContain('node_modules/ngx-mat-hijri-adapter/agents/SKILL.md');
+    expect(element.textContent).toContain('whatever editor you use');
   });
 
   it('renders every page', async () => {
