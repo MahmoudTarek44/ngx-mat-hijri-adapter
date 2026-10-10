@@ -28,12 +28,12 @@ One task is one branch and one commit. Do not start the next task until the prev
 | 6   | Agent skill for people who install the package | `feat/agent-skill`                 | Done        |
 | 7   | Public contribution policy                     | `docs/contributing`                | Done        |
 | 8   | `@types` package on DefinitelyTyped            | none                               | Will not do |
-| 9   | Roadmap page on the docs site                  | `feat/docs-roadmap`                | Open        |
+| 9   | Roadmap page on the docs site                  | `feat/docs-roadmap`                | Done        |
 | 10  | Closing workspace check                        | `chore/closing-check`              | Open        |
 
 Task 0 is the private workflow skill. Task 1 is the first product change. Task 1a is the display-format switch and ships before task 2. Tasks 2–7 follow it, in order. Task 8 is a decision, not work. Task 9 adds the public roadmap page. Task 10 runs only after tasks 0–7, 1a, and 9 are done.
 
-When a task is squash-merged, set its status here to `Done` in the same breath as the merge. Once task 9 exists, that same commit also updates the status on `/docs/roadmap`. Until that page exists, this file is the only status list.
+When a task is squash-merged, set its status here to `Done` in the same breath as the merge. `/docs/roadmap` lists product features, not these task rows. Update that page in the same commit only when a feature listed there changes.
 
 ## Decisions already settled
 
@@ -44,6 +44,7 @@ When a task is squash-merged, set its status here to `Done` in the same breath a
 - One agent skill ships inside the npm package and is explained on the docs site. A skill that exists only in this repo would not help other developers.
 - This library is TypeScript and ng-packagr emits `.d.ts` files. DefinitelyTyped hosts `@types/*` for JavaScript libraries that do not ship types. A `@types/ngx-mat-hijri-adapter` package would duplicate the built-in types, so nothing is submitted there.
 - The public names `gregorian` (this package) and `gregory` (the runtime calendar identifier) stay as they are. The AH 1300–1599 Umm al-Qura limit stays as it is.
+- The next main feature is a native Hijri adapter based on the JavaScript `Intl` APIs and the `Date` object. The current adapter keeps `CalendarDate` from `@internationalized/date`.
 - Historical paths in `CHANGELOG.md` are not rewritten when the demo project is renamed.
 
 ## 0. Delivery skill
@@ -145,14 +146,13 @@ Public policy for outside contributors. This is separate from the private delive
 
 Branch: `feat/docs-roadmap`
 
-Add a docs page at `/docs/roadmap` and a nav entry named Roadmap. The page is public, so it lists product tasks 1, 1a, 2–7, and the later ideas below. Task 0 stays in this file only.
+Add a docs page at `/docs/roadmap` and a nav entry named Roadmap. The page is public and lists product features. Task 0 and the task table above stay in this file only.
 
-The page has two sections:
+The page has three sections:
 
-- **Now.** Tasks 1, 1a, 2–7, and 10 with status `Done` or `Open`, matching this file at the time the page is added. Task 8 is shown once as a decision that a `@types` package will not be published. Task 0 stays off the page.
-- **Later.** Ideas that are not scheduled. This section starts with the list below. Nothing there is a commitment.
-
-After this page exists, finishing a task includes updating its status on the page in that task's single commit.
+- **Implemented.** The main features that already ship: both calendars, locale separate from calendar, `CalendarDate` values, the Material datepicker, reactive and signal fields, the calendar toggle, display formats, strict parsing, right-to-left, `ng add`, and the agent skill. Task 8 is shown once as a decision that a `@types` package will not be published.
+- **Under development.** The next main feature: a native Hijri adapter based on the JavaScript `Intl` APIs and the `Date` object.
+- **Future.** The unscheduled ideas below. Nothing there is a commitment.
 
 ## 10. Closing workspace check
 
@@ -162,7 +162,7 @@ Start this only after tasks 0–7 and 9 are done and on `development`. It is a r
 
 The branch records the findings. It does not apply a pile of fixes. Anything worth changing becomes its own later task, with its own branch, after you approve that item. The check also says which ideas in the Later list are worth scheduling.
 
-When the review is accepted, mark task 10 `Done` here and on `/docs/roadmap`.
+When the review is accepted, mark task 10 `Done` here.
 
 ## Later, not scheduled
 

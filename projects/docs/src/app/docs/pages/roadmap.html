@@ -1,0 +1,93 @@
+<article class="doc-page roadmap">
+  <h1>Roadmap</h1>
+  <p class="doc-lead">
+    The main features of this package: what ships today, what comes next, and what is only an idea.
+  </p>
+
+  <nav class="grid gap-3 sm:grid-cols-3" aria-label="Roadmap sections">
+    <a
+      class="rounded-card border bg-surface-container-low px-4 py-3 no-underline transition duration-200 hover:-translate-y-0.5 hover:border-primary motion-reduce:transition-none motion-reduce:hover:translate-none"
+      routerLink="/docs/roadmap"
+      fragment="implemented"
+    >
+      <span class="block font-mono text-title-medium font-semibold text-primary">{{
+        implemented.length
+      }}</span>
+      <span class="text-label-large text-on-surface">Implemented</span>
+    </a>
+    <a
+      class="rounded-card border border-primary bg-[color-mix(in_srgb,var(--color-primary)_8%,transparent)] px-4 py-3 no-underline transition duration-200 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-none"
+      routerLink="/docs/roadmap"
+      fragment="under-development"
+    >
+      <span class="block font-mono text-title-medium font-semibold text-primary">{{
+        inDevelopment.length
+      }}</span>
+      <span class="text-label-large text-on-surface">Under development</span>
+    </a>
+    <a
+      class="rounded-card border border-dashed px-4 py-3 no-underline transition duration-200 hover:-translate-y-0.5 hover:border-primary motion-reduce:transition-none motion-reduce:hover:translate-none"
+      routerLink="/docs/roadmap"
+      fragment="future"
+    >
+      <span class="block font-mono text-title-medium font-semibold text-on-surface-variant">{{
+        future.length
+      }}</span>
+      <span class="text-label-large text-on-surface">Future</span>
+    </a>
+  </nav>
+
+  <section class="relative mt-14">
+    <span id="implemented" class="absolute -top-24 block size-px" aria-hidden="true"></span>
+    <h2>Implemented</h2>
+    <div class="grid gap-3 sm:grid-cols-2">
+      @for (feature of implemented; track feature.title) {
+        <article
+          class="rounded-card border bg-surface-container-low p-5 transition duration-200 hover:-translate-y-0.5 hover:border-primary hover:shadow-[0_12px_28px_-18px_var(--color-primary)] motion-reduce:transition-none motion-reduce:hover:translate-none"
+        >
+          <h3 class="mb-1.5 text-title-small font-semibold">{{ feature.title }}</h3>
+          <p class="text-body-medium text-on-surface-variant">{{ feature.detail }}</p>
+        </article>
+      }
+    </div>
+    <p class="mt-4 text-body-medium text-on-surface-variant" data-types-decision>
+      A <code>&#64;types</code> package will not be published. This library ships its own
+      <code>.d.ts</code> files.
+    </p>
+  </section>
+
+  <section class="relative mt-14 border-t pt-10">
+    <span id="under-development" class="absolute -top-24 block size-px" aria-hidden="true"></span>
+    <h2>Under development</h2>
+    @for (feature of inDevelopment; track feature.title) {
+      <article
+        class="rounded-card border border-primary bg-[color-mix(in_srgb,var(--color-primary)_8%,transparent)] p-6"
+        data-roadmap-next
+      >
+        <p class="mb-2! text-label-large tracking-[0.12em] text-primary uppercase">
+          Next main feature
+        </p>
+        <h3 class="mb-2 text-title-large font-semibold">{{ feature.title }}</h3>
+        <p class="max-w-[40rem] text-body-large text-on-surface-variant">{{ feature.detail }}</p>
+      </article>
+    }
+  </section>
+
+  <section class="relative mt-14 border-t pt-10">
+    <span id="future" class="absolute -top-24 block size-px" aria-hidden="true"></span>
+    <h2>Future</h2>
+    <p class="mb-5! text-body-large text-on-surface-variant">
+      These ideas are not scheduled. Nothing in this list is a commitment.
+    </p>
+    <div class="grid gap-3 sm:grid-cols-2">
+      @for (idea of future; track idea.title) {
+        <article
+          class="rounded-card border border-dashed p-5 transition duration-200 hover:-translate-y-0.5 hover:border-primary hover:bg-surface-container-low motion-reduce:transition-none motion-reduce:hover:translate-none"
+        >
+          <h3 class="mb-1.5 text-title-small font-semibold">{{ idea.title }}</h3>
+          <p class="text-body-medium text-on-surface-variant">{{ idea.detail }}</p>
+        </article>
+      }
+    </div>
+  </section>
+</article>

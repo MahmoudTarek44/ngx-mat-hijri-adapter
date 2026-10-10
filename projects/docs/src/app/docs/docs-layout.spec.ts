@@ -33,6 +33,26 @@ describe('Docs', () => {
     expect(element.textContent).not.toContain('ngx-mat-reactive-date-field');
   });
 
+  it('lists shipped features, the next adapter, and unscheduled ideas', async () => {
+    const harness = await RouterTestingHarness.create('/docs/roadmap');
+    const element = harness.routeNativeElement as HTMLElement;
+    const next = element.querySelector('[data-roadmap-next]')?.textContent ?? '';
+
+    expect(element.querySelector('h1')?.textContent).toBe('Roadmap');
+    expect(element.querySelector('#implemented + h2')?.textContent?.trim()).toBe('Implemented');
+    expect(element.textContent).toContain('Two calendars, one adapter');
+    expect(element.textContent).toContain('CalendarDate');
+    expect(next).toContain('Native Hijri adapter');
+    expect(next).toContain('Intl');
+    expect(next).toContain('Date');
+    expect(element.querySelector('[data-types-decision]')?.textContent).toContain(
+      'will not be published',
+    );
+    expect(element.textContent).toContain('calendarOf()');
+    expect(element.textContent).toContain('Nothing in this list is a commitment');
+    expect(element.textContent).not.toContain('Delivery skill');
+  });
+
   it('renders every page', async () => {
     const harness = await RouterTestingHarness.create();
 

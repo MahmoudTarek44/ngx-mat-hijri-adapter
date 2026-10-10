@@ -181,6 +181,20 @@
     }
   }
 
+  .doc-page.roadmap {
+    & h2 {
+      @apply mt-0 mb-4 border-0 pt-0 tracking-[-0.03em];
+    }
+
+    & p {
+      @apply mb-0;
+    }
+
+    & .doc-lead {
+      @apply mb-8;
+    }
+  }
+
   .doc-table {
     @apply mb-6 w-full border-collapse text-body-medium max-sm:block max-sm:overflow-x-auto;
 

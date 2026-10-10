@@ -37,7 +37,7 @@ import { DOC_PAGES, type DocPage } from './doc-pages';
       [attr.data-open]="menuOpen() || null"
     >
       <p class="mb-3 text-label-large tracking-[0.08em] text-primary uppercase">Documentation</p>
-      @for (page of pages; track page.path) {
+      @for (page of guides; track page.path) {
         <a
           class="rounded-full px-3.5 py-2 text-label-large text-on-surface-variant no-underline hover:bg-surface-container-high hover:text-on-surface"
           [routerLink]="['/docs', page.path]"
@@ -47,6 +47,28 @@ import { DOC_PAGES, type DocPage } from './doc-pages';
           >{{ page.title }}</a
         >
       }
+      <div class="mt-2 border-t pt-2">
+        @for (page of highlights; track page.path) {
+          <a
+            class="group flex items-center gap-2 rounded-full px-3.5 py-2 text-label-large text-on-surface-variant no-underline transition-colors hover:text-on-surface data-[nav=ai-agents]:hover:bg-[color-mix(in_srgb,var(--color-primary)_12%,transparent)] data-[nav=ai-agents]:hover:text-primary"
+            [attr.data-nav]="page.path"
+            [routerLink]="['/docs', page.path]"
+            routerLinkActive="text-primary!"
+            ariaCurrentWhenActive="page"
+            (click)="menuOpen.set(false)"
+          >
+            <mat-icon class="size-5! text-[20px]! text-primary" aria-hidden="true">{{
+              page.icon
+            }}</mat-icon>
+            <span class="relative">
+              {{ page.title }}
+              <span
+                class="absolute inset-x-0 -bottom-px h-px origin-left scale-x-0 bg-current transition-transform duration-200 group-hover:scale-x-100 motion-reduce:transition-none"
+              ></span>
+            </span>
+          </a>
+        }
+      </div>
     </nav>
 
     <div class="max-w-208 min-w-0">
@@ -80,7 +102,8 @@ import { DOC_PAGES, type DocPage } from './doc-pages';
 export class DocsLayout {
   private readonly router = inject(Router);
 
-  protected readonly pages = DOC_PAGES;
+  protected readonly guides = DOC_PAGES.filter((page) => page.icon === undefined);
+  protected readonly highlights = DOC_PAGES.filter((page) => page.icon !== undefined);
   protected readonly menuOpen = signal(false);
 
   private readonly url = toSignal(

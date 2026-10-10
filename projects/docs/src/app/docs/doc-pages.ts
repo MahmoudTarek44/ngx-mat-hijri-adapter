@@ -3,6 +3,7 @@ import type { Routes } from '@angular/router';
 export interface DocPage {
   path: string;
   title: string;
+  icon?: string;
 }
 
 export const DOC_PAGES: readonly DocPage[] = [
@@ -16,7 +17,8 @@ export const DOC_PAGES: readonly DocPage[] = [
   { path: 'right-to-left', title: 'Right-to-left' },
   { path: 'api', title: 'API reference' },
   { path: 'gotchas', title: 'Gotchas' },
-  { path: 'ai-agents', title: 'AI agents' },
+  { path: 'ai-agents', title: 'AI agents', icon: 'smart_toy' },
+  { path: 'roadmap', title: 'Roadmap', icon: 'map' },
 ];
 
 const pageTitle = (title: string) => `${title} · ngx-mat-hijri-adapter`;
@@ -77,5 +79,10 @@ export const DOC_ROUTES: Routes = [
     path: 'ai-agents',
     title: pageTitle('AI agents'),
     loadComponent: () => import('./pages/ai-agents').then((m) => m.AiAgents),
+  },
+  {
+    path: 'roadmap',
+    title: pageTitle('Roadmap'),
+    loadComponent: () => import('./pages/roadmap').then((m) => m.Roadmap),
   },
 ];
