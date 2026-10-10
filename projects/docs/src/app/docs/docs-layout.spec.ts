@@ -22,6 +22,11 @@ describe('Docs', () => {
     expect(element.querySelector('h1')?.textContent).toBe('Getting started');
     expect(element.querySelector('[data-pager="previous"]')).toBeNull();
     expect(element.querySelector('[data-pager="next"]')?.textContent).toContain('Calendar values');
+    const guides = Array.from(element.querySelectorAll('[aria-label="Form guides"] a')).map((link) =>
+      link.getAttribute('href'),
+    );
+    expect(guides).toEqual(['/docs/reactive-fields', '/docs/signal-fields']);
+    expect(element.textContent).not.toContain('ngx-mat-reactive-date-field');
   });
 
   it('renders every page', async () => {

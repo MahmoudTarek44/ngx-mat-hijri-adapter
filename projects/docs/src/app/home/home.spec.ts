@@ -37,6 +37,11 @@ describe('Home', () => {
     );
     expect(compiled.querySelector('#playground playground')).not.toBeNull();
     expect(compiled.querySelectorAll('[data-playground-stage] input').length).toBe(4);
+    const examples = compiled.querySelector('#examples');
+    const guides = Array.from(examples?.querySelectorAll('[aria-label="Form guides"] a') ?? []).map(
+      (link) => link.getAttribute('href'),
+    );
+    expect(guides).toEqual(['/docs/reactive-fields', '/docs/signal-fields']);
     expect(compiled.querySelectorAll('#examples example-card').length).toBe(4);
 
     const umalqura = compiled.querySelector('[data-calendar="islamic-umalqura"]');

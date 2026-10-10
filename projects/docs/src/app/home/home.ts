@@ -19,6 +19,7 @@ import {
 import { REPOSITORY_URL } from '../links';
 import { CodeBlock } from '../shared/code-block';
 import { ExampleCard } from '../shared/example-card';
+import { FormGuides } from '../shared/form-guides';
 import { Logo } from '../shared/logo';
 import { HeroCalendar } from './hero-calendar';
 import { Playground } from './playground/playground';
@@ -64,6 +65,7 @@ const FEATURES = [
     MatIcon,
     CodeBlock,
     ExampleCard,
+    FormGuides,
     HeroCalendar,
     Logo,
     Playground,

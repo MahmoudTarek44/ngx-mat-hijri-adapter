@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+
+import { FormGuides } from '../../shared/form-guides';
 
 @Component({
   selector: 'form-fields',
-  imports: [RouterLink],
+  imports: [FormGuides],
   templateUrl: './form-fields.html',
 })
 export class FormFields {}
