@@ -1,0 +1,19 @@
+<article class="doc-page">
+  <h1>AI agents</h1>
+  <p class="doc-lead">
+    The published package includes an agent skill at <code>agents/SKILL.md</code>. It tells a coding
+    agent how to install the adapter and how to store dates.
+  </p>
+
+  <h2 id="cursor">Cursor</h2>
+  <p>
+    After <code>ng add</code>, copy the skill into the app so Cursor loads it for that project:
+  </p>
+  <code-block language="bash" [code]="installSkill" />
+
+  <h2 id="agents-md">AGENTS.md</h2>
+  <p>
+    The same markdown can live at the project root as <code>AGENTS.md</code>. Use that when the
+    agent reads a root instructions file instead of <code>.cursor/skills/</code>.
+  </p>
+</article>

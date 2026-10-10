@@ -25,7 +25,7 @@ One task is one branch and one commit. Do not start the next task until the prev
 | 3   | Unpublished-version warning                    | `feat/release-warning`             | Done        |
 | 4   | Links to both form guides                      | `feat/forms-docs-nav`              | Done        |
 | 5   | `ng add` and `ng update`                       | `feat/ng-add`                      | Done        |
-| 6   | Agent skill for people who install the package | `feat/agent-skill`                 | Open        |
+| 6   | Agent skill for people who install the package | `feat/agent-skill`                 | Done        |
 | 7   | Public contribution policy                     | `docs/contributing`                | Open        |
 | 8   | `@types` package on DefinitelyTyped            | none                               | Will not do |
 | 9   | Roadmap page on the docs site                  | `feat/docs-roadmap`                | Open        |

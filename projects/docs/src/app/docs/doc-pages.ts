@@ -16,6 +16,7 @@ export const DOC_PAGES: readonly DocPage[] = [
   { path: 'right-to-left', title: 'Right-to-left' },
   { path: 'api', title: 'API reference' },
   { path: 'gotchas', title: 'Gotchas' },
+  { path: 'ai-agents', title: 'AI agents' },
 ];
 
 const pageTitle = (title: string) => `${title} · ngx-mat-hijri-adapter`;
@@ -71,5 +72,10 @@ export const DOC_ROUTES: Routes = [
     path: 'gotchas',
     title: pageTitle('Gotchas'),
     loadComponent: () => import('./pages/gotchas').then((m) => m.Gotchas),
+  },
+  {
+    path: 'ai-agents',
+    title: pageTitle('AI agents'),
+    loadComponent: () => import('./pages/ai-agents').then((m) => m.AiAgents),
   },
 ];

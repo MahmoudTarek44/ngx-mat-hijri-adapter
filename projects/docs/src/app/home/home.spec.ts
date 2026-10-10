@@ -27,6 +27,9 @@ describe('Home', () => {
       'Hijri and Gregorian dates for Angular Material',
     );
     expect(compiled.textContent).toContain('ng add ngx-mat-hijri-adapter');
+    expect(compiled.querySelector('[data-agent-callout] a')?.getAttribute('href')).toBe(
+      '/docs/ai-agents',
+    );
     expect(compiled.textContent).toContain(
       'npm install ngx-mat-hijri-adapter @internationalized/date',
     );
