@@ -6,13 +6,18 @@
 
   <h2 id="install">Install</h2>
   <p>
-    Version {{ version }} is tagged on GitHub and not yet published to npm. Once it is, install it
-    with its peer dependency:
+    Version {{ version }} is tagged on GitHub and not yet published to npm. Once it is,
+    <code>ng add</code> is the default. It installs the package, adds
+    <code>&#64;internationalized/date</code> when that package is missing, and registers
+    <code>provideHijriDateAdapter()</code>.
   </p>
   <code-block language="bash" [code]="code.install" />
+  <p>You can install the packages manually instead:</p>
+  <code-block language="bash" [code]="code.manualInstall" />
   <p>
     Angular <code>core</code>, <code>forms</code>, <code>material</code>, and <code>cdk</code> are
-    peer dependencies too, and are expected to be in the app already.
+    peer dependencies too, and are expected to be in the app already. <code>ng add</code> stops when
+    Angular Material is missing.
   </p>
 
   <h2 id="requirements">Requirements</h2>

@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 
 import { NGX_MAT_HIJRI_ADAPTER_VERSION } from 'ngx-mat-hijri-adapter';
 
-import { INSTALL_COMMAND } from '../../examples/snippets';
+import { INSTALL_COMMAND, MANUAL_INSTALL_COMMAND } from '../../examples/snippets';
 import { CodeBlock } from '../../shared/code-block';
 import { FormGuides } from '../../shared/form-guides';
 
@@ -31,6 +31,7 @@ export class GettingStarted {
   protected readonly version = NGX_MAT_HIJRI_ADAPTER_VERSION;
   protected readonly code = {
     install: INSTALL_COMMAND,
+    manualInstall: MANUAL_INSTALL_COMMAND,
     provider: PROVIDER,
     datepickerTs: DATEPICKER_TS,
     datepickerHtml: DATEPICKER_HTML,

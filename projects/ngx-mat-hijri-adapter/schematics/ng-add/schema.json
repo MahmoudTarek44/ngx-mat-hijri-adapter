@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "SchematicsNgxMatHijriAdapterNgAdd",
+  "title": "ngx-mat-hijri-adapter ng-add schema",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The application that receives provideHijriDateAdapter().",
+      "$default": {
+        "$source": "projectName"
+      }
+    }
+  }
+}

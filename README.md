@@ -29,7 +29,13 @@
 
 ## Status and installation
 
-Version 0.2.2 is tagged on [GitHub](https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.2). It is not yet published to npm. Once it is, install it with its peer dependency:
+Version 0.2.2 is tagged on [GitHub](https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.2). It is not yet published to npm. Once it is, add it to an Angular Material app:
+
+```bash
+ng add ngx-mat-hijri-adapter
+```
+
+`ng add` installs this package, adds `@internationalized/date` when it is missing, and registers `provideHijriDateAdapter()`. It stops if Angular Material is missing. You can install the packages manually instead:
 
 ```bash
 npm install ngx-mat-hijri-adapter @internationalized/date

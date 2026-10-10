@@ -11,5 +11,11 @@
       "ngx-mat-hijri-adapter/*": ["./*/src/public-api.ts"]
     }
   },
-  "include": ["src/**/*.d.ts", "src/**/*.spec.ts", "reactive/src/**/*.spec.ts", "signals/src/**/*.spec.ts"]
+  "include": [
+    "src/**/*.d.ts",
+    "src/**/*.spec.ts",
+    "reactive/src/**/*.spec.ts",
+    "signals/src/**/*.spec.ts",
+    "schematics/**/*.spec.ts"
+  ]
 }

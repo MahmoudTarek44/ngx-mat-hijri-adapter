@@ -5,10 +5,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve docs",
-    "build": "node scripts/check-entry-boundaries.mjs && node scripts/stage-package-files.mjs && ng build ngx-mat-hijri-adapter",
+    "build": "node scripts/check-entry-boundaries.mjs && node scripts/stage-package-files.mjs && ng build ngx-mat-hijri-adapter && node scripts/build-schematics.mjs",
     "build:docs": "ng build docs",
     "watch": "ng build ngx-mat-hijri-adapter --watch --configuration development",
-    "test": "ng test ngx-mat-hijri-adapter --watch=false",
+    "test": "node scripts/build-schematics.mjs && ng test ngx-mat-hijri-adapter --watch=false",
     "test:docs": "ng test docs --watch=false"
   },
   "private": true,

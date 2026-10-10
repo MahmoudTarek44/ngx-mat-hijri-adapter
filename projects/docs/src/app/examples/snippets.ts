@@ -1,6 +1,8 @@
 import type { Snippet } from '../shared/example-card';
 
-export const INSTALL_COMMAND = 'npm install ngx-mat-hijri-adapter @internationalized/date';
+export const INSTALL_COMMAND = 'ng add ngx-mat-hijri-adapter';
+
+export const MANUAL_INSTALL_COMMAND = 'npm install ngx-mat-hijri-adapter @internationalized/date';
 
 export const UMALQURA_SNIPPETS: readonly Snippet[] = [
   {

@@ -26,6 +26,10 @@ describe('Home', () => {
     expect(compiled.querySelector('h1')?.textContent).toContain(
       'Hijri and Gregorian dates for Angular Material',
     );
+    expect(compiled.textContent).toContain('ng add ngx-mat-hijri-adapter');
+    expect(compiled.textContent).toContain(
+      'npm install ngx-mat-hijri-adapter @internationalized/date',
+    );
     expect(compiled.querySelector('mat-calendar')).not.toBeNull();
     const today = calendarToday(CalendarCode.gregorian, getLocalTimeZone());
     expect(compiled.querySelector('[data-hero-equivalent]')?.textContent).toContain(

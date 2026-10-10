@@ -21,6 +21,13 @@
     "islamic-calendar"
   ],
   "sideEffects": false,
+  "schematics": "./schematics/collection.json",
+  "ng-add": {
+    "save": "dependencies"
+  },
+  "ng-update": {
+    "migrations": "./schematics/migration-collection.json"
+  },
   "peerDependencies": {
     "@angular/cdk": ">=22.0.0",
     "@angular/core": ">=22.0.0",

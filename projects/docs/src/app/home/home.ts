@@ -12,6 +12,7 @@ import { SignalFieldsDemo } from '../examples/signal-fields-demo/signal-fields-d
 import {
   GREGORIAN_SNIPPETS,
   INSTALL_COMMAND,
+  MANUAL_INSTALL_COMMAND,
   REACTIVE_SNIPPETS,
   SIGNAL_SNIPPETS,
   UMALQURA_SNIPPETS,
@@ -81,6 +82,7 @@ export class Home {
   protected readonly version = NGX_MAT_HIJRI_ADAPTER_VERSION;
   protected readonly repositoryUrl = REPOSITORY_URL;
   protected readonly installCommand = INSTALL_COMMAND;
+  protected readonly manualInstallCommand = MANUAL_INSTALL_COMMAND;
   protected readonly features = FEATURES;
   protected readonly snippets = {
     umalqura: UMALQURA_SNIPPETS,

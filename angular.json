@@ -27,7 +27,12 @@
           "builder": "@angular/build:unit-test",
           "options": {
             "tsConfig": "projects/ngx-mat-hijri-adapter/tsconfig.spec.json",
-            "include": ["**/*.spec.ts", "../reactive/**/*.spec.ts", "../signals/**/*.spec.ts"]
+            "include": [
+              "**/*.spec.ts",
+              "../reactive/**/*.spec.ts",
+              "../signals/**/*.spec.ts",
+              "../schematics/**/*.spec.ts"
+            ]
           }
         }
       }
