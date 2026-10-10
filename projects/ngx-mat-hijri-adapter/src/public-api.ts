@@ -23,7 +23,13 @@ export {
   HIJRI_DATE_ADAPTER_OPTIONS,
   type HijriDateAdapterOptions,
 } from './lib/adapter/hijri-date-adapter-options';
-export { HIJRI_DATE_FORMATS } from './lib/formats/date-formats';
+export {
+  HIJRI_DATE_FORMATS,
+  MONTH_NAME_DATE_INPUT,
+  NUMERIC_DATE_INPUT,
+  dateInputOptions,
+  type DateDisplayFormat,
+} from './lib/formats/date-formats';
 export { formatCalendarDate } from './lib/formats/format-calendar-date';
 export {
   provideHijriDateAdapter,

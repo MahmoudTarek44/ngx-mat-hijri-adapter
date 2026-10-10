@@ -63,6 +63,19 @@
     hide it.
   </p>
 
+  <h2 id="format">Displayed format</h2>
+  <p>
+    <code>displayFormat</code> chooses the text in the input. It does not change the
+    <code>CalendarDate</code> stored by the form. <code>numeric</code> is the default:
+    <code>29/4/1448</code> and <code>10/10/2026</code>. <code>month-name</code> writes the month:
+    <code>29 Rabi al-Thani, 1448</code> and <code>10 October, 2026</code>.
+  </p>
+  <p>
+    Digits and the month language follow <code>locale</code>. With <code>ar-SA</code>, the same two
+    days are <code>٢٩/٤/١٤٤٨</code> and <code>١٠/١٠/٢٠٢٦</code>, or
+    <code>٢٩ ربيع الثاني، ١٤٤٨</code> and <code>١٠ أكتوبر، ٢٠٢٦</code>. Both forms still parse.
+  </p>
+
   <h2 id="inputs">Inputs</h2>
   <table class="doc-table">
     <thead>
@@ -99,6 +112,10 @@
       <tr>
         <td><code>locale</code></td>
         <td>Overrides the provider locale for digits, names, week start, and button text.</td>
+      </tr>
+      <tr>
+        <td><code>displayFormat</code></td>
+        <td><code>numeric</code> or <code>month-name</code>. Defaults to <code>numeric</code>.</td>
       </tr>
       <tr>
         <td><code>minDate</code>, <code>maxDate</code></td>

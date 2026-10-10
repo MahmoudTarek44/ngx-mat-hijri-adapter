@@ -1,9 +1,14 @@
 import { Dir } from '@angular/cdk/bidi';
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
-import { DateAdapter, MatOption } from '@angular/material/core';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MatOption,
+  type MatDateFormats,
+} from '@angular/material/core';
 import {
   MatDatepicker,
   MatDatepickerInput,
@@ -19,8 +24,11 @@ import {
   CalendarCode,
   calendarToday,
   convertCalendarDate,
+  dateInputOptions,
+  HIJRI_DATE_FORMATS,
   HijriDateAdapter,
   provideHijriDateAdapter,
+  type DateDisplayFormat,
   type SupportedCalendar,
 } from 'ngx-mat-hijri-adapter';
 import {
@@ -35,6 +43,11 @@ import { describeDate } from '../../shared/demo-controls';
 
 type PlaygroundLocale = 'ar-SA' | 'en-US' | 'ar-EG';
 type Direction = 'rtl' | 'ltr';
+
+const PLAYGROUND_FORMATS: MatDateFormats = {
+  parse: { ...HIJRI_DATE_FORMATS.parse },
+  display: { ...HIJRI_DATE_FORMATS.display },
+};
 
 const TEXT = {
   ar: {
@@ -91,7 +104,7 @@ const TEXT = {
     ReactiveDateRangeField,
     CodeBlock,
   ],
-  providers: [provideHijriDateAdapter({ timeZone: 'UTC' })],
+  providers: [provideHijriDateAdapter({ timeZone: 'UTC', formats: PLAYGROUND_FORMATS })],
   host: {
     class:
       'grid grid-cols-1 overflow-hidden rounded-card border bg-surface-container-low lg:grid-cols-[20rem_minmax(0,1fr)]',
@@ -100,6 +113,7 @@ const TEXT = {
 })
 export class Playground {
   private readonly adapter = inject(DateAdapter) as HijriDateAdapter;
+  private readonly formats = inject(MAT_DATE_FORMATS);
 
   protected readonly calendarCode = CalendarCode;
   protected readonly locales: readonly { value: PlaygroundLocale; label: string }[] = [
@@ -112,6 +126,7 @@ export class Playground {
   protected readonly locale = signal<PlaygroundLocale>('ar-SA');
   protected readonly direction = signal<Direction>('rtl');
   protected readonly calendarToggle = signal(true);
+  protected readonly displayFormat = signal<DateDisplayFormat>('numeric');
   protected readonly equivalentHint = signal(true);
   protected readonly period = signal<DateFieldPeriod>('all');
   protected readonly touchUi = signal(false);
@@ -157,6 +172,9 @@ export class Playground {
     if (this.calendarToggle()) {
       attributes.push('calendarToggle');
     }
+    if (this.displayFormat() === 'month-name') {
+      attributes.push('displayFormat="month-name"');
+    }
     if (!this.equivalentHint()) {
       attributes.push('[equivalentHint]="false"');
     }
@@ -176,7 +194,14 @@ export class Playground {
   });
 
   constructor() {
-    effect(() => this.adapter.setLocale(this.locale()));
+    effect(() => {
+      const locale = this.locale();
+      const format = this.displayFormat();
+      untracked(() => {
+        this.formats.display.dateInput = dateInputOptions(format);
+        this.adapter.setLocale(locale);
+      });
+    });
   }
 
   protected useCalendar(calendar: SupportedCalendar): void {

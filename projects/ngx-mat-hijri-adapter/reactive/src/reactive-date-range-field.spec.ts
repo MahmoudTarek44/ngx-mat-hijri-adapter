@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { createCalendarDate, provideHijriDateAdapter } from 'ngx-mat-hijri-adapter';
+import {
+  createCalendarDate,
+  type DateDisplayFormat,
+  provideHijriDateAdapter,
+} from 'ngx-mat-hijri-adapter';
 
 import { ReactiveDateRangeField } from './reactive-date-range-field';
 import type { CalendarDateRange } from './public-api';
@@ -13,11 +17,13 @@ import type { CalendarDateRange } from './public-api';
       label="Period"
       valueCalendar="gregorian"
       calendarToggle
+      [displayFormat]="format()"
       [formControl]="period"
     />
   `,
 })
 class Host {
+  readonly format = signal<DateDisplayFormat>('numeric');
   readonly period = new FormControl<CalendarDateRange>({
     start: createCalendarDate('gregorian', 2024, 3, 11),
     end: createCalendarDate('gregorian', 2024, 3, 20),
@@ -45,7 +51,15 @@ async function setup() {
   };
   const hint = () => element.querySelector('mat-hint')?.textContent?.trim() ?? '';
 
-  return { host: fixture.componentInstance, start: start!, end: end!, type, press, hint };
+  return {
+    fixture,
+    host: fixture.componentInstance,
+    start: start!,
+    end: end!,
+    type,
+    press,
+    hint,
+  };
 }
 
 describe('ReactiveDateRangeField', () => {
@@ -66,6 +80,18 @@ describe('ReactiveDateRangeField', () => {
     expect(value?.start?.toString()).toBe('2024-03-11');
     expect(value?.end?.calendar.identifier).toBe('gregory');
     expect(value?.end?.toString()).toBe('2024-04-09');
+  });
+
+  it('shows both ends with the month name', async () => {
+    const { fixture, host, start, end } = await setup();
+
+    host.format.set('month-name');
+    await fixture.whenStable();
+
+    expect(start.value).toBe('11 March, 2024');
+    expect(end.value).toBe('20 March, 2024');
+    expect(host.period.value?.start?.toString()).toBe('2024-03-11');
+    expect(host.period.value?.end?.toString()).toBe('2024-03-20');
   });
 
   it('reports an end date before the start date', async () => {

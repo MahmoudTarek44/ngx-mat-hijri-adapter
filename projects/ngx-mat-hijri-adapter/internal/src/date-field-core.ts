@@ -9,13 +9,15 @@ import {
   signal,
   untracked,
 } from '@angular/core';
-import type { ErrorStateMatcher } from '@angular/material/core';
+import { MAT_DATE_FORMATS, type ErrorStateMatcher } from '@angular/material/core';
 import type { CalendarDate } from '@internationalized/date';
 import {
   CalendarCode,
   CalendarLocale,
+  type DateDisplayFormat,
   HIJRI_DATE_ADAPTER_OPTIONS,
   HijriDateAdapter,
+  dateInputOptions,
   type SupportedCalendar,
 } from 'ngx-mat-hijri-adapter';
 
@@ -49,6 +51,11 @@ export abstract class DateFieldCore {
   readonly equivalentHint = input(true, { transform: booleanAttribute });
   /** Locale for digits, names, and week start. Defaults to the provider locale. */
   readonly locale = input<string>();
+  /**
+   * Text in the input. `numeric` is `29/4/1448`. `month-name` is `29 Rabi al-Thani, 1448`.
+   * Digits and the month language follow `locale`.
+   */
+  readonly displayFormat = input<DateDisplayFormat>('numeric');
   /** Earliest selectable day, in any supported calendar. */
   readonly minDate = input<CalendarDate | null>();
   /** Latest selectable day, in any supported calendar. */
@@ -63,6 +70,7 @@ export abstract class DateFieldCore {
   readonly calendarLabels = input<Partial<DateFieldLabels>>({});
 
   protected readonly calendarCode = CalendarCode;
+  private readonly formats = inject(MAT_DATE_FORMATS);
   protected readonly display = signal<SupportedCalendar>(this.defaultCalendar);
   protected readonly activeLocale = computed(() => this.locale() ?? this.defaultLocale);
   protected readonly labels = computed(() =>
@@ -116,7 +124,14 @@ export abstract class DateFieldCore {
   protected abstract readonly errorMessage: Signal<string>;
 
   constructor() {
-    effect(() => this.adapter.setLocale(this.activeLocale()));
+    effect(() => {
+      const format = this.displayFormat();
+      const locale = this.activeLocale();
+      untracked(() => {
+        this.formats.display.dateInput = dateInputOptions(format);
+        this.adapter.setLocale(locale);
+      });
+    });
 
     effect(() => {
       const calendar = this.resolvedValueCalendar();

@@ -2,7 +2,11 @@ import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import type { CalendarDate } from '@internationalized/date';
-import { createCalendarDate, provideHijriDateAdapter } from 'ngx-mat-hijri-adapter';
+import {
+  createCalendarDate,
+  type DateDisplayFormat,
+  provideHijriDateAdapter,
+} from 'ngx-mat-hijri-adapter';
 
 import { ReactiveDateField } from './reactive-date-field';
 import type { DateFieldPeriod } from './public-api';
@@ -14,6 +18,8 @@ import type { DateFieldPeriod } from './public-api';
       label="Date"
       [formControl]="date"
       [calendarToggle]="toggle()"
+      [displayFormat]="format()"
+      [locale]="locale()"
       [minDate]="min()"
       [period]="period()"
       [errors]="{
@@ -29,6 +35,8 @@ class Host {
     createCalendarDate('islamic-umalqura', 1445, 9, 1),
   );
   readonly toggle = signal(true);
+  readonly format = signal<DateDisplayFormat>('numeric');
+  readonly locale = signal<string | undefined>(undefined);
   readonly min = signal<CalendarDate | null>(null);
   readonly period = signal<DateFieldPeriod>('all');
 }
@@ -166,12 +174,39 @@ describe('ReactiveDateField', () => {
     expect(input.value).toBe('');
   });
 
+  it('switches the input between a numeric date and a month name', async () => {
+    const { fixture, host, input } = await setup();
+
+    host.date.setValue(createCalendarDate('islamic-umalqura', 1448, 4, 29));
+    await fixture.whenStable();
+    expect(input.value).toBe('29/4/1448');
+
+    host.format.set('month-name');
+    await fixture.whenStable();
+    expect(input.value).toBe('29 Rabi al-Thani, 1448');
+    expect(iso(host.date.value)).toBe('islamic-umalqura:1448-04-29');
+    expect(host.date.dirty).toBe(false);
+
+    host.locale.set('ar-SA');
+    await fixture.whenStable();
+    expect(input.value).toBe('٢٩ ربيع الثاني، ١٤٤٨');
+
+    host.format.set('numeric');
+    await fixture.whenStable();
+    expect(input.value).toBe('٢٩/٤/١٤٤٨');
+    expect(iso(host.date.value)).toBe('islamic-umalqura:1448-04-29');
+  });
+
   it('keeps two fields on different calendars', async () => {
     @Component({
       imports: [ReactiveFormsModule, ReactiveDateField],
       template: `
         <ngx-mat-reactive-date-field [formControl]="hijri" />
-        <ngx-mat-reactive-date-field [formControl]="gregorian" valueCalendar="gregorian" calendarToggle />
+        <ngx-mat-reactive-date-field
+          [formControl]="gregorian"
+          valueCalendar="gregorian"
+          calendarToggle
+        />
       `,
     })
     class TwoFields {

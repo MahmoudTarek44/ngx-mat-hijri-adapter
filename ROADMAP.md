@@ -16,21 +16,22 @@ One task is one branch and one commit. Do not start the next task until the prev
 
 ## Status
 
-| # | Task | Branch | Status |
-| - | ---- | ------ | ------ |
-| 0 | Delivery skill for this repo | `chore/development-delivery-skill` | Done |
-| 1 | Adapter refactor | `fix/hijri-adapter-review` | Done |
-| 2 | Rename the demo into the docs app | `chore/docs-site` | Open |
-| 3 | Unpublished-version warning | `feat/release-warning` | Open |
-| 4 | Links to both form guides | `feat/forms-docs-nav` | Open |
-| 5 | `ng add` and `ng update` | `feat/ng-add` | Open |
-| 6 | Agent skill for people who install the package | `feat/agent-skill` | Open |
-| 7 | Public contribution policy | `docs/contributing` | Open |
-| 8 | `@types` package on DefinitelyTyped | none | Will not do |
-| 9 | Roadmap page on the docs site | `feat/docs-roadmap` | Open |
-| 10 | Closing workspace check | `chore/closing-check` | Open |
+| #   | Task                                           | Branch                             | Status      |
+| --- | ---------------------------------------------- | ---------------------------------- | ----------- |
+| 0   | Delivery skill for this repo                   | `chore/development-delivery-skill` | Done        |
+| 1   | Adapter refactor                               | `fix/hijri-adapter-review`         | Done        |
+| 1a  | Display format on date fields                  | `feat/date-display-format`         | Done        |
+| 2   | Rename the demo into the docs app              | `chore/docs-site`                  | Open        |
+| 3   | Unpublished-version warning                    | `feat/release-warning`             | Open        |
+| 4   | Links to both form guides                      | `feat/forms-docs-nav`              | Open        |
+| 5   | `ng add` and `ng update`                       | `feat/ng-add`                      | Open        |
+| 6   | Agent skill for people who install the package | `feat/agent-skill`                 | Open        |
+| 7   | Public contribution policy                     | `docs/contributing`                | Open        |
+| 8   | `@types` package on DefinitelyTyped            | none                               | Will not do |
+| 9   | Roadmap page on the docs site                  | `feat/docs-roadmap`                | Open        |
+| 10  | Closing workspace check                        | `chore/closing-check`              | Open        |
 
-Task 0 is the private workflow skill. Task 1 is the first product change. Tasks 2–7 follow it, in order. Task 8 is a decision, not work. Task 9 adds the public roadmap page. Task 10 runs only after tasks 0–7 and 9 are done.
+Task 0 is the private workflow skill. Task 1 is the first product change. Task 1a is the display-format switch and ships before task 2. Tasks 2–7 follow it, in order. Task 8 is a decision, not work. Task 9 adds the public roadmap page. Task 10 runs only after tasks 0–7, 1a, and 9 are done.
 
 When a task is squash-merged, set its status here to `Done` in the same breath as the merge. Once task 9 exists, that same commit also updates the status on `/docs/roadmap`. Until that page exists, this file is the only status list.
 
@@ -65,6 +66,18 @@ Fixes from the code review of `projects/ngx-mat-hijri-adapter`. One related set,
 - Optional `firstDayOfWeek` on the adapter options.
 - Common Hijri month-name aliases, narrow names that stay distinct across the twelve months, and short Arabic names that use the locale's digits.
 - A test with two fields showing different calendars at the same time.
+
+## 1a. Display format on date fields
+
+Branch: `feat/date-display-format`
+
+Date and range fields, reactive and signal, accept `displayFormat`.
+
+- `numeric` is the default. The input shows `29/4/1448` or `10/10/2026`.
+- `month-name` shows `29 Rabi al-Thani, 1448` or `10 October, 2026`.
+- Digits and the month language follow the field locale, so `ar-SA` shows `٢٩ ربيع الثاني، ١٤٤٨` and `١٠ أكتوبر، ٢٠٢٦`.
+- Switching the format redraws the input and leaves the form value unchanged. Each field keeps its own copy of the format slots.
+- The playground has a control for the same switch.
 
 ## 2. Docs app rename
 
@@ -132,11 +145,11 @@ Public policy for outside contributors. This is separate from the private delive
 
 Branch: `feat/docs-roadmap`
 
-Add a docs page at `/docs/roadmap` and a nav entry named Roadmap. The page is public, so it lists product tasks 1–7 and the later ideas below. Task 0 stays in this file only.
+Add a docs page at `/docs/roadmap` and a nav entry named Roadmap. The page is public, so it lists product tasks 1, 1a, 2–7, and the later ideas below. Task 0 stays in this file only.
 
 The page has two sections:
 
-- **Now.** Tasks 1–7 and 10 with status `Done` or `Open`, matching this file at the time the page is added. Task 8 is shown once as a decision that a `@types` package will not be published. Task 0 stays off the page.
+- **Now.** Tasks 1, 1a, 2–7, and 10 with status `Done` or `Open`, matching this file at the time the page is added. Task 8 is shown once as a decision that a `@types` package will not be published. Task 0 stays off the page.
 - **Later.** Ideas that are not scheduled. This section starts with the list below. Nothing there is a commitment.
 
 After this page exists, finishing a task includes updating its status on the page in that task's single commit.

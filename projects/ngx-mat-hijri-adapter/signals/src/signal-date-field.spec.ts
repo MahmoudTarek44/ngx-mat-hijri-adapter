@@ -2,7 +2,11 @@ import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FormField, disabled, form, required } from '@angular/forms/signals';
 import type { CalendarDate } from '@internationalized/date';
-import { createCalendarDate, provideHijriDateAdapter } from 'ngx-mat-hijri-adapter';
+import {
+  createCalendarDate,
+  type DateDisplayFormat,
+  provideHijriDateAdapter,
+} from 'ngx-mat-hijri-adapter';
 
 import { SignalDateField } from './signal-date-field';
 
@@ -16,6 +20,7 @@ interface Model {
     <ngx-mat-signal-date-field
       label="Date"
       calendarToggle
+      [displayFormat]="format()"
       [formField]="f.date"
       [minDate]="min"
       [errorMessages]="{ matDatepickerMin: 'Too early' }"
@@ -26,6 +31,7 @@ class Host {
   readonly model = signal<Model>({ date: createCalendarDate('islamic-umalqura', 1445, 9, 1) });
   readonly f = form(this.model, (path) => required(path.date, { message: 'Required' }));
   readonly min = createCalendarDate('gregorian', 2024, 3, 11);
+  readonly format = signal<DateDisplayFormat>('numeric');
 }
 
 async function setup() {
@@ -142,5 +148,15 @@ describe('SignalDateField', () => {
     await fixture.whenStable();
     const input = (fixture.nativeElement as HTMLElement).querySelector('input') as HTMLInputElement;
     expect(input.disabled).toBe(true);
+  });
+
+  it('switches the input to the month name without changing the model', async () => {
+    const { fixture, host, input } = await setup();
+
+    host.format.set('month-name');
+    await fixture.whenStable();
+
+    expect(input.value).toBe('1 Ramadan, 1445');
+    expect(ymd(host.model().date)).toBe('islamic-umalqura:1445-9-1');
   });
 });
