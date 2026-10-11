@@ -21,68 +21,68 @@ export const DOC_PAGES: readonly DocPage[] = [
   { path: 'roadmap', title: 'Roadmap', icon: 'map' },
 ];
 
-const pageTitle = (title: string) => `${title} · ngx-mat-hijri-adapter`;
+const pageTitle = (path: string) => `title.${path}`;
 
 export const DOC_ROUTES: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'getting-started' },
   {
     path: 'getting-started',
-    title: pageTitle('Getting started'),
+    title: pageTitle('getting-started'),
     loadComponent: () => import('./pages/getting-started').then((m) => m.GettingStarted),
   },
   {
     path: 'calendar-values',
-    title: pageTitle('Calendar values'),
+    title: pageTitle('calendar-values'),
     loadComponent: () => import('./pages/calendar-values').then((m) => m.CalendarValues),
   },
   {
     path: 'date-adapter',
-    title: pageTitle('Date adapter'),
+    title: pageTitle('date-adapter'),
     loadComponent: () => import('./pages/date-adapter').then((m) => m.DateAdapterPage),
   },
   {
     path: 'parsing-formatting',
-    title: pageTitle('Parsing and formatting'),
+    title: pageTitle('parsing-formatting'),
     loadComponent: () => import('./pages/parsing-formatting').then((m) => m.ParsingFormatting),
   },
   {
     path: 'form-fields',
-    title: pageTitle('Form fields'),
+    title: pageTitle('form-fields'),
     loadComponent: () => import('./pages/form-fields').then((m) => m.FormFields),
   },
   {
     path: 'reactive-fields',
-    title: pageTitle('Reactive fields'),
+    title: pageTitle('reactive-fields'),
     loadComponent: () => import('./pages/reactive-fields').then((m) => m.ReactiveFields),
   },
   {
     path: 'signal-fields',
-    title: pageTitle('Signal fields'),
+    title: pageTitle('signal-fields'),
     loadComponent: () => import('./pages/signal-fields').then((m) => m.SignalFields),
   },
   {
     path: 'right-to-left',
-    title: pageTitle('Right-to-left'),
+    title: pageTitle('right-to-left'),
     loadComponent: () => import('./pages/right-to-left').then((m) => m.RightToLeft),
   },
   {
     path: 'api',
-    title: pageTitle('API reference'),
+    title: pageTitle('api'),
     loadComponent: () => import('./pages/api').then((m) => m.ApiReference),
   },
   {
     path: 'gotchas',
-    title: pageTitle('Gotchas'),
+    title: pageTitle('gotchas'),
     loadComponent: () => import('./pages/gotchas').then((m) => m.Gotchas),
   },
   {
     path: 'ai-agents',
-    title: pageTitle('AI agents'),
+    title: pageTitle('ai-agents'),
     loadComponent: () => import('./pages/ai-agents').then((m) => m.AiAgents),
   },
   {
     path: 'roadmap',
-    title: pageTitle('Roadmap'),
+    title: pageTitle('roadmap'),
     loadComponent: () => import('./pages/roadmap').then((m) => m.Roadmap),
   },
 ];

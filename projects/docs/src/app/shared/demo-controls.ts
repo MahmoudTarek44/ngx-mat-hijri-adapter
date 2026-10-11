@@ -1,5 +1,6 @@
 import { Component, model } from '@angular/core';
 import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
+import { TranslatePipe } from '@ngx-translate/core';
 import type { CalendarDate } from '@internationalized/date';
 
 export type DemoLocale = 'ar-SA' | 'en-US';
@@ -8,12 +9,12 @@ export type DemoDirection = 'rtl' | 'ltr';
 /** Locale and direction switches shared by the example cards. */
 @Component({
   selector: 'demo-controls',
-  imports: [MatButtonToggleGroup, MatButtonToggle],
+  imports: [MatButtonToggleGroup, MatButtonToggle, TranslatePipe],
   host: { class: 'flex flex-wrap gap-2' },
   template: `
     <mat-button-toggle-group
       hideSingleSelectionIndicator
-      aria-label="Locale"
+      [attr.aria-label]="'demo.locale' | translate"
       [value]="locale()"
       (change)="locale.set($event.value)"
     >
@@ -22,12 +23,16 @@ export type DemoDirection = 'rtl' | 'ltr';
     </mat-button-toggle-group>
     <mat-button-toggle-group
       hideSingleSelectionIndicator
-      aria-label="Direction"
+      [attr.aria-label]="'demo.direction' | translate"
       [value]="direction()"
       (change)="direction.set($event.value)"
     >
-      <mat-button-toggle value="rtl" data-direction="rtl">RTL</mat-button-toggle>
-      <mat-button-toggle value="ltr" data-direction="ltr">LTR</mat-button-toggle>
+      <mat-button-toggle value="rtl" data-direction="rtl">{{
+        'demo.rtl' | translate
+      }}</mat-button-toggle>
+      <mat-button-toggle value="ltr" data-direction="ltr">{{
+        'demo.ltr' | translate
+      }}</mat-button-toggle>
     </mat-button-toggle-group>
   `,
 })

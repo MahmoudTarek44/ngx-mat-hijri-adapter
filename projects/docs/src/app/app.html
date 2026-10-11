@@ -1,16 +1,16 @@
 <a
   class="absolute start-4 -top-16 z-10 rounded-full bg-primary px-4 py-2 text-on-primary no-underline focus:top-3"
   href="#main"
-  >Skip to content</a
+  >{{ 'shell.skip' | translate }}</a
 >
 
 <p
   class="border-b bg-[color-mix(in_srgb,var(--mat-sys-error)_12%,var(--color-surface))] px-6 py-2.5 text-center text-body-medium"
   data-release-banner
 >
-  Version <span class="font-mono font-semibold">{{ version }}</span> is tagged on
-  <a [href]="tagUrl">GitHub</a> and is not published on npm. The first npm release will be the
-  stable 1.0.0.
+  {{ 'shell.bannerBefore' | translate: { version: version } }}
+  <a [href]="tagUrl">GitHub</a>
+  {{ 'shell.bannerAfter' | translate }}
 </p>
 
 <header
@@ -31,20 +31,25 @@
       {{ version }}
     </span>
 
-    <nav class="ms-4 hidden md:flex" aria-label="Main">
+    <nav class="ms-4 hidden md:flex" [attr.aria-label]="'shell.main' | translate">
       <a
         mat-button
         routerLink="/docs"
         routerLinkActive="bg-secondary-container! text-on-secondary-container!"
-        >Docs</a
+        >{{ 'shell.docs' | translate }}</a
       >
-      <a mat-button routerLink="/" fragment="playground">Playground</a>
-      <a mat-button routerLink="/" fragment="examples">Examples</a>
+      <a mat-button routerLink="/" fragment="playground">{{ 'shell.playground' | translate }}</a>
+      <a mat-button routerLink="/" fragment="examples">{{ 'shell.examples' | translate }}</a>
     </nav>
 
     <span class="flex-1"></span>
 
-    <a mat-icon-button matTooltip="GitHub" aria-label="GitHub repository" [href]="repositoryUrl">
+    <a
+      mat-icon-button
+      [matTooltip]="'shell.github' | translate"
+      [attr.aria-label]="'shell.github' | translate"
+      [href]="repositoryUrl"
+    >
       <svg class="size-[22px] fill-current" viewBox="0 0 24 24" aria-hidden="true">
         <path
           d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"
@@ -54,8 +59,39 @@
     <button
       type="button"
       mat-icon-button
-      matTooltip="Theme"
-      aria-label="Choose color theme"
+      [matTooltip]="'shell.language' | translate"
+      [attr.aria-label]="'shell.languageLabel' | translate"
+      data-language-menu
+      [matMenuTriggerFor]="languageMenu"
+    >
+      <span class="text-label-large font-bold">{{ language.lang() === 'ar' ? 'ع' : 'EN' }}</span>
+    </button>
+    <mat-menu #languageMenu="matMenu">
+      <button
+        type="button"
+        mat-menu-item
+        role="menuitemradio"
+        [attr.aria-checked]="language.lang() === 'en'"
+        (click)="language.lang.set('en')"
+      >
+        <span>English</span>
+      </button>
+      <button
+        type="button"
+        mat-menu-item
+        lang="ar"
+        role="menuitemradio"
+        [attr.aria-checked]="language.lang() === 'ar'"
+        (click)="language.lang.set('ar')"
+      >
+        <span>العربية</span>
+      </button>
+    </mat-menu>
+    <button
+      type="button"
+      mat-icon-button
+      [matTooltip]="'shell.theme' | translate"
+      [attr.aria-label]="'shell.themeLabel' | translate"
       data-theme-menu
       [matMenuTriggerFor]="themeMenu"
     >
@@ -71,7 +107,7 @@
           (click)="theme.mode.set(mode)"
         >
           <mat-icon>{{ themeIcons[mode] }}</mat-icon>
-          <span>{{ mode === 'system' ? 'System' : mode === 'light' ? 'Light' : 'Dark' }}</span>
+          <span>{{ 'shell.' + mode | translate }}</span>
         </button>
       }
     </mat-menu>
@@ -84,10 +120,10 @@
 
 <footer class="mt-24 border-t py-10 text-body-medium text-on-surface-variant">
   <div class="mx-auto flex w-full max-w-page flex-wrap justify-between gap-x-8 gap-y-4 px-6">
-    <p>ngx-mat-hijri-adapter {{ version }}, released under the MIT license.</p>
+    <p>{{ 'shell.footer' | translate: { version: version } }}</p>
     <p>
-      <a [href]="repositoryUrl">GitHub</a> ·
-      <a [href]="repositoryUrl + '/blob/main/CHANGELOG.md'">Changelog</a>
+      <a [href]="repositoryUrl">{{ 'shell.githubName' | translate }}</a> ·
+      <a [href]="repositoryUrl + '/blob/main/CHANGELOG.md'">{{ 'shell.changelog' | translate }}</a>
     </p>
   </div>
 </footer>

@@ -1,18 +1,18 @@
 <article class="doc-page">
-  <h1>API reference</h1>
-  <p class="doc-lead">Everything each entry point exports.</p>
+  <h1>{{ 'nav.api' | translate }}</h1>
+  <p class="doc-lead">{{ 'api.lead' | translate }}</p>
 
   @for (group of groups; track group.entryPoint) {
     <h2 [id]="group.entryPoint">
       <code>{{ group.entryPoint }}</code>
     </h2>
-    <p>{{ group.summary }}</p>
+    <p>{{ ('api.summary.' + group.id) | translate }}</p>
     <table class="doc-table">
       <thead>
         <tr>
-          <th scope="col">Export</th>
-          <th scope="col">Kind</th>
-          <th scope="col">Description</th>
+          <th scope="col">{{ 'api.export' | translate }}</th>
+          <th scope="col">{{ 'api.kind' | translate }}</th>
+          <th scope="col">{{ 'api.description' | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -21,18 +21,21 @@
             <td>
               <code>{{ entry.name }}</code>
             </td>
-            <td>{{ entry.kind }}</td>
-            <td>{{ entry.description }}</td>
+            <td>{{ ('api.kinds.' + entry.kind) | translate }}</td>
+            <td>{{ ('api.desc.' + entry.name) | translate }}</td>
           </tr>
         }
       </tbody>
     </table>
   }
 
-  <h2 id="internal">Private: <code>ngx-mat-hijri-adapter/internal</code></h2>
+  <h2 id="internal">
+    {{ 'api.privateBefore' | translate }} <code>ngx-mat-hijri-adapter/internal</code>
+  </h2>
   <p>
-    <code>/reactive</code> and <code>/signals</code> do not depend on each other. The code they
-    share lives in <code>ngx-mat-hijri-adapter/internal</code>, which is not public API: its exports
-    carry the <code>ɵ</code> prefix and may change in any release. Do not import from it.
+    <code>/reactive</code> {{ 'api.privateBody' | translate }} <code>/signals</code>
+    {{ 'api.privateDo' | translate }} <code>ngx-mat-hijri-adapter/internal</code
+    >{{ 'api.privateWhich' | translate }} <code>ɵ</code>
+    {{ 'api.privatePrefix' | translate }}
   </p>
 </article>

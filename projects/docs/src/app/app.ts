@@ -4,9 +4,11 @@ import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { MatTooltip } from '@angular/material/tooltip';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { NGX_MAT_HIJRI_ADAPTER_VERSION } from 'ngx-mat-hijri-adapter';
 
+import { DocsLanguage } from './i18n/docs-language';
 import { REPOSITORY_URL } from './links';
 import { Logo } from './shared/logo';
 import { Theme, type ThemeMode } from './theme/theme';
@@ -30,12 +32,14 @@ const THEME_ICONS: Record<ThemeMode, string> = {
     MatMenuItem,
     MatMenuTrigger,
     MatTooltip,
+    TranslatePipe,
     Logo,
   ],
   templateUrl: './app.html',
 })
 export class App {
   protected readonly theme = inject(Theme);
+  protected readonly language = inject(DocsLanguage);
   protected readonly version = NGX_MAT_HIJRI_ADAPTER_VERSION;
   protected readonly repositoryUrl = REPOSITORY_URL;
   protected readonly tagUrl = `${REPOSITORY_URL}/releases/tag/${NGX_MAT_HIJRI_ADAPTER_VERSION}`;

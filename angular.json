@@ -53,6 +53,11 @@
               {
                 "glob": "**/*",
                 "input": "projects/docs/public"
+              },
+              {
+                "glob": "*.json",
+                "input": "projects/docs/src/locale",
+                "output": "i18n"
               }
             ],
             "styles": ["projects/docs/src/styles.scss", "projects/docs/src/tailwind.css"]

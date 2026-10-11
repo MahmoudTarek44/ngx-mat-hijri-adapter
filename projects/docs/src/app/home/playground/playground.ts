@@ -18,6 +18,7 @@ import { MatFormField, MatHint, MatLabel, MatSuffix } from '@angular/material/fo
 import { MatInput } from '@angular/material/input';
 import { MatSelect } from '@angular/material/select';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { translate, TranslatePipe } from '@ngx-translate/core';
 import type { CalendarDate } from '@internationalized/date';
 
 import {
@@ -103,6 +104,7 @@ const TEXT = {
     ReactiveDateField,
     ReactiveDateRangeField,
     CodeBlock,
+    TranslatePipe,
   ],
   providers: [provideHijriDateAdapter({ timeZone: 'UTC', formats: PLAYGROUND_FORMATS })],
   host: {
@@ -148,11 +150,14 @@ export class Playground {
   private readonly rangeValue = toSignal(this.range.valueChanges, {
     initialValue: this.range.value,
   });
+  private readonly datepickerValueLabel = translate('playground.values.datepicker');
+  private readonly dateFieldValueLabel = translate('playground.values.dateField');
+  private readonly rangeFieldValueLabel = translate('playground.values.rangeField');
   protected readonly values = computed(() => [
-    { label: 'Datepicker', value: describeDate(this.pickerValue()) },
-    { label: 'Date field', value: describeDate(this.fieldValue()) },
+    { label: this.datepickerValueLabel(), value: describeDate(this.pickerValue()) },
+    { label: this.dateFieldValueLabel(), value: describeDate(this.fieldValue()) },
     {
-      label: 'Range field',
+      label: this.rangeFieldValueLabel(),
       value: `${describeDate(this.rangeValue()?.start)} → ${describeDate(this.rangeValue()?.end)}`,
     },
   ]);

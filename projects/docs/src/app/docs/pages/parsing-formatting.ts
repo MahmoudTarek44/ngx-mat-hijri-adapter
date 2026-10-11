@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { TranslatePipe } from '@ngx-translate/core';
+
 import { CodeBlock } from '../../shared/code-block';
 
 const FORMAT = `import { createCalendarDate, formatCalendarDate } from 'ngx-mat-hijri-adapter';
@@ -12,7 +14,7 @@ formatCalendarDate(createCalendarDate('islamic-umalqura', 1445, 9, 1), 'en-US', 
 
 @Component({
   selector: 'parsing-formatting',
-  imports: [CodeBlock],
+  imports: [CodeBlock, TranslatePipe],
   templateUrl: './parsing-formatting.html',
 })
 export class ParsingFormatting {

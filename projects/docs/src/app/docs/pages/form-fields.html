@@ -1,131 +1,152 @@
 <article class="doc-page">
-  <h1>Form fields</h1>
-  <p class="doc-lead">
-    Ready-made date and date range fields that wrap a Material form field and datepicker. Two sets
-    share one template and the same inputs.
-  </p>
+  <h1>{{ 'nav.form-fields' | translate }}</h1>
+  <p class="doc-lead">{{ 'formFields.lead' | translate }}</p>
 
   <form-guides class="mb-6" />
 
   <p>
-    Each field provides its own <code>HijriDateAdapter</code>, reading the calendar and locale
-    defaults from <code>provideHijriDateAdapter()</code> when it is present.
+    {{ 'formFields.own' | translate }} <code>HijriDateAdapter</code
+    >{{ 'formFields.ownMid' | translate }} <code>provideHijriDateAdapter()</code>
+    {{ 'formFields.ownEnd' | translate }}
   </p>
 
-  <h2 id="values">Values</h2>
+  <h2 id="values">{{ 'formFields.values' | translate }}</h2>
   <p>
-    The value of a date field is a <code>CalendarDate</code> or <code>null</code>. The value of a
-    range field is a <code>CalendarDateRange</code> with <code>start</code> and <code>end</code>,
-    each a <code>CalendarDate</code> or <code>null</code>.
+    {{ 'formFields.valueDate' | translate }} <code>CalendarDate</code>
+    {{ 'formFields.valueOr' | translate }} <code>null</code>{{ 'formFields.valueRange' | translate }}
+    <code>CalendarDateRange</code> {{ 'formFields.valueWith' | translate }} <code>start</code>
+    {{ 'formFields.valueAnd' | translate }} <code>end</code>{{ 'formFields.valueEach' | translate }}
+    <code>CalendarDate</code> {{ 'formFields.valueOr' | translate }} <code>null</code>.
   </p>
   <p>
-    Values are always emitted in <code>valueCalendar</code>, which defaults to the provider
-    calendar. A written value may be in either calendar. Anything other than a
-    <code>CalendarDate</code>, <code>null</code>, or <code>''</code> throws.
-  </p>
-
-  <h2 id="toggle">Calendar toggle and hint</h2>
-  <p>
-    With <code>calendarToggle</code>, Hijri and Gregorian buttons replace the calendar icon.
-    Pressing one switches the displayed and typed calendar, then opens the picker. Switching does
-    not change the form value and does not mark the control dirty. A typed <code>20/3/2024</code> in
-    the Gregorian view stores 10 Ramadan 1445 when <code>valueCalendar</code> is
-    <code>islamic-umalqura</code>.
-  </p>
-  <p>
-    With the toggle on, the hint shows the selected date in the calendar that is not displayed, such
-    as <code>10 Ramadan, 1445 AH</code>. Set <code>equivalentHint</code> to <code>false</code> to
-    hide it.
+    {{ 'formFields.emitted' | translate }} <code>valueCalendar</code
+    >{{ 'formFields.emittedMid' | translate }} <code>CalendarDate</code
+    >{{ 'formFields.emittedOr' | translate }} <code>null</code
+    >{{ 'formFields.emittedBlank' | translate }} <code>''</code>
+    {{ 'formFields.emittedEnd' | translate }}
   </p>
 
-  <h2 id="format">Displayed format</h2>
+  <h2 id="toggle">{{ 'formFields.toggle' | translate }}</h2>
   <p>
-    <code>displayFormat</code> chooses the text in the input. It does not change the
-    <code>CalendarDate</code> stored by the form. <code>numeric</code> is the default:
-    <code>29/4/1448</code> and <code>10/10/2026</code>. <code>month-name</code> writes the month:
-    <code>29 Rabi al-Thani, 1448</code> and <code>10 October, 2026</code>.
+    {{ 'formFields.toggleBefore' | translate }} <code>calendarToggle</code
+    >{{ 'formFields.toggleMid' | translate }} <code>20/3/2024</code>
+    {{ 'formFields.toggleIn' | translate }} <code>valueCalendar</code>
+    {{ 'formFields.toggleIs' | translate }} <code>islamic-umalqura</code>.
   </p>
   <p>
-    Digits and the month language follow <code>locale</code>. With <code>ar-SA</code>, the same two
-    days are <code>٢٩/٤/١٤٤٨</code> and <code>١٠/١٠/٢٠٢٦</code>, or
-    <code>٢٩ ربيع الثاني، ١٤٤٨</code> and <code>١٠ أكتوبر، ٢٠٢٦</code>. Both forms still parse.
+    {{ 'formFields.hintBefore' | translate }} <code>10 Ramadan, 1445 AH</code
+    >{{ 'formFields.hintSet' | translate }} <code>equivalentHint</code>
+    {{ 'formFields.hintTo' | translate }} <code>false</code>
+    {{ 'formFields.hintEnd' | translate }}
   </p>
 
-  <h2 id="inputs">Inputs</h2>
+  <h2 id="format">{{ 'formFields.format' | translate }}</h2>
+  <p>
+    <code>displayFormat</code> {{ 'formFields.formatBefore' | translate }}
+    <code>CalendarDate</code> {{ 'formFields.formatStored' | translate }} <code>numeric</code>
+    {{ 'formFields.formatDefault' | translate }} <code>29/4/1448</code>
+    {{ 'formFields.formatAnd' | translate }} <code>10/10/2026</code>. <code>month-name</code>
+    {{ 'formFields.formatWrites' | translate }} <code>29 Rabi al-Thani, 1448</code>
+    {{ 'formFields.formatAnd' | translate }} <code>10 October, 2026</code>.
+  </p>
+  <p>
+    {{ 'formFields.digits' | translate }} <code>locale</code>{{ 'formFields.digitsWith' | translate }}
+    <code>ar-SA</code>{{ 'formFields.digitsSame' | translate }} <code>٢٩/٤/١٤٤٨</code>
+    {{ 'formFields.digitsAnd' | translate }} <code>١٠/١٠/٢٠٢٦</code
+    >{{ 'formFields.digitsOr' | translate }} <code>٢٩ ربيع الثاني، ١٤٤٨</code>
+    {{ 'formFields.digitsAnd' | translate }} <code>١٠ أكتوبر، ٢٠٢٦</code
+    >{{ 'formFields.digitsEnd' | translate }}
+  </p>
+
+  <h2 id="inputs">{{ 'formFields.inputs' | translate }}</h2>
   <table class="doc-table">
     <thead>
       <tr>
-        <th scope="col">Input</th>
-        <th scope="col">Description</th>
+        <th scope="col">{{ 'formFields.input' | translate }}</th>
+        <th scope="col">{{ 'formFields.description' | translate }}</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><code>label</code></td>
-        <td>The form field label.</td>
+        <td>{{ 'formFields.label' | translate }}</td>
       </tr>
       <tr>
         <td><code>placeholder</code></td>
-        <td>Date fields only.</td>
+        <td>{{ 'formFields.placeholder' | translate }}</td>
       </tr>
       <tr>
         <td><code>startPlaceholder</code>, <code>endPlaceholder</code></td>
-        <td>Range fields only.</td>
+        <td>{{ 'formFields.rangePlaceholders' | translate }}</td>
       </tr>
       <tr>
         <td><code>valueCalendar</code></td>
-        <td>The calendar of emitted values. Defaults to the provider calendar.</td>
+        <td>{{ 'formFields.valueCalendar' | translate }}</td>
       </tr>
       <tr>
         <td><code>calendarToggle</code></td>
-        <td>Shows the Hijri and Gregorian buttons.</td>
+        <td>{{ 'formFields.calendarToggle' | translate }}</td>
       </tr>
       <tr>
         <td><code>equivalentHint</code></td>
-        <td>Shows the date in the other calendar while the toggle is on. Defaults to true.</td>
+        <td>{{ 'formFields.equivalent' | translate }}</td>
       </tr>
       <tr>
         <td><code>locale</code></td>
-        <td>Overrides the provider locale for digits, names, week start, and button text.</td>
+        <td>{{ 'formFields.locale' | translate }}</td>
       </tr>
       <tr>
         <td><code>displayFormat</code></td>
-        <td><code>numeric</code> or <code>month-name</code>. Defaults to <code>numeric</code>.</td>
+        <td>
+          <code>numeric</code> {{ 'formFields.displayFormat' | translate }}
+          <code>month-name</code>{{ 'formFields.displayDefault' | translate }}
+          <code>numeric</code>.
+        </td>
       </tr>
       <tr>
         <td><code>minDate</code>, <code>maxDate</code></td>
-        <td>A <code>CalendarDate</code> in either calendar.</td>
+        <td>
+          {{ 'formFields.bounds' | translate }} <code>CalendarDate</code>
+          {{ 'formFields.boundsEnd' | translate }}
+        </td>
       </tr>
       <tr>
         <td><code>period</code></td>
         <td>
-          <code>'all'</code>, <code>'past'</code>, or <code>'future'</code>. Past and future both
-          exclude today.
+          <code>'all'</code>{{ 'formFields.period' | translate }} <code>'past'</code
+          >{{ 'formFields.periodOr' | translate }} <code>'future'</code
+          >{{ 'formFields.periodEnd' | translate }}
         </td>
       </tr>
       <tr>
         <td><code>dateFilter</code></td>
-        <td>Receives each day in <code>valueCalendar</code>.</td>
+        <td>
+          {{ 'formFields.filter' | translate }} <code>valueCalendar</code>.
+        </td>
       </tr>
       <tr>
         <td><code>touchUi</code></td>
-        <td>Opens the calendar in a dialog.</td>
+        <td>{{ 'formFields.touch' | translate }}</td>
       </tr>
       <tr>
         <td><code>calendarLabels</code></td>
         <td>
-          Overrides the button text and accessible names. Defaults are <code>هـ</code> and
-          <code>م</code> for Arabic locales, and <code>AH</code> and <code>AD</code> otherwise.
+          {{ 'formFields.labels' | translate }} <code>هـ</code>
+          {{ 'formFields.labelsAnd' | translate }} <code>م</code>
+          {{ 'formFields.labelsFor' | translate }} <code>AH</code>
+          {{ 'formFields.labelsAnd' | translate }} <code>AD</code>
+          {{ 'formFields.labelsOtherwise' | translate }}
         </td>
       </tr>
     </tbody>
   </table>
 
-  <h2 id="range-limits">Range limits and unreadable dates</h2>
+  <h2 id="range-limits">{{ 'formFields.limits' | translate }}</h2>
   <p>
-    When Umm al-Qura is involved, through <code>valueCalendar</code> or the toggle, the picker is
-    limited to AH 1300–1599. A Gregorian date outside that table reports
-    <code>matDatepickerMin</code> or <code>matDatepickerMax</code>, and the value is
-    <code>null</code>. An unreadable date also sets the value to <code>null</code>.
+    {{ 'formFields.limitsBefore' | translate }} <code>valueCalendar</code>
+    {{ 'formFields.limitsOr' | translate }} <code>matDatepickerMin</code>
+    {{ 'formFields.limitsOrCode' | translate }} <code>matDatepickerMax</code
+    >{{ 'formFields.limitsNull' | translate }} <code>null</code
+    >{{ 'formFields.limitsUnread' | translate }} <code>null</code>.
   </p>
 </article>

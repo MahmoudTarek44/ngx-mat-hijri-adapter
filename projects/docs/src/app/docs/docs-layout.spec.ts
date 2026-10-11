@@ -3,11 +3,14 @@ import { provideRouter, Router } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 
 import { routes } from '../app.routes';
+import { provideDocsI18nTesting } from '../i18n/provide-docs-i18n-testing';
 import { DOC_PAGES } from './doc-pages';
 
 describe('Docs', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({ providers: [provideRouter(routes)] });
+    TestBed.configureTestingModule({
+      providers: [provideRouter(routes), ...provideDocsI18nTesting()],
+    });
   });
 
   it('opens Getting started from /docs with the side navigation and pager', async () => {

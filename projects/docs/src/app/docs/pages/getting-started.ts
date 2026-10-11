@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { NGX_MAT_HIJRI_ADAPTER_VERSION } from 'ngx-mat-hijri-adapter';
 
@@ -24,7 +25,7 @@ const DATEPICKER_HTML = `<mat-form-field>
 
 @Component({
   selector: 'getting-started',
-  imports: [RouterLink, CodeBlock, FormGuides],
+  imports: [RouterLink, CodeBlock, FormGuides, TranslatePipe],
   templateUrl: './getting-started.html',
 })
 export class GettingStarted {

@@ -11,33 +11,36 @@
         <h1 class="text-display-medium font-extrabold tracking-[-0.035em]">
           <em
             class="bg-linear-to-r from-primary to-tertiary bg-clip-text text-transparent not-italic"
-            >Hijri</em
+            >{{ 'home.hero.hijri' | translate }}</em
           >
-          and Gregorian dates for Angular Material
+          {{ 'home.hero.titleRest' | translate }}
         </h1>
       </div>
       <p
         class="mb-3 max-w-[38rem] text-title-medium leading-relaxed font-normal text-on-surface-variant"
       >
-        One date adapter for the Umm al-Qura and Gregorian calendars, with ready-made fields for
-        reactive and signal forms. Built on <code>&#64;internationalized/date</code>.
+        {{ 'home.hero.lead' | translate }} <code>&#64;internationalized/date</code>.
       </p>
       <p class="mb-8 text-label-large tracking-[0.08em] text-primary uppercase">
-        Angular 22 · Material 3 · Signal forms
+        {{ 'home.hero.eyebrow' | translate }}
       </p>
       <code-block class="max-w-[34rem]" language="bash" [code]="installCommand" />
-      <p class="mt-4 mb-2 text-body-small text-on-surface-variant">Or install it manually:</p>
+      <p class="mt-4 mb-2 text-body-small text-on-surface-variant">
+        {{ 'home.hero.manual' | translate }}
+      </p>
       <code-block class="max-w-[34rem]" language="bash" [code]="manualInstallCommand" />
       <div class="mt-6 flex flex-wrap gap-3">
         <a mat-flat-button routerLink="/docs">
           <mat-icon>rocket_launch</mat-icon>
-          Get started
+          {{ 'home.hero.start' | translate }}
         </a>
-        <a mat-stroked-button routerLink="/" fragment="playground">Try the playground</a>
-        <a mat-stroked-button [href]="repositoryUrl">View on GitHub</a>
+        <a mat-stroked-button routerLink="/" fragment="playground">{{
+          'home.hero.try' | translate
+        }}</a>
+        <a mat-stroked-button [href]="repositoryUrl">{{ 'home.hero.github' | translate }}</a>
       </div>
       <p class="mt-5 text-body-small text-on-surface-variant">
-        Version {{ version }} is tagged on GitHub. Publishing to npm comes next.
+        {{ 'home.hero.version' | translate: { version: version } }}
       </p>
     </div>
     <hero-calendar />
@@ -48,32 +51,38 @@
   <div
     class="mx-auto flex w-full max-w-page flex-wrap items-center justify-between gap-x-6 gap-y-2 px-6 py-4"
   >
-    <p class="text-body-medium">Any coding agent can follow the skill shipped in this package.</p>
-    <a mat-button routerLink="/docs/ai-agents">AI agents</a>
+    <p class="text-body-medium">{{ 'home.agent' | translate }}</p>
+    <a mat-button routerLink="/docs/ai-agents">{{ 'nav.ai-agents' | translate }}</a>
   </div>
 </aside>
 
 <section class="mx-auto w-full max-w-page px-6 pt-20 pb-4" aria-labelledby="features-title">
-  <p class="mb-3 text-label-large tracking-[0.08em] text-primary uppercase">Why this package</p>
+  <p class="mb-3 text-label-large tracking-[0.08em] text-primary uppercase">
+    {{ 'home.why' | translate }}
+  </p>
   <h2 class="mb-3 text-headline-large font-bold tracking-[-0.02em]" id="features-title">
-    Built for both calendars from day one
+    {{ 'home.featuresTitle' | translate }}
   </h2>
   <p class="mb-10 max-w-[44rem] text-on-surface-variant">
-    The name says Hijri, but every part handles the Gregorian calendar too. The default adapter
-    stores <code>CalendarDate</code> objects, so no time zone shifts a day. Use
-    <code>ngx-mat-hijri-adapter/native</code> when a form needs a JavaScript <code>Date</code>
-    stored at UTC noon.
+    {{ 'home.featuresLead' | translate }} <code>CalendarDate</code>
+    {{ 'home.featuresLeadMid' | translate }} <code>ngx-mat-hijri-adapter/native</code>
+    {{ 'home.featuresLeadEnd' | translate }} <code>Date</code>
+    {{ 'home.featuresLeadTail' | translate }}
   </p>
   <div class="grid grid-cols-[repeat(auto-fit,minmax(16rem,1fr))] gap-4">
-    @for (feature of features; track feature.title) {
+    @for (feature of features; track feature.key) {
       <article class="rounded-card border bg-surface-container-low p-6">
         <mat-icon
           class="mb-4 grid! size-11! place-items-center rounded-xl bg-primary-container text-on-primary-container"
           aria-hidden="true"
           >{{ feature.icon }}</mat-icon
         >
-        <h3 class="mb-2 text-title-medium font-semibold">{{ feature.title }}</h3>
-        <p class="text-body-medium text-on-surface-variant">{{ feature.text }}</p>
+        <h3 class="mb-2 text-title-medium font-semibold">
+          {{ ('home.features.' + feature.key + '.title') | translate }}
+        </h3>
+        <p class="text-body-medium text-on-surface-variant">
+          {{ ('home.features.' + feature.key + '.text') | translate }}
+        </p>
       </article>
     }
   </div>
@@ -84,12 +93,14 @@
   class="mx-auto w-full max-w-page scroll-mt-16 px-6 pt-20 pb-4"
   aria-labelledby="playground-title"
 >
-  <p class="mb-3 text-label-large tracking-[0.08em] text-primary uppercase">Playground</p>
+  <p class="mb-3 text-label-large tracking-[0.08em] text-primary uppercase">
+    {{ 'home.playgroundEyebrow' | translate }}
+  </p>
   <h2 class="mb-3 text-headline-large font-bold tracking-[-0.02em]" id="playground-title">
-    Try every option live
+    {{ 'home.playgroundTitle' | translate }}
   </h2>
   <p class="mb-10 max-w-[44rem] text-on-surface-variant">
-    Change the calendar, locale, and field options. The values and the code below update as you go.
+    {{ 'home.playgroundLead' | translate }}
   </p>
   <playground />
 </section>
@@ -99,58 +110,58 @@
   class="mx-auto w-full max-w-page scroll-mt-16 px-6 pt-20 pb-4"
   aria-labelledby="examples-title"
 >
-  <p class="mb-3 text-label-large tracking-[0.08em] text-primary uppercase">Examples</p>
-  <h2 class="mb-3 text-headline-large font-bold tracking-[-0.02em]" id="examples-title">
-    Copy, paste, ship
-  </h2>
-  <p class="mb-6 max-w-[44rem] text-on-surface-variant">
-    Each example runs live. Switch to the code tabs for the component and template behind it.
+  <p class="mb-3 text-label-large tracking-[0.08em] text-primary uppercase">
+    {{ 'home.examplesEyebrow' | translate }}
   </p>
+  <h2 class="mb-3 text-headline-large font-bold tracking-[-0.02em]" id="examples-title">
+    {{ 'home.examplesTitle' | translate }}
+  </h2>
+  <p class="mb-6 max-w-[44rem] text-on-surface-variant">{{ 'home.examplesLead' | translate }}</p>
   <form-guides class="mb-10" />
   <div class="grid grid-cols-1 gap-6 min-[1100px]:grid-cols-2">
     <example-card
-      heading="Umm al-Qura datepicker"
-      description="A plain mat-datepicker with a range and a Friday filter."
+      [heading]="'home.examples.umalqura.heading' | translate"
+      [description]="'home.examples.umalqura.description' | translate"
       entryPoint="ngx-mat-hijri-adapter"
       [snippets]="snippets.umalqura"
     >
       <umalqura-demo />
     </example-card>
     <example-card
-      heading="Gregorian datepicker"
-      description="The same adapter in the Gregorian calendar."
+      [heading]="'home.examples.gregorian.heading' | translate"
+      [description]="'home.examples.gregorian.description' | translate"
       entryPoint="ngx-mat-hijri-adapter"
       [snippets]="snippets.gregorian"
     >
       <gregorian-demo />
     </example-card>
     <example-card
-      heading="Native Umm al-Qura datepicker"
-      description="The alternative adapter. The form value is a Date at UTC noon, with the same range and Friday filter."
+      [heading]="'home.examples.nativeUmalqura.heading' | translate"
+      [description]="'home.examples.nativeUmalqura.description' | translate"
       entryPoint="ngx-mat-hijri-adapter/native"
       [snippets]="snippets.nativeUmalqura"
     >
       <native-umalqura-demo />
     </example-card>
     <example-card
-      heading="Native Gregorian datepicker"
-      description="The same native adapter in the Gregorian calendar."
+      [heading]="'home.examples.nativeGregorian.heading' | translate"
+      [description]="'home.examples.nativeGregorian.description' | translate"
       entryPoint="ngx-mat-hijri-adapter/native"
       [snippets]="snippets.nativeGregorian"
     >
       <native-gregorian-demo />
     </example-card>
     <example-card
-      heading="Reactive form fields"
-      description="Date and range fields with the calendar toggle."
+      [heading]="'home.examples.reactive.heading' | translate"
+      [description]="'home.examples.reactive.description' | translate"
       entryPoint="ngx-mat-hijri-adapter/reactive"
       [snippets]="snippets.reactive"
     >
       <reactive-fields-demo />
     </example-card>
     <example-card
-      heading="Signal form fields"
-      description="The same fields bound with [formField]."
+      [heading]="'home.examples.signals.heading' | translate"
+      [description]="'home.examples.signals.description' | translate"
       entryPoint="ngx-mat-hijri-adapter/signals"
       [snippets]="snippets.signals"
     >

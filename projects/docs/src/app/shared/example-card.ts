@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { CodeBlock } from './code-block';
 
@@ -11,7 +12,7 @@ export interface Snippet {
 
 @Component({
   selector: 'example-card',
-  imports: [MatTabGroup, MatTab, CodeBlock],
+  imports: [MatTabGroup, MatTab, CodeBlock, TranslatePipe],
   host: {
     class: 'flex min-w-0 flex-col overflow-hidden rounded-card border bg-surface-container-low',
   },
@@ -24,7 +25,7 @@ export interface Snippet {
       <code class="text-primary">{{ entryPoint() }}</code>
     </header>
     <mat-tab-group mat-stretch-tabs="false" animationDuration="0ms" [preserveContent]="true">
-      <mat-tab label="Demo">
+      <mat-tab [label]="'example.demo' | translate">
         <ng-content />
       </mat-tab>
       @for (snippet of snippets(); track snippet.label) {

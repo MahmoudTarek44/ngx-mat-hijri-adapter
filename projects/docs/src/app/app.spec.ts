@@ -4,6 +4,8 @@ import { provideRouter } from '@angular/router';
 
 import { App } from './app';
 import { routes } from './app.routes';
+import { DocsLanguage } from './i18n/docs-language';
+import { provideDocsI18nTesting } from './i18n/provide-docs-i18n-testing';
 import { Theme } from './theme/theme';
 
 describe('App', () => {
@@ -11,7 +13,7 @@ describe('App', () => {
     localStorage.clear();
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [provideRouter(routes)],
+      providers: [provideRouter(routes), ...provideDocsI18nTesting()],
     }).compileComponents();
   });
 
@@ -47,5 +49,23 @@ describe('App', () => {
     TestBed.tick();
     expect(root.classList.contains('dark')).toBe(false);
     expect(root.classList.contains('light')).toBe(false);
+  });
+
+  it('switches the document to Arabic and remembers it', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const language = TestBed.inject(DocsLanguage);
+    const root = TestBed.inject(DOCUMENT).documentElement;
+
+    language.lang.set('ar');
+    await fixture.whenStable();
+
+    expect(root.lang).toBe('ar');
+    expect(root.dir).toBe('rtl');
+    expect(localStorage.getItem('ngx-mat-hijri-adapter-lang')).toBe('ar');
+    const links = Array.from(fixture.nativeElement.querySelectorAll('header nav a')).map((link) =>
+      (link as HTMLElement).textContent?.trim(),
+    );
+    expect(links).toEqual(['التوثيق', 'التجربة', 'الأمثلة']);
   });
 });

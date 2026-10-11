@@ -4,13 +4,14 @@ import { MatButton } from '@angular/material/button';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import { filter, map } from 'rxjs';
 
 import { DOC_PAGES, type DocPage } from './doc-pages';
 
 @Component({
   selector: 'docs-layout',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, MatButton, MatIcon],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, MatButton, MatIcon, TranslatePipe],
   providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }],
   host: {
     class:
@@ -26,17 +27,23 @@ import { DOC_PAGES, type DocPage } from './doc-pages';
       (click)="menuOpen.set(!menuOpen())"
     >
       <mat-icon>menu_book</mat-icon>
-      {{ current()?.title ?? 'Documentation' }}
+      @if (current(); as page) {
+        {{ ('nav.' + page.path) | translate }}
+      } @else {
+        {{ 'docs.menu' | translate }}
+      }
     </button>
 
     <nav
       id="docs-nav"
       class="hidden flex-col gap-0.5 self-start data-open:flex data-open:rounded-card data-open:border data-open:bg-surface-container-low data-open:p-4 lg:sticky lg:top-24 lg:flex lg:data-open:rounded-none lg:data-open:border-0 lg:data-open:bg-transparent lg:data-open:p-0"
-      aria-label="Documentation"
+      [attr.aria-label]="'docs.label' | translate"
       data-docs-nav
       [attr.data-open]="menuOpen() || null"
     >
-      <p class="mb-3 text-label-large tracking-[0.08em] text-primary uppercase">Documentation</p>
+      <p class="mb-3 text-label-large tracking-[0.08em] text-primary uppercase">
+        {{ 'docs.label' | translate }}
+      </p>
       @for (page of guides; track page.path) {
         <a
           class="rounded-full px-3.5 py-2 text-label-large text-on-surface-variant no-underline hover:bg-surface-container-high hover:text-on-surface"
@@ -44,7 +51,7 @@ import { DOC_PAGES, type DocPage } from './doc-pages';
           routerLinkActive="bg-secondary-container! text-on-secondary-container!"
           ariaCurrentWhenActive="page"
           (click)="menuOpen.set(false)"
-          >{{ page.title }}</a
+          >{{ ('nav.' + page.path) | translate }}</a
         >
       }
       <div class="mt-2 border-t pt-2">
@@ -61,7 +68,7 @@ import { DOC_PAGES, type DocPage } from './doc-pages';
               page.icon
             }}</mat-icon>
             <span class="relative">
-              {{ page.title }}
+              {{ ('nav.' + page.path) | translate }}
               <span
                 class="absolute inset-x-0 -bottom-px h-px origin-left scale-x-0 bg-current transition-transform duration-200 group-hover:scale-x-100 motion-reduce:transition-none"
               ></span>
@@ -74,15 +81,17 @@ import { DOC_PAGES, type DocPage } from './doc-pages';
     <div class="max-w-208 min-w-0">
       <router-outlet />
 
-      <nav class="mt-12 flex justify-between gap-4" aria-label="Previous and next page">
+      <nav class="mt-12 flex justify-between gap-4" [attr.aria-label]="'docs.pager' | translate">
         @if (previous(); as page) {
           <a
             class="grid min-w-0 flex-1 gap-0.5 sm:min-w-48 sm:flex-none rounded-2xl border px-5 py-4 text-title-small text-on-surface no-underline hover:border-primary"
             data-pager="previous"
             [routerLink]="['/docs', page.path]"
           >
-            <span class="text-label-medium text-on-surface-variant">Previous</span>
-            {{ page.title }}
+            <span class="text-label-medium text-on-surface-variant">{{
+              'docs.previous' | translate
+            }}</span>
+            {{ ('nav.' + page.path) | translate }}
           </a>
         }
         @if (next(); as page) {
@@ -91,8 +100,8 @@ import { DOC_PAGES, type DocPage } from './doc-pages';
             data-pager="next"
             [routerLink]="['/docs', page.path]"
           >
-            <span class="text-label-medium text-on-surface-variant">Next</span>
-            {{ page.title }}
+            <span class="text-label-medium text-on-surface-variant">{{ 'docs.next' | translate }}</span>
+            {{ ('nav.' + page.path) | translate }}
           </a>
         }
       </nav>

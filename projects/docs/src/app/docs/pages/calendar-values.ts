@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { TranslatePipe } from '@ngx-translate/core';
+
 import { CodeBlock } from '../../shared/code-block';
 
 const CREATE = `import { CalendarCode, convertCalendarDate, createCalendarDate } from 'ngx-mat-hijri-adapter';
@@ -18,7 +20,7 @@ provideHijriDateAdapter({ calendar: CalendarCode.gregorian, locale: CalendarLoca
 
 @Component({
   selector: 'calendar-values',
-  imports: [CodeBlock],
+  imports: [CodeBlock, TranslatePipe],
   templateUrl: './calendar-values.html',
 })
 export class CalendarValues {

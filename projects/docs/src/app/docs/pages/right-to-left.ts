@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { TranslatePipe } from '@ngx-translate/core';
+
 import { CodeBlock } from '../../shared/code-block';
 
 const DIR_TS = `import { Dir } from '@angular/cdk/bidi';
@@ -16,7 +18,7 @@ const DIR_HTML = `<section dir="rtl">
 
 @Component({
   selector: 'right-to-left',
-  imports: [CodeBlock],
+  imports: [CodeBlock, TranslatePipe],
   templateUrl: './right-to-left.html',
 })
 export class RightToLeft {

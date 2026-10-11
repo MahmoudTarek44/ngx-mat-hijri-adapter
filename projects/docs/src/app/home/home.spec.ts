@@ -8,13 +8,14 @@ import {
   formatCalendarDate,
 } from 'ngx-mat-hijri-adapter';
 
+import { provideDocsI18nTesting } from '../i18n/provide-docs-i18n-testing';
 import { Home } from './home';
 
 describe('Home', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Home],
-      providers: [provideRouter([])],
+      providers: [provideRouter([]), ...provideDocsI18nTesting()],
     }).compileComponents();
   });
 

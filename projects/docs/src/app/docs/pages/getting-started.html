@@ -1,57 +1,66 @@
 <article class="doc-page">
-  <h1>Getting started</h1>
-  <p class="doc-lead">
-    Add a Hijri or Gregorian datepicker to an Angular Material app in three steps.
-  </p>
+  <h1>{{ 'nav.getting-started' | translate }}</h1>
+  <p class="doc-lead">{{ 'gettingStarted.lead' | translate }}</p>
 
-  <h2 id="install">Install</h2>
+  <h2 id="install">{{ 'gettingStarted.install' | translate }}</h2>
   <p>
-    Version {{ version }} is tagged on GitHub and not yet published to npm. Once it is,
-    <code>ng add</code> is the default. It installs the package, adds
-    <code>&#64;internationalized/date</code> when that package is missing, and registers
+    {{ 'gettingStarted.version' | translate: { version: version } }}
+    <code>ng add</code>
+    {{ 'gettingStarted.versionMid' | translate }}
+    <code>&#64;internationalized/date</code>
+    {{ 'gettingStarted.versionEnd' | translate }}
     <code>provideHijriDateAdapter()</code>.
   </p>
   <code-block language="bash" [code]="code.install" />
-  <p>You can install the packages manually instead:</p>
+  <p>{{ 'gettingStarted.manual' | translate }}</p>
   <code-block language="bash" [code]="code.manualInstall" />
   <p>
-    Angular <code>core</code>, <code>forms</code>, <code>material</code>, and <code>cdk</code> are
-    peer dependencies too, and are expected to be in the app already. <code>ng add</code> stops when
-    Angular Material is missing.
+    {{ 'gettingStarted.peers' | translate }} <code>core</code>{{ 'gettingStarted.peersMid' | translate }}
+    <code>forms</code>{{ 'gettingStarted.peersMid' | translate }} <code>material</code
+    >{{ 'gettingStarted.peersAnd' | translate }} <code>cdk</code>
+    {{ 'gettingStarted.peersEnd' | translate }} <code>ng add</code>
+    {{ 'gettingStarted.peersStop' | translate }}
   </p>
 
-  <h2 id="requirements">Requirements</h2>
+  <h2 id="requirements">{{ 'gettingStarted.requirements' | translate }}</h2>
   <ul>
     <li>
-      Angular <code>core</code>, <code>forms</code>, <code>material</code>, and <code>cdk</code>
-      22.0.0 or newer. Signal forms are stable from this version; Angular 21 is not supported.
+      {{ 'gettingStarted.reqAngular' | translate }} <code>core</code
+      >{{ 'gettingStarted.reqAngularMid' | translate }} <code>forms</code
+      >{{ 'gettingStarted.reqAngularMid' | translate }} <code>material</code
+      >{{ 'gettingStarted.reqAngularMid' | translate }} <code>cdk</code>
+      {{ 'gettingStarted.reqAngularEnd' | translate }}
     </li>
     <li>
-      <code>&#64;internationalized/date</code> 3.12.0 or newer. <code>CalendarDate</code> is part of
-      the public value type, so it is a peer dependency.
+      <code>&#64;internationalized/date</code>
+      {{ 'gettingStarted.reqDate' | translate }} <code>CalendarDate</code>
+      {{ 'gettingStarted.reqDateEnd' | translate }}
     </li>
   </ul>
 
-  <h2 id="provider">Register the adapter</h2>
+  <h2 id="provider">{{ 'gettingStarted.provider' | translate }}</h2>
   <p>
-    Register the adapter once in the application providers. The defaults are the Umm al-Qura
-    calendar and the <code>ar-SA</code> locale.
+    {{ 'gettingStarted.providerLead' | translate }} <code>ar-SA</code>
+    {{ 'gettingStarted.providerEnd' | translate }}
   </p>
   <code-block language="ts" [code]="code.provider" />
 
-  <h2 id="datepicker">Use a Material datepicker</h2>
-  <p>A plain Material datepicker now works with <code>CalendarDate</code> values:</p>
+  <h2 id="datepicker">{{ 'gettingStarted.datepicker' | translate }}</h2>
+  <p>
+    {{ 'gettingStarted.datepickerLead' | translate }} <code>CalendarDate</code>
+    {{ 'gettingStarted.datepickerEnd' | translate }}
+  </p>
   <code-block language="ts" [code]="code.datepickerTs" />
   <code-block language="html" [code]="code.datepickerHtml" />
 
-  <h2 id="field">Or use a ready-made field</h2>
-  <p>
-    The fields add the calendar toggle, an equivalent-date hint, and error messages. Follow the
-    guide for the forms you use.
-  </p>
+  <h2 id="field">{{ 'gettingStarted.field' | translate }}</h2>
+  <p>{{ 'gettingStarted.fieldLead' | translate }}</p>
   <form-guides class="mb-6" />
   <p>
-    Next, read about <a routerLink="/docs/calendar-values">calendar values</a> or the shared
-    <a routerLink="/docs/form-fields">form fields</a> guide.
+    {{ 'gettingStarted.next' | translate }}
+    <a routerLink="/docs/calendar-values">{{ 'nav.calendar-values' | translate }}</a>
+    {{ 'gettingStarted.nextMid' | translate }}
+    <a routerLink="/docs/form-fields">{{ 'nav.form-fields' | translate }}</a>
+    {{ 'gettingStarted.nextEnd' | translate }}
   </p>
 </article>

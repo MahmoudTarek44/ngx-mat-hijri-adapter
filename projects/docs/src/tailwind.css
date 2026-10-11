@@ -7,7 +7,7 @@
   --color-code-muted: #8fb5a2;
   --color-code-action: #b9d9c8;
 
-  --font-sans: Inter, 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --font-sans: var(--docs-font), system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
 
   --breakpoint-lg: 60rem;

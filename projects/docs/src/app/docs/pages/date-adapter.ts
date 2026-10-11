@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import {
   NativeGregorianDemo,
@@ -42,7 +43,7 @@ adapter.addCalendarMonths(adapter.createDate(1445, 8, 30), 1); // 29 Shawwal 144
 
 @Component({
   selector: 'date-adapter-page',
-  imports: [RouterLink, CodeBlock, ExampleCard, NativeUmalquraDemo, NativeGregorianDemo],
+  imports: [RouterLink, CodeBlock, ExampleCard, NativeUmalquraDemo, NativeGregorianDemo, TranslatePipe],
   templateUrl: './date-adapter.html',
 })
 export class DateAdapterPage {

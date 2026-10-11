@@ -1,5 +1,6 @@
 import { Dir } from '@angular/cdk/bidi';
 import { Component, computed, inject, signal } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
 import { DateAdapter } from '@angular/material/core';
 import { MatCalendar } from '@angular/material/datepicker';
@@ -20,7 +21,7 @@ const LONG_DATE = { day: 'numeric', month: 'long', year: 'numeric' } as const;
 /** An inline Material calendar that switches between Umm al-Qura and Gregorian. */
 @Component({
   selector: 'hero-calendar',
-  imports: [Dir, MatCalendar, MatButtonToggleGroup, MatButtonToggle],
+  imports: [Dir, MatCalendar, MatButtonToggleGroup, MatButtonToggle, TranslatePipe],
   providers: [
     provideHijriDateAdapter({
       calendar: CalendarCode.umalqura,
@@ -33,15 +34,21 @@ const LONG_DATE = { day: 'numeric', month: 'long', year: 'numeric' } as const;
   },
   template: `
     <div class="mb-2 flex items-center justify-between gap-4">
-      <span class="text-label-large tracking-[0.08em] text-primary uppercase">Live preview</span>
+      <span class="text-label-large tracking-[0.08em] text-primary uppercase">{{
+        'home.preview' | translate
+      }}</span>
       <mat-button-toggle-group
         hideSingleSelectionIndicator
-        aria-label="Calendar"
+        [attr.aria-label]="'home.calendar' | translate"
         [value]="calendar()"
         (change)="useCalendar($event.value)"
       >
-        <mat-button-toggle [value]="calendarCode.umalqura">Hijri</mat-button-toggle>
-        <mat-button-toggle [value]="calendarCode.gregorian">Gregorian</mat-button-toggle>
+        <mat-button-toggle [value]="calendarCode.umalqura">{{
+          'home.hijriShort' | translate
+        }}</mat-button-toggle>
+        <mat-button-toggle [value]="calendarCode.gregorian">{{
+          'home.gregorianShort' | translate
+        }}</mat-button-toggle>
       </mat-button-toggle-group>
     </div>
     <!-- Header height plus six week rows, each a seventh of the table width. -->

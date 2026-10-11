@@ -1,9 +1,14 @@
 @use '@angular/material' as mat;
 
-$font-family: (Inter, 'IBM Plex Sans Arabic', system-ui, sans-serif);
+$font-family: (var(--docs-font), system-ui, sans-serif);
 
 html {
+  --docs-font: Inter, 'Noto Kufi Arabic';
   color-scheme: light dark;
+
+  &[lang='ar'] {
+    --docs-font: 'Noto Kufi Arabic';
+  }
 
   @include mat.theme(
     (
@@ -26,4 +31,9 @@ html {
   &.dark {
     color-scheme: dark;
   }
+}
+
+html[lang='ar'] :is(code, pre, kbd, .font-mono) {
+  direction: ltr;
+  unicode-bidi: isolate;
 }

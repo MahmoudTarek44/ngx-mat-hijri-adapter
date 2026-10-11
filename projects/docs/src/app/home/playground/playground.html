@@ -3,7 +3,9 @@
   data-playground-controls
 >
   <div class="grid gap-2">
-    <span class="text-label-large text-on-surface-variant" id="pg-calendar">Calendar</span>
+    <span class="text-label-large text-on-surface-variant" id="pg-calendar">{{
+      'playground.calendar' | translate
+    }}</span>
     <mat-button-toggle-group
       class="w-full *:flex-1"
       hideSingleSelectionIndicator
@@ -11,23 +13,29 @@
       [value]="calendar()"
       (change)="useCalendar($event.value)"
     >
-      <mat-button-toggle [value]="calendarCode.umalqura">Umm al-Qura</mat-button-toggle>
-      <mat-button-toggle [value]="calendarCode.gregorian">Gregorian</mat-button-toggle>
+      <mat-button-toggle [value]="calendarCode.umalqura">{{
+        'playground.umalqura' | translate
+      }}</mat-button-toggle>
+      <mat-button-toggle [value]="calendarCode.gregorian">{{
+        'playground.gregorian' | translate
+      }}</mat-button-toggle>
     </mat-button-toggle-group>
   </div>
 
   <mat-form-field appearance="outline" subscriptSizing="dynamic">
-    <mat-label>Locale</mat-label>
+    <mat-label>{{ 'playground.locale' | translate }}</mat-label>
     <mat-select [value]="locale()" (selectionChange)="useLocale($event.value)">
       @for (option of locales; track option.value) {
         <mat-option [value]="option.value">{{ option.label }}</mat-option>
       }
     </mat-select>
-    <mat-hint>Digits, names, and week start. Never the calendar.</mat-hint>
+    <mat-hint>{{ 'playground.localeHint' | translate }}</mat-hint>
   </mat-form-field>
 
   <div class="grid gap-2">
-    <span class="text-label-large text-on-surface-variant" id="pg-direction">Direction</span>
+    <span class="text-label-large text-on-surface-variant" id="pg-direction">{{
+      'playground.direction' | translate
+    }}</span>
     <mat-button-toggle-group
       class="w-full *:flex-1"
       hideSingleSelectionIndicator
@@ -35,13 +43,15 @@
       [value]="direction()"
       (change)="direction.set($event.value)"
     >
-      <mat-button-toggle value="rtl">RTL</mat-button-toggle>
-      <mat-button-toggle value="ltr">LTR</mat-button-toggle>
+      <mat-button-toggle value="rtl">{{ 'demo.rtl' | translate }}</mat-button-toggle>
+      <mat-button-toggle value="ltr">{{ 'demo.ltr' | translate }}</mat-button-toggle>
     </mat-button-toggle-group>
   </div>
 
   <div class="grid gap-2">
-    <span class="text-label-large text-on-surface-variant" id="pg-period">Period</span>
+    <span class="text-label-large text-on-surface-variant" id="pg-period">{{
+      'playground.period' | translate
+    }}</span>
     <mat-button-toggle-group
       class="w-full *:flex-1"
       hideSingleSelectionIndicator
@@ -49,14 +59,16 @@
       [value]="period()"
       (change)="period.set($event.value)"
     >
-      <mat-button-toggle value="all">All</mat-button-toggle>
-      <mat-button-toggle value="past">Past</mat-button-toggle>
-      <mat-button-toggle value="future">Future</mat-button-toggle>
+      <mat-button-toggle value="all">{{ 'playground.all' | translate }}</mat-button-toggle>
+      <mat-button-toggle value="past">{{ 'playground.past' | translate }}</mat-button-toggle>
+      <mat-button-toggle value="future">{{ 'playground.future' | translate }}</mat-button-toggle>
     </mat-button-toggle-group>
   </div>
 
   <div class="grid gap-2">
-    <span class="text-label-large text-on-surface-variant" id="pg-format">Date format</span>
+    <span class="text-label-large text-on-surface-variant" id="pg-format">{{
+      'playground.format' | translate
+    }}</span>
     <mat-button-toggle-group
       class="w-full *:flex-1"
       hideSingleSelectionIndicator
@@ -64,19 +76,21 @@
       [value]="displayFormat()"
       (change)="displayFormat.set($event.value)"
     >
-      <mat-button-toggle value="numeric">Numeric</mat-button-toggle>
-      <mat-button-toggle value="month-name">Month name</mat-button-toggle>
+      <mat-button-toggle value="numeric">{{ 'playground.numeric' | translate }}</mat-button-toggle>
+      <mat-button-toggle value="month-name">{{
+        'playground.monthName' | translate
+      }}</mat-button-toggle>
     </mat-button-toggle-group>
   </div>
 
   <mat-slide-toggle [checked]="calendarToggle()" (change)="calendarToggle.set($event.checked)">
-    Calendar toggle
+    {{ 'playground.toggle' | translate }}
   </mat-slide-toggle>
   <mat-slide-toggle [checked]="equivalentHint()" (change)="equivalentHint.set($event.checked)">
-    Equivalent-date hint
+    {{ 'playground.hint' | translate }}
   </mat-slide-toggle>
   <mat-slide-toggle [checked]="touchUi()" (change)="touchUi.set($event.checked)">
-    Touch UI dialog
+    {{ 'playground.touch' | translate }}
   </mat-slide-toggle>
 </div>
 

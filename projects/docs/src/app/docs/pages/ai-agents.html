@@ -1,30 +1,31 @@
 <article class="doc-page">
-  <h1>AI agents</h1>
+  <h1>{{ 'nav.ai-agents' | translate }}</h1>
   <p class="doc-lead">
-    The published package includes a skill at <code>agents/SKILL.md</code>. It is plain markdown.
-    Any coding agent that can read a file in the project can follow it.
+    {{ 'agents.lead' | translate }} <code>agents/SKILL.md</code>
+    {{ 'agents.leadEnd' | translate }}
   </p>
 
   <h2 id="agents-md">AGENTS.md</h2>
   <p>
-    After <code>ng add</code>, the file is
-    <code>node_modules/ngx-mat-hijri-adapter/agents/SKILL.md</code>. Copy it to
-    <code>AGENTS.md</code> at the project root. Agents that follow that convention read it, in
-    whatever editor you use.
+    {{ 'agents.after' | translate }} <code>ng add</code>{{ 'agents.afterMid' | translate }}
+    <code>node_modules/ngx-mat-hijri-adapter/agents/SKILL.md</code
+    >{{ 'agents.afterCopy' | translate }} <code>AGENTS.md</code>
+    {{ 'agents.afterRoot' | translate }}
   </p>
   <p>
-    If the project already has an <code>AGENTS.md</code>, add this skill to that file. Copying
-    replaces the whole file:
+    {{ 'agents.exists' | translate }} <code>AGENTS.md</code>
+    {{ 'agents.existsMid' | translate }}
   </p>
   <code-block language="bash" [code]="installSkill" />
 
-  <h2 id="skills-folder">A skills folder</h2>
+  <h2 id="skills-folder">{{ 'agents.folder' | translate }}</h2>
   <p>
-    Some agents load <code>SKILL.md</code> from a folder of their own and use the
-    <code>name</code> and <code>description</code> at the top of the file. Copy the same file
-    there. The folder is the one that agent documents, for example
-    <code>.agents/skills/ngx-mat-hijri-adapter/SKILL.md</code>,
-    <code>.claude/skills/ngx-mat-hijri-adapter/SKILL.md</code>, or
+    {{ 'agents.folderBefore' | translate }} <code>SKILL.md</code>
+    {{ 'agents.folderFrom' | translate }} <code>name</code>
+    {{ 'agents.folderAnd' | translate }} <code>description</code>
+    {{ 'agents.folderTop' | translate }}
+    <code>.agents/skills/ngx-mat-hijri-adapter/SKILL.md</code>{{ 'agents.folderAnd' | translate }}
+    <code>.claude/skills/ngx-mat-hijri-adapter/SKILL.md</code>{{ 'agents.folderOr' | translate }}
     <code>.cursor/skills/ngx-mat-hijri-adapter/SKILL.md</code>.
   </p>
 </article>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 interface ApiEntry {
   name: string;
@@ -7,8 +8,8 @@ interface ApiEntry {
 }
 
 interface ApiGroup {
+  id: 'main' | 'native' | 'reactive' | 'signals';
   entryPoint: string;
-  summary: string;
   entries: readonly ApiEntry[];
 }
 
@@ -20,8 +21,8 @@ const FIELD_TYPES: readonly ApiEntry[] = [
 
 const GROUPS: readonly ApiGroup[] = [
   {
+    id: 'main',
     entryPoint: 'ngx-mat-hijri-adapter',
-    summary: 'The adapter, its provider, formatting, and calendar helpers.',
     entries: [
       {
         name: 'HijriDateAdapter',
@@ -120,8 +121,8 @@ const GROUPS: readonly ApiGroup[] = [
     ],
   },
   {
+    id: 'native',
     entryPoint: 'ngx-mat-hijri-adapter/native',
-    summary: 'A DateAdapter<Date> that formats with Intl and counts Umm al-Qura days from an in-repo table.',
     entries: [
       {
         name: 'NativeHijriDateAdapter',
@@ -151,8 +152,8 @@ const GROUPS: readonly ApiGroup[] = [
     ],
   },
   {
+    id: 'reactive',
     entryPoint: 'ngx-mat-hijri-adapter/reactive',
-    summary: 'Fields for reactive forms.',
     entries: [
       { name: 'ReactiveDateField', kind: 'component', description: 'ngx-mat-reactive-date-field' },
       {
@@ -164,8 +165,8 @@ const GROUPS: readonly ApiGroup[] = [
     ],
   },
   {
+    id: 'signals',
     entryPoint: 'ngx-mat-hijri-adapter/signals',
-    summary: 'Fields for signal forms.',
     entries: [
       { name: 'SignalDateField', kind: 'component', description: 'ngx-mat-signal-date-field' },
       {
@@ -180,6 +181,7 @@ const GROUPS: readonly ApiGroup[] = [
 
 @Component({
   selector: 'api-reference',
+  imports: [TranslatePipe],
   templateUrl: './api.html',
 })
 export class ApiReference {

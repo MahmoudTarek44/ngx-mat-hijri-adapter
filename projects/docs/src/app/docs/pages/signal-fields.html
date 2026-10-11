@@ -1,41 +1,49 @@
 <article class="doc-page">
-  <h1>Signal fields</h1>
+  <h1>{{ 'nav.signal-fields' | translate }}</h1>
   <p class="doc-lead">
-    <code>SignalDateField</code> and <code>SignalDateRangeField</code> from
-    <code>ngx-mat-hijri-adapter/signals</code> implement <code>FormValueControl</code> for the
-    <code>[formField]</code> directive from <code>&#64;angular/forms/signals</code>.
+    <code>SignalDateField</code> {{ 'signalFields.leadBefore' | translate }}
+    <code>SignalDateRangeField</code> {{ 'signalFields.leadFrom' | translate }}
+    <code>ngx-mat-hijri-adapter/signals</code> {{ 'signalFields.leadImplement' | translate }}
+    <code>FormValueControl</code> {{ 'signalFields.leadFor' | translate }}
+    <code>[formField]</code> {{ 'signalFields.leadFromPkg' | translate }}
+    <code>&#64;angular/forms/signals</code>.
   </p>
 
   <example-card
-    heading="Booking form"
-    description="The same booking form, bound to a signal form."
+    [heading]="'signalFields.heading' | translate"
+    [description]="'signalFields.description' | translate"
     entryPoint="ngx-mat-hijri-adapter/signals"
     [snippets]="snippets"
   >
     <signal-fields-demo />
   </example-card>
 
-  <h2 id="state">State and errors</h2>
+  <h2 id="state">{{ 'signalFields.state' | translate }}</h2>
   <p>
-    Disabled, touched, and error state come from the field. Datepicker errors such as
-    <code>matDatepickerParse</code> and <code>matEndDateInvalid</code> are reported to the field as
-    errors of that <code>kind</code>.
+    {{ 'signalFields.stateBody' | translate }} <code>matDatepickerParse</code>
+    {{ 'signalFields.stateAnd' | translate }} <code>matEndDateInvalid</code>
+    {{ 'signalFields.stateEnd' | translate }} <code>kind</code>.
   </p>
   <p>
-    <code>errorMessages</code> maps error kinds to messages, because <code>errors</code> is set by
-    <code>[formField]</code>. Without an entry, the field shows the error's own
-    <code>message</code>. Datepicker errors are shown first.
-  </p>
-
-  <h2 id="bounds">Bounds</h2>
-  <p>
-    Use <code>minDate</code> and <code>maxDate</code> for picker bounds. The <code>min()</code> and
-    <code>max()</code> signal form rules work on numbers and JavaScript <code>Date</code> values,
-    not <code>CalendarDate</code>, and these fields do not read them.
+    <code>errorMessages</code> {{ 'signalFields.messages' | translate }} <code>errors</code>
+    {{ 'signalFields.messagesSet' | translate }} <code>[formField]</code
+    >{{ 'signalFields.messagesWithout' | translate }} <code>message</code
+    >{{ 'signalFields.messagesFirst' | translate }}
   </p>
 
+  <h2 id="bounds">{{ 'signalFields.bounds' | translate }}</h2>
   <p>
-    The other inputs, the value calendar, and the toggle are described in
-    <a routerLink="/docs/form-fields">Form fields</a>.
+    {{ 'signalFields.boundsUse' | translate }} <code>minDate</code>
+    {{ 'signalFields.boundsAnd' | translate }} <code>maxDate</code>
+    {{ 'signalFields.boundsFor' | translate }} <code>min()</code>
+    {{ 'signalFields.boundsMax' | translate }} <code>max()</code>
+    {{ 'signalFields.boundsRules' | translate }} <code>Date</code>
+    {{ 'signalFields.boundsValues' | translate }} <code>CalendarDate</code
+    >{{ 'signalFields.boundsEnd' | translate }}
+  </p>
+
+  <p>
+    {{ 'signalFields.more' | translate }}
+    <a routerLink="/docs/form-fields">{{ 'nav.form-fields' | translate }}</a>.
   </p>
 </article>
