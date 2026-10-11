@@ -5,6 +5,54 @@ All notable changes to ngx-mat-hijri-adapter will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.2] - 2026-10-11
+
+### Arabic and English docs
+
+This patch is tagged on GitHub and is not published on npm. The first npm release remains the stable 1.0.0. The docs site switches between English and Arabic. Framework names such as adapter, provider, and locale stay in English.
+
+#### Changes by Commit
+
+| Commit    | Type    | Description                                                                                          |
+| --------- | ------- | ---------------------------------------------------------------------------------------------------- |
+| `f70a73e` | 📝 Docs | **Docs languages**: English and Arabic, with Noto Kufi Arabic and a right-to-left layout for Arabic |
+
+### 📝 Summary of Changes
+
+#### ✨ Added
+
+- **Docs languages**: The docs site switches between English and Arabic with ngx-translate. Arabic uses the Noto Kufi Arabic font and a right-to-left layout. The language choice is stored in the browser. Framework and technology names stay in English
+
+### 📦 Modified Files
+
+<details>
+<summary><strong>Docs</strong></summary>
+
+- `projects/docs/src/locale/` - English and Arabic messages
+- `projects/docs/src/app/i18n/` - Language switch, document direction, and page titles
+- Roadmap lists Arabic and English docs under Implemented
+- `projects/docs/src/app/app.spec.ts` - Expects version 0.3.2 and the tag URL without a `v` prefix
+
+</details>
+
+<details>
+<summary><strong>Workspace</strong></summary>
+
+- `README.md` - Version 0.3.2
+- `package.json` and `package-lock.json` - Version 0.3.2. `@ngx-translate/core` and `@ngx-translate/http-loader` are workspace dependencies for the docs site only
+- `projects/ngx-mat-hijri-adapter/package.json` and `src/lib/version.ts` - Version 0.3.2
+- `CHANGELOG.md` - This entry
+
+</details>
+
+---
+
+**Version**: 0.3.2  
+**Release Date**: October 11, 2026  
+**Maintained by**: Mahmoud
+
+---
+
 ## [0.3.1] - 2026-10-10
 
 ### Native adapter and agent instructions
@@ -604,6 +652,7 @@ First release. One Angular Material date adapter for the Gregorian and Umm al-Qu
 
 ---
 
+[0.3.2]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.2
 [0.3.1]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.1
 [0.3.0]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.0
 [0.2.2]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.2.2
