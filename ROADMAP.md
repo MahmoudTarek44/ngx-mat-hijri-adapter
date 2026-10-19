@@ -89,7 +89,7 @@ Branch: `chore/docs-site`
 
 - Git-move `projects/demo` to `projects/docs`.
 - Update `angular.json`, the `start`, `build:docs`, and `test:docs` scripts in `package.json`, `tsconfig.json`, `.github/workflows/ci.yml`, and `.github/workflows/pages.yml`.
-- Pages keeps the base href `/ngx-mat-hijri-adapter/` and publishes `dist/docs/browser`.
+- Pages builds with base href `/` for `https://ngx-mat-hijri-adapter.dev/` and publishes `dist/docs/browser`.
 - Update the logo path in `README.md`.
 
 ## 3. Unpublished-version warning

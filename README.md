@@ -12,11 +12,11 @@
   <a href="https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.2"><img src="https://img.shields.io/github/v/tag/MahmoudTarek44/ngx-mat-hijri-adapter?label=version&amp;color=006d33" alt="Version" /></a>
   <a href="https://angular.dev"><img src="https://img.shields.io/badge/Angular-22-dd0031" alt="Angular" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT" /></a>
-  <a href="https://mahmoudtarek44.github.io/ngx-mat-hijri-adapter/"><img src="https://img.shields.io/badge/docs-live%20demo-006d33" alt="Documentation" /></a>
+  <a href="https://ngx-mat-hijri-adapter.dev/"><img src="https://img.shields.io/badge/docs-live%20demo-006d33" alt="Documentation" /></a>
 </p>
 
 <p align="center">
-  <strong><a href="https://mahmoudtarek44.github.io/ngx-mat-hijri-adapter/">Documentation and live demo →</a></strong>
+  <strong><a href="https://ngx-mat-hijri-adapter.dev/">Documentation and live demo →</a></strong>
 </p>
 
 ## Features
@@ -76,7 +76,7 @@ import { ReactiveDateField } from 'ngx-mat-hijri-adapter/reactive';
 | `ngx-mat-hijri-adapter/reactive` | `ReactiveDateField` and `ReactiveDateRangeField`               |
 | `ngx-mat-hijri-adapter/signals`  | `SignalDateField` and `SignalDateRangeField`                   |
 
-Configuration, parsing, formatting, field inputs, right-to-left, and the full API are covered in the [documentation](https://mahmoudtarek44.github.io/ngx-mat-hijri-adapter/docs).
+Configuration, parsing, formatting, field inputs, right-to-left, and the full API are covered in the [documentation](https://ngx-mat-hijri-adapter.dev/docs).
 
 ## Development
 
