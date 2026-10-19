@@ -5,6 +5,57 @@ All notable changes to ngx-mat-hijri-adapter will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.3] - 2026-10-19
+
+### Custom domain and Apache 2.0
+
+This patch is tagged on GitHub and is not published on npm. The first npm release remains the stable 1.0.0. The docs site is served from `https://ngx-mat-hijri-adapter.dev/`, and the project license is Apache 2.0.
+
+#### Changes by Commit
+
+| Commit    | Type    | Description                                                                                          |
+| --------- | ------- | ---------------------------------------------------------------------------------------------------- |
+| `2b62366` | 📝 Docs | **Docs hosting**: Build the docs site with base href `/` for the custom domain                      |
+| `9d076f1` | 📝 Docs | **License**: Apache License 2.0, replacing MIT                                                       |
+
+### 📝 Summary of Changes
+
+#### 🔧 Changed
+
+- **Docs hosting**: GitHub Pages builds the docs app with base href `/`, so scripts and styles load on `https://ngx-mat-hijri-adapter.dev/`. The README links point at that domain
+- **License**: The project is released under the Apache License 2.0. Copyright 2026 Mahmoud
+
+### 📦 Modified Files
+
+<details>
+<summary><strong>Docs</strong></summary>
+
+- `.github/workflows/pages.yml` - Base href `/`
+- `README.md` - Docs links for `https://ngx-mat-hijri-adapter.dev/`
+- `projects/docs/src/locale/en.json` and `ar.json` - Footer names the Apache License 2.0
+- `projects/docs/src/app/app.spec.ts` - Expects version 0.3.3 and the tag URL without a `v` prefix
+
+</details>
+
+<details>
+<summary><strong>Workspace</strong></summary>
+
+- `LICENSE` - Apache License 2.0
+- `package.json`, `package-lock.json`, and `projects/ngx-mat-hijri-adapter/package.json` - License Apache-2.0 and version 0.3.3
+- `projects/ngx-mat-hijri-adapter/src/lib/version.ts` - `NGX_MAT_HIJRI_ADAPTER_VERSION` is 0.3.3
+- `README.md`, `ROADMAP.md`, and `CONTRIBUTING.md` - Version 0.3.3
+- `CHANGELOG.md` - This entry
+
+</details>
+
+---
+
+**Version**: 0.3.3  
+**Release Date**: October 19, 2026  
+**Maintained by**: Mahmoud
+
+---
+
 ## [0.3.2] - 2026-10-11
 
 ### Arabic and English docs
@@ -652,6 +703,7 @@ First release. One Angular Material date adapter for the Gregorian and Umm al-Qu
 
 ---
 
+[0.3.3]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.3
 [0.3.2]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.2
 [0.3.1]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.1
 [0.3.0]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.0
