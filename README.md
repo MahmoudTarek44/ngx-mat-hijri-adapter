@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.2"><img src="https://img.shields.io/github/v/tag/MahmoudTarek44/ngx-mat-hijri-adapter?label=version&amp;color=006d33" alt="Version" /></a>
   <a href="https://angular.dev"><img src="https://img.shields.io/badge/Angular-22-dd0031" alt="Angular" /></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-blue" alt="License: Apache 2.0" /></a>
   <a href="https://ngx-mat-hijri-adapter.dev/"><img src="https://img.shields.io/badge/docs-live%20demo-006d33" alt="Documentation" /></a>
 </p>
 
@@ -99,4 +99,4 @@ See [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
-[MIT](LICENSE). Copyright (c) 2026 Mahmoud.
+[Apache 2.0](LICENSE). Copyright 2026 Mahmoud.

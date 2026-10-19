@@ -3,7 +3,7 @@
   "version": "0.3.2",
   "description": "Modern Angular Material date adapter for Gregorian and Umm al-Qura Hijri calendars, powered by @internationalized/date.",
   "author": "Mahmoud",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter.git"

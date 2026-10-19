@@ -45,7 +45,7 @@
     "system": "System",
     "language": "Language",
     "languageLabel": "Choose language",
-    "footer": "ngx-mat-hijri-adapter {{version}}, released under the MIT license.",
+    "footer": "ngx-mat-hijri-adapter {{version}}, released under the Apache License 2.0.",
     "changelog": "Changelog"
   },
   "docs": {

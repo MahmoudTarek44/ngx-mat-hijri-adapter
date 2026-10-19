@@ -45,7 +45,7 @@
     "system": "النظام",
     "language": "اللغة",
     "languageLabel": "اختيار اللغة",
-    "footer": "ngx-mat-hijri-adapter {{version}}، منشور برخصة MIT.",
+    "footer": "ngx-mat-hijri-adapter {{version}}، منشور برخصة Apache 2.0.",
     "changelog": "سجل التغييرات"
   },
   "docs": {

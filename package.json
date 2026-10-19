@@ -12,7 +12,7 @@
     "test:docs": "ng test docs --watch=false"
   },
   "private": true,
-  "license": "MIT",
+  "license": "Apache-2.0",
   "engines": {
     "node": "^22.22.3 || ^24.15.0 || >=26"
   },
