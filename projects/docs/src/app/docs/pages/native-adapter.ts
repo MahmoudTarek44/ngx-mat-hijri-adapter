@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -11,7 +12,7 @@ import { ExampleCard } from '../../shared/example-card';
 
 @Component({
   selector: 'native-adapter-page',
-  imports: [RouterLink, ExampleCard, NativeUmalquraDemo, NativeGregorianDemo, TranslatePipe],
+  imports: [MatIcon, RouterLink, ExampleCard, NativeUmalquraDemo, NativeGregorianDemo, TranslatePipe],
   templateUrl: './native-adapter.html',
 })
 export class NativeAdapterPage {

@@ -333,7 +333,8 @@
     "nativePage": "This provider is an alternative for a plain mat-datepicker that stores a Date. The restrictions, and the live examples, are on the"
   },
   "nativeAdapter": {
-    "lead": "provideNativeHijriDateAdapter() is an alternative. It is for a plain mat-datepicker that must store a Date. The ready-made fields do not use it.",
+    "lead": "provideNativeHijriDateAdapter() is an alternative.",
+    "warning": "It is for a plain mat-datepicker that must store a Date. The ready-made fields do not use it.",
     "restrictions": "Restrictions",
     "forPicker": "It is for a plain mat-datepicker. provideNativeHijriDateAdapter() stores a Date.",
     "instant": "1 Ramadan 1445 is stored as the Gregorian instant 2024-03-11T12:00:00.000Z.",

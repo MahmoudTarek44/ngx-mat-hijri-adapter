@@ -333,7 +333,8 @@
     "nativePage": "هذا الـ provider بديل لـ mat-datepicker عادي يخزّن Date. القيود والأمثلة الحية في صفحة"
   },
   "nativeAdapter": {
-    "lead": "provideNativeHijriDateAdapter() بديل. هو لـ mat-datepicker عادي يجب أن يخزّن Date. الحقول الجاهزة لا تستخدمه.",
+    "lead": "provideNativeHijriDateAdapter() بديل.",
+    "warning": "هو لـ mat-datepicker عادي يجب أن يخزّن Date. الحقول الجاهزة لا تستخدمه.",
     "restrictions": "القيود",
     "forPicker": "هو لـ mat-datepicker عادي. provideNativeHijriDateAdapter() يخزّن Date.",
     "instant": "يُخزَّن 1 رمضان 1445 كلحظة ميلادية 2024-03-11T12:00:00.000Z.",

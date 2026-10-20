@@ -153,6 +153,22 @@
 
     & .doc-lead {
       @apply mb-8 text-title-medium leading-relaxed font-normal text-on-surface-variant;
+
+      &:has(+ .doc-warning) {
+        @apply mb-4;
+      }
+    }
+
+    & .doc-warning {
+      @apply mb-8 flex items-start gap-3 rounded-card border border-[color-mix(in_srgb,var(--mat-sys-error)_40%,transparent)] bg-[color-mix(in_srgb,var(--mat-sys-error)_12%,var(--color-surface))] px-4 py-3 text-body-large text-on-surface;
+
+      & mat-icon {
+        @apply mt-0.5 shrink-0 text-[color:var(--mat-sys-error)];
+      }
+
+      & p {
+        @apply mb-0;
+      }
     }
 
     & h2 {
