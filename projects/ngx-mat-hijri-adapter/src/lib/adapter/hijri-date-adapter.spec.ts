@@ -126,6 +126,7 @@ describe('HijriDateAdapter', () => {
     dates.setLocale('ar-SA');
     expect(dates.getYear(dates.createDate(1445, 8, 1))).toBe(1445);
     expect(dates.getMonthNames('long')[8]).toBe('رمضان');
+    expect(dates.getDateNames()[0]).toBe('١');
     expect(dates.getFirstDayOfWeek()).toBe(0);
 
     dates.setLocale('ar-EG');

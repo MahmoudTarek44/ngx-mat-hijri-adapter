@@ -36,6 +36,13 @@ export class NativeHijriDateAdapter extends DateAdapter<Date, string> {
   private calendarId: SupportedCalendar;
   private readonly timeZone: string;
   private readonly weekStartsOn: number | null;
+  private dateNames?: string[];
+  private weekStart?: number;
+  private numberFormat?: Intl.NumberFormat;
+  private todayFormatter?: Intl.DateTimeFormat;
+  private readonly weekdayNames = new Map<string, string[]>();
+  private readonly monthNames = new Map<string, string[]>();
+  private readonly formatters = new Map<string, Intl.DateTimeFormat>();
 
   constructor() {
     super();
@@ -61,7 +68,21 @@ export class NativeHijriDateAdapter extends DateAdapter<Date, string> {
     }
 
     this.calendarId = calendar;
+    this.monthNames.clear();
+    this.formatters.clear();
+    this.todayFormatter = undefined;
     this._localeChanges.next();
+  }
+
+  override setLocale(locale: string): void {
+    this.dateNames = undefined;
+    this.weekStart = undefined;
+    this.numberFormat = undefined;
+    this.todayFormatter = undefined;
+    this.weekdayNames.clear();
+    this.monthNames.clear();
+    this.formatters.clear();
+    super.setLocale(locale);
   }
 
   override getYear(date: Date): number {
@@ -82,28 +103,43 @@ export class NativeHijriDateAdapter extends DateAdapter<Date, string> {
   }
 
   override getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
+    const key = `${this.calendarId}:${style}`;
+    const cached = this.monthNames.get(key);
+    if (cached) {
+      return cached;
+    }
+
     const formatter = new Intl.DateTimeFormat(this.locale, {
       calendar: this.intlCalendar,
       month: style,
       timeZone: 'UTC',
     });
-
-    return Array.from({ length: 12 }, (_, month) => {
+    const names = Array.from({ length: 12 }, (_, month) => {
       const sample = this.sampleDate(month + 1);
       return formatter.formatToParts(sample).find((part) => part.type === 'month')?.value ?? '';
     });
+    this.monthNames.set(key, names);
+    return names;
   }
 
   override getDateNames(): string[] {
-    return Array.from({ length: 31 }, (_, index) => this.formatNumber(index + 1));
+    this.dateNames ??= Array.from({ length: 31 }, (_, index) => this.formatNumber(index + 1));
+    return this.dateNames;
   }
 
   override getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
+    const cached = this.weekdayNames.get(style);
+    if (cached) {
+      return cached;
+    }
+
     const formatter = new Intl.DateTimeFormat(this.locale, { weekday: style, timeZone: 'UTC' });
     const sunday = Date.UTC(2023, 0, 1);
-    return Array.from({ length: 7 }, (_, index) =>
+    const names = Array.from({ length: 7 }, (_, index) =>
       formatter.format(new Date(sunday + index * 86_400_000)),
     );
+    this.weekdayNames.set(style, names);
+    return names;
   }
 
   override getYearName(date: Date): string {
@@ -111,7 +147,12 @@ export class NativeHijriDateAdapter extends DateAdapter<Date, string> {
   }
 
   override getFirstDayOfWeek(): number {
-    return this.weekStartsOn ?? firstDayOfWeek(this.locale);
+    if (this.weekStartsOn != null) {
+      return this.weekStartsOn;
+    }
+
+    this.weekStart ??= firstDayOfWeek(this.locale);
+    return this.weekStart;
   }
 
   override getNumDaysInMonth(date: Date): number {
@@ -152,14 +193,15 @@ export class NativeHijriDateAdapter extends DateAdapter<Date, string> {
   }
 
   override today(): Date {
-    const parts = new Intl.DateTimeFormat('en-US', {
+    this.todayFormatter ??= new Intl.DateTimeFormat('en-US', {
       calendar: this.intlCalendar,
       day: 'numeric',
       month: 'numeric',
       numberingSystem: 'latn',
       timeZone: this.timeZone,
       year: 'numeric',
-    }).formatToParts(new Date());
+    });
+    const parts = this.todayFormatter.formatToParts(new Date());
     const year = Number(parts.find((part) => part.type === 'year')?.value);
     const month = Number(parts.find((part) => part.type === 'month')?.value);
     const day = Number(parts.find((part) => part.type === 'day')?.value);
@@ -193,11 +235,7 @@ export class NativeHijriDateAdapter extends DateAdapter<Date, string> {
     }
 
     const options = readFormatOptions(displayFormat);
-    const formatted = new Intl.DateTimeFormat(this.locale, {
-      ...options,
-      calendar: this.intlCalendar,
-      timeZone: 'UTC',
-    }).formatToParts(date);
+    const formatted = this.utcFormatter(options).formatToParts(date);
     const day = options.day ? partValue(formatted, 'day') : '';
     const month = options.month ? partValue(formatted, 'month') : '';
     const year = options.year ? partValue(formatted, 'year') : '';
@@ -383,7 +421,24 @@ export class NativeHijriDateAdapter extends DateAdapter<Date, string> {
   }
 
   private formatNumber(value: number): string {
-    return new Intl.NumberFormat(this.locale, { useGrouping: false }).format(value);
+    this.numberFormat ??= new Intl.NumberFormat(this.locale, { useGrouping: false });
+    return this.numberFormat.format(value);
+  }
+
+  private utcFormatter(options: Intl.DateTimeFormatOptions): Intl.DateTimeFormat {
+    const key = `${this.calendarId}:${optionKey(options)}`;
+    const cached = this.formatters.get(key);
+    if (cached) {
+      return cached;
+    }
+
+    const formatter = new Intl.DateTimeFormat(this.locale, {
+      ...options,
+      calendar: this.intlCalendar,
+      timeZone: 'UTC',
+    });
+    this.formatters.set(key, formatter);
+    return formatter;
   }
 }
 
@@ -401,6 +456,14 @@ function readFormatOptions(displayFormat: unknown): Intl.DateTimeFormatOptions {
   }
 
   return displayFormat as Intl.DateTimeFormatOptions;
+}
+
+function optionKey(options: Intl.DateTimeFormatOptions): string {
+  return Object.entries(options)
+    .filter((entry) => entry[1] !== undefined)
+    .map(([key, value]) => `${key}:${String(value)}`)
+    .sort()
+    .join(',');
 }
 
 function partValue(parts: Intl.DateTimeFormatPart[], type: Intl.DateTimeFormatPartTypes): string {

@@ -109,8 +109,16 @@ function easternDigit(value: number): string {
   return String(value).replace(/\d/g, (digit) => '٠١٢٣٤٥٦٧٨٩'[Number(digit)] ?? digit);
 }
 
+const localeDigits = new Map<string, Intl.NumberFormat>();
+
 function localeDigit(value: number, locale: string): string {
-  return new Intl.NumberFormat(locale, { useGrouping: false }).format(value);
+  let formatter = localeDigits.get(locale);
+  if (!formatter) {
+    formatter = new Intl.NumberFormat(locale, { useGrouping: false });
+    localeDigits.set(locale, formatter);
+  }
+
+  return formatter.format(value);
 }
 
 export function umalquraMonthNames(locale: string, style: 'long' | 'short' | 'narrow'): string[] {

@@ -36,6 +36,9 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
   private calendarId: SupportedCalendar;
   private readonly timeZone: string;
   private readonly weekStartsOn: number | null;
+  private dateNames?: string[];
+  private weekStart?: number;
+  private readonly weekdayNames = new Map<string, string[]>();
 
   constructor() {
     super();
@@ -64,6 +67,13 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
     this._localeChanges.next();
   }
 
+  override setLocale(locale: string): void {
+    this.dateNames = undefined;
+    this.weekStart = undefined;
+    this.weekdayNames.clear();
+    super.setLocale(locale);
+  }
+
   override getYear(date: CalendarDate): number {
     return this.isValid(date) ? this.inCalendar(date).year : Number.NaN;
   }
@@ -89,15 +99,25 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
   }
 
   override getDateNames(): string[] {
-    return Array.from({ length: 31 }, (_, index) => formatNumber(index + 1, this.locale));
+    this.dateNames ??= Array.from({ length: 31 }, (_, index) =>
+      formatNumber(index + 1, this.locale),
+    );
+    return this.dateNames;
   }
 
   override getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
+    const cached = this.weekdayNames.get(style);
+    if (cached) {
+      return cached;
+    }
+
     const formatter = new Intl.DateTimeFormat(this.locale, { weekday: style, timeZone: 'UTC' });
     const sunday = Date.UTC(2023, 0, 1);
-    return Array.from({ length: 7 }, (_, index) =>
+    const names = Array.from({ length: 7 }, (_, index) =>
       formatter.format(new Date(sunday + index * 86_400_000)),
     );
+    this.weekdayNames.set(style, names);
+    return names;
   }
 
   override getYearName(date: CalendarDate): string {
@@ -105,7 +125,12 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
   }
 
   override getFirstDayOfWeek(): number {
-    return this.weekStartsOn ?? firstDayOfWeek(this.locale);
+    if (this.weekStartsOn != null) {
+      return this.weekStartsOn;
+    }
+
+    this.weekStart ??= firstDayOfWeek(this.locale);
+    return this.weekStart;
   }
 
   override getNumDaysInMonth(date: CalendarDate): number {

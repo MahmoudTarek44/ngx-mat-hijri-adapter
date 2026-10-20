@@ -38,15 +38,39 @@ export function formatCalendarDate(
   return day || month || year;
 }
 
+const monthNameCache = new Map<string, string[]>();
+const numberFormats = new Map<string, Intl.NumberFormat>();
+
 export function calendarMonthNames(
   calendar: SupportedCalendar,
   locale: string,
   style: 'long' | 'short' | 'narrow',
 ): string[] {
-  if (calendar === CalendarCode.umalqura) {
-    return umalquraMonthNames(locale, style);
+  const key = `${calendar}\0${locale}\0${style}`;
+  const cached = monthNameCache.get(key);
+  if (cached) {
+    return cached;
   }
 
+  const names =
+    calendar === CalendarCode.umalqura
+      ? umalquraMonthNames(locale, style)
+      : gregorianMonthNames(locale, style);
+  monthNameCache.set(key, names);
+  return names;
+}
+
+export function formatNumber(value: number, locale: string): string {
+  let formatter = numberFormats.get(locale);
+  if (!formatter) {
+    formatter = new Intl.NumberFormat(locale, { useGrouping: false });
+    numberFormats.set(locale, formatter);
+  }
+
+  return formatter.format(value);
+}
+
+function gregorianMonthNames(locale: string, style: 'long' | 'short' | 'narrow'): string[] {
   const formatter = new Intl.DateTimeFormat(locale, {
     month: style,
     timeZone: 'UTC',
@@ -55,10 +79,6 @@ export function calendarMonthNames(
   return Array.from({ length: 12 }, (_, month) =>
     formatter.format(new Date(Date.UTC(2024, month, 1))),
   );
-}
-
-export function formatNumber(value: number, locale: string): string {
-  return new Intl.NumberFormat(locale, { useGrouping: false }).format(value);
 }
 
 function formatMonth(
