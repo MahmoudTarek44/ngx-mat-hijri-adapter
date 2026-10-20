@@ -4,6 +4,7 @@
     "getting-started": "البداية · ngx-mat-hijri-adapter",
     "calendar-values": "قيم التقويم · ngx-mat-hijri-adapter",
     "date-adapter": "Date adapter · ngx-mat-hijri-adapter",
+    "native-adapter": "Native adapter · ngx-mat-hijri-adapter",
     "parsing-formatting": "Parsing and formatting · ngx-mat-hijri-adapter",
     "form-fields": "Form fields · ngx-mat-hijri-adapter",
     "reactive-fields": "Reactive fields · ngx-mat-hijri-adapter",
@@ -18,6 +19,7 @@
     "getting-started": "البداية",
     "calendar-values": "قيم التقويم",
     "date-adapter": "Date adapter",
+    "native-adapter": "Native adapter",
     "parsing-formatting": "Parsing and formatting",
     "form-fields": "Form fields",
     "reactive-fields": "Reactive fields",
@@ -204,6 +206,7 @@
     "datepickerEnd": ":",
     "field": "أو استخدم حقلًا جاهزًا",
     "fieldLead": "تضيف الحقول calendar toggle و equivalent hint ورسائل الخطأ. اتبع الدليل المناسب للنماذج التي تستخدمها.",
+    "native": "النموذج الذي يجب أن يخزّن Date يستخدم mat-datepicker عاديًا مع provideNativeHijriDateAdapter(). اقرأ",
     "next": "بعد ذلك، اقرأ عن",
     "nextMid": "أو دليل",
     "nextEnd": "المشترك."
@@ -326,7 +329,23 @@
     "monthsHeading": "ترقيم الشهور",
     "monthsBody": "يتبع الـ adapters شهور Material التي تبدأ من 0. calendar helpers في الـ entry point الرئيسي تبدأ من 1.",
     "monthsMid": "يرمي إذا كان الشهر خارج 0–11، أو اليوم خارج ذلك الشهر، أو سنة أم القرى خارج 1300–1599. إضافة الشهور تُثبَّت على آخر يوم صالح. إضافة سنة أو شهر يخرج من 1300–1599 هـ تعيد تاريخًا غير صالح.",
-    "time": "time methods غير منفّذة."
+    "time": "time methods غير منفّذة.",
+    "nativePage": "هذا الـ provider بديل لـ mat-datepicker عادي يخزّن Date. القيود والأمثلة الحية في صفحة"
+  },
+  "nativeAdapter": {
+    "lead": "provideNativeHijriDateAdapter() بديل. هو لـ mat-datepicker عادي يجب أن يخزّن Date. الحقول الجاهزة لا تستخدمه.",
+    "restrictions": "القيود",
+    "forPicker": "هو لـ mat-datepicker عادي. provideNativeHijriDateAdapter() يخزّن Date.",
+    "instant": "يُخزَّن 1 رمضان 1445 كلحظة ميلادية 2024-03-11T12:00:00.000Z.",
+    "fields": "تخزّن الحقول الجاهزة CalendarDate حتى يستطيع calendar toggle تغيير التقويم على الشاشة بينما يبقى valueCalendar هو التقويم المحفوظ. يمكن لحقل ميلادي أن يعرض 1/9/1445 ويبقى محتفظًا بالميلادي 2024-03-11. لا يستطيع Date ذلك، لأنه لا يملك تقويمًا يحتفظ به. تضيف الحقول أيضًا الـ hint. وهي لا تستخدم هذا الـ provider.",
+    "fieldsLink": "تخزّن CalendarDate ولا تستخدم هذا الـ provider.",
+    "noCalendar": "ليس لـ Date تقويم، لذلك valueCalendar لا ينطبق. لا يوجد toggle في هذا المسار. أي toggle هنا يغيّر النص على الشاشة فقط.",
+    "calendarOf": "calendarOf() لا ينطبق. الـ Date الواحد هو 1 رمضان 1445 و11 مارس 2024 معًا.",
+    "intlNames": "أسماء الشهور الهجرية تأتي من Intl ويمكن أن تختلف بين المتصفحات.",
+    "math": "حساب الأيام الهجرية يستخدم جدول أم القرى في هذه الحزمة، وهو محدود بالسنوات 1300–1599 هـ.",
+    "json": "يكتب JSON.stringify اللحظة الميلادية، وليس 1445-09-01.",
+    "peer": "تحميل ngx-mat-hijri-adapter/native يحمّل أيضًا الـ entry point الرئيسي، لذلك يبقى @internationalized/date مثبّتًا.",
+    "examples": "أمثلة"
   },
   "parsing": {
     "lead": "يُقرأ النص المكتوب في تقويم الـ adapter، وتُنسَّق التواريخ في تقويمها. لا تمر أي خطوة عبر",
@@ -614,7 +633,7 @@
       },
       "native": {
         "title": "Native Hijri adapter",
-        "detail": "provideNativeHijriDateAdapter() من ngx-mat-hijri-adapter/native يخزّن Date في JavaScript عند منتصف نهار UTC. ينسّقه Intl ويقرأه، وجدول أم القرى داخل المستودع يجري حساب الأيام."
+        "detail": "provideNativeHijriDateAdapter() من ngx-mat-hijri-adapter/native بديل لـ mat-datepicker عادي. يخزّن Date في JavaScript عند منتصف نهار UTC. ينسّقه Intl ويقرأه. الحقول الجاهزة تخزّن CalendarDate ولا تستخدم هذا الـ provider."
       },
       "datepicker": {
         "title": "datepicker من Material",

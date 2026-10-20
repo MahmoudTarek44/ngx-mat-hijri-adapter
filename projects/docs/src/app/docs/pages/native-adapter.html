@@ -1,0 +1,41 @@
+<article class="doc-page">
+  <h1>{{ 'nav.native-adapter' | translate }}</h1>
+  <p class="doc-lead">{{ 'nativeAdapter.lead' | translate }}</p>
+
+  <h2 id="restrictions">{{ 'nativeAdapter.restrictions' | translate }}</h2>
+  <ul>
+    <li>{{ 'nativeAdapter.forPicker' | translate }}</li>
+    <li>{{ 'nativeAdapter.instant' | translate }}</li>
+    <li>{{ 'nativeAdapter.fields' | translate }}</li>
+    <li>{{ 'nativeAdapter.noCalendar' | translate }}</li>
+    <li>{{ 'nativeAdapter.calendarOf' | translate }}</li>
+    <li>{{ 'nativeAdapter.intlNames' | translate }}</li>
+    <li>{{ 'nativeAdapter.math' | translate }}</li>
+    <li>{{ 'nativeAdapter.json' | translate }}</li>
+    <li>{{ 'nativeAdapter.peer' | translate }}</li>
+  </ul>
+  <p>
+    <a routerLink="/docs/form-fields">{{ 'dateAdapter.fieldsLink' | translate }}</a>
+    {{ 'nativeAdapter.fieldsLink' | translate }}
+  </p>
+
+  <h2 id="examples">{{ 'nativeAdapter.examples' | translate }}</h2>
+  <div class="mb-6 grid grid-cols-1 gap-6 min-[1100px]:grid-cols-2">
+    <example-card
+      [heading]="'dateAdapter.nativeUmalqura' | translate"
+      [description]="'dateAdapter.nativeUmalquraText' | translate"
+      entryPoint="ngx-mat-hijri-adapter/native"
+      [snippets]="code.nativeUmalqura"
+    >
+      <native-umalqura-demo />
+    </example-card>
+    <example-card
+      [heading]="'dateAdapter.nativeGregorian' | translate"
+      [description]="'dateAdapter.nativeGregorianText' | translate"
+      entryPoint="ngx-mat-hijri-adapter/native"
+      [snippets]="code.nativeGregorian"
+    >
+      <native-gregorian-demo />
+    </example-card>
+  </div>
+</article>

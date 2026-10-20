@@ -2,13 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
-import {
-  NativeGregorianDemo,
-  NativeUmalquraDemo,
-} from '../../examples/native-demo/native-demo';
-import { NATIVE_GREGORIAN_SNIPPETS, NATIVE_UMALQURA_SNIPPETS } from '../../examples/snippets';
 import { CodeBlock } from '../../shared/code-block';
-import { ExampleCard } from '../../shared/example-card';
 
 const CONFIG = `import { CalendarCode, CalendarLocale, provideHijriDateAdapter } from 'ngx-mat-hijri-adapter';
 
@@ -43,7 +37,7 @@ adapter.addCalendarMonths(adapter.createDate(1445, 8, 30), 1); // 29 Shawwal 144
 
 @Component({
   selector: 'date-adapter-page',
-  imports: [RouterLink, CodeBlock, ExampleCard, NativeUmalquraDemo, NativeGregorianDemo, TranslatePipe],
+  imports: [RouterLink, CodeBlock, TranslatePipe],
   templateUrl: './date-adapter.html',
 })
 export class DateAdapterPage {
@@ -51,8 +45,6 @@ export class DateAdapterPage {
     config: CONFIG,
     hijriDatepicker: HIJRI_DATEPICKER,
     datepickerHtml: DATEPICKER_HTML,
-    nativeUmalqura: NATIVE_UMALQURA_SNIPPETS,
-    nativeGregorian: NATIVE_GREGORIAN_SNIPPETS,
     switch: SWITCH,
     months: MONTHS,
   };

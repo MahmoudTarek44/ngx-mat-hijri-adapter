@@ -20,7 +20,9 @@ Do not add `@types/ngx-mat-hijri-adapter`. The package publishes its own `.d.ts`
 
 `provideHijriDateAdapter()` stores a `CalendarDate` from `@internationalized/date`. Do not store a JavaScript `Date` with that provider.
 
-`provideNativeHijriDateAdapter()` from `ngx-mat-hijri-adapter/native` stores a JavaScript `Date` at UTC noon. Use it when the form value has to be a `Date`. It does not replace the `CalendarDate` adapter. Reactive and signal fields stay on `CalendarDate`.
+`provideNativeHijriDateAdapter()` from `ngx-mat-hijri-adapter/native` is an alternative for a plain `mat-datepicker` that must store a JavaScript `Date`. It stores that `Date` at UTC noon. 1 Ramadan 1445 is `2024-03-11T12:00:00.000Z`. A `Date` has no calendar, so `valueCalendar` and `calendarOf()` do not apply, and there is no calendar toggle on this path. Hijri month names come from `Intl` and can differ between browsers. Hijri day math uses the in-repo Umm al-Qura table, AH 1300–1599. `JSON.stringify` writes the Gregorian instant. Loading this entry still loads the main entry, so `@internationalized/date` stays installed.
+
+The ready-made fields store a `CalendarDate` so the toggle can change the calendar on screen while `valueCalendar` stays the saved value. They do not use the native provider. Do not add `Date` fields and do not move the existing fields onto `Date`.
 
 Both providers default to the Umm al-Qura calendar and the `ar-SA` locale. The locale does not select the calendar.
 

@@ -24,8 +24,7 @@
     </a>
     <a
       class="rounded-card border bg-surface-container-low p-5 no-underline"
-      routerLink="/docs/date-adapter"
-      fragment="native"
+      routerLink="/docs/native-adapter"
     >
       <p class="mb-1! text-label-large tracking-[0.12em] text-on-surface-variant uppercase">
         {{ 'dateAdapter.alternative' | translate }}
@@ -129,76 +128,9 @@
 
   <h2 id="native">NativeHijriDateAdapter</h2>
   <p>
-    {{ 'dateAdapter.nativeLead' | translate }} <code>DateAdapter&lt;Date&gt;</code>
-    {{ 'dateAdapter.nativeLeadMid' | translate }} <code>Date</code
-    >{{ 'dateAdapter.nativeLeadEnd' | translate }} <code>HijriDateAdapter</code>.
+    {{ 'dateAdapter.nativePage' | translate }}
+    <a routerLink="/docs/native-adapter">{{ 'nav.native-adapter' | translate }}</a>.
   </p>
-  <p>
-    <code>provideNativeHijriDateAdapter()</code> {{ 'dateAdapter.nativeRegister' | translate }}
-    <code>ngx-mat-hijri-adapter/native</code> {{ 'dateAdapter.nativeRegisterMid' | translate }}
-    <code>MAT_DATE_FORMATS</code> {{ 'dateAdapter.optionsAnd' | translate }}
-    <code>MAT_DATE_LOCALE</code>{{ 'dateAdapter.nativeRegisterEnd' | translate }}
-    <code>provideHijriDateAdapter()</code>{{ 'dateAdapter.nativeRegisterTail' | translate }}
-    <code>DateAdapter</code>{{ 'dateAdapter.nativeRegisterLast' | translate }}
-  </p>
-  <p>{{ 'dateAdapter.sameOptions' | translate }}</p>
-  <ul>
-    <li>
-      <code>calendar</code>: <code>'gregorian'</code> {{ 'dateAdapter.optCalendar' | translate }}
-      <code>'islamic-umalqura'</code>{{ 'dateAdapter.optCalendarEnd' | translate }}
-      <code>islamic-umalqura</code>. <code>Intl</code>
-      {{ 'dateAdapter.nativeCalendarIntl' | translate }} <code>gregory</code>
-      {{ 'dateAdapter.nativeCalendarOr' | translate }} <code>islamic-umalqura</code
-      >{{ 'dateAdapter.nativeCalendarEnd' | translate }}
-    </li>
-    <li>
-      <code>locale</code>: {{ 'dateAdapter.nativeLocale' | translate }} <code>Intl</code>
-      {{ 'dateAdapter.nativeLocaleMid' | translate }} <code>Ram.</code
-      >{{ 'dateAdapter.nativeLocaleEnd' | translate }} <code>ar-SA</code>.
-    </li>
-    <li>
-      <code>timeZone</code>: {{ 'dateAdapter.nativeZone' | translate }} <code>today()</code>
-      {{ 'dateAdapter.nativeZoneMid' | translate }}
-    </li>
-    <li>
-      <code>firstDayOfWeek</code>: <code>0</code> {{ 'dateAdapter.optWeek' | translate }}
-      <code>6</code> {{ 'dateAdapter.optWeekEnd' | translate }}
-    </li>
-    <li>
-      <code>formats</code>: {{ 'dateAdapter.nativeFormats' | translate }}
-      <code>HIJRI_DATE_FORMATS</code>.
-    </li>
-  </ul>
-  <p>
-    <code>Intl</code> {{ 'dateAdapter.intlLead' | translate }} <code>timeZone: 'UTC'</code
-    >{{ 'dateAdapter.intlMid' | translate }} <code>Date</code>
-    {{ 'dateAdapter.intlEnd' | translate }} <code>toIso8601()</code>
-    {{ 'dateAdapter.intlIso' | translate }} <code>YYYY-MM-DD</code>
-    {{ 'dateAdapter.intlIsoMid' | translate }} <code>deserialize</code>
-    {{ 'dateAdapter.intlDes' | translate }} <code>Date</code
-    >{{ 'dateAdapter.intlDesEnd' | translate }}
-  </p>
-  <p>
-    {{ 'dateAdapter.both' | translate }} <code>Date</code>.
-  </p>
-  <div class="mb-6 grid grid-cols-1 gap-6 min-[1100px]:grid-cols-2">
-    <example-card
-      [heading]="'dateAdapter.nativeUmalqura' | translate"
-      [description]="'dateAdapter.nativeUmalquraText' | translate"
-      entryPoint="ngx-mat-hijri-adapter/native"
-      [snippets]="code.nativeUmalqura"
-    >
-      <native-umalqura-demo />
-    </example-card>
-    <example-card
-      [heading]="'dateAdapter.nativeGregorian' | translate"
-      [description]="'dateAdapter.nativeGregorianText' | translate"
-      entryPoint="ngx-mat-hijri-adapter/native"
-      [snippets]="code.nativeGregorian"
-    >
-      <native-gregorian-demo />
-    </example-card>
-  </div>
 
   <h2 id="locale">{{ 'dateAdapter.localeHeading' | translate }}</h2>
   <p>

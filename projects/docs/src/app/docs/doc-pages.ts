@@ -10,6 +10,7 @@ export const DOC_PAGES: readonly DocPage[] = [
   { path: 'getting-started', title: 'Getting started' },
   { path: 'calendar-values', title: 'Calendar values' },
   { path: 'date-adapter', title: 'Date adapter' },
+  { path: 'native-adapter', title: 'Native adapter' },
   { path: 'parsing-formatting', title: 'Parsing and formatting' },
   { path: 'form-fields', title: 'Form fields' },
   { path: 'reactive-fields', title: 'Reactive fields' },
@@ -39,6 +40,11 @@ export const DOC_ROUTES: Routes = [
     path: 'date-adapter',
     title: pageTitle('date-adapter'),
     loadComponent: () => import('./pages/date-adapter').then((m) => m.DateAdapterPage),
+  },
+  {
+    path: 'native-adapter',
+    title: pageTitle('native-adapter'),
+    loadComponent: () => import('./pages/native-adapter').then((m) => m.NativeAdapterPage),
   },
   {
     path: 'parsing-formatting',

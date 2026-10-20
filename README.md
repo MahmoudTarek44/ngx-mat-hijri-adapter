@@ -25,7 +25,7 @@
 - Locale is independent of calendar: an English Hijri picker or an Arabic Gregorian picker both work.
 - Ready-made date and date range fields for reactive forms and for signal forms.
 - An optional Hijri/Gregorian toggle on each field, with a hint showing the date in the other calendar.
-- The default adapter stores `CalendarDate` objects, so no time zone shifts a day. `ngx-mat-hijri-adapter/native` stores a JavaScript `Date` at UTC noon.
+- The default adapter stores `CalendarDate` objects, so no time zone shifts a day. The ready-made fields use that value so the calendar toggle can change the text on screen while `valueCalendar` stays the saved calendar. `ngx-mat-hijri-adapter/native` is the alternative for a plain `mat-datepicker` that stores a JavaScript `Date` at UTC noon. See the [native adapter](https://ngx-mat-hijri-adapter.dev/docs/native-adapter) page.
 
 ## Status and installation
 

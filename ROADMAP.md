@@ -45,7 +45,8 @@ When a task is squash-merged, set its status here to `Done` in the same breath a
 - This library is TypeScript and ng-packagr emits `.d.ts` files. DefinitelyTyped hosts `@types/*` for JavaScript libraries that do not ship types. A `@types/ngx-mat-hijri-adapter` package would duplicate the built-in types, so nothing is submitted there.
 - The public names `gregorian` (this package) and `gregory` (the runtime calendar identifier) stay as they are. The AH 1300–1599 Umm al-Qura limit stays as it is.
 - Hijri month names stay Arabic and English. Persian and Urdu month names are not planned.
-- `ngx-mat-hijri-adapter/native` provides `provideNativeHijriDateAdapter()` for a JavaScript `Date` at UTC noon. Formatting uses `Intl` with `islamic-umalqura` or `gregory`. Month lengths and day arithmetic use an in-repo Umm al-Qura table for AH 1300–1599. `provideHijriDateAdapter()` keeps `CalendarDate` from `@internationalized/date`.
+- `ngx-mat-hijri-adapter/native` provides `provideNativeHijriDateAdapter()` for a plain `mat-datepicker` that stores a JavaScript `Date` at UTC noon. Formatting uses `Intl` with `islamic-umalqura` or `gregory`. Month lengths and day arithmetic use an in-repo Umm al-Qura table for AH 1300–1599. `provideHijriDateAdapter()` keeps `CalendarDate` from `@internationalized/date`.
+- The calendar toggle changes the text on screen. `valueCalendar` stays the saved calendar. A Gregorian field can show `1/9/1445` while the control still holds Gregorian `2024-03-11`. The ready-made fields store a `CalendarDate` so that split is possible. A `Date` has no calendar to keep, so the fields do not use the native provider. Do not add `Date` fields. Do not move the existing fields onto `Date`.
 - Historical paths in `CHANGELOG.md` are not rewritten when the demo project is renamed.
 
 ## 0. Delivery skill
