@@ -5,6 +5,68 @@ All notable changes to ngx-mat-hijri-adapter will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-10-20
+
+### Calendar toggle, calendarOf(), and styling
+
+This minor release is tagged on GitHub and is not published on npm. The first npm release remains the stable 1.0.0. A field can replace the default calendar buttons without changing the stored `CalendarDate`. `calendarOf()` reads that calendar. The docs explain the native `Date` provider and how a form restyles a field through Material tokens.
+
+#### Changes by Commit
+
+| Commit    | Type       | Description                                                                                                          |
+| --------- | ---------- | -------------------------------------------------------------------------------------------------------------------- |
+| `4930c63` | 📝 Docs    | **Native adapter**: Document `provideNativeHijriDateAdapter()` as the alternative for a `Date`                       |
+| `dbe97dd` | 📝 Docs    | **Native adapter**: Show that restriction as a warning                                                               |
+| `f6796fa` | ✨ Feature | **calendarOf()**: Read a `CalendarDate` calendar without comparing `gregory` and `gregorian`                         |
+| `2432c8f` | ✨ Feature | **Calendar toggle**: A `#calendarToggle` template replaces the default buttons and keeps `valueCalendar`             |
+| `db1aab2` | 📝 Docs    | **Styling**: Show that ready-made fields inherit Material tokens and have no style input                             |
+
+### 📝 Summary of Changes
+
+#### ✨ Added
+
+- **calendarOf()**: Returns `gregorian` or `islamic-umalqura` for a `CalendarDate`. `gregory` maps to `gregorian`. Any other identifier throws
+- **Calendar toggle template**: One `#calendarToggle` template inside a ready-made field replaces the default buttons. `let-controller` receives `display`, `valueCalendar`, `labels`, `disabled`, `show`, and `open`. `show` switches the calendar on screen and leaves the picker closed. `open` switches it and opens the picker. The stored `CalendarDate` stays in `valueCalendar`, and the control is not marked dirty
+- **Default toggle icons**: Hijri uses `dark_mode`. Gregorian uses `add_circle_outline`
+- **Native adapter page**: `/docs/native-adapter` explains that `provideNativeHijriDateAdapter()` is for a plain `mat-datepicker` that stores a `Date`. A warning states that the ready-made fields do not use it
+- **Styling page**: `/docs/styling` shows that the fields inherit the project Material tokens. `mat.form-field-overrides()` on a parent restyles the input. `mat.datepicker-overrides()` on `html` restyles the toggle icon and the calendar popup, because the popup is an overlay
+
+### 📦 Modified Files
+
+<details>
+<summary><strong>Library</strong></summary>
+
+- `projects/ngx-mat-hijri-adapter/src/lib/calendar/calendar-date.ts` - `calendarOf()`
+- `projects/ngx-mat-hijri-adapter/internal/` - Calendar toggle template, controller, and default icons
+- `projects/ngx-mat-hijri-adapter/package.json` and `src/lib/version.ts` - Version 0.4.0
+
+</details>
+
+<details>
+<summary><strong>Docs</strong></summary>
+
+- `/docs/native-adapter`, `/docs/calendar-toggle`, and `/docs/styling`
+- `projects/docs/src/app/app.spec.ts` - Expects version 0.4.0 and the tag URL without a `v` prefix
+
+</details>
+
+<details>
+<summary><strong>Workspace</strong></summary>
+
+- `package.json` and `package-lock.json` - Version 0.4.0
+- `README.md`, `ROADMAP.md`, and `CONTRIBUTING.md` - Version 0.4.0
+- `CHANGELOG.md` - This entry
+
+</details>
+
+---
+
+**Version**: 0.4.0  
+**Release Date**: October 20, 2026  
+**Maintained by**: Mahmoud
+
+---
+
 ## [0.3.3] - 2026-10-19
 
 ### Custom domain and Apache 2.0
@@ -703,6 +765,7 @@ First release. One Angular Material date adapter for the Gregorian and Umm al-Qu
 
 ---
 
+[0.4.0]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.0
 [0.3.3]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.3
 [0.3.2]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.2
 [0.3.1]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.1
