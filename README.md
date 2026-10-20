@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.0"><img src="https://img.shields.io/github/v/tag/MahmoudTarek44/ngx-mat-hijri-adapter?label=version&amp;color=006d33" alt="Version" /></a>
+  <a href="https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.1"><img src="https://img.shields.io/github/v/tag/MahmoudTarek44/ngx-mat-hijri-adapter?label=version&amp;color=006d33" alt="Version" /></a>
   <a href="https://angular.dev"><img src="https://img.shields.io/badge/Angular-22-dd0031" alt="Angular" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-blue" alt="License: Apache 2.0" /></a>
   <a href="https://ngx-mat-hijri-adapter.dev/"><img src="https://img.shields.io/badge/docs-live%20demo-006d33" alt="Documentation" /></a>
@@ -29,7 +29,7 @@
 
 ## Status and installation
 
-Version 0.4.0 is tagged on [GitHub](https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.0). It is not yet published to npm. Once it is, add it to an Angular Material app:
+Version 0.4.1 is tagged on [GitHub](https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.1). It is not yet published to npm. A beta will be published before the stable 1.0.0. Once the package is on npm, add it to an Angular Material app:
 
 ```bash
 ng add ngx-mat-hijri-adapter

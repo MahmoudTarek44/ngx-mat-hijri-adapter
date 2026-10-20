@@ -26,7 +26,7 @@ export class Roadmap {
     'docsI18n',
   ] as const;
 
-  protected readonly inDevelopment: readonly string[] = [];
+  protected readonly inDevelopment: readonly string[] = ['stable', 'migrations'];
 
-  protected readonly future: readonly string[] = ['stable', 'changelog', 'migrations', 'mcp'];
+  protected readonly future: readonly string[] = ['mcp'];
 }

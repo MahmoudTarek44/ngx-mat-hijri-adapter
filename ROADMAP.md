@@ -37,8 +37,8 @@ When a task is squash-merged, set its status here to `Done` in the same breath a
 
 ## Decisions already settled
 
-- The current version (0.4.0) is tagged on GitHub and is not on npm. The first npm release is the stable 1.0.0.
-- `ng add ngx-mat-hijri-adapter` is the default install command in the docs. `npm install ngx-mat-hijri-adapter @internationalized/date` stays as the manual alternative. Both apply once 1.0.0 is published.
+- The current version (0.4.1) is tagged on GitHub and is not on npm. A beta will be published before the stable 1.0.0.
+- `ng add ngx-mat-hijri-adapter` is the default install command in the docs. `npm install ngx-mat-hijri-adapter @internationalized/date` stays as the manual alternative. Both apply once the package is on npm.
 - Getting started currently shows only a reactive field. That block is replaced with links to `/docs/reactive-fields` and `/docs/signal-fields`.
 - The home page already runs live cards for both reactive and signal fields. Those cards stay. The same two links are added above that grid.
 - One agent skill ships inside the npm package and is explained on the docs site. A skill that exists only in this repo would not help other developers.
@@ -99,7 +99,7 @@ Branch: `feat/release-warning`
 
 Add a site-wide banner on the docs app shell so the home page and every docs page show it.
 
-The banner states that the current minor version, read from `NGX_MAT_HIJRI_ADAPTER_VERSION`, is tagged on GitHub and is not published on npm, and that the first npm release will be the stable 1.0.0.
+The banner states that the current version, read from `NGX_MAT_HIJRI_ADAPTER_VERSION`, is tagged on GitHub and is not published on npm, and that a beta will be published before the stable 1.0.0.
 
 ## 4. Links to both form guides
 
@@ -139,7 +139,7 @@ Branch: `docs/contributing`
 
 Public policy for outside contributors. This is separate from the private delivery skill in task 0.
 
-- `CONTRIBUTING.md`: pull requests target `development`, one focused change per pull request, how to build and test, and that npm publishing starts at the stable 1.0.0.
+- `CONTRIBUTING.md`: pull requests target `development`, one focused change per pull request, how to build and test, and that a beta will be published before the stable 1.0.0.
 - `.github/PULL_REQUEST_TEMPLATE.md` linked to that policy.
 - `CODE_OF_CONDUCT.md` using the Contributor Covenant.
 - A link from `README.md`.
@@ -167,11 +167,17 @@ The branch records the findings. It does not apply a pile of fixes. Anything wor
 
 When the review is accepted, mark task 10 `Done` here.
 
+## Under development
+
+These are in progress. They are not numbered tasks, and they are not done.
+
+- The stable 1.0.0 release: version, changelog, tag, and retiring the unpublished-version banner. A beta is published before it.
+- `ng update` migrations kept current when a future Angular Material `DateAdapter` change requires one.
+
+The changelog stays `CHANGELOG.md` in the GitHub repository. There is no docs changelog page.
+
 ## Later, not scheduled
 
 Choose these after the closing check. They come from the current package and from what Angular Material apps need. They are not branches yet.
 
-- The 1.0.0 npm release itself: version, changelog, tag, and the docs site, which retires the unpublished-version banner.
-- A changelog page on the docs site, fed by `CHANGELOG.md`.
-- `ng update` migrations kept current when a future Angular Material `DateAdapter` change requires one.
 - A package MCP server an agent can call for setup, the stored date type, and calendar checks. The markdown skill stays the way those rules are installed.

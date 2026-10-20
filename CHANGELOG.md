@@ -5,6 +5,49 @@ All notable changes to ngx-mat-hijri-adapter will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.1] - 2026-10-20
+
+### Roadmap and npm wording
+
+This patch is tagged on GitHub and is not published on npm. A beta will be published before the stable 1.0.0. The public roadmap now treats that stable release, and `ng update` migrations, as work in progress. The changelog stays `CHANGELOG.md` in the GitHub repository.
+
+### 📝 Summary of Changes
+
+#### 🔧 Changed
+
+- **npm wording**: The banner, Getting started, README, and contributing guide no longer say that npm publishing starts at the stable 1.0.0
+- **Roadmap**: Stable 1.0.0 release and ng update migrations are under development. The package MCP server stays in Future. The docs changelog page is no longer a roadmap item
+
+### 📦 Modified Files
+
+<details>
+<summary><strong>Docs</strong></summary>
+
+- `projects/docs/src/app/docs/pages/roadmap.ts` - Under development and Future lists
+- `projects/docs/src/locale/en.json` and `ar.json` - Banner, Getting started, and roadmap copy
+- `projects/docs/src/app/app.spec.ts` - Expects version 0.4.1 and the beta wording
+- `projects/docs/src/app/docs/docs-layout.spec.ts` - Expects the two under-development cards
+
+</details>
+
+<details>
+<summary><strong>Workspace</strong></summary>
+
+- `package.json` and `package-lock.json` - Version 0.4.1
+- `projects/ngx-mat-hijri-adapter/package.json` and `src/lib/version.ts` - Version 0.4.1
+- `README.md`, `ROADMAP.md`, and `CONTRIBUTING.md` - Version 0.4.1 and the beta wording
+- `CHANGELOG.md` - This entry
+
+</details>
+
+---
+
+**Version**: 0.4.1  
+**Release Date**: October 20, 2026  
+**Maintained by**: Mahmoud
+
+---
+
 ## [0.4.0] - 2026-10-20
 
 ### Calendar toggle, calendarOf(), and styling
@@ -765,6 +808,7 @@ First release. One Angular Material date adapter for the Gregorian and Umm al-Qu
 
 ---
 
+[0.4.1]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.1
 [0.4.0]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.0
 [0.3.3]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.3
 [0.3.2]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.2

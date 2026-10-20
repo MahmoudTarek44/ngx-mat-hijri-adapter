@@ -37,7 +37,7 @@
   "shell": {
     "skip": "تجاوز إلى المحتوى",
     "bannerBefore": "الإصدار {{version}} له tag على",
-    "bannerAfter": "وغير منشور على npm. أول إصدار على npm سيكون المستقر 1.0.0.",
+    "bannerAfter": "وغير منشور على npm. سيُنشر إصدار beta قبل المستقر 1.0.0.",
     "docs": "التوثيق",
     "playground": "التجربة",
     "examples": "الأمثلة",
@@ -187,7 +187,7 @@
   "gettingStarted": {
     "lead": "أضف datepicker هجريًا أو ميلاديًا إلى تطبيق Angular Material في ثلاث خطوات.",
     "install": "التثبيت",
-    "version": "الإصدار {{version}} له tag على GitHub ولم يُنشر بعد على npm. عندما يُنشر،",
+    "version": "الإصدار {{version}} له tag على GitHub ولم يُنشر بعد على npm. سيُنشر إصدار beta قبل المستقر 1.0.0. عندما تكون الحزمة على npm،",
     "versionMid": "هو الافتراضي. يثبّت الحزمة، ويضيف",
     "versionEnd": "عندما تكون تلك الحزمة ناقصة، ويسجّل",
     "manual": "يمكنك تثبيت الحزم يدويًا بدل ذلك:",
@@ -713,15 +713,11 @@
       },
       "stable": {
         "title": "إصدار 1.0.0 المستقر",
-        "detail": "الإصدار وسجل التغييرات والـ tag، وإلغاء شريط الإصدار غير المنشور في موقع التوثيق."
-      },
-      "changelog": {
-        "title": "صفحة سجل التغييرات",
-        "detail": "صفحة سجل تغييرات في موقع التوثيق، تغذيها CHANGELOG.md."
+        "detail": "ما زال قادمًا. يُنشر إصدار beta قبله، ثم الإصدار وسجل التغييرات والـ tag وإلغاء شريط الإصدار غير المنشور."
       },
       "migrations": {
         "title": "migrations لـ ng update",
-        "detail": "تُبقى محدّثة عندما يتطلب تغيير مستقبلي في DateAdapter من Angular Material migration."
+        "detail": "تُحدَّث عندما يتطلب تغيير مستقبلي في DateAdapter من Angular Material migration."
       },
       "mcp": {
         "title": "MCP server للحزمة",
