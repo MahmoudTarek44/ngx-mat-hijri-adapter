@@ -80,6 +80,11 @@ const GROUPS: readonly ApiGroup[] = [
         kind: 'function',
         description: 'Converts a date to another calendar.',
       },
+      {
+        name: 'calendarOf',
+        kind: 'function',
+        description: 'Reads the supported calendar. gregory becomes gregorian.',
+      },
       { name: 'compareCalendarDates', kind: 'function', description: 'Orders two dates.' },
       {
         name: 'addCalendarDate',

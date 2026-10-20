@@ -12,6 +12,7 @@ export class Roadmap {
     'twoCalendars',
     'locale',
     'calendarDate',
+    'calendarOf',
     'native',
     'datepicker',
     'fields',
@@ -24,7 +25,7 @@ export class Roadmap {
     'docsI18n',
   ] as const;
 
-  protected readonly inDevelopment: readonly string[] = ['calendarOf', 'toggleTemplates'];
+  protected readonly inDevelopment: readonly string[] = ['toggleTemplates'];
 
   protected readonly future: readonly string[] = ['stable', 'changelog', 'migrations', 'mcp'];
 }

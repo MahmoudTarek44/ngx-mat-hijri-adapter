@@ -37,7 +37,7 @@ Both providers default to the Umm al-Qura calendar and the `ar-SA` locale. The l
 
 `valueCalendar` is the calendar of the stored form value. `calendarToggle` changes the calendar shown and typed in the field. Switching it leaves the stored value in `valueCalendar`.
 
-The package name for the Gregorian calendar is `gregorian`. A `CalendarDate` in that calendar reports `calendar.identifier === 'gregory'`.
+The package name for the Gregorian calendar is `gregorian`. A `CalendarDate` in that calendar reports `calendar.identifier === 'gregory'`. `calendarOf(date)` returns `gregorian` or `islamic-umalqura`, mapping `gregory` to `gregorian`. Any other identifier throws. It does not apply to a JavaScript `Date`.
 
 `HijriDateAdapter.createDate` uses 0-based months, matching Material. `createDate(1445, 8, 1)` is 1 Ramadan 1445. `createCalendarDate` uses 1-based months. `createCalendarDate('islamic-umalqura', 1445, 9, 1)` is that same day.
 

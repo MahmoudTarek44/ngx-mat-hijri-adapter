@@ -231,7 +231,8 @@
     "rangeAnd": "and",
     "rangeEnd": "). AH 1600 is rejected because the underlying table falls back to the civil Islamic calendar there.",
     "throwBefore": "Creating, converting, or adding to a date outside that range throws",
-    "invalidBefore": "Creating a day that does not exist, such as 30 in a 29-day month, throws"
+    "invalidBefore": "Creating a day that does not exist, such as 30 in a 29-day month, throws",
+    "of": "calendarOf() reads the package calendar of a CalendarDate. gregory becomes gregorian. islamic-umalqura stays islamic-umalqura. Any other identifier throws."
   },
   "dateAdapter": {
     "leadBefore": "Two adapters can drive a Material datepicker. Register one of them.",
@@ -584,6 +585,7 @@
       "CalendarLocale": "The default locales, ar-SA and en-US.",
       "createCalendarDate": "Creates a validated date. Months are 1-based.",
       "convertCalendarDate": "Converts a date to another calendar.",
+      "calendarOf": "Reads the supported calendar. gregory becomes gregorian.",
       "compareCalendarDates": "Orders two dates.",
       "addCalendarDate": "Adds a duration, keeping the Umm al-Qura range.",
       "daysInCalendarMonth": "Days in the month of a date.",

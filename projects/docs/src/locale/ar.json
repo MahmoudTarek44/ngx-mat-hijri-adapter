@@ -231,7 +231,8 @@
     "rangeAnd": "و",
     "rangeEnd": "). سنة 1600 هـ مرفوضة لأن الجدول الأساسي يعود هناك إلى التقويم الإسلامي المدني.",
     "throwBefore": "إنشاء تاريخ خارج ذلك المدى أو تحويله أو الإضافة إليه يرمي",
-    "invalidBefore": "إنشاء يوم غير موجود، مثل 30 في شهر من 29 يومًا، يرمي"
+    "invalidBefore": "إنشاء يوم غير موجود، مثل 30 في شهر من 29 يومًا، يرمي",
+    "of": "يقرأ calendarOf() تقويم الحزمة المخزّن في CalendarDate. يصبح gregory هو gregorian. يبقى islamic-umalqura كما هو. أي معرّف آخر يرمي خطأ."
   },
   "dateAdapter": {
     "leadBefore": "يمكن لـ adapters تشغيل datepicker من Material. سجّل أحدهما.",
@@ -584,6 +585,7 @@
       "CalendarLocale": "قيم locale الافتراضية، ar-SA و en-US.",
       "createCalendarDate": "ينشئ تاريخًا متحققًا منه. الشهور تبدأ من 1.",
       "convertCalendarDate": "يحوّل تاريخًا إلى تقويم آخر.",
+      "calendarOf": "يقرأ التقويم المدعوم. يصبح gregory هو gregorian.",
       "compareCalendarDates": "يرتب تاريخين.",
       "addCalendarDate": "يضيف مدة، مع الحفاظ على مدى أم القرى.",
       "daysInCalendarMonth": "أيام شهر تاريخ.",

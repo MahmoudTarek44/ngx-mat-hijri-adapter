@@ -72,6 +72,18 @@ export function calendarToday(calendar: SupportedCalendar, timeZone: string): Ca
   return convertCalendarDate(today(timeZone), calendar);
 }
 
+/** The package calendar of a date. `gregory` is returned as `gregorian`. */
+export function calendarOf(date: CalendarDate): SupportedCalendar {
+  const identifier = date.calendar.identifier;
+  if (identifier === 'gregory') {
+    return CalendarCode.gregorian;
+  }
+  if (identifier === CalendarCode.umalqura) {
+    return CalendarCode.umalqura;
+  }
+  throw new Error(`Unsupported calendar "${identifier}".`);
+}
+
 function assertUmalquraYear(year: number): void {
   if (year < UMALQURA_MIN_YEAR || year > UMALQURA_MAX_YEAR) {
     throw new UmalquraDateRangeError(year);

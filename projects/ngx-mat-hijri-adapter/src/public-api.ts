@@ -11,6 +11,7 @@ export {
   InvalidCalendarDateError,
   UmalquraDateRangeError,
   addCalendarDate,
+  calendarOf,
   calendarToday,
   compareCalendarDates,
   convertCalendarDate,

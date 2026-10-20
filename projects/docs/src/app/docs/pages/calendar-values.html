@@ -14,12 +14,15 @@
   </p>
   <code-block language="ts" [code]="code.create" />
   <p>
-    {{ 'calendarValues.helpers' | translate }} <code>compareCalendarDates</code
+    {{ 'calendarValues.helpers' | translate }} <code>calendarOf</code
+    >{{ 'calendarValues.helpersMid' | translate }} <code>compareCalendarDates</code
     >{{ 'calendarValues.helpersMid' | translate }} <code>addCalendarDate</code
     >{{ 'calendarValues.helpersMid' | translate }} <code>daysInCalendarMonth</code
     >{{ 'calendarValues.helpersMid' | translate }} <code>monthsInCalendarYear</code
     >{{ 'calendarValues.helpersAnd' | translate }} <code>calendarToday</code>.
   </p>
+  <p>{{ 'calendarValues.of' | translate }}</p>
+  <code-block language="ts" [code]="code.calendarOf" />
 
   <h2 id="constants">{{ 'calendarValues.constants' | translate }}</h2>
   <p>

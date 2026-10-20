@@ -1,3 +1,4 @@
+import { CalendarDate, IslamicCivilCalendar } from '@internationalized/date';
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -6,6 +7,7 @@ import {
   InvalidCalendarDateError,
   UmalquraDateRangeError,
   addCalendarDate,
+  calendarOf,
   calendarToday,
   compareCalendarDates,
   convertCalendarDate,
@@ -66,6 +68,14 @@ describe('Umm al-Qura calendar dates', () => {
     expect(() => createCalendarDate('islamic-umalqura', 1445, 10, 30)).toThrow(InvalidCalendarDateError);
     expect(() => convertCalendarDate(createCalendarDate('gregorian', 1800, 1, 1), 'islamic-umalqura')).toThrow(
       UmalquraDateRangeError,
+    );
+  });
+
+  it('names the package calendar, including gregory as gregorian', () => {
+    expect(calendarOf(createCalendarDate('gregorian', 2024, 3, 11))).toBe('gregorian');
+    expect(calendarOf(createCalendarDate('islamic-umalqura', 1445, 9, 1))).toBe('islamic-umalqura');
+    expect(() => calendarOf(new CalendarDate(new IslamicCivilCalendar(), 1445, 9, 1))).toThrow(
+      'Unsupported calendar "islamic-civil"',
     );
   });
 
