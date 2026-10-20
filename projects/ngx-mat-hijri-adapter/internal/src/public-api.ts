@@ -3,7 +3,10 @@
  * Not part of the public API. Exports may change in any release.
  */
 
-export { DateFieldCore as ɵDateFieldCore } from './date-field-core';
+export {
+  DateFieldCore as ɵDateFieldCore,
+  type CalendarToggleController as ɵCalendarToggleController,
+} from './date-field-core';
 export { provideFieldDateFormats as ɵprovideFieldDateFormats } from './field-providers';
 export {
   convertOrNull as ɵconvertOrNull,

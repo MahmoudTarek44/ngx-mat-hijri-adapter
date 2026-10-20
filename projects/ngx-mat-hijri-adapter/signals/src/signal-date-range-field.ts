@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   booleanAttribute,
@@ -16,6 +17,7 @@ import {
   transformedValue,
 } from '@angular/forms/signals';
 import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 import { DateAdapter } from '@angular/material/core';
 import {
   MatDateRangeInput,
@@ -54,6 +56,7 @@ const EMPTY_RANGE: CalendarDateRange = { start: null, end: null };
     provideFieldDateFormats(),
   ],
   imports: [
+    NgTemplateOutlet,
     ReactiveFormsModule,
     MatFormField,
     MatLabel,
@@ -61,6 +64,7 @@ const EMPTY_RANGE: CalendarDateRange = { start: null, end: null };
     MatError,
     MatSuffix,
     MatIconButton,
+    MatIcon,
     MatDateRangeInput,
     MatDateRangePicker,
     MatStartDate,
@@ -124,7 +128,7 @@ export class SignalDateRangeField
     firstErrorMessage(this.errors(), this.errorMessages()),
   );
   protected readonly equivalent = computed(() => {
-    if (!this.calendarToggle() || !this.equivalentHint()) {
+    if (!this.toggleMode() || !this.equivalentHint()) {
       return '';
     }
 

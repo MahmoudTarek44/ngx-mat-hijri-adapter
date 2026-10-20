@@ -17,6 +17,7 @@ export class Roadmap {
     'datepicker',
     'fields',
     'toggle',
+    'toggleTemplates',
     'formats',
     'parsing',
     'rtl',
@@ -25,7 +26,7 @@ export class Roadmap {
     'docsI18n',
   ] as const;
 
-  protected readonly inDevelopment: readonly string[] = ['toggleTemplates'];
+  protected readonly inDevelopment: readonly string[] = [];
 
   protected readonly future: readonly string[] = ['stable', 'changelog', 'migrations', 'mcp'];
 }

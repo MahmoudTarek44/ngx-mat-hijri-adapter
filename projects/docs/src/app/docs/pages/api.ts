@@ -15,7 +15,12 @@ interface ApiGroup {
 
 const FIELD_TYPES: readonly ApiEntry[] = [
   { name: 'CalendarDateRange', kind: 'type', description: 'The value of a range field.' },
-  { name: 'DateFieldLabels', kind: 'type', description: 'Button text and accessible names.' },
+  { name: 'DateFieldLabels', kind: 'type', description: 'Letter labels and accessible names.' },
+  {
+    name: 'CalendarToggleController',
+    kind: 'type',
+    description: 'Context of a #calendarToggle template.',
+  },
   { name: 'DateFieldPeriod', kind: 'type', description: "'all', 'past', or 'future'." },
 ];
 

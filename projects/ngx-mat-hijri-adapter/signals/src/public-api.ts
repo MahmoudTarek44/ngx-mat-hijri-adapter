@@ -7,6 +7,7 @@ export { SignalDateRangeField } from './signal-date-range-field';
 export type { DateDisplayFormat } from 'ngx-mat-hijri-adapter';
 export type {
   ɵCalendarDateRange as CalendarDateRange,
+  ɵCalendarToggleController as CalendarToggleController,
   ɵDateFieldLabels as DateFieldLabels,
   ɵDateFieldPeriod as DateFieldPeriod,
 } from 'ngx-mat-hijri-adapter/internal';

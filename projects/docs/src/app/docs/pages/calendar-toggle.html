@@ -1,0 +1,20 @@
+<article class="doc-page">
+  <h1>{{ 'nav.calendar-toggle' | translate }}</h1>
+  <p class="doc-lead">{{ 'calendarTogglePage.lead' | translate }}</p>
+
+  <h2 id="why">{{ 'calendarTogglePage.why' | translate }}</h2>
+  <p>{{ 'calendarTogglePage.whyBody' | translate }}</p>
+
+  <h2 id="template">{{ 'calendarTogglePage.template' | translate }}</h2>
+  <p>{{ 'calendarTogglePage.templateBody' | translate }}</p>
+
+  <example-card
+    id="demo"
+    [heading]="'calendarTogglePage.demo' | translate"
+    [description]="'calendarTogglePage.demoText' | translate"
+    entryPoint="ngx-mat-hijri-adapter/signals"
+    [snippets]="snippets"
+  >
+    <calendar-toggle-demo />
+  </example-card>
+</article>

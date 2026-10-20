@@ -154,7 +154,7 @@ The page has three sections:
 
 - **Implemented.** The main features that already ship: both calendars, locale separate from calendar, `CalendarDate` values, the Material datepicker, reactive and signal fields, the calendar toggle, display formats, strict parsing, right-to-left, `ng add`, the agent skill, and Arabic and English docs. The docs site switches language with ngx-translate. Arabic uses the Noto Kufi Arabic font and a right-to-left layout. Task 8 is shown once as a decision that a `@types` package will not be published.
 - **Implemented.** `calendarOf()` reads the package calendar of a `CalendarDate`. `gregory` becomes `gregorian`. Any other identifier throws.
-- **Under development.** Custom templates for the calendar-toggle buttons. The native Hijri adapter ships from `ngx-mat-hijri-adapter/native`.
+- **Implemented.** A `#calendarToggle` template replaces the default icon buttons. `let-controller` can show or open either calendar without changing `valueCalendar`. The native Hijri adapter ships from `ngx-mat-hijri-adapter/native`.
 - **Future.** The unscheduled ideas below. Nothing there is a commitment.
 
 ## 10. Closing workspace check

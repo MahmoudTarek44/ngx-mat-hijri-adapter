@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, forwardRef, input, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
@@ -8,6 +9,7 @@ import {
   type ValidationErrors,
 } from '@angular/forms';
 import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 import { DateAdapter } from '@angular/material/core';
 import {
   MatDatepicker,
@@ -43,6 +45,7 @@ import { ReactiveDateFieldBase } from './reactive-date-field-base';
     { provide: NG_VALIDATORS, useExisting: forwardRef(() => ReactiveDateField), multi: true },
   ],
   imports: [
+    NgTemplateOutlet,
     ReactiveFormsModule,
     MatFormField,
     MatLabel,
@@ -51,6 +54,7 @@ import { ReactiveDateFieldBase } from './reactive-date-field-base';
     MatSuffix,
     MatInput,
     MatIconButton,
+    MatIcon,
     MatDatepicker,
     MatDatepickerInput,
     MatDatepickerToggle,
@@ -66,7 +70,7 @@ export class ReactiveDateField extends ReactiveDateFieldBase<CalendarDate | null
   protected readonly shown = signal<CalendarDate | null>(null);
   private stored: CalendarDate | null = null;
   protected readonly equivalent = computed(() =>
-    this.calendarToggle() && this.equivalentHint()
+    this.toggleMode() && this.equivalentHint()
       ? equivalentText(this.shown(), this.display(), this.activeLocale(), this.labels())
       : '',
   );

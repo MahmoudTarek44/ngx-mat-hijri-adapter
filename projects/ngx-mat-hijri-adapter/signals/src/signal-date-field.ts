@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   booleanAttribute,
@@ -16,6 +17,7 @@ import {
   transformedValue,
 } from '@angular/forms/signals';
 import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 import { DateAdapter } from '@angular/material/core';
 import {
   MatDatepicker,
@@ -50,6 +52,7 @@ import { datepickerErrors, firstErrorMessage } from './signal-errors';
     provideFieldDateFormats(),
   ],
   imports: [
+    NgTemplateOutlet,
     ReactiveFormsModule,
     MatFormField,
     MatLabel,
@@ -58,6 +61,7 @@ import { datepickerErrors, firstErrorMessage } from './signal-errors';
     MatSuffix,
     MatInput,
     MatIconButton,
+    MatIcon,
     MatDatepicker,
     MatDatepickerInput,
     MatDatepickerToggle,
@@ -104,7 +108,7 @@ export class SignalDateField
     firstErrorMessage(this.errors(), this.errorMessages()),
   );
   protected readonly equivalent = computed(() =>
-    this.calendarToggle() && this.equivalentHint()
+    this.toggleMode() && this.equivalentHint()
       ? equivalentText(this.shown(), this.display(), this.activeLocale(), this.labels())
       : '',
   );

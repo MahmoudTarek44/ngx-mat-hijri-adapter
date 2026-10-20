@@ -39,6 +39,10 @@
     {{ 'formFields.hintTo' | translate }} <code>false</code>
     {{ 'formFields.hintEnd' | translate }}
   </p>
+  <p>
+    {{ 'formFields.custom' | translate }}
+    <a routerLink="/docs/calendar-toggle">{{ 'nav.calendar-toggle' | translate }}</a>.
+  </p>
 
   <h2 id="format">{{ 'formFields.format' | translate }}</h2>
   <p>
@@ -131,11 +135,7 @@
       <tr>
         <td><code>calendarLabels</code></td>
         <td>
-          {{ 'formFields.labels' | translate }} <code>هـ</code>
-          {{ 'formFields.labelsAnd' | translate }} <code>م</code>
-          {{ 'formFields.labelsFor' | translate }} <code>AH</code>
-          {{ 'formFields.labelsAnd' | translate }} <code>AD</code>
-          {{ 'formFields.labelsOtherwise' | translate }}
+          {{ 'formFields.labels' | translate }}
         </td>
       </tr>
     </tbody>

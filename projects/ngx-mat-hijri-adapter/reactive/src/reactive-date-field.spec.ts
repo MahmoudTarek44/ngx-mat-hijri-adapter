@@ -229,11 +229,67 @@ describe('ReactiveDateField', () => {
     expect(hijri?.value).toBe('1/9/1445');
     expect(gregorian?.value).toBe('11/3/2024');
 
-    (element.querySelector('button[aria-label="Hijri calendar"]') as HTMLButtonElement).click();
+    const hijriButton = element.querySelector(
+      'button[aria-label="Hijri calendar"]',
+    ) as HTMLButtonElement;
+    const gregorianButton = element.querySelector(
+      'button[aria-label="Gregorian calendar"]',
+    ) as HTMLButtonElement;
+    expect(hijriButton.querySelector('mat-icon')?.textContent?.trim()).toBe('dark_mode');
+    expect(gregorianButton.querySelector('mat-icon')?.textContent?.trim()).toBe('add_circle_outline');
+
+    hijriButton.click();
     await fixture.whenStable();
 
     expect(hijri?.value).toBe('1/9/1445');
     expect(gregorian?.value).toBe('1/9/1445');
     expect(fixture.componentInstance.gregorian.value?.calendar.identifier).toBe('gregory');
+  });
+
+  it('opens either calendar from a content template without changing the stored calendar', async () => {
+    @Component({
+      imports: [ReactiveFormsModule, ReactiveDateField],
+      template: `
+        <ngx-mat-reactive-date-field [formControl]="date" valueCalendar="gregorian">
+          <ng-template #calendarToggle let-controller>
+            <button type="button" (click)="controller.open('islamic-umalqura')">Hijri</button>
+            <button type="button" (click)="controller.open('gregorian')">Gregorian</button>
+          </ng-template>
+        </ngx-mat-reactive-date-field>
+      `,
+    })
+    class CustomToggle {
+      readonly date = new FormControl<CalendarDate | null>(
+        createCalendarDate('gregorian', 2024, 3, 11),
+      );
+    }
+
+    TestBed.configureTestingModule({
+      providers: [provideHijriDateAdapter({ locale: 'en-US', timeZone: 'UTC' })],
+    });
+    const fixture = TestBed.createComponent(CustomToggle);
+    await fixture.whenStable();
+    const element: HTMLElement = fixture.nativeElement;
+    const input = element.querySelector('input') as HTMLInputElement;
+    const click = async (name: string) => {
+      (Array.from(element.querySelectorAll('button')).find(
+        (button) => button.textContent?.trim() === name,
+      ) as HTMLButtonElement).click();
+      await fixture.whenStable();
+    };
+
+    expect(input.value).toBe('11/3/2024');
+    expect(element.querySelector('mat-hint')?.textContent).toContain('AH');
+
+    await click('Hijri');
+    expect(input.value).toBe('1/9/1445');
+    expect(fixture.componentInstance.date.value?.calendar.identifier).toBe('gregory');
+    expect(fixture.componentInstance.date.dirty).toBe(false);
+    expect(element.querySelector('mat-hint')?.textContent).toContain('AD');
+
+    await click('Gregorian');
+    expect(input.value).toBe('11/3/2024');
+    expect(fixture.componentInstance.date.value?.calendar.identifier).toBe('gregory');
+    expect(element.querySelector('mat-hint')).not.toBeNull();
   });
 });

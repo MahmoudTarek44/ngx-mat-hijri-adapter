@@ -55,7 +55,7 @@ async function setup() {
   };
   const text = (selector: string) => element.querySelector(selector)?.textContent?.trim() ?? '';
 
-  return { fixture, host: fixture.componentInstance, input, type, press, text };
+  return { fixture, host: fixture.componentInstance, element, input, type, press, text };
 }
 
 function ymd(date: CalendarDate | null): string {
@@ -75,7 +75,12 @@ describe('SignalDateField', () => {
   });
 
   it('switches the displayed calendar without changing the model', async () => {
-    const { host, input, type, press, text } = await setup();
+    const { element, host, input, type, press, text } = await setup();
+
+    const hijriButton = element.querySelector('button[aria-label="Hijri calendar"]');
+    const gregorianButton = element.querySelector('button[aria-label="Gregorian calendar"]');
+    expect(hijriButton?.querySelector('mat-icon')?.textContent?.trim()).toBe('dark_mode');
+    expect(gregorianButton?.querySelector('mat-icon')?.textContent?.trim()).toBe('add_circle_outline');
 
     await press('Gregorian calendar');
     expect(input.value).toBe('11/3/2024');
@@ -158,5 +163,51 @@ describe('SignalDateField', () => {
 
     expect(input.value).toBe('1 Ramadan, 1445');
     expect(ymd(host.model().date)).toBe('islamic-umalqura:1445-9-1');
+  });
+
+  it('opens either calendar from a content template without changing the stored calendar', async () => {
+    @Component({
+      imports: [FormField, SignalDateField],
+      template: `
+        <ngx-mat-signal-date-field label="Date" [formField]="f.date" valueCalendar="gregorian">
+          <ng-template #calendarToggle let-controller>
+            <button type="button" (click)="controller.open('islamic-umalqura')">Hijri</button>
+            <button type="button" (click)="controller.open('gregorian')">Gregorian</button>
+          </ng-template>
+        </ngx-mat-signal-date-field>
+      `,
+    })
+    class CustomToggle {
+      readonly model = signal<Model>({ date: createCalendarDate('gregorian', 2024, 3, 11) });
+      readonly f = form(this.model);
+    }
+
+    TestBed.configureTestingModule({
+      providers: [provideHijriDateAdapter({ locale: 'en-US', timeZone: 'UTC' })],
+    });
+    const fixture = TestBed.createComponent(CustomToggle);
+    await fixture.whenStable();
+    const element: HTMLElement = fixture.nativeElement;
+    const input = element.querySelector('input') as HTMLInputElement;
+    const click = async (name: string) => {
+      (Array.from(element.querySelectorAll('button')).find(
+        (button) => button.textContent?.trim() === name,
+      ) as HTMLButtonElement).click();
+      await fixture.whenStable();
+    };
+
+    expect(input.value).toBe('11/3/2024');
+    expect(element.querySelector('mat-hint')?.textContent).toContain('AH');
+
+    await click('Hijri');
+    expect(input.value).toBe('1/9/1445');
+    expect(ymd(fixture.componentInstance.model().date)).toBe('gregory:2024-3-11');
+    expect(fixture.componentInstance.f.date().dirty()).toBe(false);
+    expect(element.querySelector('mat-hint')?.textContent).toContain('AD');
+
+    await click('Gregorian');
+    expect(input.value).toBe('11/3/2024');
+    expect(ymd(fixture.componentInstance.model().date)).toBe('gregory:2024-3-11');
+    expect(element.querySelector('mat-hint')).not.toBeNull();
   });
 });

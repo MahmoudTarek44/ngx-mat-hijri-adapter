@@ -35,7 +35,27 @@ Both providers default to the Umm al-Qura calendar and the `ar-SA` locale. The l
 
 ## Calendars
 
-`valueCalendar` is the calendar of the stored form value. `calendarToggle` changes the calendar shown and typed in the field. Switching it leaves the stored value in `valueCalendar`.
+`valueCalendar` is the calendar of the stored form value. `calendarToggle` changes the calendar shown and typed in the field. Switching it leaves the stored value in `valueCalendar`. The default buttons are icons: `dark_mode` for Hijri and `add_circle_outline` for Gregorian.
+
+A content template replaces those buttons. One icon can open a menu:
+
+```html
+<ng-template #calendarToggle let-controller>
+  <button type="button" mat-icon-button [matMenuTriggerFor]="calendars" [disabled]="controller.disabled">
+    <mat-icon>{{ controller.display === 'gregorian' ? 'add_circle_outline' : 'dark_mode' }}</mat-icon>
+  </button>
+  <mat-menu #calendars="matMenu">
+    <button type="button" mat-menu-item (click)="controller.open('islamic-umalqura')">
+      {{ controller.labels.hijri }}
+    </button>
+    <button type="button" mat-menu-item (click)="controller.open('gregorian')">
+      {{ controller.labels.gregorian }}
+    </button>
+  </mat-menu>
+</ng-template>
+```
+
+`controller.show` switches the calendar and leaves the picker closed. `controller.open` switches it and opens the picker. Neither changes the stored `CalendarDate` or marks the control dirty. `equivalentHint` still renders under the field.
 
 The package name for the Gregorian calendar is `gregorian`. A `CalendarDate` in that calendar reports `calendar.identifier === 'gregory'`. `calendarOf(date)` returns `gregorian` or `islamic-umalqura`, mapping `gregory` to `gregorian`. Any other identifier throws. It does not apply to a JavaScript `Date`.
 

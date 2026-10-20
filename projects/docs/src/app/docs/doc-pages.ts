@@ -13,6 +13,7 @@ export const DOC_PAGES: readonly DocPage[] = [
   { path: 'native-adapter', title: 'Native adapter' },
   { path: 'parsing-formatting', title: 'Parsing and formatting' },
   { path: 'form-fields', title: 'Form fields' },
+  { path: 'calendar-toggle', title: 'Calendar toggle' },
   { path: 'reactive-fields', title: 'Reactive fields' },
   { path: 'signal-fields', title: 'Signal fields' },
   { path: 'right-to-left', title: 'Right-to-left' },
@@ -55,6 +56,11 @@ export const DOC_ROUTES: Routes = [
     path: 'form-fields',
     title: pageTitle('form-fields'),
     loadComponent: () => import('./pages/form-fields').then((m) => m.FormFields),
+  },
+  {
+    path: 'calendar-toggle',
+    title: pageTitle('calendar-toggle'),
+    loadComponent: () => import('./pages/calendar-toggle').then((m) => m.CalendarTogglePage),
   },
   {
     path: 'reactive-fields',

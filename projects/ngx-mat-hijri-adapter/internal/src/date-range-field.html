@@ -26,28 +26,35 @@
     />
   </mat-date-range-input>
 
-  @if (calendarToggle()) {
+  @if (toggleMode()) {
     <span matIconSuffix class="date-field-calendars">
-      <button
-        type="button"
-        mat-icon-button
-        [disabled]="disabled()"
-        [attr.aria-pressed]="display() === calendarCode.umalqura"
-        [attr.aria-label]="labels().hijriAriaLabel"
-        (click)="openIn(calendarCode.umalqura, picker)"
-      >
-        {{ labels().hijri }}
-      </button>
-      <button
-        type="button"
-        mat-icon-button
-        [disabled]="disabled()"
-        [attr.aria-pressed]="display() === calendarCode.gregorian"
-        [attr.aria-label]="labels().gregorianAriaLabel"
-        (click)="openIn(calendarCode.gregorian, picker)"
-      >
-        {{ labels().gregorian }}
-      </button>
+      @if (calendarToggleTemplate(); as calendarToggle) {
+        <ng-container
+          [ngTemplateOutlet]="calendarToggle"
+          [ngTemplateOutletContext]="{ $implicit: toggleController() }"
+        />
+      } @else {
+        <button
+          type="button"
+          mat-icon-button
+          [disabled]="disabled()"
+          [attr.aria-pressed]="display() === calendarCode.umalqura"
+          [attr.aria-label]="labels().hijriAriaLabel"
+          (click)="openIn(calendarCode.umalqura, picker)"
+        >
+          <mat-icon aria-hidden="true">dark_mode</mat-icon>
+        </button>
+        <button
+          type="button"
+          mat-icon-button
+          [disabled]="disabled()"
+          [attr.aria-pressed]="display() === calendarCode.gregorian"
+          [attr.aria-label]="labels().gregorianAriaLabel"
+          (click)="openIn(calendarCode.gregorian, picker)"
+        >
+          <mat-icon aria-hidden="true">add_circle_outline</mat-icon>
+        </button>
+      }
     </span>
   } @else {
     <mat-datepicker-toggle matIconSuffix [for]="picker" />

@@ -7,6 +7,7 @@
     "native-adapter": "Native adapter · ngx-mat-hijri-adapter",
     "parsing-formatting": "Parsing and formatting · ngx-mat-hijri-adapter",
     "form-fields": "Form fields · ngx-mat-hijri-adapter",
+    "calendar-toggle": "calendar toggle · ngx-mat-hijri-adapter",
     "reactive-fields": "Reactive fields · ngx-mat-hijri-adapter",
     "signal-fields": "Signal fields · ngx-mat-hijri-adapter",
     "right-to-left": "من اليمين إلى اليسار · ngx-mat-hijri-adapter",
@@ -22,6 +23,7 @@
     "native-adapter": "Native adapter",
     "parsing-formatting": "Parsing and formatting",
     "form-fields": "Form fields",
+    "calendar-toggle": "calendar toggle",
     "reactive-fields": "Reactive fields",
     "signal-fields": "Signal fields",
     "right-to-left": "من اليمين إلى اليسار",
@@ -407,7 +409,8 @@
     "emittedEnd": "يرمي خطأ.",
     "toggle": "calendar toggle و equivalent hint",
     "toggleBefore": "مع",
-    "toggleMid": "، يحل زرا الهجري والميلادي محل icon التقويم. الضغط على أحدهما يبدّل التقويم المعروض والمكتوب ثم يفتح الـ datepicker. التبديل لا يغيّر قيمة النموذج ولا يعلّم الـ control كـ dirty.",
+    "toggleMid": "، تحل أزرار أيقونات الهجري والميلادي محل icon التقويم. الضغط على أحدهما يبدّل التقويم المعروض والمكتوب ثم يفتح الـ datepicker. التبديل لا يغيّر قيمة النموذج ولا يعلّم الـ control كـ dirty.",
+    "custom": "template باسم #calendarToggle يستبدل هذه الأزرار. اقرأ",
     "toggleIn": "مكتوب في العرض الميلادي يخزّن 10 رمضان 1445 عندما يكون",
     "toggleIs": "هو",
     "hintBefore": "مع تشغيل الـ toggle، يُظهر الـ hint التاريخ المختار في التقويم غير المعروض، مثل",
@@ -445,7 +448,7 @@
     "periodEnd": ". الماضي والمستقبل كلاهما يستبعد اليوم.",
     "filter": "يتلقى كل يوم في",
     "touch": "يفتح التقويم كـ Touch UI.",
-    "labels": "يتجاوز نص الأزرار و accessible names. الافتراضي",
+    "labels": "يتجاوز accessible names وحروف الـ labels التي يستطيع template مخصّص عرضها. الأزرار الافتراضية أيقونات.",
     "labelsAnd": "و",
     "labelsFor": "لـ locales العربية، و",
     "labelsOtherwise": "فيما عدا ذلك.",
@@ -456,6 +459,15 @@
     "limitsNull": "، والقيمة",
     "limitsUnread": ". التاريخ غير المقروء يضبط القيمة أيضًا على",
     "reactiveLink": "Form fields"
+  },
+  "calendarTogglePage": {
+    "lead": "template باسم #calendarToggle يستبدل الـ toggle كله. يبقى CalendarDate المخزّن في valueCalendar.",
+    "why": "لماذا تبقى القيمة المخزّنة",
+    "whyBody": "تخزّن الحقول الجاهزة CalendarDate، وهو يحتفظ بتقويمه. يغيّر الـ toggle التقويم على الشاشة فقط، فيمكن لحقل ميلادي أن يعرض 1/9/1445 ويبقى محتفظًا بالميلادي 2024-03-11. لا يُعلَّم الـ control كـ dirty.",
+    "template": "template مخصّص",
+    "templateBody": "ضع ng-template واحدًا بالمرجع #calendarToggle داخل الحقل. يتلقى let-controller كلًا من display و valueCalendar و labels و disabled و show و open. show يبدّل التقويم ويترك الـ datepicker مغلقًا. open يبدّله ويفتح الـ datepicker. صفة calendarToggle اختيارية بجانب هذا الـ template. يبقى equivalent hint ظاهرًا تحت الحقل.",
+    "demo": "template حي",
+    "demoText": "تعرض الأيقونة التقويم الظاهر على الشاشة وتفتح قائمة. اختيار التقويم يستدعي controller.open. السطر تحت الحقل هو القيمة المخزّنة، وتبقى ميلادية."
   },
   "reactiveFields": {
     "leadBefore": "و",
@@ -606,7 +618,8 @@
       "SignalDateField": "ngx-mat-signal-date-field",
       "SignalDateRangeField": "ngx-mat-signal-date-range-field",
       "CalendarDateRange": "قيمة range field.",
-      "DateFieldLabels": "نص الأزرار و accessible names.",
+      "DateFieldLabels": "حروف الـ labels و accessible names.",
+      "CalendarToggleController": "سياق template باسم #calendarToggle.",
       "DateFieldPeriod": "'all' أو 'past' أو 'future'."
     }
   },
@@ -680,7 +693,7 @@
       },
       "toggleTemplates": {
         "title": "templates مخصّصة لـ calendar toggle",
-        "detail": "يستطيع الحقل تمرير template لـ toggle الهجري والميلادي. تبقى الأزرار تبدّل التقويم المعروض وتفتح الـ datepicker."
+        "detail": "template باسم #calendarToggle يستبدل أزرار الأيقونات. يستطيع let-controller عرض أي التقويمين أو فتحه بينما يبقى valueCalendar هو القيمة المحفوظة."
       },
       "stable": {
         "title": "إصدار 1.0.0 المستقر",

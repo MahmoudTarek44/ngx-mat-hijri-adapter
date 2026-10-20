@@ -46,8 +46,8 @@ describe('Docs', () => {
     expect(element.textContent).toContain('Native Hijri adapter');
     expect(element.textContent).toContain('ngx-mat-hijri-adapter/native');
     expect(element.textContent).toContain('Intl');
-    expect(element.textContent).not.toContain('Nothing is in progress.');
-    expect(element.querySelectorAll('[data-roadmap-next]').length).toBe(1);
+    expect(element.textContent).toContain('Nothing is in progress.');
+    expect(element.querySelectorAll('[data-roadmap-next]').length).toBe(0);
     expect(element.textContent).toContain('Custom calendar-toggle templates');
     expect(element.querySelector('[data-types-decision]')?.textContent).toContain(
       'will not be published',

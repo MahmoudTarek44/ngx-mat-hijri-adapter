@@ -1,13 +1,16 @@
 import {
   Directive,
   type Signal,
+  type TemplateRef,
   booleanAttribute,
   computed,
+  contentChild,
   effect,
   inject,
   input,
   signal,
   untracked,
+  viewChild,
 } from '@angular/core';
 import { MAT_DATE_FORMATS, type ErrorStateMatcher } from '@angular/material/core';
 import type { CalendarDate } from '@internationalized/date';
@@ -29,6 +32,22 @@ import {
   periodAllows,
   pickerBound,
 } from './field-support';
+
+/** Values and actions passed to a `#calendarToggle` template as `let-controller`. */
+export interface CalendarToggleController {
+  /** Calendar currently shown in the field. */
+  display: SupportedCalendar;
+  /** Calendar of the stored form value. */
+  valueCalendar: SupportedCalendar;
+  /** Letter labels and accessible names. */
+  labels: DateFieldLabels;
+  /** True when the field is disabled. */
+  disabled: boolean;
+  /** Switches the calendar on screen and leaves the picker closed. */
+  show: (calendar: SupportedCalendar) => void;
+  /** Switches the calendar on screen and opens the picker. */
+  open: (calendar: SupportedCalendar) => void;
+}
 
 /**
  * Calendar switching, bounds, filtering, and labels shared by the reactive and signal fields.
@@ -79,8 +98,30 @@ export abstract class DateFieldCore {
   protected readonly resolvedValueCalendar = computed(
     () => this.valueCalendar() ?? this.defaultCalendar,
   );
+  /** Replaces the default toggle when the field contains `<ng-template #calendarToggle>`. */
+  protected readonly calendarToggleTemplate =
+    contentChild<TemplateRef<{ $implicit: CalendarToggleController }>>('calendarToggle');
+  /** True when the input is set or a `#calendarToggle` template is present. */
+  protected readonly toggleMode = computed(
+    () => this.calendarToggle() || this.calendarToggleTemplate() != null,
+  );
+  private readonly picker = viewChild<{ open(): void }>('picker');
+  /** Context for the custom toggle template. */
+  protected readonly toggleController = computed<CalendarToggleController>(() => ({
+    display: this.display(),
+    valueCalendar: this.resolvedValueCalendar(),
+    labels: this.labels(),
+    disabled: this.disabled(),
+    show: (calendar) => this.showCalendar(calendar),
+    open: (calendar) => {
+      const picker = this.picker();
+      if (picker) {
+        this.openIn(calendar, picker);
+      }
+    },
+  }));
   private readonly umalqura = computed(
-    () => this.calendarToggle() || this.resolvedValueCalendar() === CalendarCode.umalqura,
+    () => this.toggleMode() || this.resolvedValueCalendar() === CalendarCode.umalqura,
   );
   protected readonly pickerMin = computed(() =>
     pickerBound('min', this.minDate(), this.display(), this.umalqura()),
@@ -135,7 +176,7 @@ export abstract class DateFieldCore {
 
     effect(() => {
       const calendar = this.resolvedValueCalendar();
-      const toggle = this.calendarToggle();
+      const toggle = this.toggleMode();
       untracked(() => {
         if (!toggle || !this.started) {
           this.showCalendar(calendar);

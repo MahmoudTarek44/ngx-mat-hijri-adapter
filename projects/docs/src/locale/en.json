@@ -7,6 +7,7 @@
     "native-adapter": "Native adapter · ngx-mat-hijri-adapter",
     "parsing-formatting": "Parsing and formatting · ngx-mat-hijri-adapter",
     "form-fields": "Form fields · ngx-mat-hijri-adapter",
+    "calendar-toggle": "Calendar toggle · ngx-mat-hijri-adapter",
     "reactive-fields": "Reactive fields · ngx-mat-hijri-adapter",
     "signal-fields": "Signal fields · ngx-mat-hijri-adapter",
     "right-to-left": "Right-to-left · ngx-mat-hijri-adapter",
@@ -22,6 +23,7 @@
     "native-adapter": "Native adapter",
     "parsing-formatting": "Parsing and formatting",
     "form-fields": "Form fields",
+    "calendar-toggle": "Calendar toggle",
     "reactive-fields": "Reactive fields",
     "signal-fields": "Signal fields",
     "right-to-left": "Right-to-left",
@@ -407,7 +409,8 @@
     "emittedEnd": "throws.",
     "toggle": "Calendar toggle and hint",
     "toggleBefore": "With",
-    "toggleMid": ", Hijri and Gregorian buttons replace the calendar icon. Pressing one switches the displayed and typed calendar, then opens the picker. Switching does not change the form value and does not mark the control dirty. A typed",
+    "toggleMid": ", Hijri and Gregorian icon buttons replace the calendar icon. Pressing one switches the displayed and typed calendar, then opens the picker. Switching does not change the form value and does not mark the control dirty. A typed",
+    "custom": "A #calendarToggle template replaces those buttons. Read",
     "toggleIn": "in the Gregorian view stores 10 Ramadan 1445 when",
     "toggleIs": "is",
     "hintBefore": "With the toggle on, the hint shows the selected date in the calendar that is not displayed, such as",
@@ -445,7 +448,7 @@
     "periodEnd": ". Past and future both exclude today.",
     "filter": "Receives each day in",
     "touch": "Opens the calendar in a dialog.",
-    "labels": "Overrides the button text and accessible names. Defaults are",
+    "labels": "Overrides accessible names and the letter labels a custom template can show. The default buttons are icons.",
     "labelsAnd": "and",
     "labelsFor": "for Arabic locales, and",
     "labelsOtherwise": "otherwise.",
@@ -456,6 +459,15 @@
     "limitsNull": ", and the value is",
     "limitsUnread": ". An unreadable date also sets the value to",
     "reactiveLink": "Form fields"
+  },
+  "calendarTogglePage": {
+    "lead": "A #calendarToggle template replaces the whole toggle. The stored CalendarDate stays in valueCalendar.",
+    "why": "Why the stored value stays",
+    "whyBody": "The ready-made fields store a CalendarDate, which keeps its own calendar. The toggle changes only the calendar on screen, so a Gregorian field can show 1/9/1445 and still hold Gregorian 2024-03-11. The control is not marked dirty.",
+    "template": "Custom template",
+    "templateBody": "Put one ng-template with the reference #calendarToggle inside the field. let-controller receives display, valueCalendar, labels, disabled, show, and open. show switches the calendar and leaves the picker closed. open switches it and opens the picker. The calendarToggle attribute is optional next to this template. equivalentHint still shows under the field.",
+    "demo": "Live template",
+    "demoText": "The icon shows the calendar on screen and opens a menu. Choosing a calendar calls controller.open. The line under the field is the stored value, which stays Gregorian."
   },
   "reactiveFields": {
     "leadBefore": "and",
@@ -606,7 +618,8 @@
       "SignalDateField": "ngx-mat-signal-date-field",
       "SignalDateRangeField": "ngx-mat-signal-date-range-field",
       "CalendarDateRange": "The value of a range field.",
-      "DateFieldLabels": "Button text and accessible names.",
+      "DateFieldLabels": "Letter labels and accessible names.",
+      "CalendarToggleController": "Context of a #calendarToggle template.",
       "DateFieldPeriod": "'all', 'past', or 'future'."
     }
   },
@@ -680,7 +693,7 @@
       },
       "toggleTemplates": {
         "title": "Custom calendar-toggle templates",
-        "detail": "A field can pass a template for the Hijri and Gregorian toggle. The buttons still switch the displayed calendar and open the picker."
+        "detail": "A #calendarToggle template replaces the icon buttons. let-controller can show or open either calendar while valueCalendar stays the saved value."
       },
       "stable": {
         "title": "Stable 1.0.0 release",
