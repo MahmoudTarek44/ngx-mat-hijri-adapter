@@ -7,6 +7,7 @@
     "native-adapter": "Native adapter · ngx-mat-hijri-adapter",
     "parsing-formatting": "Parsing and formatting · ngx-mat-hijri-adapter",
     "form-fields": "Form fields · ngx-mat-hijri-adapter",
+    "styling": "Styling · ngx-mat-hijri-adapter",
     "calendar-toggle": "Calendar toggle · ngx-mat-hijri-adapter",
     "reactive-fields": "Reactive fields · ngx-mat-hijri-adapter",
     "signal-fields": "Signal fields · ngx-mat-hijri-adapter",
@@ -23,6 +24,7 @@
     "native-adapter": "Native adapter",
     "parsing-formatting": "Parsing and formatting",
     "form-fields": "Form fields",
+    "styling": "Styling",
     "calendar-toggle": "Calendar toggle",
     "reactive-fields": "Reactive fields",
     "signal-fields": "Signal fields",
@@ -448,6 +450,7 @@
     "periodEnd": ". Past and future both exclude today.",
     "filter": "Receives each day in",
     "touch": "Opens the calendar in a dialog.",
+    "stylingBefore": "The fields inherit the project Material theme. Read",
     "labels": "Overrides accessible names and the letter labels a custom template can show. The default buttons are icons.",
     "labelsAnd": "and",
     "labelsFor": "for Arabic locales, and",
@@ -459,6 +462,19 @@
     "limitsNull": ", and the value is",
     "limitsUnread": ". An unreadable date also sets the value to",
     "reactiveLink": "Form fields"
+  },
+  "stylingPage": {
+    "lead": "The ready-made fields inherit the project's Material system tokens and any global design tokens. This package adds no style input and does not override those tokens.",
+    "package": "What this package styles",
+    "packageBody": "The field fills its container. The pressed calendar-toggle button uses --mat-sys-primary and --mat-sys-secondary-container. Those are the only colors this package sets.",
+    "app": "Global tokens",
+    "appBody": "The calendar popup is an overlay, so its tokens belong on html. That includes the toggle icon, which uses the datepicker color rather than the form-field icon color. This page sets them while it is open. Datepicker token names are on the",
+    "datepickerLink": "datepicker styling page",
+    "local": "Tokens on a parent",
+    "localBody": "The sample uses both mixins. mat.form-field-overrides() on the form changes the input. mat.datepicker-overrides() on html changes the toggle icon and the calendar popup, because the popup is an overlay. Form-field token names are on the",
+    "formFieldLink": "form-field styling page",
+    "demo": "Field and calendar",
+    "demoText": "The form sets the shape and outline. The toggle icon and the popup use the datepicker tokens on html: a tertiary icon, a tertiary-tinted background, and a tertiary selected day. The field still stores the same CalendarDate."
   },
   "calendarTogglePage": {
     "lead": "A #calendarToggle template replaces the whole toggle. The stored CalendarDate stays in valueCalendar.",

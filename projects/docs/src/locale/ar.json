@@ -7,6 +7,7 @@
     "native-adapter": "Native adapter · ngx-mat-hijri-adapter",
     "parsing-formatting": "Parsing and formatting · ngx-mat-hijri-adapter",
     "form-fields": "Form fields · ngx-mat-hijri-adapter",
+    "styling": "التنسيق · ngx-mat-hijri-adapter",
     "calendar-toggle": "calendar toggle · ngx-mat-hijri-adapter",
     "reactive-fields": "Reactive fields · ngx-mat-hijri-adapter",
     "signal-fields": "Signal fields · ngx-mat-hijri-adapter",
@@ -23,6 +24,7 @@
     "native-adapter": "Native adapter",
     "parsing-formatting": "Parsing and formatting",
     "form-fields": "Form fields",
+    "styling": "التنسيق",
     "calendar-toggle": "calendar toggle",
     "reactive-fields": "Reactive fields",
     "signal-fields": "Signal fields",
@@ -448,6 +450,7 @@
     "periodEnd": ". الماضي والمستقبل كلاهما يستبعد اليوم.",
     "filter": "يتلقى كل يوم في",
     "touch": "يفتح التقويم كـ Touch UI.",
+    "stylingBefore": "ترث الحقول theme المشروع في Material. اقرأ",
     "labels": "يتجاوز accessible names وحروف الـ labels التي يستطيع template مخصّص عرضها. الأزرار الافتراضية أيقونات.",
     "labelsAnd": "و",
     "labelsFor": "لـ locales العربية، و",
@@ -459,6 +462,19 @@
     "limitsNull": "، والقيمة",
     "limitsUnread": ". التاريخ غير المقروء يضبط القيمة أيضًا على",
     "reactiveLink": "Form fields"
+  },
+  "stylingPage": {
+    "lead": "ترث الحقول الجاهزة system tokens لمشروع Material وأي design tokens عامة. هذه الحزمة لا تضيف input للتنسيق ولا تتجاوز تلك الـ tokens.",
+    "package": "ما تنسّقه هذه الحزمة",
+    "packageBody": "يملأ الحقل حاويته. زر calendar toggle المضغوط يستخدم --mat-sys-primary و --mat-sys-secondary-container. هذان اللونان الوحيدان اللذان تضبطهما هذه الحزمة.",
+    "app": "tokens عامة",
+    "appBody": "نافذة التقويم overlay، لذا تنتمي tokens الخاصة بها إلى html. يشمل ذلك أيقونة الـ toggle، فهي تستخدم لون datepicker وليس لون أيقونة form-field. تضبط هذه الصفحة تلك الـ tokens أثناء فتحها. أسماء tokens الخاصة بـ datepicker في",
+    "datepickerLink": "صفحة تنسيق datepicker",
+    "local": "tokens على عنصر أب",
+    "localBody": "تستخدم العينة كلا الـ mixins. mat.form-field-overrides() على النموذج يغيّر الـ input. mat.datepicker-overrides() على html يغيّر أيقونة الـ toggle ونافذة التقويم، لأن النافذة overlay. أسماء tokens الخاصة بـ form-field في",
+    "formFieldLink": "صفحة تنسيق form-field",
+    "demo": "الحقل والتقويم",
+    "demoText": "يضبط النموذج الشكل والإطار. تستخدم أيقونة الـ toggle والنافذة datepicker tokens على html: أيقونة tertiary، وخلفية مائلة إلى tertiary، ويوم محدد بلون tertiary. يبقى الحقل مخزّنًا لـ CalendarDate نفسه."
   },
   "calendarTogglePage": {
     "lead": "template باسم #calendarToggle يستبدل الـ toggle كله. يبقى CalendarDate المخزّن في valueCalendar.",

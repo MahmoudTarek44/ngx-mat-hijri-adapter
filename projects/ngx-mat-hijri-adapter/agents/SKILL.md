@@ -57,6 +57,8 @@ A content template replaces those buttons. One icon can open a menu:
 
 `controller.show` switches the calendar and leaves the picker closed. `controller.open` switches it and opens the picker. Neither changes the stored `CalendarDate` or marks the control dirty. `equivalentHint` still renders under the field.
 
+The ready-made fields follow the application's Material theme. They have no style input. They inherit `--mat-sys-*` and any global datepicker or form-field tokens set on `html`. The pressed toggle uses `--mat-sys-primary` and `--mat-sys-secondary-container`. A `mat.form-field-overrides()` block on a parent of the field reaches the input. The calendar popup is an overlay, so it inherits datepicker tokens from `html`, not from the field. The calendar icon uses `toggle-icon-color`, not the form-field trailing icon color.
+
 The package name for the Gregorian calendar is `gregorian`. A `CalendarDate` in that calendar reports `calendar.identifier === 'gregory'`. `calendarOf(date)` returns `gregorian` or `islamic-umalqura`, mapping `gregory` to `gregorian`. Any other identifier throws. It does not apply to a JavaScript `Date`.
 
 `HijriDateAdapter.createDate` uses 0-based months, matching Material. `createDate(1445, 8, 1)` is 1 Ramadan 1445. `createCalendarDate` uses 1-based months. `createCalendarDate('islamic-umalqura', 1445, 9, 1)` is that same day.

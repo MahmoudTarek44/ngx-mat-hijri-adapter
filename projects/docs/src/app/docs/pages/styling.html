@@ -1,0 +1,33 @@
+<article class="doc-page">
+  <h1>{{ 'nav.styling' | translate }}</h1>
+  <p class="doc-lead">{{ 'stylingPage.lead' | translate }}</p>
+
+  <h2 id="package">{{ 'stylingPage.package' | translate }}</h2>
+  <p>{{ 'stylingPage.packageBody' | translate }}</p>
+
+  <h2 id="app">{{ 'stylingPage.app' | translate }}</h2>
+  <p>
+    {{ 'stylingPage.appBody' | translate }}
+    <a href="https://material.angular.dev/components/datepicker/styling">{{
+      'stylingPage.datepickerLink' | translate
+    }}</a>.
+  </p>
+  <code-block language="scss" [code]="appWide" />
+
+  <h2 id="form">{{ 'stylingPage.local' | translate }}</h2>
+  <p>
+    {{ 'stylingPage.localBody' | translate }}
+    <a href="https://material.angular.dev/components/form-field/styling">{{
+      'stylingPage.formFieldLink' | translate
+    }}</a>.
+  </p>
+
+  <example-card
+    [heading]="'stylingPage.demo' | translate"
+    [description]="'stylingPage.demoText' | translate"
+    entryPoint="ngx-mat-hijri-adapter/signals"
+    [snippets]="snippets"
+  >
+    <styling-demo />
+  </example-card>
+</article>

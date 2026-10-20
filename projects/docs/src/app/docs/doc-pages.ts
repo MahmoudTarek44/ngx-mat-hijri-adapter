@@ -13,6 +13,7 @@ export const DOC_PAGES: readonly DocPage[] = [
   { path: 'native-adapter', title: 'Native adapter' },
   { path: 'parsing-formatting', title: 'Parsing and formatting' },
   { path: 'form-fields', title: 'Form fields' },
+  { path: 'styling', title: 'Styling' },
   { path: 'calendar-toggle', title: 'Calendar toggle' },
   { path: 'reactive-fields', title: 'Reactive fields' },
   { path: 'signal-fields', title: 'Signal fields' },
@@ -56,6 +57,11 @@ export const DOC_ROUTES: Routes = [
     path: 'form-fields',
     title: pageTitle('form-fields'),
     loadComponent: () => import('./pages/form-fields').then((m) => m.FormFields),
+  },
+  {
+    path: 'styling',
+    title: pageTitle('styling'),
+    loadComponent: () => import('./pages/styling').then((m) => m.StylingPage),
   },
   {
     path: 'calendar-toggle',

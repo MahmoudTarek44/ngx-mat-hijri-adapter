@@ -37,3 +37,42 @@ html[lang='ar'] :is(code, pre, kbd, .font-mono) {
   direction: ltr;
   unicode-bidi: isolate;
 }
+
+// The styling page adds this class while it is open. The popup is an overlay, so it
+// inherits datepicker tokens from html, including the toggle icon.
+html.booking-calendar {
+  @include mat.datepicker-overrides(
+    (
+      toggle-icon-color: var(--mat-sys-tertiary),
+      toggle-active-state-icon-color: var(--mat-sys-tertiary),
+      calendar-container-shape: 24px,
+      calendar-container-background-color: light-dark(
+          color-mix(in srgb, var(--mat-sys-tertiary-container) 42%, white),
+          var(--mat-sys-tertiary-container)
+        ),
+      calendar-date-selected-state-background-color: var(--mat-sys-tertiary),
+      calendar-date-selected-state-text-color: var(--mat-sys-on-tertiary),
+    )
+  );
+}
+
+// The styling-page demo. The field inherits these tokens from the form. No field input is involved.
+.booking {
+  @include mat.form-field-overrides(
+    (
+      outlined-container-shape: 24px,
+      outlined-outline-width: 2px,
+      outlined-outline-color: var(--mat-sys-tertiary),
+      outlined-hover-outline-color: var(--mat-sys-tertiary),
+      outlined-focus-outline-color: var(--mat-sys-tertiary),
+      outlined-label-text-color: var(--mat-sys-tertiary),
+      outlined-focus-label-text-color: var(--mat-sys-tertiary),
+      outlined-input-text-color: var(--mat-sys-on-tertiary-container),
+    )
+  );
+
+  // The round outline clips a suffix button that sits on the edge.
+  .mat-datepicker-toggle {
+    margin-inline-end: 12px;
+  }
+}
