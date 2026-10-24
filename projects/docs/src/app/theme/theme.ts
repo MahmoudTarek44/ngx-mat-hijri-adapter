@@ -1,4 +1,4 @@
-import { DOCUMENT, Service, effect, inject, signal } from '@angular/core';
+import { afterNextRender, DOCUMENT, Service, effect, inject, signal } from '@angular/core';
 
 export type ThemeMode = 'light' | 'dark' | 'system';
 
@@ -10,16 +10,27 @@ const MODES: readonly ThemeMode[] = ['light', 'dark', 'system'];
 export class Theme {
   private readonly document = inject(DOCUMENT);
   private readonly storage = this.document.defaultView?.localStorage;
+  /** Stay false until hydration has claimed the system-theme prerender. */
+  private persist = false;
 
-  readonly mode = signal<ThemeMode>(this.stored());
+  readonly mode = signal<ThemeMode>('system');
 
   constructor() {
+    afterNextRender(() => {
+      const stored = this.stored();
+      this.persist = true;
+      if (stored !== this.mode()) {
+        this.mode.set(stored);
+      }
+    });
     effect(() => {
       const mode = this.mode();
       const root = this.document.documentElement;
       root.classList.toggle('light', mode === 'light');
       root.classList.toggle('dark', mode === 'dark');
-      this.storage?.setItem(STORAGE_KEY, mode);
+      if (this.persist) {
+        this.storage?.setItem(STORAGE_KEY, mode);
+      }
     });
   }
 

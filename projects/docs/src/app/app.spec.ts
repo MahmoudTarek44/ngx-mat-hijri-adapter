@@ -51,6 +51,33 @@ describe('App', () => {
     expect(root.classList.contains('light')).toBe(false);
   });
 
+  it('keeps the prerender defaults until hydration, then restores the saved choice', async () => {
+    localStorage.setItem('ngx-mat-hijri-adapter-lang', 'ar');
+    localStorage.setItem('ngx-mat-hijri-adapter-theme', 'dark');
+    const fixture = TestBed.createComponent(App);
+    const language = TestBed.inject(DocsLanguage);
+    const theme = TestBed.inject(Theme);
+    const root = TestBed.inject(DOCUMENT).documentElement;
+
+    expect(language.lang()).toBe('en');
+    expect(theme.mode()).toBe('system');
+    expect(root.lang).toBe('en');
+    expect(root.dir).toBe('ltr');
+    expect(root.classList.contains('dark')).toBe(false);
+    expect(localStorage.getItem('ngx-mat-hijri-adapter-lang')).toBe('ar');
+    expect(localStorage.getItem('ngx-mat-hijri-adapter-theme')).toBe('dark');
+
+    await fixture.whenStable();
+
+    expect(language.lang()).toBe('ar');
+    expect(theme.mode()).toBe('dark');
+    expect(root.lang).toBe('ar');
+    expect(root.dir).toBe('rtl');
+    expect(root.classList.contains('dark')).toBe(true);
+    expect(localStorage.getItem('ngx-mat-hijri-adapter-lang')).toBe('ar');
+    expect(localStorage.getItem('ngx-mat-hijri-adapter-theme')).toBe('dark');
+  });
+
   it('switches the document to Arabic and remembers it', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();

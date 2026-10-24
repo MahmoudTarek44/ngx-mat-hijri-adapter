@@ -1,4 +1,4 @@
-import { DOCUMENT, Service, effect, inject, signal } from '@angular/core';
+import { afterNextRender, DOCUMENT, Service, effect, inject, signal } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 export type DocsLang = 'en' | 'ar';
@@ -15,11 +15,20 @@ export class DocsLanguage {
   private readonly document = inject(DOCUMENT);
   private readonly translate = inject(TranslateService);
   private readonly storage = this.document.defaultView?.localStorage;
+  /** Stay false until hydration has claimed the English prerender. */
+  private persist = false;
 
-  readonly lang = signal<DocsLang>(this.stored());
+  readonly lang = signal<DocsLang>('en');
 
   constructor() {
     this.translate.addLangs([...LANGS]);
+    afterNextRender(() => {
+      const stored = this.stored();
+      this.persist = true;
+      if (stored !== this.lang()) {
+        this.lang.set(stored);
+      }
+    });
     effect(() => {
       const lang = this.lang();
       this.translate.use(lang);
@@ -27,7 +36,9 @@ export class DocsLanguage {
       root.lang = lang;
       root.dir = lang === 'ar' ? 'rtl' : 'ltr';
       this.syncArabicFont(lang);
-      this.storage?.setItem(STORAGE_KEY, lang);
+      if (this.persist) {
+        this.storage?.setItem(STORAGE_KEY, lang);
+      }
     });
   }
 
