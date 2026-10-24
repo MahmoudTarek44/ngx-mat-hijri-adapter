@@ -1,6 +1,6 @@
 {
   "title": {
-    "home": "ngx-mat-hijri-adapter: تواريخ هجرية وميلادية لـ Angular Material",
+    "home": "تواريخ هجرية وميلادية لـ Angular Material",
     "getting-started": "البداية · ngx-mat-hijri-adapter",
     "calendar-values": "قيم التقويم · ngx-mat-hijri-adapter",
     "date-adapter": "Date adapter · ngx-mat-hijri-adapter",
@@ -18,7 +18,7 @@
     "roadmap": "خارطة الطريق · ngx-mat-hijri-adapter"
   },
   "description": {
-    "home": "Date adapter وحقول نماذج Angular Material لتقويمي أم القرى الهجري والميلادي.",
+    "home": "تواريخ هجرية وميلادية لـ Angular Material. datepicker هجري وdate adapter لـ Angular Material، مع حقول نماذج لتقويمي أم القرى والميلادي.",
     "getting-started": "ثبّت ngx-mat-hijri-adapter وسجّل datepicker هجري أو ميلادي في تطبيق Angular Material.",
     "calendar-values": "قيم CalendarDate للتقويم الميلادي وتقويم أم القرى، مع دوال للإنشاء والتحويل والمقارنة والإضافة.",
     "date-adapter": "HijriDateAdapter يخزّن CalendarDate. NativeHijriDateAdapter هو البديل عندما يجب أن تكون القيمة المخزنة Date.",

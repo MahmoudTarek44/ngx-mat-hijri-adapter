@@ -1,6 +1,6 @@
 {
   "title": {
-    "home": "ngx-mat-hijri-adapter: Hijri and Gregorian dates for Angular Material",
+    "home": "Hijri and Gregorian dates for Angular Material",
     "getting-started": "Getting started · ngx-mat-hijri-adapter",
     "calendar-values": "Calendar values · ngx-mat-hijri-adapter",
     "date-adapter": "Date adapter · ngx-mat-hijri-adapter",
@@ -18,7 +18,7 @@
     "roadmap": "Roadmap · ngx-mat-hijri-adapter"
   },
   "description": {
-    "home": "Angular Material date adapter and form fields for the Umm al-Qura Hijri and Gregorian calendars.",
+    "home": "Hijri and Gregorian dates for Angular Material. A Hijri datepicker and date adapter for Angular Material, with form fields for the Umm al-Qura and Gregorian calendars.",
     "getting-started": "Install ngx-mat-hijri-adapter and register a Hijri or Gregorian datepicker in an Angular Material app.",
     "calendar-values": "CalendarDate values for the Gregorian and Umm al-Qura calendars, with helpers to create, convert, compare, and add.",
     "date-adapter": "HijriDateAdapter stores a CalendarDate. NativeHijriDateAdapter is the alternative when the stored value has to be a Date.",

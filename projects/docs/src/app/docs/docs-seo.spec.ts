@@ -23,10 +23,10 @@ describe('Docs SEO', () => {
     const harness = await RouterTestingHarness.create('/');
     const document = TestBed.inject(DOCUMENT);
 
-    expect(document.title).toBe(
-      'ngx-mat-hijri-adapter: Hijri and Gregorian dates for Angular Material',
+    expect(document.title).toBe('Hijri and Gregorian dates for Angular Material');
+    expect(meta(document, 'description')).toBe(
+      'Hijri and Gregorian dates for Angular Material. A Hijri datepicker and date adapter for Angular Material, with form fields for the Umm al-Qura and Gregorian calendars.',
     );
-    expect(meta(document, 'description')).toContain('Umm al-Qura');
     expect(metaProperty(document, 'og:title')).toBe(document.title);
     expect(metaProperty(document, 'og:description')).toBe(meta(document, 'description'));
     expect(metaProperty(document, 'og:type')).toBe('website');
