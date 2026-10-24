@@ -17,6 +17,24 @@
     "ai-agents": "وكلاء الذكاء · ngx-mat-hijri-adapter",
     "roadmap": "خارطة الطريق · ngx-mat-hijri-adapter"
   },
+  "description": {
+    "home": "Date adapter وحقول نماذج Angular Material لتقويمي أم القرى الهجري والميلادي.",
+    "getting-started": "ثبّت ngx-mat-hijri-adapter وسجّل datepicker هجري أو ميلادي في تطبيق Angular Material.",
+    "calendar-values": "قيم CalendarDate للتقويم الميلادي وتقويم أم القرى، مع دوال للإنشاء والتحويل والمقارنة والإضافة.",
+    "date-adapter": "HijriDateAdapter يخزّن CalendarDate. NativeHijriDateAdapter هو البديل عندما يجب أن تكون القيمة المخزنة Date.",
+    "native-adapter": "provideNativeHijriDateAdapter() مخصص لـ mat-datepicker عادي يجب أن يخزّن Date. الحقول الجاهزة لا تستخدمه.",
+    "parsing-formatting": "النص المكتوب يُقرأ في تقويم الـ adapter، وكل تاريخ يُنسَّق في تقويمه.",
+    "form-fields": "حقول تاريخ ونطاق تاريخ جاهزة لـ Angular Material، مع calendar toggle وتلميح التاريخ المكافئ ورسائل الخطأ.",
+    "styling": "نسّق حقل التاريخ ونافذة التقويم عبر design tokens في Material. هذه الحزمة لا تضيف style input.",
+    "calendar-toggle": "استبدل calendar toggle بقالب خاص. قيمة CalendarDate المخزنة تبقى في valueCalendar.",
+    "reactive-fields": "ReactiveDateField و ReactiveDateRangeField هما ControlValueAccessor لـ formControl و formControlName.",
+    "signal-fields": "SignalDateField و SignalDateRangeField ينفّذان FormValueControl لنماذج Angular signal forms.",
+    "right-to-left": "اضبط اتجاه التخطيط بتوجيه CDK Dir. الاتجاه والـ locale والتقويم مستقلّون.",
+    "api": "ما يصدّره ngx-mat-hijri-adapter و native adapter وحقول reactive و signal.",
+    "gotchas": "معرّفات التقويم الميلادي و toString في CalendarDate وتفاصيل تفاجئ المستخدم أول مرة.",
+    "ai-agents": "الحزمة المنشورة تتضمن skill حتى يستخدم وكيل البرمجة الـ adapter بشكل صحيح.",
+    "roadmap": "ما هو موجود في ngx-mat-hijri-adapter اليوم، وما هو قيد التطوير، وما هو فكرة فقط."
+  },
   "nav": {
     "getting-started": "البداية",
     "calendar-values": "قيم التقويم",

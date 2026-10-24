@@ -9,7 +9,7 @@ const dictionaries: Record<string, TranslationObject> = {
   ar: ar as TranslationObject,
 };
 
-/** Synchronous loader for unit tests. The app loads the same files over HTTP. */
+/** Synchronous loader for unit tests. The app bundles English and fetches Arabic. */
 export class DocsTranslateLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<TranslationObject> {
     return of(dictionaries[lang] ?? dictionaries['en']);

@@ -7,14 +7,20 @@ import {
   type Provider,
 } from '@angular/core';
 import { TitleStrategy } from '@angular/router';
-import { provideTranslateLoader, provideTranslateService, TranslateService } from '@ngx-translate/core';
+import {
+  provideTranslateLoader,
+  provideTranslateService,
+  TranslateService,
+  type TranslationObject,
+} from '@ngx-translate/core';
 import { TRANSLATE_HTTP_LOADER_CONFIG, TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { firstValueFrom } from 'rxjs';
 
+import en from '../../locale/en.json';
 import { DocsLanguage } from './docs-language';
 import { DocsTitleStrategy } from './docs-title-strategy';
 
-/** ngx-translate over HTTP, with the document language applied before first paint. */
+/** English is bundled. Arabic is fetched when the visitor switches language. */
 export function provideDocsI18n(): (Provider | EnvironmentProviders)[] {
   return [
     provideHttpClient(),
@@ -30,13 +36,15 @@ export function provideDocsI18n(): (Provider | EnvironmentProviders)[] {
       },
     },
     ...provideTranslateService({
-      fallbackLang: 'en',
       loader: provideTranslateLoader(TranslateHttpLoader),
     }),
     { provide: TitleStrategy, useClass: DocsTitleStrategy },
     provideAppInitializer(() => {
+      const translate = inject(TranslateService);
+      translate.setTranslation('en', en as TranslationObject);
+      translate.setFallbackLang('en');
       const language = inject(DocsLanguage);
-      return firstValueFrom(inject(TranslateService).use(language.lang()));
+      return firstValueFrom(translate.use(language.lang()));
     }),
   ];
 }

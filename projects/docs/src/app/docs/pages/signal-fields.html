@@ -15,7 +15,11 @@
     entryPoint="ngx-mat-hijri-adapter/signals"
     [snippets]="snippets"
   >
-    <signal-fields-demo />
+    @defer (on viewport; prefetch on idle) {
+      <signal-fields-demo />
+    } @placeholder {
+      <div class="h-72"></div>
+    }
   </example-card>
 
   <h2 id="state">{{ 'signalFields.state' | translate }}</h2>

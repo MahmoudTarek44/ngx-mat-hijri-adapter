@@ -64,11 +64,13 @@
           },
           "configurations": {
             "production": {
+              "server": "projects/docs/src/main.server.ts",
+              "outputMode": "static",
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "700kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "690kB",
+                  "maximumError": "700kB"
                 },
                 {
                   "type": "anyComponentStyle",

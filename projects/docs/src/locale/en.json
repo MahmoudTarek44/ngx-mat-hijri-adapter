@@ -17,6 +17,24 @@
     "ai-agents": "AI agents · ngx-mat-hijri-adapter",
     "roadmap": "Roadmap · ngx-mat-hijri-adapter"
   },
+  "description": {
+    "home": "Angular Material date adapter and form fields for the Umm al-Qura Hijri and Gregorian calendars.",
+    "getting-started": "Install ngx-mat-hijri-adapter and register a Hijri or Gregorian datepicker in an Angular Material app.",
+    "calendar-values": "CalendarDate values for the Gregorian and Umm al-Qura calendars, with helpers to create, convert, compare, and add.",
+    "date-adapter": "HijriDateAdapter stores a CalendarDate. NativeHijriDateAdapter is the alternative when the stored value has to be a Date.",
+    "native-adapter": "provideNativeHijriDateAdapter() is for a plain mat-datepicker that must store a Date. The ready-made fields do not use it.",
+    "parsing-formatting": "Typed text is parsed in the adapter calendar, and each date is formatted in its own calendar.",
+    "form-fields": "Ready-made date and date range fields for Angular Material, with a calendar toggle, an equivalent-date hint, and error messages.",
+    "styling": "Style the date field and calendar popup with Material design tokens. This package adds no style input.",
+    "calendar-toggle": "Replace the calendar toggle with your own template. The stored CalendarDate stays in valueCalendar.",
+    "reactive-fields": "ReactiveDateField and ReactiveDateRangeField are ControlValueAccessors for formControl and formControlName.",
+    "signal-fields": "SignalDateField and SignalDateRangeField implement FormValueControl for Angular signal forms.",
+    "right-to-left": "Set layout direction with the CDK Dir directive. Direction, locale, and calendar are independent.",
+    "api": "Public exports of ngx-mat-hijri-adapter, the native adapter, and the reactive and signal fields.",
+    "gotchas": "Gregorian calendar identifiers, CalendarDate toString, and other details that surprise people the first time.",
+    "ai-agents": "A skill shipped with the package so a coding agent can use the adapter correctly.",
+    "roadmap": "What ships in ngx-mat-hijri-adapter today, what is in progress, and what is only an idea."
+  },
   "nav": {
     "getting-started": "Getting started",
     "calendar-values": "Calendar values",

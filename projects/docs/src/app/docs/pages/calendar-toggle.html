@@ -15,6 +15,10 @@
     entryPoint="ngx-mat-hijri-adapter/signals"
     [snippets]="snippets"
   >
-    <calendar-toggle-demo />
+    @defer (on viewport; prefetch on idle) {
+      <calendar-toggle-demo />
+    } @placeholder {
+      <div class="h-40"></div>
+    }
   </example-card>
 </article>

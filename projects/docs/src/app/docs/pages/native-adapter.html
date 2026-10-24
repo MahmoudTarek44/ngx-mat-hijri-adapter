@@ -31,7 +31,11 @@
       entryPoint="ngx-mat-hijri-adapter/native"
       [snippets]="code.nativeUmalqura"
     >
-      <native-umalqura-demo />
+      @defer (on viewport; prefetch on idle) {
+        <native-umalqura-demo />
+      } @placeholder {
+        <div class="h-40"></div>
+      }
     </example-card>
     <example-card
       [heading]="'dateAdapter.nativeGregorian' | translate"
@@ -39,7 +43,11 @@
       entryPoint="ngx-mat-hijri-adapter/native"
       [snippets]="code.nativeGregorian"
     >
-      <native-gregorian-demo />
+      @defer (on viewport; prefetch on idle) {
+        <native-gregorian-demo />
+      } @placeholder {
+        <div class="h-40"></div>
+      }
     </example-card>
   </div>
 </article>

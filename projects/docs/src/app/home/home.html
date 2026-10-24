@@ -102,7 +102,11 @@
   <p class="mb-10 max-w-[44rem] text-on-surface-variant">
     {{ 'home.playgroundLead' | translate }}
   </p>
-  <playground />
+  @defer (on viewport; prefetch on idle) {
+    <playground />
+  } @placeholder {
+    <div class="h-[32rem]"></div>
+  }
 </section>
 
 <section
@@ -125,7 +129,11 @@
       entryPoint="ngx-mat-hijri-adapter"
       [snippets]="snippets.umalqura"
     >
-      <umalqura-demo />
+      @defer (on viewport; prefetch on idle) {
+        <umalqura-demo />
+      } @placeholder {
+        <div class="h-40"></div>
+      }
     </example-card>
     <example-card
       [heading]="'home.examples.gregorian.heading' | translate"
@@ -133,7 +141,11 @@
       entryPoint="ngx-mat-hijri-adapter"
       [snippets]="snippets.gregorian"
     >
-      <gregorian-demo />
+      @defer (on viewport; prefetch on idle) {
+        <gregorian-demo />
+      } @placeholder {
+        <div class="h-40"></div>
+      }
     </example-card>
     <example-card
       [heading]="'home.examples.nativeUmalqura.heading' | translate"
@@ -141,7 +153,11 @@
       entryPoint="ngx-mat-hijri-adapter/native"
       [snippets]="snippets.nativeUmalqura"
     >
-      <native-umalqura-demo />
+      @defer (on viewport; prefetch on idle) {
+        <native-umalqura-demo />
+      } @placeholder {
+        <div class="h-40"></div>
+      }
     </example-card>
     <example-card
       [heading]="'home.examples.nativeGregorian.heading' | translate"
@@ -149,7 +165,11 @@
       entryPoint="ngx-mat-hijri-adapter/native"
       [snippets]="snippets.nativeGregorian"
     >
-      <native-gregorian-demo />
+      @defer (on viewport; prefetch on idle) {
+        <native-gregorian-demo />
+      } @placeholder {
+        <div class="h-40"></div>
+      }
     </example-card>
     <example-card
       [heading]="'home.examples.reactive.heading' | translate"
@@ -157,7 +177,11 @@
       entryPoint="ngx-mat-hijri-adapter/reactive"
       [snippets]="snippets.reactive"
     >
-      <reactive-fields-demo />
+      @defer (on viewport; prefetch on idle) {
+        <reactive-fields-demo />
+      } @placeholder {
+        <div class="h-72"></div>
+      }
     </example-card>
     <example-card
       [heading]="'home.examples.signals.heading' | translate"
@@ -165,7 +189,11 @@
       entryPoint="ngx-mat-hijri-adapter/signals"
       [snippets]="snippets.signals"
     >
-      <signal-fields-demo />
+      @defer (on viewport; prefetch on idle) {
+        <signal-fields-demo />
+      } @placeholder {
+        <div class="h-72"></div>
+      }
     </example-card>
   </div>
 </section>

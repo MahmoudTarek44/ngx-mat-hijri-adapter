@@ -28,6 +28,10 @@
     entryPoint="ngx-mat-hijri-adapter/signals"
     [snippets]="snippets"
   >
-    <styling-demo />
+    @defer (on viewport; prefetch on idle) {
+      <styling-demo />
+    } @placeholder {
+      <div class="h-40"></div>
+    }
   </example-card>
 </article>

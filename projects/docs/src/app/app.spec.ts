@@ -57,9 +57,14 @@ describe('App', () => {
     const language = TestBed.inject(DocsLanguage);
     const root = TestBed.inject(DOCUMENT).documentElement;
 
+    expect(root.ownerDocument.getElementById('docs-arabic-font')).toBeNull();
+
     language.lang.set('ar');
     await fixture.whenStable();
 
+    expect(root.ownerDocument.getElementById('docs-arabic-font')?.getAttribute('href')).toContain(
+      'Noto+Kufi+Arabic',
+    );
     expect(root.lang).toBe('ar');
     expect(root.dir).toBe('rtl');
     expect(localStorage.getItem('ngx-mat-hijri-adapter-lang')).toBe('ar');

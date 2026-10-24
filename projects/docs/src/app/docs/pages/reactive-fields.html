@@ -15,7 +15,11 @@
     entryPoint="ngx-mat-hijri-adapter/reactive"
     [snippets]="snippets"
   >
-    <reactive-fields-demo />
+    @defer (on viewport; prefetch on idle) {
+      <reactive-fields-demo />
+    } @placeholder {
+      <div class="h-72"></div>
+    }
   </example-card>
 
   <h2 id="errors">{{ 'reactiveFields.errors' | translate }}</h2>

@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import { type ComponentFixture, DeferBlockState, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { getLocalTimeZone } from '@internationalized/date';
 import {
@@ -13,6 +13,7 @@ import { Home } from './home';
 
 describe('Home', () => {
   beforeEach(async () => {
+    installDeferObservers();
     await TestBed.configureTestingModule({
       imports: [Home],
       providers: [provideRouter([]), ...provideDocsI18nTesting()],
@@ -21,7 +22,7 @@ describe('Home', () => {
 
   it('renders the hero, playground, and live examples', async () => {
     const fixture = TestBed.createComponent(Home);
-    await fixture.whenStable();
+    await renderDeferred(fixture);
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.querySelector('h1')?.textContent).toContain(
@@ -101,7 +102,7 @@ describe('Home', () => {
 
   it('converts playground values when the calendar changes', async () => {
     const fixture = TestBed.createComponent(Home);
-    await fixture.whenStable();
+    await renderDeferred(fixture);
     const compiled = fixture.nativeElement as HTMLElement;
     const values = () => compiled.querySelector('[data-playground-values]')?.textContent ?? '';
 
@@ -116,3 +117,44 @@ describe('Home', () => {
     expect(values()).toContain('gregorian');
   });
 });
+
+async function renderDeferred(fixture: ComponentFixture<Home>): Promise<void> {
+  await fixture.whenStable();
+  const blocks = await fixture.getDeferBlocks();
+  for (const block of blocks) {
+    await block.render(DeferBlockState.Complete);
+  }
+  await fixture.whenStable();
+}
+
+function installDeferObservers(): void {
+  if (!('IntersectionObserver' in globalThis)) {
+    class IntersectionObserverStub {
+      observe(): void {}
+      unobserve(): void {}
+      disconnect(): void {}
+      takeRecords(): [] {
+        return [];
+      }
+    }
+    Object.defineProperty(globalThis, 'IntersectionObserver', {
+      configurable: true,
+      writable: true,
+      value: IntersectionObserverStub,
+    });
+  }
+  if (!('requestIdleCallback' in globalThis)) {
+    Object.defineProperty(globalThis, 'requestIdleCallback', {
+      configurable: true,
+      writable: true,
+      value: (callback: () => void) => setTimeout(callback, 0),
+    });
+  }
+  if (!('cancelIdleCallback' in globalThis)) {
+    Object.defineProperty(globalThis, 'cancelIdleCallback', {
+      configurable: true,
+      writable: true,
+      value: () => undefined,
+    });
+  }
+}
