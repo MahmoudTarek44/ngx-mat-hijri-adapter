@@ -71,7 +71,7 @@ Pull requests run the same checks in CI: library tests, the library build, the d
 
 ## Releases
 
-A beta will be published before the stable 1.0.0. Version 0.4.1 is tagged on GitHub and is not published on npm. A pull request does not publish a package. Maintainer steps are in [PUBLISHING.md](PUBLISHING.md).
+A beta will be published before the stable 1.0.0. Version 0.4.2 is tagged on GitHub and is not published on npm. A pull request does not publish a package. Maintainer steps are in [PUBLISHING.md](PUBLISHING.md).
 
 ## Code of conduct
 

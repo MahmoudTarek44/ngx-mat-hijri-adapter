@@ -1,6 +1,6 @@
 # Publishing to npm
 
-Maintainer steps for putting `ngx-mat-hijri-adapter` on npm. This is not the install guide. Version 0.4.1 is tagged on GitHub and is not on npm. A pull request does not publish a package, and a GitHub tag does not either.
+Maintainer steps for putting `ngx-mat-hijri-adapter` on npm. This is not the install guide. Version 0.4.2 is tagged on GitHub and is not on npm. A pull request does not publish a package, and a GitHub tag does not either.
 
 The first npm release is **1.0.0-beta.0** on the dist-tag `beta`. Stable 1.0.0 takes `latest` later. `npm install ngx-mat-hijri-adapter` does not install the beta. Install it with:
 
@@ -33,7 +33,7 @@ Log in to npm on the maintainer machine. No npm token goes in the repo. No GitHu
 
 ## Version bump
 
-The beta release commit bumps `0.4.1` to `1.0.0-beta.0` in:
+The beta release commit bumps `0.4.2` to `1.0.0-beta.0` in:
 
 - `package.json`
 - The two root version fields in `package-lock.json` (the top-level `version` and `packages[""].version`)
@@ -56,7 +56,7 @@ Leave the unpublished banner in place until the beta is actually on npm. It live
 
 ## Docs site and prerelease tags
 
-`.github/workflows/pages.yml` deploys the docs site when a tag matches `[0-9]+.[0-9]+.[0-9]+`. That matches `0.4.1` and `1.0.0`. It does not match `1.0.0-beta.0`.
+`.github/workflows/pages.yml` deploys the docs site when a tag matches `[0-9]+.[0-9]+.[0-9]+`. That matches `0.4.2` and `1.0.0`. It does not match `1.0.0-beta.0`.
 
 Widen that filter in the beta release commit, or the tag push will not deploy the docs site and the site will stay on the last numeric tag. A filter that also matches this prerelease is:
 

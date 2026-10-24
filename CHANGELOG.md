@@ -5,6 +5,59 @@ All notable changes to ngx-mat-hijri-adapter will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.2] - 2026-10-24
+
+### Docs site and calendar drawing
+
+This patch is tagged on GitHub and is not published on npm. A beta will be published before the stable 1.0.0. The docs site is prerendered English HTML, and a calendar draw reuses its Intl formatters.
+
+### 📝 Summary of Changes
+
+#### 🔧 Changed
+
+- **Docs**: Each page is prerendered English HTML with its own title, description, canonical URL, and Open Graph tags, plus `robots.txt` and `sitemap.xml`
+- **First load**: Below-the-fold datepicker demos load when they scroll into view. English strings are bundled. The Arabic font loads only after Arabic is chosen
+- **Calendar drawing**: Date adapters reuse Intl formatters instead of constructing them on every draw
+- **Publishing**: Maintainer steps for the npm beta live in `PUBLISHING.md`, with the measured bundle budget
+
+### 📦 Modified Files
+
+<details>
+<summary><strong>Docs</strong></summary>
+
+- `projects/docs/src/main.server.ts` - Static prerender of the docs routes
+- `projects/docs/src/app/home/home.html` and the live doc demos - Datepicker demos deferred until they enter the viewport
+- `projects/docs/src/app/i18n/` - English bundled, per-page title, description, and canonical URL
+- `projects/docs/public/robots.txt` and `sitemap.xml` - Crawl rules and the page list
+
+</details>
+
+<details>
+<summary><strong>Library</strong></summary>
+
+- `projects/ngx-mat-hijri-adapter/src/lib/` - Cached Intl formatters on both date adapters
+
+</details>
+
+<details>
+<summary><strong>Workspace</strong></summary>
+
+- `package.json` and `package-lock.json` - Version 0.4.2
+- `projects/ngx-mat-hijri-adapter/package.json` and `src/lib/version.ts` - Version 0.4.2
+- `PUBLISHING.md` - npm publish guide
+- `README.md`, `ROADMAP.md`, and `CONTRIBUTING.md` - Version 0.4.2
+- `CHANGELOG.md` - This entry
+
+</details>
+
+---
+
+**Version**: 0.4.2  
+**Release Date**: October 24, 2026  
+**Maintained by**: Mahmoud
+
+---
+
 ## [0.4.1] - 2026-10-20
 
 ### Roadmap and npm wording
@@ -808,6 +861,7 @@ First release. One Angular Material date adapter for the Gregorian and Umm al-Qu
 
 ---
 
+[0.4.2]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.2
 [0.4.1]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.1
 [0.4.0]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.0
 [0.3.3]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.3.3
