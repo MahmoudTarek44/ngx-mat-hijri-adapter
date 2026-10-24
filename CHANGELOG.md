@@ -5,6 +5,50 @@ All notable changes to ngx-mat-hijri-adapter will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.3] - 2026-10-24
+
+### Docs hydration and search title
+
+This patch is tagged on GitHub and is not published on npm. A beta will be published before the stable 1.0.0. The docs site keeps its English prerender, then applies a saved language and theme. The homepage title is Hijri and Gregorian dates for Angular Material.
+
+### 📝 Summary of Changes
+
+#### 🔧 Changed
+
+- **Hydration**: A saved language or theme is applied after the English prerender is claimed, so the page no longer throws `NG0500`. The hero calendar is painted in the browser
+- **Search**: The homepage title is `Hijri and Gregorian dates for Angular Material`, with a description that also matches reordered Angular Material and Hijri queries. The site icon is a 48px PNG
+
+### 📦 Modified Files
+
+<details>
+<summary><strong>Docs</strong></summary>
+
+- `projects/docs/src/app/i18n/docs-language.ts` and `theme/theme.ts` - Saved choices apply after hydration
+- `projects/docs/src/app/home/home.html` - Hero calendar skips hydration
+- `projects/docs/src/index.html` - Homepage title, description, favicon, and site name
+- `projects/docs/public/favicon-48.png` and `favicon-192.png` - Raster site icon
+- `projects/docs/src/locale/en.json` and `ar.json` - Homepage title and description
+
+</details>
+
+<details>
+<summary><strong>Workspace</strong></summary>
+
+- `package.json` and `package-lock.json` - Version 0.4.3
+- `projects/ngx-mat-hijri-adapter/package.json` and `src/lib/version.ts` - Version 0.4.3
+- `README.md`, `ROADMAP.md`, and `CONTRIBUTING.md` - Version 0.4.3
+- `CHANGELOG.md` - This entry
+
+</details>
+
+---
+
+**Version**: 0.4.3  
+**Release Date**: October 24, 2026  
+**Maintained by**: Mahmoud
+
+---
+
 ## [0.4.2] - 2026-10-24
 
 ### Docs site and calendar drawing
@@ -861,6 +905,7 @@ First release. One Angular Material date adapter for the Gregorian and Umm al-Qu
 
 ---
 
+[0.4.3]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.3
 [0.4.2]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.2
 [0.4.1]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.1
 [0.4.0]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.0
