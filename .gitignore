@@ -46,3 +46,8 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Private maintainer notes, kept locally
+/FUTURE.md
+/ROADMAP.md
+/.cursor/skills/

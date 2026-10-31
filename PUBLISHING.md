@@ -39,7 +39,7 @@ The beta release commit bumps `0.4.4` to `1.0.0-beta.0` in:
 - The two root version fields in `package-lock.json` (the top-level `version` and `packages[""].version`)
 - `projects/ngx-mat-hijri-adapter/package.json`
 - `projects/ngx-mat-hijri-adapter/src/lib/version.ts` and `version.spec.ts`
-- The living version lines in `README.md`, `CONTRIBUTING.md`, and `ROADMAP.md`
+- The living version lines in `README.md` and `CONTRIBUTING.md`, and in the local `ROADMAP.md`, which is not tracked
 - A new `CHANGELOG.md` section for `1.0.0-beta.0`
 
 Do not rewrite older changelog entries. Add the new section above them, and add a link at the bottom:
