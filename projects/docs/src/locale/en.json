@@ -15,7 +15,8 @@
     "api": "API reference · ngx-mat-hijri-adapter",
     "gotchas": "Gotchas · ngx-mat-hijri-adapter",
     "ai-agents": "AI agents · ngx-mat-hijri-adapter",
-    "roadmap": "Roadmap · ngx-mat-hijri-adapter"
+    "roadmap": "Roadmap · ngx-mat-hijri-adapter",
+    "not-found": "Page not found · ngx-mat-hijri-adapter"
   },
   "description": {
     "home": "Hijri and Gregorian dates for Angular Material. A Hijri datepicker and date adapter for Angular Material, with form fields for the Umm al-Qura and Gregorian calendars.",
@@ -33,7 +34,14 @@
     "api": "Public exports of ngx-mat-hijri-adapter, the native adapter, and the reactive and signal fields.",
     "gotchas": "Gregorian calendar identifiers, CalendarDate toString, and other details that surprise people the first time.",
     "ai-agents": "A skill shipped with the package so a coding agent can use the adapter correctly.",
-    "roadmap": "What ships in ngx-mat-hijri-adapter today, what is in progress, and what is only an idea."
+    "roadmap": "What ships in ngx-mat-hijri-adapter today, what is in progress, and what is only an idea.",
+    "not-found": "This address is not a page on the ngx-mat-hijri-adapter docs site."
+  },
+  "notFound": {
+    "heading": "Page not found",
+    "body": "This address is not a page on this site. It may have moved, or the link may be mistyped.",
+    "home": "Home",
+    "docs": "Docs"
   },
   "nav": {
     "getting-started": "Getting started",

@@ -1,4 +1,10 @@
-import type { Routes } from '@angular/router';
+import type { Route, Routes } from '@angular/router';
+
+const notFound: Route = {
+  title: 'title.not-found',
+  data: { noindex: true },
+  loadComponent: () => import('./not-found').then((m) => m.NotFound),
+};
 
 export const routes: Routes = [
   {
@@ -11,5 +17,7 @@ export const routes: Routes = [
     loadComponent: () => import('./docs/docs-layout').then((m) => m.DocsLayout),
     loadChildren: () => import('./docs/doc-pages').then((m) => m.DOC_ROUTES),
   },
-  { path: '**', redirectTo: '' },
+  // Prerendered to 404/index.html, which the Pages workflow moves to 404.html.
+  { path: '404', ...notFound },
+  { path: '**', ...notFound },
 ];

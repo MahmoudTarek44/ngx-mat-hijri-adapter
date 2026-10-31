@@ -50,6 +50,39 @@ describe('Docs SEO', () => {
   });
 });
 
+describe('Page not found', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        provideRouter(routes),
+        ...provideDocsI18nTesting(),
+        { provide: TitleStrategy, useClass: DocsTitleStrategy },
+      ],
+    });
+  });
+
+  it('shows a noindex page without a canonical URL, and restores both on a docs page', async () => {
+    const harness = await RouterTestingHarness.create('/docs/missing');
+    const document = TestBed.inject(DOCUMENT);
+
+    expect(harness.routeNativeElement?.querySelector('h1')?.textContent?.trim()).toBe(
+      'Page not found',
+    );
+    expect(harness.routeNativeElement?.querySelector('a[href="/docs"]')).not.toBeNull();
+    expect(document.title).toBe('Page not found · ngx-mat-hijri-adapter');
+    expect(meta(document, 'robots')).toBe('noindex');
+    expect(document.querySelector('link[rel="canonical"]')).toBeNull();
+    expect(metaProperty(document, 'og:url')).toBe('');
+
+    await harness.navigateByUrl('/docs/getting-started');
+
+    expect(document.querySelector('meta[name="robots"]')).toBeNull();
+    expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(
+      'https://ngx-mat-hijri-adapter.dev/docs/getting-started/',
+    );
+  });
+});
+
 function meta(document: Document, name: string): string {
   return document.querySelector(`meta[name="${name}"]`)?.getAttribute('content') ?? '';
 }

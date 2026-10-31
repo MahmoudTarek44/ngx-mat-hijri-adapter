@@ -15,7 +15,8 @@
     "api": "مرجع API · ngx-mat-hijri-adapter",
     "gotchas": "ملاحظات مهمة · ngx-mat-hijri-adapter",
     "ai-agents": "وكلاء الذكاء · ngx-mat-hijri-adapter",
-    "roadmap": "خارطة الطريق · ngx-mat-hijri-adapter"
+    "roadmap": "خارطة الطريق · ngx-mat-hijri-adapter",
+    "not-found": "الصفحة غير موجودة · ngx-mat-hijri-adapter"
   },
   "description": {
     "home": "تواريخ هجرية وميلادية لـ Angular Material. datepicker هجري وdate adapter لـ Angular Material، مع حقول نماذج لتقويمي أم القرى والميلادي.",
@@ -33,7 +34,14 @@
     "api": "ما يصدّره ngx-mat-hijri-adapter و native adapter وحقول reactive و signal.",
     "gotchas": "معرّفات التقويم الميلادي و toString في CalendarDate وتفاصيل تفاجئ المستخدم أول مرة.",
     "ai-agents": "الحزمة المنشورة تتضمن skill حتى يستخدم وكيل البرمجة الـ adapter بشكل صحيح.",
-    "roadmap": "ما هو موجود في ngx-mat-hijri-adapter اليوم، وما هو قيد التطوير، وما هو فكرة فقط."
+    "roadmap": "ما هو موجود في ngx-mat-hijri-adapter اليوم، وما هو قيد التطوير، وما هو فكرة فقط.",
+    "not-found": "هذا العنوان ليس صفحة في موقع توثيق ngx-mat-hijri-adapter."
+  },
+  "notFound": {
+    "heading": "الصفحة غير موجودة",
+    "body": "هذا العنوان ليس صفحة في هذا الموقع. ربما نُقلت الصفحة، أو كُتب الرابط بشكل خاطئ.",
+    "home": "الرئيسية",
+    "docs": "التوثيق"
   },
   "nav": {
     "getting-started": "البداية",

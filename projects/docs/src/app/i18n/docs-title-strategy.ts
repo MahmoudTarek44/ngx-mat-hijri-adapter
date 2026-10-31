@@ -35,13 +35,21 @@ export class DocsTitleStrategy extends TitleStrategy {
     }
     const pageTitle = this.translate.instant(key);
     const description = this.translate.instant(key.replace(/^title\./, 'description.'));
-    const canonical = canonicalUrl(snapshot.url);
     this.title.setTitle(pageTitle);
     this.meta.updateTag({ name: 'description', content: description });
     this.meta.updateTag({ property: 'og:title', content: pageTitle });
     this.meta.updateTag({ property: 'og:description', content: description });
-    this.meta.updateTag({ property: 'og:url', content: canonical });
     this.meta.updateTag({ property: 'og:type', content: 'website' });
+
+    if (isNoindex(snapshot)) {
+      this.meta.updateTag({ name: 'robots', content: 'noindex' });
+      this.meta.removeTag('property="og:url"');
+      this.document.head?.querySelector('link[rel="canonical"]')?.remove();
+      return;
+    }
+    const canonical = canonicalUrl(snapshot.url);
+    this.meta.removeTag('name="robots"');
+    this.meta.updateTag({ property: 'og:url', content: canonical });
     this.setCanonical(canonical);
   }
 
@@ -58,6 +66,14 @@ export class DocsTitleStrategy extends TitleStrategy {
     }
     link.setAttribute('href', href);
   }
+}
+
+function isNoindex(snapshot: RouterStateSnapshot): boolean {
+  let route = snapshot.root;
+  while (route.firstChild) {
+    route = route.firstChild;
+  }
+  return route.data['noindex'] === true;
 }
 
 function canonicalUrl(url: string): string {

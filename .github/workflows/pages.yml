@@ -26,7 +26,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npx ng build docs --base-href /
-      - run: cp dist/docs/browser/index.html dist/docs/browser/404.html
+      - run: mv dist/docs/browser/404/index.html dist/docs/browser/404.html && rmdir dist/docs/browser/404
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist/docs/browser
