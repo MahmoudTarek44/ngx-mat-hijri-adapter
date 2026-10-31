@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
 
 import { TranslatePipe } from '@ngx-translate/core';
 
-import ltrInsideRtl from '../../../ltr-inside-rtl.css' with { loader: 'text' };
+import { REPOSITORY_URL } from '../../links';
 import { CodeBlock } from '../../shared/code-block';
 
 const DIR_TS = `import { Dir } from '@angular/cdk/bidi';
@@ -19,9 +20,10 @@ const DIR_HTML = `<section dir="rtl">
 
 @Component({
   selector: 'right-to-left',
-  imports: [CodeBlock, TranslatePipe],
+  imports: [CodeBlock, MatIcon, TranslatePipe],
   templateUrl: './right-to-left.html',
 })
 export class RightToLeft {
-  protected readonly code = { ts: DIR_TS, html: DIR_HTML, css: ltrInsideRtl };
+  protected readonly code = { ts: DIR_TS, html: DIR_HTML };
+  protected readonly ltrInsideRtlUrl = `${REPOSITORY_URL}/blob/main/projects/docs/src/ltr-inside-rtl.css`;
 }
