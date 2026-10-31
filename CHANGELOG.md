@@ -5,6 +5,54 @@ All notable changes to ngx-mat-hijri-adapter will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.4] - 2026-10-31
+
+### Docs addresses, direction, and not-found page
+
+This patch is tagged on GitHub and is not published on npm. A beta will be published before the stable 1.0.0. Doc pages use the trailing-slash addresses GitHub Pages serves, LTR fields in the Arabic docs keep their labels, and a wrong address shows Page not found.
+
+### 📝 Summary of Changes
+
+#### 🔧 Changed
+
+- **Search**: Doc links, canonical URLs, `og:url`, and `sitemap.xml` use addresses such as `/docs/getting-started/`. The address without the slash redirects on GitHub Pages
+- **Direction**: Angular Material styles RTL fields with `[dir=rtl]` ancestor selectors, so an LTR demo inside the Arabic docs had a clipped label and rotated calendar arrows. The docs restore Material's LTR styles for that case, and the Right-to-left page shows the CSS for apps
+- **Not found**: An unknown address shows a Page not found screen with links to Home and Docs, marked `noindex` and without a canonical URL. It is served as `404.html`
+
+### 📦 Modified Files
+
+<details>
+<summary><strong>Docs</strong></summary>
+
+- `projects/docs/src/app/app.config.ts` - Trailing-slash links
+- `projects/docs/src/app/i18n/docs-title-strategy.ts` - Trailing-slash canonical and `og:url`, and `noindex` on Page not found
+- `projects/docs/public/sitemap.xml` - Trailing-slash doc addresses
+- `projects/docs/src/ltr-inside-rtl.css` - Material LTR field and calendar styles inside an RTL page
+- `projects/docs/src/app/docs/pages/right-to-left.html` - LTR field inside an RTL page section
+- `projects/docs/src/app/not-found.ts` and `app.routes.ts` - Page not found screen
+- `projects/docs/src/locale/en.json` and `ar.json` - Strings for both
+- `.github/workflows/pages.yml` - Page not found becomes `404.html`
+
+</details>
+
+<details>
+<summary><strong>Workspace</strong></summary>
+
+- `package.json` and `package-lock.json` - Version 0.4.4
+- `projects/ngx-mat-hijri-adapter/package.json` and `src/lib/version.ts` - Version 0.4.4
+- `README.md`, `ROADMAP.md`, and `CONTRIBUTING.md` - Version 0.4.4
+- `CHANGELOG.md` - This entry
+
+</details>
+
+---
+
+**Version**: 0.4.4  
+**Release Date**: October 31, 2026  
+**Maintained by**: Mahmoud
+
+---
+
 ## [0.4.3] - 2026-10-24
 
 ### Docs hydration and search title
@@ -905,6 +953,7 @@ First release. One Angular Material date adapter for the Gregorian and Umm al-Qu
 
 ---
 
+[0.4.4]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.4
 [0.4.3]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.3
 [0.4.2]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.2
 [0.4.1]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.1
