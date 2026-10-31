@@ -23,13 +23,7 @@ describe('App', () => {
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.querySelector('[data-version]')?.textContent?.trim()).toBe('1.0.0-beta.0');
-    const banner = compiled.querySelector('[data-release-banner]');
-    const notice = banner?.textContent?.replace(/\s+/g, ' ') ?? '';
-    expect(notice).toContain('1.0.0-beta.0 is tagged on GitHub and is not published on npm');
-    expect(notice).toContain('A beta will be published before the stable 1.0.0.');
-    expect(banner?.querySelector('a')?.getAttribute('href')).toBe(
-      'https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/1.0.0-beta.0',
-    );
+    expect(compiled.querySelector('[data-release-banner]')).toBeNull();
     const links = Array.from(compiled.querySelectorAll('nav a')).map((a) => a.textContent?.trim());
     expect(links).toEqual(['Docs', 'Playground', 'Examples']);
   });

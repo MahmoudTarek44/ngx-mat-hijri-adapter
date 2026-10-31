@@ -42,7 +42,6 @@ export class App {
   protected readonly language = inject(DocsLanguage);
   protected readonly version = NGX_MAT_HIJRI_ADAPTER_VERSION;
   protected readonly repositoryUrl = REPOSITORY_URL;
-  protected readonly tagUrl = `${REPOSITORY_URL}/releases/tag/${NGX_MAT_HIJRI_ADAPTER_VERSION}`;
   protected readonly themeIcons = THEME_ICONS;
   protected readonly themeModes: readonly ThemeMode[] = ['light', 'dark', 'system'];
 }

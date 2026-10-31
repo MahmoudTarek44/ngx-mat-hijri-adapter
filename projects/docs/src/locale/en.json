@@ -62,8 +62,6 @@
   },
   "shell": {
     "skip": "Skip to content",
-    "bannerBefore": "Version {{version}} is tagged on",
-    "bannerAfter": "and is not published on npm. A beta will be published before the stable 1.0.0.",
     "docs": "Docs",
     "playground": "Playground",
     "examples": "Examples",
@@ -97,7 +95,7 @@
       "start": "Get started",
       "try": "Try the playground",
       "github": "View on GitHub",
-      "version": "Version {{version}} is tagged on GitHub. Publishing to npm comes next."
+      "version": "Version {{version}} is on npm under the beta tag. Stable 1.0.0 comes next."
     },
     "agent": "Any coding agent can follow the skill shipped in this package.",
     "why": "Why this package",
@@ -213,7 +211,7 @@
   "gettingStarted": {
     "lead": "Add a Hijri or Gregorian datepicker to an Angular Material app in three steps.",
     "install": "Install",
-    "version": "Version {{version}} is tagged on GitHub and not yet published to npm. A beta will be published before the stable 1.0.0. When the package is on npm,",
+    "version": "Version {{version}} is on npm under the beta tag, so the commands below add @beta.",
     "versionMid": "is the default. It installs the package, adds",
     "versionEnd": "when that package is missing, and registers",
     "manual": "You can install the packages manually instead:",
@@ -741,7 +739,7 @@
       },
       "stable": {
         "title": "Stable 1.0.0 release",
-        "detail": "Still ahead. A beta is published before it, then the version, changelog, tag, and retiring the unpublished-version banner."
+        "detail": "Still ahead. 1.0.0-beta.0 is on npm under the beta tag. The stable release moves the latest tag to 1.0.0."
       },
       "migrations": {
         "title": "ng update migrations",

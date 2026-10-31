@@ -4,28 +4,19 @@
   >{{ 'shell.skip' | translate }}</a
 >
 
-<p
-  class="border-b bg-[color-mix(in_srgb,var(--mat-sys-error)_12%,var(--color-surface))] px-6 py-2.5 text-center text-body-medium"
-  data-release-banner
->
-  {{ 'shell.bannerBefore' | translate: { version: version } }}
-  <a [href]="tagUrl">GitHub</a>
-  {{ 'shell.bannerAfter' | translate }}
-</p>
-
 <header
   class="sticky top-0 z-5 border-b bg-[color-mix(in_srgb,var(--color-surface)_82%,transparent)] backdrop-blur-md"
 >
   <div class="mx-auto flex h-16 w-full max-w-page items-center gap-2 px-6">
     <a
-      class="flex items-center gap-2 text-title-medium font-semibold tracking-[-0.01em] text-on-surface no-underline"
+      class="flex items-center gap-2 text-title-medium font-semibold tracking-[-0.01em] whitespace-nowrap text-on-surface no-underline"
       routerLink="/"
     >
       <package-logo class="size-8" />
       <span>ngx-mat-<strong class="font-extrabold text-primary">hijri</strong>-adapter</span>
     </a>
     <span
-      class="hidden rounded-full border bg-surface-container-low px-3 py-1 font-mono text-label-large font-semibold tracking-[0.04em] text-on-surface shadow-[0_24px_60px_-24px_color-mix(in_srgb,var(--color-primary)_45%,transparent)] sm:inline-flex"
+      class="hidden rounded-full border bg-surface-container-low px-3 py-1 font-mono text-label-large font-semibold tracking-[0.04em] whitespace-nowrap text-on-surface shadow-[0_24px_60px_-24px_color-mix(in_srgb,var(--color-primary)_45%,transparent)] sm:inline-flex"
       data-version
     >
       {{ version }}
