@@ -1,27 +1,29 @@
 import {
-  Directive,
-  type Signal,
-  type TemplateRef,
   booleanAttribute,
-  computed,
+  type TemplateRef,
   contentChild,
-  effect,
-  inject,
-  input,
-  signal,
+  type Signal,
   untracked,
   viewChild,
+  Directive,
+  computed,
+  effect,
+  inject,
+  signal,
+  input,
 } from '@angular/core';
+
 import { MAT_DATE_FORMATS, type ErrorStateMatcher } from '@angular/material/core';
 import type { CalendarDate } from '@internationalized/date';
+
 import {
-  CalendarCode,
-  CalendarLocale,
-  type DateDisplayFormat,
   HIJRI_DATE_ADAPTER_OPTIONS,
+  type DateDisplayFormat,
+  type SupportedCalendar,
   HijriDateAdapter,
   dateInputOptions,
-  type SupportedCalendar,
+  CalendarLocale,
+  CalendarCode,
 } from 'ngx-mat-hijri-adapter';
 
 import {

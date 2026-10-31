@@ -1,10 +1,11 @@
+import { FormField, form } from '@angular/forms/signals';
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { FormField, form } from '@angular/forms/signals';
+
 import { createCalendarDate, provideHijriDateAdapter } from 'ngx-mat-hijri-adapter';
-import type { CalendarDateRange } from './public-api';
 
 import { SignalDateRangeField } from './signal-date-range-field';
+import type { CalendarDateRange } from './public-api';
 
 @Component({
   imports: [FormField, SignalDateRangeField],

@@ -3,18 +3,18 @@
  * Not part of the public API. Exports may change in any release.
  */
 
-export {
-  DateFieldCore as ɵDateFieldCore,
-  type CalendarToggleController as ɵCalendarToggleController,
-} from './date-field-core';
 export { provideFieldDateFormats as ɵprovideFieldDateFormats } from './field-providers';
 export {
-  convertOrNull as ɵconvertOrNull,
-  equivalentText as ɵequivalentText,
-  fieldErrorText as ɵfieldErrorText,
-  readCalendarDate as ɵreadCalendarDate,
-  sameValue as ɵsameValue,
+  type CalendarToggleController as ɵCalendarToggleController,
+  DateFieldCore as ɵDateFieldCore,
+} from './date-field-core';
+export {
   type CalendarDateRange as ɵCalendarDateRange,
   type DateFieldLabels as ɵDateFieldLabels,
   type DateFieldPeriod as ɵDateFieldPeriod,
+  readCalendarDate as ɵreadCalendarDate,
+  equivalentText as ɵequivalentText,
+  fieldErrorText as ɵfieldErrorText,
+  convertOrNull as ɵconvertOrNull,
+  sameValue as ɵsameValue,
 } from './field-support';

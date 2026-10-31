@@ -1,9 +1,10 @@
 import { type Provider } from '@angular/core';
+
 import {
-  DateAdapter,
+  type MatDateFormats,
   MAT_DATE_FORMATS,
   MAT_DATE_LOCALE,
-  type MatDateFormats,
+  DateAdapter,
 } from '@angular/material/core';
 
 import { CalendarCode } from '../calendar/supported-calendars';
@@ -11,8 +12,8 @@ import { HIJRI_DATE_FORMATS } from '../formats/date-formats';
 import { CalendarLocale } from '../locale/calendar-locale';
 import { HijriDateAdapter } from './hijri-date-adapter';
 import {
-  HIJRI_DATE_ADAPTER_OPTIONS,
   type HijriDateAdapterOptions,
+  HIJRI_DATE_ADAPTER_OPTIONS,
 } from './hijri-date-adapter-options';
 
 /** Options for {@link provideHijriDateAdapter}. Locale does not select the calendar. */

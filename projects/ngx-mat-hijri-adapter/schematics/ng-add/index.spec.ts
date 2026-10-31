@@ -1,8 +1,8 @@
-import { HostTree, SchematicsException } from '@angular-devkit/schematics';
 import { SchematicTestRunner, type UnitTestTree } from '@angular-devkit/schematics/testing';
+import { HostTree, SchematicsException } from '@angular-devkit/schematics';
 
-const collectionPath = 'dist/ngx-mat-hijri-adapter/schematics/collection.json';
 const migrationPath = 'dist/ngx-mat-hijri-adapter/schematics/migration-collection.json';
+const collectionPath = 'dist/ngx-mat-hijri-adapter/schematics/collection.json';
 
 const APP_CONFIG = '/src/app/app.config.ts';
 

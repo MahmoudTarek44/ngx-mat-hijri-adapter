@@ -1,13 +1,15 @@
 import { TestBed } from '@angular/core/testing';
+
 import { DateAdapter } from '@angular/material/core';
+
 import { HIJRI_DATE_FORMATS, UmalquraDateRangeError } from 'ngx-mat-hijri-adapter';
 
+import { provideNativeHijriDateAdapter } from './provide-native-hijri-date-adapter';
 import { NativeHijriDateAdapter } from './native-hijri-date-adapter';
 import {
-  NATIVE_HIJRI_DATE_ADAPTER_OPTIONS,
   type NativeHijriDateAdapterOptions,
+  NATIVE_HIJRI_DATE_ADAPTER_OPTIONS,
 } from './native-hijri-date-adapter-options';
-import { provideNativeHijriDateAdapter } from './provide-native-hijri-date-adapter';
 
 function adapter(options: NativeHijriDateAdapterOptions = {}): NativeHijriDateAdapter {
   TestBed.resetTestingModule();
@@ -153,9 +155,9 @@ describe('NativeHijriDateAdapter', () => {
     expect(dates.deserialize(null)).toBeNull();
     expect(dates.isValid(dates.deserialize('1445-9-1')!)).toBe(false);
     expect(dates.isValid(dates.deserialize(1_700_000_000_000)!)).toBe(false);
-    expect(
-      dates.sameDate(dates.deserialize(new Date(Date.UTC(2024, 2, 11, 0, 30))), ramadan),
-    ).toBe(true);
+    expect(dates.sameDate(dates.deserialize(new Date(Date.UTC(2024, 2, 11, 0, 30))), ramadan)).toBe(
+      true,
+    );
     expect(dates.deserialize(new Date(Date.UTC(2024, 2, 11, 0, 30)))?.getUTCHours()).toBe(12);
   });
 

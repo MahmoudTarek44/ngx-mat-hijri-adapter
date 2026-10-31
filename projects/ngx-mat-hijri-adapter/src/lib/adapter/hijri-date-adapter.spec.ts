@@ -1,10 +1,11 @@
 import { TestBed } from '@angular/core/testing';
+
 import { UmalquraDateRangeError, createCalendarDate } from '../calendar/calendar-date';
 import { HIJRI_DATE_FORMATS } from '../formats/date-formats';
 import { HijriDateAdapter } from './hijri-date-adapter';
 import {
-  HIJRI_DATE_ADAPTER_OPTIONS,
   type HijriDateAdapterOptions,
+  HIJRI_DATE_ADAPTER_OPTIONS,
 } from './hijri-date-adapter-options';
 
 function adapter(options: HijriDateAdapterOptions = {}): HijriDateAdapter {
@@ -72,15 +73,15 @@ describe('HijriDateAdapter', () => {
 
     expect(dates.sameDate(dates.parse('1 Ramadan, 1445', null), ramadan)).toBe(true);
     expect(dates.sameDate(dates.parse('1 رمضان 1445', null), ramadan)).toBe(true);
-    expect(dates.sameDate(dates.parse("1 Rabi' al-Awwal, 1445", null), dates.createDate(1445, 2, 1))).toBe(
-      true,
-    );
-    expect(dates.sameDate(dates.parse('1 ذي الحجة 1445', null), dates.createDate(1445, 11, 1))).toBe(
-      true,
-    );
-    expect(dates.sameDate(dates.parse('1 Dhul Hijjah, 1445', null), dates.createDate(1445, 11, 1))).toBe(
-      true,
-    );
+    expect(
+      dates.sameDate(dates.parse("1 Rabi' al-Awwal, 1445", null), dates.createDate(1445, 2, 1)),
+    ).toBe(true);
+    expect(
+      dates.sameDate(dates.parse('1 ذي الحجة 1445', null), dates.createDate(1445, 11, 1)),
+    ).toBe(true);
+    expect(
+      dates.sameDate(dates.parse('1 Dhul Hijjah, 1445', null), dates.createDate(1445, 11, 1)),
+    ).toBe(true);
     expect(
       dates.sameDate(dates.parse('1 Rabi al-Awwal, 1445', null), dates.createDate(1445, 2, 1)),
     ).toBe(true);

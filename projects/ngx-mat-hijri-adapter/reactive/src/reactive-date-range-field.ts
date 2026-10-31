@@ -1,34 +1,35 @@
-import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, forwardRef, input, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NgTemplateOutlet } from '@angular/common';
 import {
+  type ValidationErrors,
+  ReactiveFormsModule,
+  NG_VALUE_ACCESSOR,
+  NG_VALIDATORS,
   FormControl,
   FormGroup,
-  NG_VALIDATORS,
-  NG_VALUE_ACCESSOR,
-  ReactiveFormsModule,
-  type ValidationErrors,
 } from '@angular/forms';
-import { MatIconButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
-import { DateAdapter } from '@angular/material/core';
-import {
-  MatDateRangeInput,
-  MatDateRangePicker,
-  MatDatepickerToggle,
-  MatEndDate,
-  MatStartDate,
-} from '@angular/material/datepicker';
+
 import { MatError, MatFormField, MatHint, MatLabel, MatSuffix } from '@angular/material/form-field';
 import type { CalendarDate } from '@internationalized/date';
-import { HijriDateAdapter, type SupportedCalendar } from 'ngx-mat-hijri-adapter';
-
+import { MatIconButton } from '@angular/material/button';
+import { DateAdapter } from '@angular/material/core';
+import { MatIcon } from '@angular/material/icon';
 import {
-  type ɵCalendarDateRange as CalendarDateRange,
-  ɵconvertOrNull as convertOrNull,
-  ɵequivalentText as equivalentText,
+  MatDatepickerToggle,
+  MatDateRangePicker,
+  MatDateRangeInput,
+  MatStartDate,
+  MatEndDate,
+} from '@angular/material/datepicker';
+
+import { HijriDateAdapter, type SupportedCalendar } from 'ngx-mat-hijri-adapter';
+import {
   ɵprovideFieldDateFormats as provideFieldDateFormats,
+  type ɵCalendarDateRange as CalendarDateRange,
   ɵreadCalendarDate as readCalendarDate,
+  ɵequivalentText as equivalentText,
+  ɵconvertOrNull as convertOrNull,
   ɵsameValue as sameValue,
 } from 'ngx-mat-hijri-adapter/internal';
 
@@ -52,20 +53,21 @@ import { ReactiveDateFieldBase } from './reactive-date-field-base';
     { provide: NG_VALIDATORS, useExisting: forwardRef(() => ReactiveDateRangeField), multi: true },
   ],
   imports: [
-    NgTemplateOutlet,
     ReactiveFormsModule,
-    MatFormField,
-    MatLabel,
-    MatHint,
-    MatError,
-    MatSuffix,
-    MatIconButton,
-    MatIcon,
-    MatDateRangeInput,
+    NgTemplateOutlet,
+
+    MatDatepickerToggle,
     MatDateRangePicker,
+    MatDateRangeInput,
+    MatIconButton,
+    MatFormField,
     MatStartDate,
     MatEndDate,
-    MatDatepickerToggle,
+    MatSuffix,
+    MatLabel,
+    MatError,
+    MatHint,
+    MatIcon,
   ],
   templateUrl: '../../internal/src/date-range-field.html',
   styleUrl: '../../internal/src/date-field.css',

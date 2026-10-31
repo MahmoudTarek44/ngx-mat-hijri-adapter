@@ -1,39 +1,41 @@
-import { NgTemplateOutlet } from '@angular/common';
-import {
-  Component,
-  booleanAttribute,
-  computed,
-  effect,
-  input,
-  model,
-  output,
-  untracked,
-} from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   type FormValueControl,
   type ValidationError,
   transformedValue,
 } from '@angular/forms/signals';
-import { MatIconButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
-import { DateAdapter } from '@angular/material/core';
 import {
-  MatDatepicker,
-  MatDatepickerInput,
-  MatDatepickerToggle,
-} from '@angular/material/datepicker';
+  booleanAttribute,
+  Component,
+  untracked,
+  computed,
+  output,
+  effect,
+  input,
+  model,
+} from '@angular/core';
+
 import { MatError, MatFormField, MatHint, MatLabel, MatSuffix } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
 import type { CalendarDate } from '@internationalized/date';
+import { MatIconButton } from '@angular/material/button';
+import { DateAdapter } from '@angular/material/core';
+import { MatInput } from '@angular/material/input';
+import { MatIcon } from '@angular/material/icon';
+import {
+  MatDatepickerToggle,
+  MatDatepickerInput,
+  MatDatepicker,
+} from '@angular/material/datepicker';
+
 import { HijriDateAdapter, type SupportedCalendar } from 'ngx-mat-hijri-adapter';
 import {
-  ɵDateFieldCore as DateFieldCore,
-  ɵconvertOrNull as convertOrNull,
-  ɵequivalentText as equivalentText,
   ɵprovideFieldDateFormats as provideFieldDateFormats,
   ɵreadCalendarDate as readCalendarDate,
+  ɵequivalentText as equivalentText,
+  ɵDateFieldCore as DateFieldCore,
+  ɵconvertOrNull as convertOrNull,
   ɵsameValue as sameValue,
 } from 'ngx-mat-hijri-adapter/internal';
 
@@ -52,19 +54,20 @@ import { datepickerErrors, firstErrorMessage } from './signal-errors';
     provideFieldDateFormats(),
   ],
   imports: [
-    NgTemplateOutlet,
     ReactiveFormsModule,
-    MatFormField,
-    MatLabel,
-    MatHint,
-    MatError,
-    MatSuffix,
-    MatInput,
-    MatIconButton,
-    MatIcon,
-    MatDatepicker,
-    MatDatepickerInput,
+    NgTemplateOutlet,
+
     MatDatepickerToggle,
+    MatDatepickerInput,
+    MatIconButton,
+    MatDatepicker,
+    MatFormField,
+    MatSuffix,
+    MatLabel,
+    MatError,
+    MatInput,
+    MatHint,
+    MatIcon,
   ],
   templateUrl: '../../internal/src/date-field.html',
   styleUrl: '../../internal/src/date-field.css',

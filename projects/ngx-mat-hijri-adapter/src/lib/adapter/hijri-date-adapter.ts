@@ -1,25 +1,26 @@
 import { Injectable, inject } from '@angular/core';
-import { DateAdapter } from '@angular/material/core';
-import { CalendarDate, type DateDuration } from '@internationalized/date';
 
+import { CalendarDate, type DateDuration } from '@internationalized/date';
+import { DateAdapter } from '@angular/material/core';
+
+import { CalendarCode, type SupportedCalendar } from '../calendar/supported-calendars';
+import { normalizeMonthLabel, umalquraMonthNumber } from '../locale/month-names';
+import { HIJRI_DATE_ADAPTER_OPTIONS } from './hijri-date-adapter-options';
+import { CalendarLocale } from '../locale/calendar-locale';
 import {
   UmalquraDateRangeError,
-  addCalendarDate,
-  calendarToday,
   compareCalendarDates,
   convertCalendarDate,
-  createCalendarDate,
   daysInCalendarMonth,
+  createCalendarDate,
+  addCalendarDate,
+  calendarToday,
 } from '../calendar/calendar-date';
-import { CalendarCode, type SupportedCalendar } from '../calendar/supported-calendars';
 import {
   calendarMonthNames,
   formatCalendarDate,
   formatNumber,
 } from '../formats/format-calendar-date';
-import { CalendarLocale } from '../locale/calendar-locale';
-import { normalizeMonthLabel, umalquraMonthNumber } from '../locale/month-names';
-import { HIJRI_DATE_ADAPTER_OPTIONS } from './hijri-date-adapter-options';
 
 const invalidDates = new WeakSet<CalendarDate>();
 

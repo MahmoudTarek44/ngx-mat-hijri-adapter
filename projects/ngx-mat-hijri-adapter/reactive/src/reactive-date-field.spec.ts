@@ -1,11 +1,13 @@
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+
 import type { CalendarDate } from '@internationalized/date';
+
 import {
-  createCalendarDate,
-  type DateDisplayFormat,
   provideHijriDateAdapter,
+  type DateDisplayFormat,
+  createCalendarDate,
 } from 'ngx-mat-hijri-adapter';
 
 import { ReactiveDateField } from './reactive-date-field';
@@ -236,7 +238,9 @@ describe('ReactiveDateField', () => {
       'button[aria-label="Gregorian calendar"]',
     ) as HTMLButtonElement;
     expect(hijriButton.querySelector('mat-icon')?.textContent?.trim()).toBe('dark_mode');
-    expect(gregorianButton.querySelector('mat-icon')?.textContent?.trim()).toBe('add_circle_outline');
+    expect(gregorianButton.querySelector('mat-icon')?.textContent?.trim()).toBe(
+      'add_circle_outline',
+    );
 
     hijriButton.click();
     await fixture.whenStable();
@@ -272,9 +276,11 @@ describe('ReactiveDateField', () => {
     const element: HTMLElement = fixture.nativeElement;
     const input = element.querySelector('input') as HTMLInputElement;
     const click = async (name: string) => {
-      (Array.from(element.querySelectorAll('button')).find(
-        (button) => button.textContent?.trim() === name,
-      ) as HTMLButtonElement).click();
+      (
+        Array.from(element.querySelectorAll('button')).find(
+          (button) => button.textContent?.trim() === name,
+        ) as HTMLButtonElement
+      ).click();
       await fixture.whenStable();
     };
 

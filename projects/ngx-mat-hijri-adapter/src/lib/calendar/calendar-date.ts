@@ -1,18 +1,9 @@
 import { CalendarDate, toCalendar, today, type DateDuration } from '@internationalized/date';
 
-export {
-  UMALQURA_MAX_YEAR,
-  UMALQURA_MIN_YEAR,
-  UmalquraDateRangeError,
-} from './calendar-constants';
-
-import {
-  UMALQURA_MAX_YEAR,
-  UMALQURA_MIN_YEAR,
-  UmalquraDateRangeError,
-} from './calendar-constants';
+import { UMALQURA_MAX_YEAR, UMALQURA_MIN_YEAR, UmalquraDateRangeError } from './calendar-constants';
 import { CalendarCode, supportedCalendar, type SupportedCalendar } from './supported-calendars';
 
+export { UMALQURA_MAX_YEAR, UMALQURA_MIN_YEAR, UmalquraDateRangeError } from './calendar-constants';
 export class InvalidCalendarDateError extends Error {
   constructor(calendar: SupportedCalendar, year: number, month: number, day: number) {
     super(`Invalid ${calendar} date ${year}-${month}-${day}.`);

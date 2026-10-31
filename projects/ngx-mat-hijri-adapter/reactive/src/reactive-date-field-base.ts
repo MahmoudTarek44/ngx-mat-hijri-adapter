@@ -1,30 +1,30 @@
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   ChangeDetectorRef,
+  afterRenderEffect,
+  afterNextRender,
   DestroyRef,
   Directive,
+  untracked,
   Injector,
-  afterNextRender,
-  afterRenderEffect,
   computed,
   inject,
   input,
   signal,
-  untracked,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
-  type AbstractControl,
   type ControlValueAccessor,
+  type ValidationErrors,
+  type AbstractControl,
   FormGroupDirective,
+  type Validator,
   NgControl,
   NgForm,
-  type ValidationErrors,
-  type Validator,
 } from '@angular/forms';
 
 import {
-  ɵDateFieldCore as DateFieldCore,
   ɵfieldErrorText as fieldErrorText,
+  ɵDateFieldCore as DateFieldCore,
 } from 'ngx-mat-hijri-adapter/internal';
 
 /** Connects a field to reactive forms as a `ControlValueAccessor` and `Validator`. */
@@ -33,9 +33,9 @@ export abstract class ReactiveDateFieldBase<TValue>
   extends DateFieldCore
   implements ControlValueAccessor, Validator
 {
-  private readonly injector = inject(Injector);
   private readonly changeDetector = inject(ChangeDetectorRef);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly injector = inject(Injector);
   private readonly parentForm =
     inject(FormGroupDirective, { optional: true }) ?? inject(NgForm, { optional: true });
 

@@ -1,31 +1,32 @@
-import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, forwardRef, input, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NgTemplateOutlet } from '@angular/common';
 import {
-  FormControl,
-  NG_VALIDATORS,
-  NG_VALUE_ACCESSOR,
-  ReactiveFormsModule,
   type ValidationErrors,
+  ReactiveFormsModule,
+  NG_VALUE_ACCESSOR,
+  NG_VALIDATORS,
+  FormControl,
 } from '@angular/forms';
-import { MatIconButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
-import { DateAdapter } from '@angular/material/core';
-import {
-  MatDatepicker,
-  MatDatepickerInput,
-  MatDatepickerToggle,
-} from '@angular/material/datepicker';
-import { MatError, MatFormField, MatHint, MatLabel, MatSuffix } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import type { CalendarDate } from '@internationalized/date';
-import { HijriDateAdapter, type SupportedCalendar } from 'ngx-mat-hijri-adapter';
 
+import { MatError, MatFormField, MatHint, MatLabel, MatSuffix } from '@angular/material/form-field';
+import type { CalendarDate } from '@internationalized/date';
+import { MatIconButton } from '@angular/material/button';
+import { DateAdapter } from '@angular/material/core';
+import { MatInput } from '@angular/material/input';
+import { MatIcon } from '@angular/material/icon';
 import {
-  ɵconvertOrNull as convertOrNull,
-  ɵequivalentText as equivalentText,
+  MatDatepickerToggle,
+  MatDatepickerInput,
+  MatDatepicker,
+} from '@angular/material/datepicker';
+
+import { HijriDateAdapter, type SupportedCalendar } from 'ngx-mat-hijri-adapter';
+import {
   ɵprovideFieldDateFormats as provideFieldDateFormats,
   ɵreadCalendarDate as readCalendarDate,
+  ɵequivalentText as equivalentText,
+  ɵconvertOrNull as convertOrNull,
   ɵsameValue as sameValue,
 } from 'ngx-mat-hijri-adapter/internal';
 
@@ -47,17 +48,18 @@ import { ReactiveDateFieldBase } from './reactive-date-field-base';
   imports: [
     NgTemplateOutlet,
     ReactiveFormsModule,
-    MatFormField,
-    MatLabel,
-    MatHint,
-    MatError,
-    MatSuffix,
-    MatInput,
-    MatIconButton,
-    MatIcon,
-    MatDatepicker,
+
     MatDatepickerInput,
     MatDatepickerToggle,
+    MatDatepicker,
+    MatIconButton,
+    MatFormField,
+    MatSuffix,
+    MatLabel,
+    MatError,
+    MatInput,
+    MatIcon,
+    MatHint,
   ],
   templateUrl: '../../internal/src/date-field.html',
   styleUrl: '../../internal/src/date-field.css',
@@ -69,6 +71,7 @@ export class ReactiveDateField extends ReactiveDateFieldBase<CalendarDate | null
   protected readonly input = new FormControl<CalendarDate | null>(null);
   protected readonly shown = signal<CalendarDate | null>(null);
   private stored: CalendarDate | null = null;
+
   protected readonly equivalent = computed(() =>
     this.toggleMode() && this.equivalentHint()
       ? equivalentText(this.shown(), this.display(), this.activeLocale(), this.labels())

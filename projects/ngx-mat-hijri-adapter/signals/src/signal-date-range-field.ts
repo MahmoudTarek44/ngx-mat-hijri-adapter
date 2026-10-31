@@ -1,41 +1,43 @@
-import { NgTemplateOutlet } from '@angular/common';
-import {
-  Component,
-  booleanAttribute,
-  computed,
-  effect,
-  input,
-  model,
-  output,
-  untracked,
-} from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   type FormValueControl,
   type ValidationError,
   transformedValue,
 } from '@angular/forms/signals';
-import { MatIconButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
-import { DateAdapter } from '@angular/material/core';
 import {
-  MatDateRangeInput,
-  MatDateRangePicker,
-  MatDatepickerToggle,
-  MatEndDate,
-  MatStartDate,
-} from '@angular/material/datepicker';
+  booleanAttribute,
+  untracked,
+  Component,
+  computed,
+  effect,
+  output,
+  input,
+  model,
+} from '@angular/core';
+
 import { MatError, MatFormField, MatHint, MatLabel, MatSuffix } from '@angular/material/form-field';
 import type { CalendarDate } from '@internationalized/date';
+import { MatIconButton } from '@angular/material/button';
+import { DateAdapter } from '@angular/material/core';
+import { MatIcon } from '@angular/material/icon';
+import {
+  MatDatepickerToggle,
+  MatDateRangePicker,
+  MatDateRangeInput,
+  MatStartDate,
+  MatEndDate,
+} from '@angular/material/datepicker';
+
 import { HijriDateAdapter, type SupportedCalendar } from 'ngx-mat-hijri-adapter';
 import {
-  type ɵCalendarDateRange as CalendarDateRange,
-  ɵDateFieldCore as DateFieldCore,
-  ɵconvertOrNull as convertOrNull,
-  ɵequivalentText as equivalentText,
   ɵprovideFieldDateFormats as provideFieldDateFormats,
+  type ɵCalendarDateRange as CalendarDateRange,
   ɵreadCalendarDate as readCalendarDate,
+  ɵequivalentText as equivalentText,
+  ɵconvertOrNull as convertOrNull,
+  ɵDateFieldCore as DateFieldCore,
   ɵsameValue as sameValue,
 } from 'ngx-mat-hijri-adapter/internal';
 

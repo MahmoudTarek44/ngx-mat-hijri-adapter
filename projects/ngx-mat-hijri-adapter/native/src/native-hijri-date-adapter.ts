@@ -1,4 +1,5 @@
 import { Injectable, inject } from '@angular/core';
+
 import { DateAdapter } from '@angular/material/core';
 import {
   CalendarCode,
@@ -9,18 +10,18 @@ import {
   type SupportedCalendar,
 } from 'ngx-mat-hijri-adapter';
 
+import { NATIVE_HIJRI_DATE_ADAPTER_OPTIONS } from './native-hijri-date-adapter-options';
 import {
-  addCivilMonths,
-  addUtcDays,
   gregorianMonthLength,
-  gregorianToUtcNoon,
   umalquraMonthLength,
+  gregorianToUtcNoon,
   umalquraToUtcNoon,
   utcToGregorian,
-  utcToUmalqura,
   type CivilDate,
+  addCivilMonths,
+  utcToUmalqura,
+  addUtcDays,
 } from './native-calendar';
-import { NATIVE_HIJRI_DATE_ADAPTER_OPTIONS } from './native-hijri-date-adapter-options';
 
 const NUMERIC_DATE = /^(\d{1,4})([./-])(\d{1,2})\2(\d{1,4})$/;
 const NAMED_DATE = /^(\d{1,2})[\s,،]+(.+?)[\s,،]+(\d{1,4})$/;

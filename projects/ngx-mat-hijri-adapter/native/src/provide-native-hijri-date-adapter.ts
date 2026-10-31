@@ -1,16 +1,18 @@
 import { type Provider } from '@angular/core';
+
 import {
-  DateAdapter,
+  type MatDateFormats,
   MAT_DATE_FORMATS,
   MAT_DATE_LOCALE,
-  type MatDateFormats,
+  DateAdapter,
 } from '@angular/material/core';
+
 import { CalendarCode, CalendarLocale, HIJRI_DATE_FORMATS } from 'ngx-mat-hijri-adapter';
 
 import { NativeHijriDateAdapter } from './native-hijri-date-adapter';
 import {
-  NATIVE_HIJRI_DATE_ADAPTER_OPTIONS,
   type NativeHijriDateAdapterOptions,
+  NATIVE_HIJRI_DATE_ADAPTER_OPTIONS,
 } from './native-hijri-date-adapter-options';
 
 /** Options for {@link provideNativeHijriDateAdapter}. Locale does not select the calendar. */

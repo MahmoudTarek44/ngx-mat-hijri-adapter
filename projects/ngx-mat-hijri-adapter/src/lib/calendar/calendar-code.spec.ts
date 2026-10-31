@@ -1,6 +1,6 @@
+import { CalendarCode, supportedCalendar } from './supported-calendars';
 import { CalendarLocale } from '../locale/calendar-locale';
 import { createCalendarDate } from './calendar-date';
-import { CalendarCode, supportedCalendar } from './supported-calendars';
 
 describe('CalendarCode and CalendarLocale', () => {
   it('names the supported calendars', () => {

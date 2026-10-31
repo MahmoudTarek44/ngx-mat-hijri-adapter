@@ -1,4 +1,5 @@
 import { InjectionToken } from '@angular/core';
+
 import type { SupportedCalendar } from 'ngx-mat-hijri-adapter';
 
 /** Construction options for {@link NativeHijriDateAdapter}. Locale does not select the calendar. */

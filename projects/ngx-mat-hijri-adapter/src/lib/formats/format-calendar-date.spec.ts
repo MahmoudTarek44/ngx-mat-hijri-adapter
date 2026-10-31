@@ -1,6 +1,6 @@
+import { calendarMonthNames, formatCalendarDate } from './format-calendar-date';
 import { createCalendarDate } from '../calendar/calendar-date';
 import { HIJRI_DATE_FORMATS } from './date-formats';
-import { calendarMonthNames, formatCalendarDate } from './format-calendar-date';
 
 const long = HIJRI_DATE_FORMATS.display.dateA11yLabel as Intl.DateTimeFormatOptions;
 const numeric = HIJRI_DATE_FORMATS.display.dateInput as Intl.DateTimeFormatOptions;

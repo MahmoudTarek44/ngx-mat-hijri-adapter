@@ -1,9 +1,9 @@
-import { TestBed } from '@angular/core/testing';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { TestBed } from '@angular/core/testing';
 
+import { provideHijriDateAdapter } from './provide-hijri-date-adapter';
 import { HIJRI_DATE_FORMATS } from '../formats/date-formats';
 import { HijriDateAdapter } from './hijri-date-adapter';
-import { provideHijriDateAdapter } from './provide-hijri-date-adapter';
 
 describe('provideHijriDateAdapter', () => {
   it('registers Umm al-Qura and ar-SA independently of each other', () => {

@@ -1,5 +1,6 @@
-import type { ValidationErrors } from '@angular/forms';
 import type { ValidationError } from '@angular/forms/signals';
+import type { ValidationErrors } from '@angular/forms';
+
 import { ɵfieldErrorText as fieldErrorText } from 'ngx-mat-hijri-adapter/internal';
 
 /** Datepicker errors from the inner Material control, as signal forms parse errors. */

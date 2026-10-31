@@ -2,18 +2,18 @@ import { CalendarDate, IslamicCivilCalendar } from '@internationalized/date';
 import { describe, expect, it } from 'vitest';
 
 import {
-  UMALQURA_MAX_YEAR,
-  UMALQURA_MIN_YEAR,
   InvalidCalendarDateError,
   UmalquraDateRangeError,
-  addCalendarDate,
-  calendarOf,
-  calendarToday,
+  monthsInCalendarYear,
   compareCalendarDates,
   convertCalendarDate,
-  createCalendarDate,
   daysInCalendarMonth,
-  monthsInCalendarYear,
+  createCalendarDate,
+  UMALQURA_MAX_YEAR,
+  UMALQURA_MIN_YEAR,
+  addCalendarDate,
+  calendarToday,
+  calendarOf,
 } from './calendar-date';
 
 const golden = [
@@ -27,9 +27,19 @@ const golden = [
 describe('Umm al-Qura calendar dates', () => {
   it('matches known Gregorian and Umm al-Qura days', () => {
     for (const entry of golden) {
-      const gregorian = createCalendarDate('gregorian', entry.gregorian[0], entry.gregorian[1], entry.gregorian[2]);
+      const gregorian = createCalendarDate(
+        'gregorian',
+        entry.gregorian[0],
+        entry.gregorian[1],
+        entry.gregorian[2],
+      );
       const hijri = convertCalendarDate(gregorian, 'islamic-umalqura');
-      const hijriDate = createCalendarDate('islamic-umalqura', entry.hijri[0], entry.hijri[1], entry.hijri[2]);
+      const hijriDate = createCalendarDate(
+        'islamic-umalqura',
+        entry.hijri[0],
+        entry.hijri[1],
+        entry.hijri[2],
+      );
 
       expect([hijri.year, hijri.month, hijri.day]).toEqual(entry.hijri);
       expect(compareCalendarDates(gregorian, hijriDate)).toBe(0);
@@ -38,7 +48,10 @@ describe('Umm al-Qura calendar dates', () => {
 
   it('round-trips a Gregorian day through Umm al-Qura', () => {
     const original = createCalendarDate('gregorian', 2026, 10, 1);
-    const restored = convertCalendarDate(convertCalendarDate(original, 'islamic-umalqura'), 'gregorian');
+    const restored = convertCalendarDate(
+      convertCalendarDate(original, 'islamic-umalqura'),
+      'gregorian',
+    );
 
     expect(compareCalendarDates(original, restored)).toBe(0);
     expect(restored.year).toBe(2026);
@@ -53,7 +66,9 @@ describe('Umm al-Qura calendar dates', () => {
     expect(daysInCalendarMonth(ramadan)).toBe(30);
     expect(daysInCalendarMonth(shawwal)).toBe(29);
 
-    const nextMonth = addCalendarDate(createCalendarDate('islamic-umalqura', 1445, 9, 30), { months: 1 });
+    const nextMonth = addCalendarDate(createCalendarDate('islamic-umalqura', 1445, 9, 30), {
+      months: 1,
+    });
     expect([nextMonth.year, nextMonth.month, nextMonth.day]).toEqual([1445, 10, 29]);
   });
 
@@ -64,11 +79,15 @@ describe('Umm al-Qura calendar dates', () => {
     expect(() => createCalendarDate('islamic-umalqura', UMALQURA_MAX_YEAR + 1, 1, 1)).toThrow(
       UmalquraDateRangeError,
     );
-    expect(() => createCalendarDate('islamic-umalqura', 1445, 13, 1)).toThrow(InvalidCalendarDateError);
-    expect(() => createCalendarDate('islamic-umalqura', 1445, 10, 30)).toThrow(InvalidCalendarDateError);
-    expect(() => convertCalendarDate(createCalendarDate('gregorian', 1800, 1, 1), 'islamic-umalqura')).toThrow(
-      UmalquraDateRangeError,
+    expect(() => createCalendarDate('islamic-umalqura', 1445, 13, 1)).toThrow(
+      InvalidCalendarDateError,
     );
+    expect(() => createCalendarDate('islamic-umalqura', 1445, 10, 30)).toThrow(
+      InvalidCalendarDateError,
+    );
+    expect(() =>
+      convertCalendarDate(createCalendarDate('gregorian', 1800, 1, 1), 'islamic-umalqura'),
+    ).toThrow(UmalquraDateRangeError);
   });
 
   it('names the package calendar, including gregory as gregorian', () => {
@@ -106,7 +125,11 @@ describe('Umm al-Qura calendar dates', () => {
       const roundTrip = convertCalendarDate(gregorian, 'islamic-umalqura');
       const nextDay = addCalendarDate(date, { days: 1 });
 
-      expect([roundTrip.year, roundTrip.month, roundTrip.day]).toEqual([date.year, date.month, date.day]);
+      expect([roundTrip.year, roundTrip.month, roundTrip.day]).toEqual([
+        date.year,
+        date.month,
+        date.day,
+      ]);
       expect(date.day).toBeLessThanOrEqual(daysInCalendarMonth(date));
       expect(date.calendar.toJulianDay(nextDay) - date.calendar.toJulianDay(date)).toBe(1);
 

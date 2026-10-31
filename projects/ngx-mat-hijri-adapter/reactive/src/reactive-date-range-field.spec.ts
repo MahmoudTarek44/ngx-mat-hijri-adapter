@@ -1,10 +1,11 @@
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+
 import {
-  createCalendarDate,
-  type DateDisplayFormat,
   provideHijriDateAdapter,
+  type DateDisplayFormat,
+  createCalendarDate,
 } from 'ngx-mat-hijri-adapter';
 
 import { ReactiveDateRangeField } from './reactive-date-range-field';

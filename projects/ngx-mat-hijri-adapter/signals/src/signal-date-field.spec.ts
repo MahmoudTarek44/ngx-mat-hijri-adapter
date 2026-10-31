@@ -1,11 +1,13 @@
+import { FormField, disabled, form, required } from '@angular/forms/signals';
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { FormField, disabled, form, required } from '@angular/forms/signals';
+
 import type { CalendarDate } from '@internationalized/date';
+
 import {
-  createCalendarDate,
-  type DateDisplayFormat,
   provideHijriDateAdapter,
+  type DateDisplayFormat,
+  createCalendarDate,
 } from 'ngx-mat-hijri-adapter';
 
 import { SignalDateField } from './signal-date-field';
@@ -80,7 +82,9 @@ describe('SignalDateField', () => {
     const hijriButton = element.querySelector('button[aria-label="Hijri calendar"]');
     const gregorianButton = element.querySelector('button[aria-label="Gregorian calendar"]');
     expect(hijriButton?.querySelector('mat-icon')?.textContent?.trim()).toBe('dark_mode');
-    expect(gregorianButton?.querySelector('mat-icon')?.textContent?.trim()).toBe('add_circle_outline');
+    expect(gregorianButton?.querySelector('mat-icon')?.textContent?.trim()).toBe(
+      'add_circle_outline',
+    );
 
     await press('Gregorian calendar');
     expect(input.value).toBe('11/3/2024');
@@ -190,9 +194,11 @@ describe('SignalDateField', () => {
     const element: HTMLElement = fixture.nativeElement;
     const input = element.querySelector('input') as HTMLInputElement;
     const click = async (name: string) => {
-      (Array.from(element.querySelectorAll('button')).find(
-        (button) => button.textContent?.trim() === name,
-      ) as HTMLButtonElement).click();
+      (
+        Array.from(element.querySelectorAll('button')).find(
+          (button) => button.textContent?.trim() === name,
+        ) as HTMLButtonElement
+      ).click();
       await fixture.whenStable();
     };
 

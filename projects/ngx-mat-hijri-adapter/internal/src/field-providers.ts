@@ -1,5 +1,7 @@
 import { type Provider, inject } from '@angular/core';
+
 import { MAT_DATE_FORMATS } from '@angular/material/core';
+
 import { HIJRI_DATE_FORMATS } from 'ngx-mat-hijri-adapter';
 
 /**
