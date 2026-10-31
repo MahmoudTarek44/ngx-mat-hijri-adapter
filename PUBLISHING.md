@@ -23,7 +23,7 @@ The built package comes from `projects/ngx-mat-hijri-adapter/package.json`:
 
 `scripts/stage-package-files.mjs` copies the root `README.md`, `LICENSE`, and `CHANGELOG.md` into `projects/ngx-mat-hijri-adapter/` before the build. Those copies are gitignored. ng-packagr then ships the README, the changelog, and `agents/SKILL.md` with the package.
 
-Before the first publish, set `homepage` in `projects/ngx-mat-hijri-adapter/package.json` to `https://ngx-mat-hijri-adapter.dev/`. Keep the GitHub `repository` URL.
+`homepage` in `projects/ngx-mat-hijri-adapter/package.json` is `https://ngx-mat-hijri-adapter.dev/`. Keep the GitHub `repository` URL.
 
 Ready-made fields store a `CalendarDate`. `ngx-mat-hijri-adapter/native` remains the `Date` alternative. Changing the stored field type from `CalendarDate` to `Date` after 1.0.0 is a breaking release.
 

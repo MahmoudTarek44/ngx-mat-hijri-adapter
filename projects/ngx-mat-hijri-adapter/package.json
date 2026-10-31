@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git+https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter.git"
   },
-  "homepage": "https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter#readme",
+  "homepage": "https://ngx-mat-hijri-adapter.dev/",
   "bugs": {
     "url": "https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/issues"
   },
@@ -16,9 +16,14 @@
     "angular",
     "angular-material",
     "datepicker",
+    "date-adapter",
+    "calendar",
     "hijri",
     "umalqura",
-    "islamic-calendar"
+    "umm-al-qura",
+    "islamic-calendar",
+    "arabic",
+    "signal-forms"
   ],
   "sideEffects": false,
   "schematics": "./schematics/collection.json",
