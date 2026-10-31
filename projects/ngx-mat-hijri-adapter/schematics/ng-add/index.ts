@@ -1,4 +1,10 @@
-import { chain, SchematicsException, type Rule, type Tree } from '@angular-devkit/schematics';
+import {
+  chain,
+  SchematicsException,
+  type DirEntry,
+  type Rule,
+  type Tree,
+} from '@angular-devkit/schematics';
 import { addDependency, addRootProvider } from '@schematics/angular/utility';
 import { getDependency } from '@schematics/angular/utility/dependency';
 
@@ -6,6 +12,8 @@ import type { NgAddOptions } from './schema';
 
 const CALENDAR_PACKAGE = '@internationalized/date';
 const CALENDAR_VERSION = '^3.12.0';
+/** Installed packages and build output mention the provider without the app calling it. */
+const SKIPPED_DIRS = new Set(['node_modules', 'dist', '.angular', '.git']);
 
 export function ngAdd(options: NgAddOptions): Rule {
   return (tree) => {
@@ -38,15 +46,18 @@ export function ngAdd(options: NgAddOptions): Rule {
 }
 
 function providesAdapter(tree: Tree): boolean {
-  let found = false;
+  return dirProvidesAdapter(tree.getDir('/'));
+}
 
-  tree.visit((path) => {
-    if (found || !path.endsWith('.ts')) {
-      return;
+function dirProvidesAdapter(dir: DirEntry): boolean {
+  for (const name of dir.subfiles) {
+    if (!name.endsWith('.ts') || name.endsWith('.d.ts')) {
+      continue;
     }
+    if (dir.file(name)?.content.toString('utf8').includes('provideHijriDateAdapter')) {
+      return true;
+    }
+  }
 
-    found = tree.readText(path).includes('provideHijriDateAdapter');
-  });
-
-  return found;
+  return dir.subdirs.some((name) => !SKIPPED_DIRS.has(name) && dirProvidesAdapter(dir.dir(name)));
 }

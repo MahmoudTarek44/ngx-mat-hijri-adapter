@@ -76,6 +76,19 @@ export const appConfig: ApplicationConfig = {
     expect(runner.tasks).toEqual([]);
   });
 
+  it('adds the provider when only the installed package mentions it', async () => {
+    const tree = workspace({ '@angular/material': '^22.2.0' });
+    tree.create(
+      '/node_modules/ngx-mat-hijri-adapter/types/ngx-mat-hijri-adapter.d.ts',
+      'export declare function provideHijriDateAdapter(): unknown;\n',
+    );
+    tree.create('/dist/app/main.ts', 'provideHijriDateAdapter();\n');
+
+    const updated = await runner.runSchematic('ng-add', { project: 'app' }, tree);
+
+    expect(providerCount(updated)).toBe(1);
+  });
+
   it('leaves an installed calendar peer alone', async () => {
     const tree = await runner.runSchematic(
       'ng-add',
