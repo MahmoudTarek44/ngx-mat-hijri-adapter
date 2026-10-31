@@ -141,15 +141,14 @@ From `dist/ngx-mat-hijri-adapter`, after that push:
 npm publish --access public --tag beta
 ```
 
-`--access public` is required because this is the first publish of an unscoped package. `--tag beta` keeps `latest` empty. Omitting `--tag` would publish on `latest`, which is reserved for stable 1.0.0.
-
-Confirm the registry:
+`--access public` is required because this is the first publish of an unscoped package. Omitting `--tag` would publish on `latest`, which is reserved for stable 1.0.0. npm's documentation says `--tag beta` does not set `latest`. Check the registry instead of assuming it:
 
 ```bash
 npm view ngx-mat-hijri-adapter@beta version
+npm dist-tag ls ngx-mat-hijri-adapter
 ```
 
-The version must be `1.0.0-beta.0`. `npm view ngx-mat-hijri-adapter version` must still have no `latest` release.
+`npm view` must print `1.0.0-beta.0`, and `dist-tag ls` must list `beta: 1.0.0-beta.0`. If it also lists `latest: 1.0.0-beta.0`, the registry set `latest` because no other version exists. That is acceptable for the first beta. The stable publish moves `latest` to `1.0.0`. Do not remove `latest` from the only published version.
 
 Only after `npm publish` succeeds, tag that same commit. Tags are lightweight and have no `v` prefix:
 
@@ -172,4 +171,4 @@ Stable 1.0.0 uses this same checklist after the beta is already published. Diffe
 - Tag `1.0.0` only after that publish succeeds, then push the tag.
 - `npm install ngx-mat-hijri-adapter` and `ng add ngx-mat-hijri-adapter` then install the stable release. Drop `@beta` from the README, `agents/SKILL.md`, and the docs snippets in that release commit. The `beta` tag remains available until it is moved.
 
-`latest` stays empty until this stable publish.
+Until this stable publish, `latest` is either empty or points at the beta. `npm dist-tag ls ngx-mat-hijri-adapter` after the stable publish must list `latest: 1.0.0`.
