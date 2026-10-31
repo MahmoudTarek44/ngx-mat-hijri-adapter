@@ -16,7 +16,7 @@ Publish `dist/ngx-mat-hijri-adapter` after `npm run build`. Do not publish the w
 
 The built package comes from `projects/ngx-mat-hijri-adapter/package.json`:
 
-- Peers: `@angular/cdk`, `@angular/core`, `@angular/forms`, and `@angular/material` at `>=22.0.0`, and `@internationalized/date` at `>=3.12.0`
+- Peers: `@angular/cdk`, `@angular/common`, `@angular/core`, `@angular/forms`, and `@angular/material` at `^22.0.0`, and `@internationalized/date` at `^3.12.0`. A new Angular major needs a tested release that widens these ranges
 - The only dependency is `tslib`
 - Entries: the main barrel, plus `native`, `reactive`, `signals`, and `internal`
 - Schematics: `ng-add` and the `ng update` migration collection, compiled by `npm run build`

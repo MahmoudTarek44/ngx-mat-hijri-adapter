@@ -43,8 +43,8 @@ npm install ngx-mat-hijri-adapter@beta @internationalized/date
 
 ## Requirements
 
-- Angular `core`, `forms`, `material`, and `cdk` 22.0.0 or newer.
-- `@internationalized/date` 3.12.0 or newer.
+- Angular `common`, `core`, `forms`, `material`, and `cdk` 22, from 22.0.0. Angular 23 is not supported yet.
+- `@internationalized/date` 3, from 3.12.0.
 
 ## Quick start
 
