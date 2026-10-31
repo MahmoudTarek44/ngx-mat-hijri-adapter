@@ -1,3 +1,4 @@
+import { LocationStrategy, TrailingSlashPathLocationStrategy } from '@angular/common';
 import {
   ApplicationConfig,
   inject,
@@ -19,6 +20,8 @@ export const appConfig: ApplicationConfig = {
       routes,
       withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }),
     ),
+    // GitHub Pages serves each prerendered page from a folder and redirects the address without a slash.
+    { provide: LocationStrategy, useClass: TrailingSlashPathLocationStrategy },
     ...provideDocsI18n(),
     provideAppInitializer(() => {
       inject(MatIconRegistry).setDefaultFontSetClass('material-symbols-outlined');

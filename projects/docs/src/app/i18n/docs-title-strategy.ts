@@ -62,5 +62,6 @@ export class DocsTitleStrategy extends TitleStrategy {
 
 function canonicalUrl(url: string): string {
   const path = url.split(/[?#]/)[0] || '/';
-  return path === '/' ? `${SITE}/` : `${SITE}${path.startsWith('/') ? path : `/${path}`}`;
+  const absolute = path.startsWith('/') ? path : `/${path}`;
+  return `${SITE}${absolute.endsWith('/') ? absolute : `${absolute}/`}`;
 }

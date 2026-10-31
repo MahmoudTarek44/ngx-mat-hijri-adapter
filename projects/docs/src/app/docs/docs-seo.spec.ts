@@ -44,7 +44,7 @@ describe('Docs SEO', () => {
       expect(metaProperty(document, 'og:title')).toBe(document.title);
       expect(metaProperty(document, 'og:description')).toBe(description);
       expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(
-        `https://ngx-mat-hijri-adapter.dev/docs/${page.path}`,
+        `https://ngx-mat-hijri-adapter.dev/docs/${page.path}/`,
       );
     }
   });
