@@ -1,6 +1,6 @@
 # Publishing to npm
 
-Maintainer steps for putting `ngx-mat-hijri-adapter` on npm. This is not the install guide. Version 0.4.4 is tagged on GitHub and is not on npm. A pull request does not publish a package, and a GitHub tag does not either.
+Maintainer steps for putting `ngx-mat-hijri-adapter` on npm. This is not the install guide. Version 1.0.0-beta.0 is the first npm release. A pull request does not publish a package, and a GitHub tag does not either.
 
 The first npm release is **1.0.0-beta.0** on the dist-tag `beta`. Stable 1.0.0 takes `latest` later. `npm install ngx-mat-hijri-adapter` does not install the beta. Install it with:
 
@@ -58,13 +58,13 @@ The docs site is different. Leave its unpublished banner in place until the beta
 
 ## Docs site and prerelease tags
 
-`.github/workflows/pages.yml` deploys the docs site when a tag matches `[0-9]+.[0-9]+.[0-9]+`. That matches `0.4.4` and `1.0.0`. It does not match `1.0.0-beta.0`.
-
-Widen that filter in the beta release commit, or the tag push will not deploy the docs site and the site will stay on the last numeric tag. A filter that also matches this prerelease is:
+`.github/workflows/pages.yml` deploys the docs site when a tag matches one of these filters:
 
 ```yaml
 tags: ['[0-9]+.[0-9]+.[0-9]+', '[0-9]+.[0-9]+.[0-9]+-beta.[0-9]+']
 ```
+
+That matches `1.0.0-beta.0` and `1.0.0`. The beta release commit widened it from the numeric filter alone.
 
 The workflow builds and deploys the docs app. It does not publish to npm.
 

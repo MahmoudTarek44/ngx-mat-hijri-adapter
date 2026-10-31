@@ -5,11 +5,65 @@ All notable changes to ngx-mat-hijri-adapter will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0-beta.0] - 2026-10-31
+
+### First npm beta
+
+This is the first release on npm, under the `beta` tag. Install it with `ng add ngx-mat-hijri-adapter@beta` or `npm install ngx-mat-hijri-adapter@beta @internationalized/date`. Ready-made fields store a `CalendarDate`. `ngx-mat-hijri-adapter/native` remains the `Date` alternative for a plain `mat-datepicker`. Stable 1.0.0 will take the `latest` tag.
+
+#### Changes by Commit
+
+| Commit    | Type        | Description                                                                                                 |
+| --------- | ----------- | ----------------------------------------------------------------------------------------------------------- |
+| `8ec7108` | 🔧 Refactor | **Imports**: Group and order imports in the library and docs, and use `matButton` on the 404 links          |
+| `8997ea3` | 🔧 Chore    | **Closing check**: Record the review of the library, docs, schematics, skill, and workflows before the beta |
+| `768f143` | 🐛 Fix      | **ng add**: Skip `node_modules` and build output when looking for an existing provider                      |
+| `c979fa8` | 📝 Docs     | **Beta install**: `@beta` on the install commands in the README, the agent skill, and the docs              |
+| `3e442e9` | 📝 Docs     | **Publishing**: Check the npm dist-tags after the beta publish                                              |
+| `2b01d31` | 🏗️ Build    | **Peers**: Angular `^22.0.0` with `@angular/common`, and `@internationalized/date` `^3.12.0`                |
+| `5919324` | 🏗️ Build    | **Package page**: `homepage` points at the docs site, with more search keywords                             |
+| `0dec861` | 📝 Docs     | **README**: List the `native` entry point and use docs addresses that do not redirect                       |
+| `05262c8` | 📝 Docs     | **Agent skill**: Name the field components, selectors, bindings, and value types                            |
+| `3c2d7a9` | 🔧 Chore    | **Git ignore**: Ignore the whole `.angular` folder                                                          |
+| `c53bbca` | 🔧 Chore    | **Private notes**: Stop tracking the maintainer roadmap, future notes, and delivery skill                   |
+
+### 📝 Summary of Changes
+
+#### 🐛 Fixed
+
+- **ng add**: The schematic no longer looks inside `node_modules` or build output for `provideHijriDateAdapter`. The installed package mentions that name, so in a real app the provider could be skipped
+
+#### 🔧 Changed
+
+- **Peers**: Angular `common`, `core`, `forms`, `material`, and `cdk` at `^22.0.0`, and `@internationalized/date` at `^3.12.0`. The earlier `>=` ranges also claimed Angular 23 and later before they were tested. `@angular/common` is now listed because the field entries import it
+- **Install commands**: The README, the agent skill, and the docs use `@beta` while only the beta is on npm
+- **Package page**: `homepage` points at the docs site, and the keywords include date adapter, calendar, Umm al-Qura, Arabic, and signal forms
+- **Agent skill**: Names the field components, their selectors, the form bindings, and the stored value types
+- **README**: Lists the `native` entry point
+
+---
+
+**Version**: 1.0.0-beta.0  
+**Release Date**: October 31, 2026  
+**Maintained by**: Mahmoud
+
+---
+
 ## [0.4.4] - 2026-10-31
 
 ### Docs addresses, direction, and not-found page
 
 This patch is tagged on GitHub and is not published on npm. A beta will be published before the stable 1.0.0. Doc pages use the trailing-slash addresses GitHub Pages serves, LTR fields in the Arabic docs keep their labels, and a wrong address shows Page not found.
+
+#### Changes by Commit
+
+| Commit    | Type       | Description                                                                                                     |
+| --------- | ---------- | --------------------------------------------------------------------------------------------------------------- |
+| `cc5d180` | 🐛 Fix     | **Docs addresses**: Links, canonical URLs, and the sitemap use the trailing-slash addresses GitHub Pages serves |
+| `e5346af` | 🐛 Fix     | **Direction**: LTR fields inside the Arabic docs keep Material's LTR notch and label                            |
+| `c54e1e6` | ✨ Feature | **Page not found**: A `noindex` screen with links to Home and Docs, served as `404.html`                        |
+| `e3d620c` | 📝 Docs    | **Right-to-left**: A short warning that links to the LTR-inside-RTL CSS                                         |
+| `74cfa69` | 📝 Docs    | **Changelog**: Describe the Right-to-left warning in this entry                                                 |
 
 ### 📝 Summary of Changes
 
@@ -18,32 +72,6 @@ This patch is tagged on GitHub and is not published on npm. A beta will be publi
 - **Search**: Doc links, canonical URLs, `og:url`, and `sitemap.xml` use addresses such as `/docs/getting-started/`. The address without the slash redirects on GitHub Pages
 - **Direction**: Angular Material styles RTL fields with `[dir=rtl]` ancestor selectors, so an LTR demo inside the Arabic docs had a clipped label and rotated calendar arrows. The docs restore Material's LTR styles for that case, and the Right-to-left page warns about it and links to the CSS for apps
 - **Not found**: An unknown address shows a Page not found screen with links to Home and Docs, marked `noindex` and without a canonical URL. It is served as `404.html`
-
-### 📦 Modified Files
-
-<details>
-<summary><strong>Docs</strong></summary>
-
-- `projects/docs/src/app/app.config.ts` - Trailing-slash links
-- `projects/docs/src/app/i18n/docs-title-strategy.ts` - Trailing-slash canonical and `og:url`, and `noindex` on Page not found
-- `projects/docs/public/sitemap.xml` - Trailing-slash doc addresses
-- `projects/docs/src/ltr-inside-rtl.css` - Material LTR field and calendar styles inside an RTL page
-- `projects/docs/src/app/docs/pages/right-to-left.html` - Warning for an LTR field inside an RTL page
-- `projects/docs/src/app/not-found.ts` and `app.routes.ts` - Page not found screen
-- `projects/docs/src/locale/en.json` and `ar.json` - Strings for both
-- `.github/workflows/pages.yml` - Page not found becomes `404.html`
-
-</details>
-
-<details>
-<summary><strong>Workspace</strong></summary>
-
-- `package.json` and `package-lock.json` - Version 0.4.4
-- `projects/ngx-mat-hijri-adapter/package.json` and `src/lib/version.ts` - Version 0.4.4
-- `README.md`, `ROADMAP.md`, and `CONTRIBUTING.md` - Version 0.4.4
-- `CHANGELOG.md` - This entry
-
-</details>
 
 ---
 
@@ -59,35 +87,19 @@ This patch is tagged on GitHub and is not published on npm. A beta will be publi
 
 This patch is tagged on GitHub and is not published on npm. A beta will be published before the stable 1.0.0. The docs site keeps its English prerender, then applies a saved language and theme. The homepage title is Hijri and Gregorian dates for Angular Material.
 
+#### Changes by Commit
+
+| Commit    | Type    | Description                                                                              |
+| --------- | ------- | ---------------------------------------------------------------------------------------- |
+| `54d5913` | 🐛 Fix  | **Hydration**: Apply the saved language and theme after the English prerender is claimed |
+| `ce50e17` | 📝 Docs | **Search title**: The homepage title, description, favicon, and site name                |
+
 ### 📝 Summary of Changes
 
 #### 🔧 Changed
 
 - **Hydration**: A saved language or theme is applied after the English prerender is claimed, so the page no longer throws `NG0500`. The hero calendar is painted in the browser
 - **Search**: The homepage title is `Hijri and Gregorian dates for Angular Material`, with a description that also matches reordered Angular Material and Hijri queries. The site icon is a 48px PNG
-
-### 📦 Modified Files
-
-<details>
-<summary><strong>Docs</strong></summary>
-
-- `projects/docs/src/app/i18n/docs-language.ts` and `theme/theme.ts` - Saved choices apply after hydration
-- `projects/docs/src/app/home/home.html` - Hero calendar skips hydration
-- `projects/docs/src/index.html` - Homepage title, description, favicon, and site name
-- `projects/docs/public/favicon-48.png` and `favicon-192.png` - Raster site icon
-- `projects/docs/src/locale/en.json` and `ar.json` - Homepage title and description
-
-</details>
-
-<details>
-<summary><strong>Workspace</strong></summary>
-
-- `package.json` and `package-lock.json` - Version 0.4.3
-- `projects/ngx-mat-hijri-adapter/package.json` and `src/lib/version.ts` - Version 0.4.3
-- `README.md`, `ROADMAP.md`, and `CONTRIBUTING.md` - Version 0.4.3
-- `CHANGELOG.md` - This entry
-
-</details>
 
 ---
 
@@ -103,6 +115,13 @@ This patch is tagged on GitHub and is not published on npm. A beta will be publi
 
 This patch is tagged on GitHub and is not published on npm. A beta will be published before the stable 1.0.0. The docs site is prerendered English HTML, and a calendar draw reuses its Intl formatters.
 
+#### Changes by Commit
+
+| Commit    | Type       | Description                                                                                          |
+| --------- | ---------- | ---------------------------------------------------------------------------------------------------- |
+| `39a7cdd` | 📝 Docs    | **Publishing**: The npm publish guide and measured bundle budget, and reused Intl formatters         |
+| `31630f4` | ✨ Feature | **Docs first load**: Prerendered English pages, deferred demos, and the Arabic font loaded on demand |
+
 ### 📝 Summary of Changes
 
 #### 🔧 Changed
@@ -111,36 +130,6 @@ This patch is tagged on GitHub and is not published on npm. A beta will be publi
 - **First load**: Below-the-fold datepicker demos load when they scroll into view. English strings are bundled. The Arabic font loads only after Arabic is chosen
 - **Calendar drawing**: Date adapters reuse Intl formatters instead of constructing them on every draw
 - **Publishing**: Maintainer steps for the npm beta live in `PUBLISHING.md`, with the measured bundle budget
-
-### 📦 Modified Files
-
-<details>
-<summary><strong>Docs</strong></summary>
-
-- `projects/docs/src/main.server.ts` - Static prerender of the docs routes
-- `projects/docs/src/app/home/home.html` and the live doc demos - Datepicker demos deferred until they enter the viewport
-- `projects/docs/src/app/i18n/` - English bundled, per-page title, description, and canonical URL
-- `projects/docs/public/robots.txt` and `sitemap.xml` - Crawl rules and the page list
-
-</details>
-
-<details>
-<summary><strong>Library</strong></summary>
-
-- `projects/ngx-mat-hijri-adapter/src/lib/` - Cached Intl formatters on both date adapters
-
-</details>
-
-<details>
-<summary><strong>Workspace</strong></summary>
-
-- `package.json` and `package-lock.json` - Version 0.4.2
-- `projects/ngx-mat-hijri-adapter/package.json` and `src/lib/version.ts` - Version 0.4.2
-- `PUBLISHING.md` - npm publish guide
-- `README.md`, `ROADMAP.md`, and `CONTRIBUTING.md` - Version 0.4.2
-- `CHANGELOG.md` - This entry
-
-</details>
 
 ---
 
@@ -156,34 +145,18 @@ This patch is tagged on GitHub and is not published on npm. A beta will be publi
 
 This patch is tagged on GitHub and is not published on npm. A beta will be published before the stable 1.0.0. The public roadmap now treats that stable release, and `ng update` migrations, as work in progress. The changelog stays `CHANGELOG.md` in the GitHub repository.
 
+#### Changes by Commit
+
+| Commit    | Type    | Description                                                                                             |
+| --------- | ------- | ------------------------------------------------------------------------------------------------------- |
+| `7bf921d` | 📝 Docs | **Roadmap and npm wording**: Under development and future roadmap cards, and the beta-first npm wording |
+
 ### 📝 Summary of Changes
 
 #### 🔧 Changed
 
 - **npm wording**: The banner, Getting started, README, and contributing guide no longer say that npm publishing starts at the stable 1.0.0
 - **Roadmap**: Stable 1.0.0 release and ng update migrations are under development. The package MCP server stays in Future. The docs changelog page is no longer a roadmap item
-
-### 📦 Modified Files
-
-<details>
-<summary><strong>Docs</strong></summary>
-
-- `projects/docs/src/app/docs/pages/roadmap.ts` - Under development and Future lists
-- `projects/docs/src/locale/en.json` and `ar.json` - Banner, Getting started, and roadmap copy
-- `projects/docs/src/app/app.spec.ts` - Expects version 0.4.1 and the beta wording
-- `projects/docs/src/app/docs/docs-layout.spec.ts` - Expects the two under-development cards
-
-</details>
-
-<details>
-<summary><strong>Workspace</strong></summary>
-
-- `package.json` and `package-lock.json` - Version 0.4.1
-- `projects/ngx-mat-hijri-adapter/package.json` and `src/lib/version.ts` - Version 0.4.1
-- `README.md`, `ROADMAP.md`, and `CONTRIBUTING.md` - Version 0.4.1 and the beta wording
-- `CHANGELOG.md` - This entry
-
-</details>
 
 ---
 
@@ -201,13 +174,13 @@ This minor release is tagged on GitHub and is not published on npm. The first np
 
 #### Changes by Commit
 
-| Commit    | Type       | Description                                                                                                          |
-| --------- | ---------- | -------------------------------------------------------------------------------------------------------------------- |
-| `4930c63` | 📝 Docs    | **Native adapter**: Document `provideNativeHijriDateAdapter()` as the alternative for a `Date`                       |
-| `dbe97dd` | 📝 Docs    | **Native adapter**: Show that restriction as a warning                                                               |
-| `f6796fa` | ✨ Feature | **calendarOf()**: Read a `CalendarDate` calendar without comparing `gregory` and `gregorian`                         |
-| `2432c8f` | ✨ Feature | **Calendar toggle**: A `#calendarToggle` template replaces the default buttons and keeps `valueCalendar`             |
-| `db1aab2` | 📝 Docs    | **Styling**: Show that ready-made fields inherit Material tokens and have no style input                             |
+| Commit    | Type       | Description                                                                                              |
+| --------- | ---------- | -------------------------------------------------------------------------------------------------------- |
+| `4930c63` | 📝 Docs    | **Native adapter**: Document `provideNativeHijriDateAdapter()` as the alternative for a `Date`           |
+| `dbe97dd` | 📝 Docs    | **Native adapter**: Show that restriction as a warning                                                   |
+| `f6796fa` | ✨ Feature | **calendarOf()**: Read a `CalendarDate` calendar without comparing `gregory` and `gregorian`             |
+| `2432c8f` | ✨ Feature | **Calendar toggle**: A `#calendarToggle` template replaces the default buttons and keeps `valueCalendar` |
+| `db1aab2` | 📝 Docs    | **Styling**: Show that ready-made fields inherit Material tokens and have no style input                 |
 
 ### 📝 Summary of Changes
 
@@ -218,34 +191,6 @@ This minor release is tagged on GitHub and is not published on npm. The first np
 - **Default toggle icons**: Hijri uses `dark_mode`. Gregorian uses `add_circle_outline`
 - **Native adapter page**: `/docs/native-adapter` explains that `provideNativeHijriDateAdapter()` is for a plain `mat-datepicker` that stores a `Date`. A warning states that the ready-made fields do not use it
 - **Styling page**: `/docs/styling` shows that the fields inherit the project Material tokens. `mat.form-field-overrides()` on a parent restyles the input. `mat.datepicker-overrides()` on `html` restyles the toggle icon and the calendar popup, because the popup is an overlay
-
-### 📦 Modified Files
-
-<details>
-<summary><strong>Library</strong></summary>
-
-- `projects/ngx-mat-hijri-adapter/src/lib/calendar/calendar-date.ts` - `calendarOf()`
-- `projects/ngx-mat-hijri-adapter/internal/` - Calendar toggle template, controller, and default icons
-- `projects/ngx-mat-hijri-adapter/package.json` and `src/lib/version.ts` - Version 0.4.0
-
-</details>
-
-<details>
-<summary><strong>Docs</strong></summary>
-
-- `/docs/native-adapter`, `/docs/calendar-toggle`, and `/docs/styling`
-- `projects/docs/src/app/app.spec.ts` - Expects version 0.4.0 and the tag URL without a `v` prefix
-
-</details>
-
-<details>
-<summary><strong>Workspace</strong></summary>
-
-- `package.json` and `package-lock.json` - Version 0.4.0
-- `README.md`, `ROADMAP.md`, and `CONTRIBUTING.md` - Version 0.4.0
-- `CHANGELOG.md` - This entry
-
-</details>
 
 ---
 
@@ -263,10 +208,10 @@ This patch is tagged on GitHub and is not published on npm. The first npm releas
 
 #### Changes by Commit
 
-| Commit    | Type    | Description                                                                                          |
-| --------- | ------- | ---------------------------------------------------------------------------------------------------- |
-| `2b62366` | 📝 Docs | **Docs hosting**: Build the docs site with base href `/` for the custom domain                      |
-| `9d076f1` | 📝 Docs | **License**: Apache License 2.0, replacing MIT                                                       |
+| Commit    | Type    | Description                                                                    |
+| --------- | ------- | ------------------------------------------------------------------------------ |
+| `2b62366` | 📝 Docs | **Docs hosting**: Build the docs site with base href `/` for the custom domain |
+| `9d076f1` | 📝 Docs | **License**: Apache License 2.0, replacing MIT                                 |
 
 ### 📝 Summary of Changes
 
@@ -274,29 +219,6 @@ This patch is tagged on GitHub and is not published on npm. The first npm releas
 
 - **Docs hosting**: GitHub Pages builds the docs app with base href `/`, so scripts and styles load on `https://ngx-mat-hijri-adapter.dev/`. The README links point at that domain
 - **License**: The project is released under the Apache License 2.0. Copyright 2026 Mahmoud
-
-### 📦 Modified Files
-
-<details>
-<summary><strong>Docs</strong></summary>
-
-- `.github/workflows/pages.yml` - Base href `/`
-- `README.md` - Docs links for `https://ngx-mat-hijri-adapter.dev/`
-- `projects/docs/src/locale/en.json` and `ar.json` - Footer names the Apache License 2.0
-- `projects/docs/src/app/app.spec.ts` - Expects version 0.3.3 and the tag URL without a `v` prefix
-
-</details>
-
-<details>
-<summary><strong>Workspace</strong></summary>
-
-- `LICENSE` - Apache License 2.0
-- `package.json`, `package-lock.json`, and `projects/ngx-mat-hijri-adapter/package.json` - License Apache-2.0 and version 0.3.3
-- `projects/ngx-mat-hijri-adapter/src/lib/version.ts` - `NGX_MAT_HIJRI_ADAPTER_VERSION` is 0.3.3
-- `README.md`, `ROADMAP.md`, and `CONTRIBUTING.md` - Version 0.3.3
-- `CHANGELOG.md` - This entry
-
-</details>
 
 ---
 
@@ -314,8 +236,8 @@ This patch is tagged on GitHub and is not published on npm. The first npm releas
 
 #### Changes by Commit
 
-| Commit    | Type    | Description                                                                                          |
-| --------- | ------- | ---------------------------------------------------------------------------------------------------- |
+| Commit    | Type    | Description                                                                                         |
+| --------- | ------- | --------------------------------------------------------------------------------------------------- |
 | `f70a73e` | 📝 Docs | **Docs languages**: English and Arabic, with Noto Kufi Arabic and a right-to-left layout for Arabic |
 
 ### 📝 Summary of Changes
@@ -323,28 +245,6 @@ This patch is tagged on GitHub and is not published on npm. The first npm releas
 #### ✨ Added
 
 - **Docs languages**: The docs site switches between English and Arabic with ngx-translate. Arabic uses the Noto Kufi Arabic font and a right-to-left layout. The language choice is stored in the browser. Framework and technology names stay in English
-
-### 📦 Modified Files
-
-<details>
-<summary><strong>Docs</strong></summary>
-
-- `projects/docs/src/locale/` - English and Arabic messages
-- `projects/docs/src/app/i18n/` - Language switch, document direction, and page titles
-- Roadmap lists Arabic and English docs under Implemented
-- `projects/docs/src/app/app.spec.ts` - Expects version 0.3.2 and the tag URL without a `v` prefix
-
-</details>
-
-<details>
-<summary><strong>Workspace</strong></summary>
-
-- `README.md` - Version 0.3.2
-- `package.json` and `package-lock.json` - Version 0.3.2. `@ngx-translate/core` and `@ngx-translate/http-loader` are workspace dependencies for the docs site only
-- `projects/ngx-mat-hijri-adapter/package.json` and `src/lib/version.ts` - Version 0.3.2
-- `CHANGELOG.md` - This entry
-
-</details>
 
 ---
 
@@ -362,10 +262,10 @@ This patch is tagged on GitHub and is not published on npm. The first npm releas
 
 #### Changes by Commit
 
-| Commit    | Type       | Description                                                                                                                |
-| --------- | ---------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `c9f15fb` | ✨ Feature | **Native adapter**: `provideNativeHijriDateAdapter()` from `ngx-mat-hijri-adapter/native` stores a `Date` at UTC noon      |
-| `7d2230a` | 📝 Docs    | **AI agents**: Copy the shipped skill to `AGENTS.md`, so any coding agent can follow it                                   |
+| Commit    | Type       | Description                                                                                                           |
+| --------- | ---------- | --------------------------------------------------------------------------------------------------------------------- |
+| `c9f15fb` | ✨ Feature | **Native adapter**: `provideNativeHijriDateAdapter()` from `ngx-mat-hijri-adapter/native` stores a `Date` at UTC noon |
+| `7d2230a` | 📝 Docs    | **AI agents**: Copy the shipped skill to `AGENTS.md`, so any coding agent can follow it                               |
 
 ### 📝 Summary of Changes
 
@@ -379,37 +279,6 @@ This patch is tagged on GitHub and is not published on npm. The first npm releas
 
 - **AI agents**: After `ng add`, copy `agents/SKILL.md` to `AGENTS.md` at the project root. If that file already exists, add the skill to it. A skills folder is only an example for agents that load `SKILL.md` themselves
 - **Default value**: The README states that the default adapter stores `CalendarDate`, and that `/native` stores a `Date` at UTC noon
-
-### 📦 Modified Files
-
-<details>
-<summary><strong>Library</strong></summary>
-
-- `projects/ngx-mat-hijri-adapter/native/` - `NativeHijriDateAdapter`, `provideNativeHijriDateAdapter()`, and the Umm al-Qura month-length table
-- `projects/ngx-mat-hijri-adapter/src/lib/calendar/calendar-constants.ts` - Shared calendar codes and the AH 1300–1599 limits, with no `@internationalized/date` import
-- `projects/ngx-mat-hijri-adapter/agents/SKILL.md` - The native provider stores a `Date` and does not replace `CalendarDate`
-- `projects/ngx-mat-hijri-adapter/package.json` and `src/lib/version.ts` - Version 0.3.1
-
-</details>
-
-<details>
-<summary><strong>Docs</strong></summary>
-
-- Date adapter page, home examples, and API group for `ngx-mat-hijri-adapter/native`
-- AI agents page leads with `AGENTS.md`
-- Roadmap: native adapter implemented, two items under development, MCP server listed as future
-- `projects/docs/src/app/app.spec.ts` - Expects version 0.3.1 and the tag URL without a `v` prefix
-
-</details>
-
-<details>
-<summary><strong>Workspace</strong></summary>
-
-- `README.md` - Version 0.3.1 and the native `Date` adapter
-- `package.json` and `package-lock.json` - Version 0.3.1
-- `CHANGELOG.md` - This entry
-
-</details>
 
 ---
 
@@ -427,18 +296,18 @@ This minor release is tagged on GitHub and is not published on npm. The first np
 
 #### Changes by Commit
 
-| Commit    | Type       | Description                                                                                                                |
-| --------- | ---------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `1701276` | 🔧 Chore   | **Delivery skill**: One branch per task, approval before the commit, then a squash-merge into `development`               |
+| Commit    | Type       | Description                                                                                                                                      |
+| --------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `1701276` | 🔧 Chore   | **Delivery skill**: One branch per task, approval before the commit, then a squash-merge into `development`                                      |
 | `9f9148a` | 🐛 Fix     | **Date fields**: Show a parse error before required, clear both sides outside the Umm al-Qura table, and do calendar math in the active calendar |
-| `85b5231` | ✨ Feature | **Month name**: Numeric day/month/year stays the default. A field can show the locale's month name without changing the stored date |
-| `213eb2e` | 🔧 Chore   | **Docs app**: Rename the demo project, scripts, and Pages output to the docs app                                          |
-| `49b087d` | ✨ Feature | **Unpublished version**: The docs site names this tag and states that the first npm release is 1.0.0                      |
-| `eed9a52` | ✨ Feature | **Form guides**: Getting started and the home examples link to both the reactive and signal field pages                   |
-| `a35efb2` | ✨ Feature | **ng add**: Install `@internationalized/date` when it is missing and register the adapter once. `ng update` to 1.0.0 does nothing |
-| `66d0ca9` | ✨ Feature | **Agent skill**: Ship a skill that tells a coding agent how to install the adapter and store dates                        |
-| `4f94e07` | 📝 Docs    | **Contributing**: Target branch, the checks CI runs, a code of conduct, and the pull request rules                        |
-| `cf3e6f4` | ✨ Feature | **Roadmap**: Shipped features, the next native Hijri adapter, and ideas that are not scheduled                            |
+| `85b5231` | ✨ Feature | **Month name**: Numeric day/month/year stays the default. A field can show the locale's month name without changing the stored date              |
+| `213eb2e` | 🔧 Chore   | **Docs app**: Rename the demo project, scripts, and Pages output to the docs app                                                                 |
+| `49b087d` | ✨ Feature | **Unpublished version**: The docs site names this tag and states that the first npm release is 1.0.0                                             |
+| `eed9a52` | ✨ Feature | **Form guides**: Getting started and the home examples link to both the reactive and signal field pages                                          |
+| `a35efb2` | ✨ Feature | **ng add**: Install `@internationalized/date` when it is missing and register the adapter once. `ng update` to 1.0.0 does nothing                |
+| `66d0ca9` | ✨ Feature | **Agent skill**: Ship a skill that tells a coding agent how to install the adapter and store dates                                               |
+| `4f94e07` | 📝 Docs    | **Contributing**: Target branch, the checks CI runs, a code of conduct, and the pull request rules                                               |
+| `cf3e6f4` | ✨ Feature | **Roadmap**: Shipped features, the next native Hijri adapter, and ideas that are not scheduled                                                   |
 
 ### 📝 Summary of Changes
 
@@ -473,101 +342,6 @@ This minor release is tagged on GitHub and is not published on npm. The first np
 - **Package asset**: ng-packagr copies `agents/SKILL.md` into the package next to the changelog
 - **Pages**: A release tag such as `0.3.0` builds the docs app and deploys it to GitHub Pages
 
-### 📦 Modified Files
-
-<details>
-<summary><strong>Date fields and adapter</strong></summary>
-
-- `projects/ngx-mat-hijri-adapter/src/lib/adapter/hijri-date-adapter.ts` - Calendar math in the active calendar, and an invalid date instead of a throw when adding past the Umm al-Qura table
-- `projects/ngx-mat-hijri-adapter/src/lib/adapter/hijri-date-adapter.spec.ts` - Active-calendar and range tests
-- `projects/ngx-mat-hijri-adapter/src/lib/adapter/hijri-date-adapter-options.ts` - Adapter options used by the field providers
-- `projects/ngx-mat-hijri-adapter/src/lib/adapter/provide-hijri-date-adapter.ts` and `provide-hijri-date-adapter.spec.ts` - Provider coverage for the field setup
-- `projects/ngx-mat-hijri-adapter/src/lib/locale/month-names.ts` - Eastern Arabic digits in short Hijri names, and extra month-name spellings
-- `projects/ngx-mat-hijri-adapter/internal/src/field-support.ts` - Shared clear-both-sides behavior when a day cannot be kept
-- `projects/ngx-mat-hijri-adapter/internal/src/public-api.ts` - Exports the shared field helper
-- `projects/ngx-mat-hijri-adapter/reactive/src/reactive-date-field-base.ts` - Parse error ahead of required, for both reactive fields
-- `projects/ngx-mat-hijri-adapter/reactive/src/reactive-date-field.ts` and `reactive-date-range-field.ts` - Stay in sync across calendars and parse errors
-- `projects/ngx-mat-hijri-adapter/reactive/src/reactive-date-field.spec.ts` - Date field sync and parse-error tests
-- `projects/ngx-mat-hijri-adapter/signals/src/signal-date-field.ts` and `signal-date-range-field.ts` - Same sync rules for signal fields
-- `projects/ngx-mat-hijri-adapter/signals/src/signal-errors.ts` - Fallback message when `errorMessages` has no entry
-- `projects/ngx-mat-hijri-adapter/signals/src/signal-date-field.spec.ts` - Signal field sync and parse-error tests
-
-</details>
-
-<details>
-<summary><strong>Display format</strong></summary>
-
-- `projects/ngx-mat-hijri-adapter/src/lib/formats/date-formats.ts` - `DateDisplayFormat`, `NUMERIC_DATE_INPUT`, and `MONTH_NAME_DATE_INPUT`
-- `projects/ngx-mat-hijri-adapter/src/public-api.ts` - Exports the display-format types
-- `projects/ngx-mat-hijri-adapter/internal/src/date-field-core.ts` - Formats the input from the field's display format
-- `projects/ngx-mat-hijri-adapter/internal/src/field-providers.ts` - Passes the display format into the adapter formats
-- `projects/ngx-mat-hijri-adapter/reactive/src/public-api.ts` and `signals/src/public-api.ts` - Re-export the display format
-- `projects/ngx-mat-hijri-adapter/reactive/src/reactive-date-field.spec.ts` and `reactive-date-range-field.spec.ts` - Month-name field tests
-- `projects/ngx-mat-hijri-adapter/signals/src/signal-date-field.spec.ts` - Month-name field tests
-- `projects/docs/src/app/home/playground/playground.ts` and `playground.html` - Numeric and month-name switch in the playground
-
-</details>
-
-<details>
-<summary><strong>Schematics</strong></summary>
-
-- `projects/ngx-mat-hijri-adapter/schematics/ng-add/index.ts` - Checks for Angular Material, adds `@internationalized/date` when missing, and registers the provider once
-- `projects/ngx-mat-hijri-adapter/schematics/ng-add/index.spec.ts` - Schematic tests
-- `projects/ngx-mat-hijri-adapter/schematics/ng-add/schema.json` and `schema.ts` - `ng add` options
-- `projects/ngx-mat-hijri-adapter/schematics/ng-update/index.ts` - No-op migration for 1.0.0
-- `projects/ngx-mat-hijri-adapter/schematics/collection.json` and `migration-collection.json` - Schematic collections
-- `projects/ngx-mat-hijri-adapter/schematics/package.json` - `"type": "commonjs"` so the CLI can load the factories
-- `projects/ngx-mat-hijri-adapter/tsconfig.schematics.json` - Schematic build
-- `projects/ngx-mat-hijri-adapter/package.json` - `ng-add` and `ng-update` metadata, and version 0.3.0
-- `scripts/build-schematics.mjs` - Compiles the schematics after the library build and before the tests
-- `angular.json` - Includes the schematic specs in the library tests
-- `package.json` - Build and test run the schematic compile
-
-</details>
-
-<details>
-<summary><strong>Agent skill</strong></summary>
-
-- `projects/ngx-mat-hijri-adapter/agents/SKILL.md` - Install path, stored date type, and calendar limits
-- `projects/ngx-mat-hijri-adapter/ng-package.json` - Ships the skill as a package asset
-- `projects/docs/src/app/docs/pages/ai-agents.ts` and `ai-agents.html` - Docs page for the skill
-- `projects/docs/src/app/docs/doc-pages.ts` - AI agents nav entry
-- `projects/docs/src/app/home/home.html` and `home.spec.ts` - Home callout linking to the skill page
-
-</details>
-
-<details>
-<summary><strong>Docs site</strong></summary>
-
-- `projects/demo` renamed to `projects/docs` - App, pages, examples, and styles
-- `.github/workflows/ci.yml` and `pages.yml` - Test and deploy the docs app
-- `projects/docs/src/app/app.html` and `app.ts` - Unpublished-version banner and the version chip
-- `projects/docs/src/app/app.spec.ts` - Expects version 0.3.0 and the tag URL without a `v` prefix
-- `projects/docs/src/app/shared/form-guides.ts` and `form-guides.html` - Links to both field guides
-- `projects/docs/src/app/docs/pages/getting-started.ts` and `getting-started.html` - `ng add` as the default install, with the manual command kept
-- `projects/docs/src/app/docs/pages/form-fields.ts` and `form-fields.html` - Display format and the form-guide links
-- `projects/docs/src/app/docs/pages/roadmap.ts` and `roadmap.html` - Implemented, under development, and future
-- `projects/docs/src/app/docs/docs-layout.ts` and `docs-layout.spec.ts` - AI agents and Roadmap set apart from the guide links
-- `projects/docs/src/tailwind.css` - Roadmap section spacing
-- `README.md` - Docs app path, `ng add`, and version 0.3.0
-
-</details>
-
-<details>
-<summary><strong>Contribution and workspace</strong></summary>
-
-- `CONTRIBUTING.md` - Target branch, checks, area of impact, breaking changes, tests, and dependencies
-- `CODE_OF_CONDUCT.md` - Contributor Covenant 2.1
-- `.github/PULL_REQUEST_TEMPLATE.md` - Summary, impact, breaking change, tests, and dependencies
-- `.cursor/skills/development-delivery/SKILL.md` - Private delivery workflow
-- `ROADMAP.md` - Task list through the roadmap page, with task 9 done
-- `package.json` and `package-lock.json` - Version 0.3.0
-- `projects/ngx-mat-hijri-adapter/src/lib/version.ts` - `NGX_MAT_HIJRI_ADAPTER_VERSION` is 0.3.0
-- `projects/ngx-mat-hijri-adapter/src/lib/version.spec.ts` - Expects version 0.3.0
-- `CHANGELOG.md` - This entry
-
-</details>
-
 ---
 
 **Version**: 0.3.0  
@@ -601,32 +375,6 @@ This release gives the package a logo: an Angular-style shield with a calendar p
 - **Hero**: The logo sits next to the title, or above it on phones. The text column is wider, the live preview aligns to the right edge, and the Angular, Material, and signal forms line moved below the description
 - **Theme Color**: The browser theme color and the README badges use the theme's primary color `#006d33`
 
-### 📦 Modified Files
-
-<details>
-<summary><strong>Demo</strong></summary>
-
-- `projects/demo/public/logo.svg` - The logo, with light and dark colors
-- `projects/demo/public/favicon.svg` - The favicon, replacing `favicon.ico`
-- `projects/demo/src/app/shared/logo.ts` - Logo component in the theme colors
-- `projects/demo/src/app/app.html` and `app.ts` - Logo next to the wordmark in the top bar
-- `projects/demo/src/app/home/home.html` and `home.ts` - Logo next to the hero title, wider text column, and the line below the description
-- `projects/demo/src/app/home/hero-calendar.ts` - Live preview aligned to the right on large screens
-- `projects/demo/src/index.html` - SVG favicon and theme color `#006d33`
-
-</details>
-
-<details>
-<summary><strong>Workspace and Package</strong></summary>
-
-- `README.md` - Centered logo header, badge colors, and version 0.2.2
-- `package.json`, `package-lock.json`, and `projects/ngx-mat-hijri-adapter/package.json` - Version 0.2.2
-- `projects/ngx-mat-hijri-adapter/src/lib/version.ts` - `NGX_MAT_HIJRI_ADAPTER_VERSION` is 0.2.2
-- `projects/ngx-mat-hijri-adapter/src/lib/version.spec.ts` and `projects/demo/src/app/app.spec.ts` - Expect version 0.2.2
-- `CHANGELOG.md` - This entry
-
-</details>
-
 ---
 
 **Version**: 0.2.2  
@@ -652,27 +400,6 @@ This hotfix fixes Gregorian month names in Arabic on iPhone and other Safari bro
 #### 🐛 Fixed
 
 - **Gregorian Month Names**: The calendar header, day labels, and formatted dates show Gregorian month names in browsers whose default calendar for the locale is not Gregorian
-
-### 📦 Modified Files
-
-<details>
-<summary><strong>Library</strong></summary>
-
-- `projects/ngx-mat-hijri-adapter/src/lib/formats/format-calendar-date.ts` - Gregorian month names request the Gregorian calendar
-- `projects/ngx-mat-hijri-adapter/src/lib/formats/format-calendar-date.spec.ts` - Test with a locale that defaults to Umm al-Qura
-- `projects/ngx-mat-hijri-adapter/src/lib/version.ts` - `NGX_MAT_HIJRI_ADAPTER_VERSION` is 0.2.1
-- `projects/ngx-mat-hijri-adapter/src/lib/version.spec.ts` and `projects/demo/src/app/app.spec.ts` - Expect version 0.2.1
-
-</details>
-
-<details>
-<summary><strong>Workspace and Package</strong></summary>
-
-- `package.json`, `package-lock.json`, and `projects/ngx-mat-hijri-adapter/package.json` - Version 0.2.1
-- `README.md` - Version 0.2.1
-- `CHANGELOG.md` - This entry
-
-</details>
 
 ---
 
@@ -721,81 +448,6 @@ This release adds a documentation site and a redesigned live demo, published to 
 - **Pages Workflow**: `.github/workflows/pages.yml` builds the library and the demo with the `/ngx-mat-hijri-adapter/` base path, adds a `404.html` fallback for deep links, and deploys to GitHub Pages
 - **Tag Format**: Tags such as `0.2.0` trigger the deploy; there is no `v` prefix
 - **Demo Dependencies**: `tailwindcss`, `@tailwindcss/postcss`, and `postcss` as development dependencies, configured only for the demo
-
-### 📦 Modified Files
-
-<details>
-<summary><strong>Demo Shell and Theme</strong></summary>
-
-- `projects/demo/src/app/app.ts` - Top bar, version chip, theme menu, and footer
-- `projects/demo/src/app/app.html` - Shell template
-- `projects/demo/src/app/app.routes.ts` - Home and docs routes, loaded on demand
-- `projects/demo/src/app/app.config.ts` - Router with anchor scrolling and the Material Symbols icon font
-- `projects/demo/src/app/theme/theme.ts` - Light, dark, and system mode service
-- `projects/demo/src/app/links.ts` - Repository link
-- `projects/demo/src/index.html` - Fonts, description, and theme color
-- `projects/demo/src/app/app.spec.ts` - Version chip, navigation, and theme tests
-
-</details>
-
-<details>
-<summary><strong>Home</strong></summary>
-
-- `projects/demo/src/app/home/home.ts` - Home page with outlined form fields
-- `projects/demo/src/app/home/home.html` - Hero, features, playground, and examples
-- `projects/demo/src/app/home/hero-calendar.ts` - Live preview calendar that opens on today's date at a fixed height
-- `projects/demo/src/app/home/playground/playground.ts` - Playground state and generated code
-- `projects/demo/src/app/home/playground/playground.html` - Playground controls and preview
-- `projects/demo/src/app/home/home.spec.ts` - Hero, playground, and example tests
-
-</details>
-
-<details>
-<summary><strong>Examples and Shared Components</strong></summary>
-
-- `projects/demo/src/app/examples/calendar-demo/calendar-demo.ts` - Umm al-Qura and Gregorian datepicker examples, moved from `calendar-demo/`
-- `projects/demo/src/app/examples/reactive-fields-demo/reactive-fields-demo.ts` - Reactive fields example, moved from `reactive-fields-demo/`
-- `projects/demo/src/app/examples/signal-fields-demo/signal-fields-demo.ts` - Signal fields example, moved from `signal-fields-demo/`
-- `projects/demo/src/app/examples/snippets.ts` - Code shown in the example tabs
-- `projects/demo/src/app/shared/code-block.ts` - Code block with a copy button
-- `projects/demo/src/app/shared/example-card.ts` - Card with demo and code tabs
-- `projects/demo/src/app/shared/demo-controls.ts` - Locale and direction switches
-
-</details>
-
-<details>
-<summary><strong>Documentation</strong></summary>
-
-- `projects/demo/src/app/docs/doc-pages.ts` - Page list and routes
-- `projects/demo/src/app/docs/docs-layout.ts` - Side navigation, mobile menu, and previous and next links
-- `projects/demo/src/app/docs/pages/*.ts` and `*.html` - The ten documentation pages
-- `projects/demo/src/app/docs/docs-layout.spec.ts` - Navigation and page tests
-
-</details>
-
-<details>
-<summary><strong>Styles</strong></summary>
-
-- `projects/demo/src/tailwind.css` - Tailwind setup with the Material color and type tokens
-- `projects/demo/src/styles.scss` - Material 3 theme with light and dark modes, replacing `styles.css`
-- `projects/demo/.postcssrc.json` - Tailwind PostCSS plugin for the demo
-- `projects/demo/src/app/app.css` and `calendar-demo/calendar-demo.css` - Removed
-
-</details>
-
-<details>
-<summary><strong>Workspace and Package</strong></summary>
-
-- `.github/workflows/pages.yml` - GitHub Pages deploy on release tags and manual runs
-- `angular.json` - Demo stylesheets
-- `package.json` - Version 0.2.0 and the Tailwind development dependencies
-- `package-lock.json` - Version 0.2.0 and the Tailwind packages
-- `projects/ngx-mat-hijri-adapter/package.json` - Version 0.2.0
-- `projects/ngx-mat-hijri-adapter/src/lib/version.ts` - `NGX_MAT_HIJRI_ADAPTER_VERSION` is 0.2.0
-- `README.md` - Shorter overview with the documentation link and version 0.2.0
-- `CHANGELOG.md` - Commit-table format and this entry
-
-</details>
 
 ---
 
@@ -852,99 +504,6 @@ First release. One Angular Material date adapter for the Gregorian and Umm al-Qu
 - **Entry Boundaries**: `scripts/check-entry-boundaries.mjs` fails the build when an entry point imports one it may not use, such as `/reactive` importing `/signals`
 - **Package Files**: The README, license, and changelog are copied into the package before each build
 
-### 📦 Modified Files
-
-<details>
-<summary><strong>Calendar</strong></summary>
-
-- `projects/ngx-mat-hijri-adapter/src/lib/calendar/calendar-date.ts` - Calendar helpers and the Umm al-Qura range checks
-- `projects/ngx-mat-hijri-adapter/src/lib/calendar/supported-calendars.ts` - `CalendarCode` and `SupportedCalendar`
-- `projects/ngx-mat-hijri-adapter/src/lib/calendar/calendar-date.spec.ts` - Helper and range tests
-- `projects/ngx-mat-hijri-adapter/src/lib/calendar/calendar-code.spec.ts` - Calendar code tests
-
-</details>
-
-<details>
-<summary><strong>Adapter, Formats, and Locale</strong></summary>
-
-- `projects/ngx-mat-hijri-adapter/src/lib/adapter/hijri-date-adapter.ts` - `HijriDateAdapter` with parsing and `setCalendar()`
-- `projects/ngx-mat-hijri-adapter/src/lib/adapter/hijri-date-adapter-options.ts` - Adapter options and their injection token
-- `projects/ngx-mat-hijri-adapter/src/lib/adapter/provide-hijri-date-adapter.ts` - `provideHijriDateAdapter()`
-- `projects/ngx-mat-hijri-adapter/src/lib/adapter/hijri-date-adapter.spec.ts` - Adapter tests
-- `projects/ngx-mat-hijri-adapter/src/lib/adapter/provide-hijri-date-adapter.spec.ts` - Provider tests
-- `projects/ngx-mat-hijri-adapter/src/lib/formats/date-formats.ts` - `HIJRI_DATE_FORMATS`
-- `projects/ngx-mat-hijri-adapter/src/lib/formats/format-calendar-date.ts` - `formatCalendarDate()`
-- `projects/ngx-mat-hijri-adapter/src/lib/formats/format-calendar-date.spec.ts` - Formatting tests
-- `projects/ngx-mat-hijri-adapter/src/lib/locale/calendar-locale.ts` - `CalendarLocale`
-- `projects/ngx-mat-hijri-adapter/src/lib/locale/month-names.ts` - Month names for parsing
-- `projects/ngx-mat-hijri-adapter/src/lib/version.ts` - `NGX_MAT_HIJRI_ADAPTER_VERSION` is 0.1.0
-- `projects/ngx-mat-hijri-adapter/src/public-api.ts` - Main entry point exports
-
-</details>
-
-<details>
-<summary><strong>Reactive Fields</strong></summary>
-
-- `projects/ngx-mat-hijri-adapter/reactive/src/reactive-date-field.ts` - `ReactiveDateField`
-- `projects/ngx-mat-hijri-adapter/reactive/src/reactive-date-range-field.ts` - `ReactiveDateRangeField`
-- `projects/ngx-mat-hijri-adapter/reactive/src/reactive-date-field-base.ts` - `ControlValueAccessor` base for both fields
-- `projects/ngx-mat-hijri-adapter/reactive/src/reactive-date-field.spec.ts` - Date field tests
-- `projects/ngx-mat-hijri-adapter/reactive/src/reactive-date-range-field.spec.ts` - Range field tests
-- `projects/ngx-mat-hijri-adapter/reactive/src/public-api.ts` - `/reactive` exports
-
-</details>
-
-<details>
-<summary><strong>Signal Fields</strong></summary>
-
-- `projects/ngx-mat-hijri-adapter/signals/src/signal-date-field.ts` - `SignalDateField`
-- `projects/ngx-mat-hijri-adapter/signals/src/signal-date-range-field.ts` - `SignalDateRangeField`
-- `projects/ngx-mat-hijri-adapter/signals/src/signal-errors.ts` - Datepicker errors as signal form parse errors, and the first error message
-- `projects/ngx-mat-hijri-adapter/signals/src/signal-date-field.spec.ts` - Date field tests
-- `projects/ngx-mat-hijri-adapter/signals/src/signal-date-range-field.spec.ts` - Range field tests
-- `projects/ngx-mat-hijri-adapter/signals/src/public-api.ts` - `/signals` exports
-
-</details>
-
-<details>
-<summary><strong>Internal</strong></summary>
-
-- `projects/ngx-mat-hijri-adapter/internal/src/date-field-core.ts` - Calendar toggle, hint, and value handling shared by both field sets
-- `projects/ngx-mat-hijri-adapter/internal/src/field-support.ts` - Value reading, range types, picker bounds, periods, and the equivalent-date text
-- `projects/ngx-mat-hijri-adapter/internal/src/field-providers.ts` - Date formats that keep the app's own formats when registered
-- `projects/ngx-mat-hijri-adapter/internal/src/date-field.html` - Date field template
-- `projects/ngx-mat-hijri-adapter/internal/src/date-range-field.html` - Range field template
-- `projects/ngx-mat-hijri-adapter/internal/src/date-field.css` - Field styles
-- `projects/ngx-mat-hijri-adapter/internal/src/public-api.ts` - `ɵ`-prefixed exports
-
-</details>
-
-<details>
-<summary><strong>Demo</strong></summary>
-
-- `projects/demo/src/app/app.ts` - Demo shell
-- `projects/demo/src/app/calendar-demo/calendar-demo.ts` - Umm al-Qura and Gregorian datepicker cards
-- `projects/demo/src/app/reactive-fields-demo/reactive-fields-demo.ts` - Reactive fields card
-- `projects/demo/src/app/signal-fields-demo/signal-fields-demo.ts` - Signal fields card
-- `projects/demo/src/app/app.spec.ts` - Demo tests
-
-</details>
-
-<details>
-<summary><strong>Workspace and Package</strong></summary>
-
-- `package.json` - Version 0.1.0
-- `projects/ngx-mat-hijri-adapter/package.json` - Version 0.1.0 and peer dependencies
-- `projects/ngx-mat-hijri-adapter/ng-package.json` - Ships `CHANGELOG.md` with the package
-- `angular.json` - Library and demo projects
-- `scripts/check-entry-boundaries.mjs` - Entry point import check
-- `scripts/stage-package-files.mjs` - Copies the README, license, and changelog into the package
-- `.github/workflows/ci.yml` - Tests and builds on pushes to `main` and on pull requests
-- `README.md` - Package documentation
-- `LICENSE` - MIT license
-
-</details>
-
 ---
 
 **Version**: 0.1.0  
@@ -953,6 +512,7 @@ First release. One Angular Material date adapter for the Gregorian and Umm al-Qu
 
 ---
 
+[1.0.0-beta.0]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/1.0.0-beta.0
 [0.4.4]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.4
 [0.4.3]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.3
 [0.4.2]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.2

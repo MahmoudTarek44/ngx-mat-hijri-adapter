@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.4"><img src="https://img.shields.io/github/v/tag/MahmoudTarek44/ngx-mat-hijri-adapter?label=version&amp;color=006d33" alt="Version" /></a>
+  <a href="https://www.npmjs.com/package/ngx-mat-hijri-adapter/v/beta"><img src="https://img.shields.io/npm/v/ngx-mat-hijri-adapter/beta?label=npm%40beta&amp;color=006d33" alt="npm beta version" /></a>
   <a href="https://angular.dev"><img src="https://img.shields.io/badge/Angular-22-dd0031" alt="Angular" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-blue" alt="License: Apache 2.0" /></a>
   <a href="https://ngx-mat-hijri-adapter.dev/"><img src="https://img.shields.io/badge/docs-live%20demo-006d33" alt="Documentation" /></a>
@@ -29,7 +29,7 @@
 
 ## Status and installation
 
-Version 0.4.4 is tagged on [GitHub](https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.4). It is not yet published to npm. A beta will be published before the stable 1.0.0. Once the package is on npm, add it to an Angular Material app:
+Version 1.0.0-beta.0 is on npm under the `beta` tag. Stable 1.0.0 will be the `latest` release. Until then, install the beta by name. Add it to an Angular Material app:
 
 ```bash
 ng add ngx-mat-hijri-adapter@beta
