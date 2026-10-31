@@ -29,9 +29,9 @@ describe('Docs', () => {
       (link) => link.getAttribute('href'),
     );
     expect(guides).toEqual(['/docs/reactive-fields', '/docs/signal-fields']);
-    expect(element.textContent).toContain('ng add ngx-mat-hijri-adapter');
+    expect(element.textContent).toContain('ng add ngx-mat-hijri-adapter@beta');
     expect(element.textContent).toContain(
-      'npm install ngx-mat-hijri-adapter @internationalized/date',
+      'npm install ngx-mat-hijri-adapter@beta @internationalized/date',
     );
     expect(element.textContent).not.toContain('ngx-mat-reactive-date-field');
   });

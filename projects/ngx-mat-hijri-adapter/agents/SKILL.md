@@ -10,9 +10,9 @@ description: >-
 
 ## Setup
 
-Run `ng add ngx-mat-hijri-adapter` in an Angular app that already has Angular Material. It installs this package, adds `@internationalized/date` when that package is missing, and registers `provideHijriDateAdapter()`.
+Run `ng add ngx-mat-hijri-adapter@beta` in an Angular app that already has Angular Material. Only the beta is on npm, so the plain package name does not install it. It installs this package, adds `@internationalized/date` when that package is missing, and registers `provideHijriDateAdapter()`.
 
-If Angular Material is missing, install it first. The manual alternative is `npm install ngx-mat-hijri-adapter @internationalized/date`, then call `provideHijriDateAdapter()` from the application providers.
+If Angular Material is missing, install it first. The manual alternative is `npm install ngx-mat-hijri-adapter@beta @internationalized/date`, then call `provideHijriDateAdapter()` from the application providers.
 
 Do not add `@types/ngx-mat-hijri-adapter`. The package publishes its own `.d.ts` files.
 

@@ -38,7 +38,7 @@ When a task is squash-merged, set its status here to `Done` in the same breath a
 ## Decisions already settled
 
 - The current version (0.4.4) is tagged on GitHub and is not on npm. A beta will be published before the stable 1.0.0.
-- `ng add ngx-mat-hijri-adapter` is the default install command in the docs. `npm install ngx-mat-hijri-adapter @internationalized/date` stays as the manual alternative. Both apply once the package is on npm.
+- `ng add ngx-mat-hijri-adapter` is the default install command in the docs. `npm install ngx-mat-hijri-adapter @internationalized/date` stays as the manual alternative. While only the beta is on npm, both carry `@beta`.
 - Getting started currently shows only a reactive field. That block is replaced with links to `/docs/reactive-fields` and `/docs/signal-fields`.
 - The home page already runs live cards for both reactive and signal fields. Those cards stay. The same two links are added above that grid.
 - One agent skill ships inside the npm package and is explained on the docs site. A skill that exists only in this repo would not help other developers.

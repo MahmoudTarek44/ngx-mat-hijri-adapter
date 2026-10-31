@@ -8,7 +8,7 @@ The first npm release is **1.0.0-beta.0** on the dist-tag `beta`. Stable 1.0.0 t
 npm install ngx-mat-hijri-adapter@beta
 ```
 
-`ng add ngx-mat-hijri-adapter` stays the install command once the package is on npm.
+While only the beta is on npm, the install commands carry `@beta`: `ng add ngx-mat-hijri-adapter@beta` and `npm install ngx-mat-hijri-adapter@beta @internationalized/date`. The README, `agents/SKILL.md`, and the docs snippets already use them. The stable release drops `@beta`.
 
 ## What is published
 
@@ -52,7 +52,9 @@ The new section says this beta is on npm under the `beta` tag, ready-made fields
 
 The docs app reads `NGX_MAT_HIJRI_ADAPTER_VERSION` from the built package. `projects/docs/src/app/app.spec.ts` must expect `1.0.0-beta.0` and the tag URL `https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/1.0.0-beta.0`.
 
-Leave the unpublished banner in place until the beta is actually on npm. It lives in `projects/docs/src/app/app.html` (`data-release-banner`) and the `shell.bannerBefore` / `shell.bannerAfter` strings in `projects/docs/src/locale/en.json` and `ar.json`. Getting started uses `gettingStarted.version` in those same files. Remove that banner, and the living "not on npm" sentences, in a follow-up only after `npm publish` succeeds.
+`README.md`, `CHANGELOG.md`, and `agents/SKILL.md` ship inside the tarball, and npmjs.com shows the README from the published copy. The release commit therefore already says the beta is on npm under the `beta` tag in those three files. A failed publish leaves that wording on GitHub until the retry.
+
+The docs site is different. Leave its unpublished banner in place until the beta is actually on npm. It lives in `projects/docs/src/app/app.html` (`data-release-banner`) and the `shell.bannerBefore` / `shell.bannerAfter` strings in `projects/docs/src/locale/en.json` and `ar.json`. Getting started uses `gettingStarted.version` in those same files. Remove that banner, and the docs "not on npm" sentences, in a follow-up only after `npm publish` succeeds.
 
 ## Docs site and prerelease tags
 
@@ -158,7 +160,7 @@ git push origin 1.0.0-beta.0
 
 If publish fails, do not create the tag. npm will not accept the same version again, so a failed attempt that did reach the registry cannot be reused. A failed attempt that did not reach the registry can be fixed and published as the same version.
 
-After the beta is on npm, remove the unpublished banner and point Getting started, the README, and `CONTRIBUTING.md` at `npm install ngx-mat-hijri-adapter@beta` beside `ng add`.
+After the beta is on npm, remove the unpublished docs banner and the docs "not on npm" sentences, then deploy the docs with a manual run of the Pages workflow.
 
 ## Stable 1.0.0
 
@@ -168,6 +170,6 @@ Stable 1.0.0 uses this same checklist after the beta is already published. Diffe
 - The version is `1.0.0`. The Pages tag filter already matches it.
 - Publish with `npm publish --access public` from `dist/ngx-mat-hijri-adapter` so the dist-tag is `latest`. Do not pass `--tag beta`.
 - Tag `1.0.0` only after that publish succeeds, then push the tag.
-- `npm install ngx-mat-hijri-adapter` and `ng add ngx-mat-hijri-adapter` then install the stable release. The `beta` tag remains available until it is moved.
+- `npm install ngx-mat-hijri-adapter` and `ng add ngx-mat-hijri-adapter` then install the stable release. Drop `@beta` from the README, `agents/SKILL.md`, and the docs snippets in that release commit. The `beta` tag remains available until it is moved.
 
 `latest` stays empty until this stable publish.
