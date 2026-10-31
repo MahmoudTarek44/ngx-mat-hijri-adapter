@@ -29,7 +29,7 @@ One task is one branch and one commit. Do not start the next task until the prev
 | 7   | Public contribution policy                     | `docs/contributing`                | Done        |
 | 8   | `@types` package on DefinitelyTyped            | none                               | Will not do |
 | 9   | Roadmap page on the docs site                  | `feat/docs-roadmap`                | Done        |
-| 10  | Closing workspace check                        | `chore/closing-check`              | Open        |
+| 10  | Closing workspace check                        | `chore/closing-check`              | Done        |
 
 Task 0 is the private workflow skill. Task 1 is the first product change. Task 1a is the display-format switch and ships before task 2. Tasks 2–7 follow it, in order. Task 8 is a decision, not work. Task 9 adds the public roadmap page. Task 10 runs only after tasks 0–7, 1a, and 9 are done.
 
@@ -166,6 +166,28 @@ Start this only after tasks 0–7 and 9 are done and on `development`. It is a r
 The branch records the findings. It does not apply a pile of fixes. Anything worth changing becomes its own later task, with its own branch, after you approve that item. The check also says which ideas in the Later list are worth scheduling.
 
 When the review is accepted, mark task 10 `Done` here.
+
+### Findings (2026-10-31, before 1.0.0-beta.0)
+
+Fix before the beta:
+
+1. **`ng add` can skip the provider.** `schematics/ng-add/index.ts` searches every `.ts` file for `provideHijriDateAdapter`, including `node_modules`. After `ng add` installs the package, its own `.d.ts` files contain that name, so the provider may never be added. The spec misses it because its workspace has no `node_modules`. Skip `node_modules` and add a spec with an installed `.d.ts`.
+2. **Text inside the tarball.** `README.md`, `CHANGELOG.md`, and `agents/SKILL.md` ship in the package, so npmjs.com shows the published copy. Today they say "not yet published" and use `ng add` without `@beta`. The release commit has to carry the beta wording. `PUBLISHING.md` says to change that text only after the publish, and needs the same correction.
+3. **Install commands for a beta.** Without a stable release, `ng add ngx-mat-hijri-adapter` and `npm install ngx-mat-hijri-adapter` do not install the beta. README, `agents/SKILL.md`, and the docs install snippets need `@beta`.
+4. **`latest` after `--tag beta`.** npm's docs say `--tag beta` does not set `latest`. `PUBLISHING.md` should say to check `npm dist-tag ls` after publishing, not assume it.
+5. **Peer ranges.** `@angular/*` peers are `>=22.0.0` and `@internationalized/date` is `>=3.12.0`, which also claim Angular 23+ and date 4+ before they are tested. Use `^22.0.0` and `^3.12.0`. The reactive and signal entries import `NgTemplateOutlet`, so add `@angular/common` `^22.0.0`.
+6. **Package metadata.** Set `homepage` to `https://ngx-mat-hijri-adapter.dev/`. Add `date-adapter`, `calendar`, `umm-al-qura`, `arabic`, and `signal-forms` to `keywords`.
+
+Small, can follow the beta:
+
+7. **CI.** `.github/workflows/ci.yml` runs on `main` and pull requests only, not on pushes to `development`. Add `development`.
+8. **Bundle budget.** `PUBLISHING.md` sizes are from 0.4.1. Re-measure from the beta build.
+9. **README entry points.** The table has no `ngx-mat-hijri-adapter/native` row.
+10. **Agent skill.** `agents/SKILL.md` does not name `ReactiveDateField`, `SignalDateField`, the range fields, their selectors, or `[formField]`.
+11. **`.gitignore`.** Only `/.angular/cache` is ignored, so `.angular/docs-lh` reports can be committed by mistake. Ignore `/.angular`.
+12. **Public notes.** `FUTURE.md` calls itself private but is tracked, as are this file and `.cursor/skills/`. Decide whether they stay public.
+
+From the Later list: the package MCP server stays later. Nothing else is worth scheduling before stable 1.0.0.
 
 ## Under development
 
