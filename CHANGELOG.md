@@ -16,7 +16,7 @@ This patch is tagged on GitHub and is not published on npm. A beta will be publi
 #### 🔧 Changed
 
 - **Search**: Doc links, canonical URLs, `og:url`, and `sitemap.xml` use addresses such as `/docs/getting-started/`. The address without the slash redirects on GitHub Pages
-- **Direction**: Angular Material styles RTL fields with `[dir=rtl]` ancestor selectors, so an LTR demo inside the Arabic docs had a clipped label and rotated calendar arrows. The docs restore Material's LTR styles for that case, and the Right-to-left page shows the CSS for apps
+- **Direction**: Angular Material styles RTL fields with `[dir=rtl]` ancestor selectors, so an LTR demo inside the Arabic docs had a clipped label and rotated calendar arrows. The docs restore Material's LTR styles for that case, and the Right-to-left page warns about it and links to the CSS for apps
 - **Not found**: An unknown address shows a Page not found screen with links to Home and Docs, marked `noindex` and without a canonical URL. It is served as `404.html`
 
 ### 📦 Modified Files
@@ -28,7 +28,7 @@ This patch is tagged on GitHub and is not published on npm. A beta will be publi
 - `projects/docs/src/app/i18n/docs-title-strategy.ts` - Trailing-slash canonical and `og:url`, and `noindex` on Page not found
 - `projects/docs/public/sitemap.xml` - Trailing-slash doc addresses
 - `projects/docs/src/ltr-inside-rtl.css` - Material LTR field and calendar styles inside an RTL page
-- `projects/docs/src/app/docs/pages/right-to-left.html` - LTR field inside an RTL page section
+- `projects/docs/src/app/docs/pages/right-to-left.html` - Warning for an LTR field inside an RTL page
 - `projects/docs/src/app/not-found.ts` and `app.routes.ts` - Page not found screen
 - `projects/docs/src/locale/en.json` and `ar.json` - Strings for both
 - `.github/workflows/pages.yml` - Page not found becomes `404.html`
