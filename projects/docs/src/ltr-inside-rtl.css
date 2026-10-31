@@ -1,0 +1,207 @@
+/*
+ * Angular Material styles right-to-left fields with [dir=rtl] ancestor selectors, so a
+ * dir="ltr" field inside a dir="rtl" page keeps the RTL notch, label, and padding.
+ * Each rule below is Material's RTL selector with [dir=ltr] added, so it always wins,
+ * and it restores Material's left-to-right value. Comparison ranges are not covered.
+ */
+
+/* Form field */
+[dir='rtl'] [dir='ltr'] .mat-mdc-form-field {
+  text-align: left;
+}
+
+[dir='rtl'] [dir='ltr'] .mdc-text-field--outlined {
+  padding-right: max(16px, var(--mat-form-field-outlined-container-shape, var(--mat-sys-corner-extra-small)));
+  padding-left: max(16px, var(--mat-form-field-outlined-container-shape, var(--mat-sys-corner-extra-small)) + 4px);
+}
+
+[dir='rtl'] [dir='ltr'] .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+  padding-right: 0;
+}
+
+[dir='rtl'] [dir='ltr'] .mat-mdc-form-field-has-icon-suffix .mdc-text-field--outlined {
+  padding-left: max(16px, var(--mat-form-field-outlined-container-shape, var(--mat-sys-corner-extra-small)) + 4px);
+}
+
+[dir='rtl'] [dir='ltr'] .mat-mdc-form-field-has-icon-suffix .mdc-text-field--filled {
+  padding-left: 16px;
+}
+
+[dir='rtl'] [dir='ltr'] .mat-mdc-form-field-has-icon-prefix .mat-mdc-text-field-wrapper {
+  padding-left: 0;
+}
+
+[dir='rtl'] [dir='ltr'] .mat-mdc-form-field-has-icon-prefix .mdc-text-field--outlined {
+  padding-right: max(16px, var(--mat-form-field-outlined-container-shape, var(--mat-sys-corner-extra-small)));
+}
+
+[dir='rtl'] [dir='ltr'] .mat-mdc-form-field-has-icon-prefix .mdc-text-field--filled {
+  padding-right: 16px;
+}
+
+[dir='rtl']
+  [dir='ltr']
+  .mat-mdc-form-field-has-icon-prefix.mat-mdc-form-field-has-icon-suffix
+  .mat-mdc-text-field-wrapper {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+[dir='rtl'] [dir='ltr'] .mat-mdc-form-field-icon-prefix {
+  padding: 0 4px 0 0;
+}
+
+[dir='rtl'] [dir='ltr'] .mat-mdc-form-field-icon-suffix {
+  padding: 0 0 0 4px;
+}
+
+[dir='rtl'] [dir='ltr'] .mdc-floating-label {
+  right: auto;
+  left: 0;
+  transform-origin: left top;
+  text-align: left;
+}
+
+[dir='rtl'] [dir='ltr'] .mdc-text-field--outlined .mdc-floating-label {
+  left: 4px;
+  right: auto;
+}
+
+[dir='rtl'] [dir='ltr'] .mdc-text-field--filled .mdc-floating-label {
+  left: 16px;
+  right: auto;
+}
+
+[dir='rtl']
+  [dir='ltr']
+  .mdc-floating-label--required:not(.mdc-floating-label--hide-required-marker)::after {
+  margin-left: 1px;
+  margin-right: 0;
+}
+
+[dir='rtl'] [dir='ltr'] .mdc-notched-outline {
+  text-align: left;
+}
+
+[dir='rtl'] [dir='ltr'] .mdc-notched-outline__leading {
+  border-left: 1px solid;
+  border-right: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: var(--mat-form-field-outlined-container-shape, var(--mat-sys-corner-extra-small));
+  border-bottom-left-radius: var(--mat-form-field-outlined-container-shape, var(--mat-sys-corner-extra-small));
+}
+
+[dir='rtl'] [dir='ltr'] .mdc-notched-outline__trailing {
+  border-left: none;
+  border-right: 1px solid;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: var(--mat-form-field-outlined-container-shape, var(--mat-sys-corner-extra-small));
+  border-bottom-right-radius: var(--mat-form-field-outlined-container-shape, var(--mat-sys-corner-extra-small));
+}
+
+[dir='rtl'] [dir='ltr'] .mdc-notched-outline--notched .mdc-notched-outline__notch {
+  padding-left: 0;
+  padding-right: 8px;
+}
+
+[dir='rtl'] [dir='ltr'] .mat-mdc-form-field .mdc-notched-outline__notch {
+  margin-left: -1px;
+  margin-right: 0;
+  -webkit-clip-path: inset(-9em -999em -9em 1px);
+  clip-path: inset(-9em -999em -9em 1px);
+}
+
+[dir='rtl']
+  [dir='ltr']
+  .mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field
+  .mdc-notched-outline__notch {
+  border-left: 1px solid transparent;
+  border-right: none;
+}
+
+[dir='rtl'] [dir='ltr'] .mat-mdc-form-field-type-mat-native-select .mat-mdc-form-field-infix::after {
+  right: 0;
+  left: auto;
+}
+
+[dir='rtl'] [dir='ltr'] .mat-mdc-form-field-type-mat-native-select .mat-mdc-form-field-input-control {
+  padding-right: 15px;
+  padding-left: 0;
+}
+
+/* Datepicker popup and inline calendar */
+[dir='rtl'] [dir='ltr'] .mat-calendar-arrow {
+  margin: 0 0 0 5px;
+}
+
+[dir='rtl'] [dir='ltr'] .mat-calendar-previous-button,
+[dir='rtl'] [dir='ltr'] .mat-calendar-next-button {
+  transform: none;
+}
+
+[dir='rtl'] [dir='ltr'] .mat-datepicker-actions .mat-mdc-button-base + .mat-mdc-button-base {
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+[dir='rtl'] [dir='ltr'] .mat-calendar-body-range-start:not(.mat-calendar-body-in-comparison-range)::before,
+[dir='rtl'] [dir='ltr'] .mat-calendar-body-range-start::after,
+[dir='rtl'] [dir='ltr'] .mat-calendar-body-preview-start .mat-calendar-body-cell-preview {
+  left: 5%;
+  border-radius: 0;
+  border-top-left-radius: 999px;
+  border-bottom-left-radius: 999px;
+}
+
+[dir='rtl'] [dir='ltr'] .mat-calendar-body-range-end:not(.mat-calendar-body-in-comparison-range)::before,
+[dir='rtl'] [dir='ltr'] .mat-calendar-body-range-end::after,
+[dir='rtl'] [dir='ltr'] .mat-calendar-body-preview-end .mat-calendar-body-cell-preview {
+  left: 0;
+  border-radius: 0;
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
+}
+
+[dir='rtl']
+  [dir='ltr']
+  .mat-calendar-body-range-start.mat-calendar-body-range-end:not(.mat-calendar-body-in-comparison-range)::before,
+[dir='rtl'] [dir='ltr'] .mat-calendar-body-range-start.mat-calendar-body-range-end::after,
+[dir='rtl']
+  [dir='ltr']
+  .mat-calendar-body-preview-start.mat-calendar-body-preview-end
+  .mat-calendar-body-cell-preview {
+  left: 5%;
+  border-radius: 999px;
+}
+
+@media (forced-colors: active) {
+  [dir='rtl'] [dir='ltr'] .mat-calendar-body-range-start::before {
+    border-left: solid 1px;
+    border-right: 0;
+  }
+
+  [dir='rtl'] [dir='ltr'] .mat-calendar-body-range-end::before {
+    border-left: 0;
+    border-right: solid 1px;
+  }
+}
+
+[dir='rtl'] [dir='ltr'] .mat-calendar-body-preview-start .mat-calendar-body-cell-preview {
+  border-left: dashed 1px;
+  border-right: 0;
+}
+
+[dir='rtl'] [dir='ltr'] .mat-calendar-body-preview-end .mat-calendar-body-cell-preview {
+  border-left: 0;
+  border-right: dashed 1px;
+}
+
+[dir='rtl']
+  [dir='ltr']
+  .mat-calendar-body-preview-start.mat-calendar-body-preview-end
+  .mat-calendar-body-cell-preview {
+  border-left: dashed 1px;
+  border-right: dashed 1px;
+}

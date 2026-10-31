@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@use './ltr-inside-rtl';
 
 $font-family: (var(--docs-font), system-ui, sans-serif);
 

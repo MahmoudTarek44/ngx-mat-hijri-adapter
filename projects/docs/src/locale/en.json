@@ -552,6 +552,10 @@
     "bodyAttr": "attribute on a wrapper element does not flip the popup. With",
     "bodyImported": "imported, the same",
     "bodyEnd": "attribute reaches the overlay too.",
+    "ltrInside": "An LTR field inside an RTL page",
+    "ltrInsideBody": "Angular Material styles right-to-left fields and calendars with",
+    "ltrInsideBodyMid": "ancestor selectors. On an RTL page, a field inside",
+    "ltrInsideBodyEnd": "still gets the RTL notch, so its label is cut off and the calendar arrows point the wrong way. Add this CSS to a global stylesheet. It restores Material's LTR styles for that case, and RTL fields are unchanged. This site loads the same file.",
     "independent": "Direction, locale, and calendar are independent",
     "independentBody": "An Arabic locale does not set right-to-left, and right-to-left does not select the Hijri calendar. Choose each one on purpose. The playground on the home page lets you combine them freely."
   },

@@ -13,6 +13,14 @@
   <code-block language="ts" [code]="code.ts" />
   <code-block language="html" [code]="code.html" />
 
+  <h2 id="ltr-inside-rtl">{{ 'rtl.ltrInside' | translate }}</h2>
+  <p>
+    {{ 'rtl.ltrInsideBody' | translate }} <code>[dir=rtl]</code>
+    {{ 'rtl.ltrInsideBodyMid' | translate }} <code>dir="ltr"</code>
+    {{ 'rtl.ltrInsideBodyEnd' | translate }}
+  </p>
+  <code-block language="css" [code]="code.css" />
+
   <h2 id="independent">{{ 'rtl.independent' | translate }}</h2>
   <p>{{ 'rtl.independentBody' | translate }}</p>
 </article>

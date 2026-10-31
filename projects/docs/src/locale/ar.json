@@ -552,6 +552,10 @@
     "bodyAttr": "العادي على wrapper element لا يقلب النافذة. مع import",
     "bodyImported": "، attribute",
     "bodyEnd": "نفسه يصل إلى الـ overlay أيضًا.",
+    "ltrInside": "حقل LTR داخل صفحة RTL",
+    "ltrInsideBody": "تنسّق Angular Material حقول وتقويمات RTL بـ ancestor selectors من نوع",
+    "ltrInsideBodyMid": ". في صفحة RTL، الحقل داخل",
+    "ltrInsideBodyEnd": "يأخذ notch الخاص بـ RTL، فيُقص الـ label وتتجه أسهم التقويم بالعكس. أضف هذا الـ CSS إلى global stylesheet. يعيد تنسيق Material للـ LTR في هذه الحالة، ولا يغيّر حقول RTL. هذا الموقع يحمّل الملف نفسه.",
     "independent": "الاتجاه والـ locale والتقويم مستقلة",
     "independentBody": "الـ locale العربي لا يفعّل الاتجاه من اليمين، والاتجاه من اليمين لا يختار التقويم الهجري. اختر كل واحد عمدًا. ساحة التجربة في الصفحة الرئيسية تتيح جمعها بحرية."
   },
