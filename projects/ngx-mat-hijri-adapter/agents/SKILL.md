@@ -30,8 +30,19 @@ Both providers default to the Umm al-Qura calendar and the `ar-SA` locale. The l
 
 - `ngx-mat-hijri-adapter` exports `HijriDateAdapter`, `provideHijriDateAdapter()`, and the calendar helpers.
 - `ngx-mat-hijri-adapter/native` exports `NativeHijriDateAdapter` and `provideNativeHijriDateAdapter()`.
-- `ngx-mat-hijri-adapter/reactive` exports date and range fields for reactive forms.
-- `ngx-mat-hijri-adapter/signals` exports the same fields for signal forms.
+- `ngx-mat-hijri-adapter/reactive` exports `ReactiveDateField` (`<ngx-mat-reactive-date-field>`) and `ReactiveDateRangeField` (`<ngx-mat-reactive-date-range-field>`). Bind them with `[formControl]` or `formControlName`. Error messages go in `[errors]`, keyed by validation error.
+- `ngx-mat-hijri-adapter/signals` exports `SignalDateField` (`<ngx-mat-signal-date-field>`) and `SignalDateRangeField` (`<ngx-mat-signal-date-range-field>`). Bind them with `[formField]` and import `FormField` from `@angular/forms/signals`. Error messages go in `[errorMessages]`.
+
+A date field stores `CalendarDate | null`. A range field stores `{ start: CalendarDate | null; end: CalendarDate | null }`, exported as `CalendarDateRange`. All four fields take `label`, `valueCalendar`, `calendarToggle`, `equivalentHint`, `locale`, `displayFormat`, `minDate`, `maxDate`, `period`, and `dateFilter`. They install `HijriDateAdapter` themselves.
+
+```html
+<ngx-mat-reactive-date-field
+  formControlName="appointment"
+  label="Appointment"
+  valueCalendar="islamic-umalqura"
+  calendarToggle
+/>
+```
 
 ## Calendars
 
