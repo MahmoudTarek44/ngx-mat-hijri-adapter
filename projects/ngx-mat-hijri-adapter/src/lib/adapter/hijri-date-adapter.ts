@@ -9,6 +9,8 @@ import { HIJRI_DATE_ADAPTER_OPTIONS } from './hijri-date-adapter-options';
 import { CalendarLocale } from '../locale/calendar-locale';
 import {
   UmalquraDateRangeError,
+  UMALQURA_MAX_YEAR,
+  UMALQURA_MIN_YEAR,
   compareCalendarDates,
   convertCalendarDate,
   daysInCalendarMonth,
@@ -25,6 +27,14 @@ import {
 const invalidDates = new WeakSet<CalendarDate>();
 /** Years that `createDate` was asked for outside the Umm al-Qura table, keyed by the invalid date. */
 const outOfRangeYears = new WeakMap<CalendarDate, number>();
+
+const UMALQURA_FIRST_DAY = createCalendarDate(CalendarCode.umalqura, UMALQURA_MIN_YEAR, 1, 1);
+const UMALQURA_LAST_DAY = createCalendarDate(
+  CalendarCode.umalqura,
+  UMALQURA_MAX_YEAR,
+  12,
+  daysInCalendarMonth(createCalendarDate(CalendarCode.umalqura, UMALQURA_MAX_YEAR, 12, 1)),
+);
 
 const NUMERIC_DATE = /^(\d{1,4})([./-])(\d{1,2})\2(\d{1,4})$/;
 const NAMED_DATE = /^(\d{1,2})[\s,،]+(.+?)[\s,،]+(\d{1,4})$/;
@@ -344,6 +354,10 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
     return null;
   }
 
+  /**
+   * Stops at the first or last day of the Umm al-Qura table, so Material can clamp the
+   * result to its min and max instead of holding an invalid active date.
+   */
   private shift(date: CalendarDate, duration: DateDuration): CalendarDate {
     if (!this.isValid(date)) {
       return this.invalid();
@@ -353,7 +367,8 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
       return addCalendarDate(this.inCalendar(date), duration);
     } catch (error) {
       if (error instanceof UmalquraDateRangeError) {
-        return this.invalid();
+        const back = (duration.years ?? 0) + (duration.months ?? 0) + (duration.days ?? 0) < 0;
+        return back ? UMALQURA_FIRST_DAY : UMALQURA_LAST_DAY;
       }
 
       throw error;

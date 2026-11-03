@@ -50,7 +50,10 @@ class MultiYearHost {
   readonly max = signal<Date | null>(null);
 }
 
-async function multiYearView(startAt: Date, bounds: { min?: Date; max?: Date } = {}) {
+async function multiYearView(
+  startAt: Date,
+  bounds: { min?: Date; max?: Date; previous?: number } = {},
+) {
   TestBed.resetTestingModule();
   TestBed.configureTestingModule({
     providers: [
@@ -69,6 +72,10 @@ async function multiYearView(startAt: Date, bounds: { min?: Date; max?: Date } =
   await fixture.whenStable();
 
   const element: HTMLElement = fixture.nativeElement;
+  for (let i = 0; i < (bounds.previous ?? 0); i++) {
+    element.querySelector<HTMLButtonElement>('.mat-calendar-previous-button')?.click();
+    await fixture.whenStable();
+  }
   const cells = Array.from(element.querySelectorAll<HTMLElement>('.mat-calendar-body-cell'));
   return {
     period: element.querySelector('.mat-calendar-period-button')?.textContent?.trim(),
@@ -190,7 +197,13 @@ describe('NativeHijriDateAdapter', () => {
     expect(dates.isValid(dates.createDate(1600, 0, 1))).toBe(false);
     expect(dates.isValid(dates.createDate(1299, 0, 1))).toBe(false);
     expect(dates.getYearName(dates.createDate(1299, 0, 1))).toBe('1299');
-    expect(dates.isValid(dates.addCalendarYears(dates.createDate(1599, 0, 1), 1))).toBe(false);
+    const lastDay = dates.addCalendarYears(dates.createDate(1599, 0, 1), 1);
+    const firstDay = dates.addCalendarMonths(dates.createDate(1300, 5, 1), -12);
+    expect(dates.toIso8601(lastDay)).toBe('1599-12-30');
+    expect(dates.toIso8601(firstDay)).toBe('1300-01-01');
+    expect(dates.toIso8601(dates.addCalendarDays(dates.createDate(1300, 0, 1), -1))).toBe(
+      '1300-01-01',
+    );
     expect(() => dates.createDate(1445, 12, 1)).toThrow(/Month index/);
     expect(() => dates.createDate(1445, 9, 30)).toThrow(/Invalid date/);
   });
@@ -206,6 +219,18 @@ describe('NativeHijriDateAdapter', () => {
     expect(view.years[0]).toBe('1288');
     expect(view.enabled[0]).toBe('1300');
     expect(view.enabled).toHaveLength(12);
+  });
+
+  it('stops at the first page of years when previous passes the table', async () => {
+    const dates = adapter();
+    const view = await multiYearView(dates.createDate(1440, 0, 1), {
+      min: dates.createDate(1300, 0, 1),
+      max: dates.createDate(1599, 11, 29),
+      previous: 6,
+    });
+
+    expect(view.period).toBe('1288 – 1311');
+    expect(view.enabled[0]).toBe('1300');
   });
 
   it('shows the last page of years in a calendar without bounds', async () => {

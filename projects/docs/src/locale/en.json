@@ -357,7 +357,7 @@
     "switchTail": "do.",
     "monthsHeading": "Month indexing",
     "monthsBody": "Both adapters follow Material's 0-based months. The calendar helpers on the main entry are 1-based.",
-    "monthsMid": "throws for a month outside 0–11 or a day outside that month. An Umm al-Qura year outside 1300–1599 returns an invalid date, so Material's year view can list the years around the table. Adding months clamps to the last valid day. Adding a year or month that leaves AH 1300–1599 returns an invalid date.",
+    "monthsMid": "throws for a month outside 0–11 or a day outside that month. An Umm al-Qura year outside 1300–1599 returns an invalid date, so Material's year view can list the years around the table. Adding months clamps to the last valid day. Adding years, months, or days past AH 1300–1599 stops at the first or last day of the table.",
     "time": "Time methods are not implemented.",
     "nativePage": "This provider is an alternative for a plain mat-datepicker that stores a Date. The restrictions, and the live examples, are on the"
   },

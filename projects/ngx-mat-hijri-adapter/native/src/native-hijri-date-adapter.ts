@@ -279,7 +279,11 @@ export class NativeHijriDateAdapter extends DateAdapter<Date, string> {
     }
 
     const next = addUtcDays(date, days);
-    return next && this.civil(next) ? next : this.invalid();
+    if (!next) {
+      return this.invalid();
+    }
+
+    return this.civil(next) ? next : this.tableEdge(days < 0);
   }
 
   /** `YYYY-MM-DD` in this adapter's calendar, with ASCII digits. This is not a Gregorian conversion. */
@@ -369,12 +373,25 @@ export class NativeHijriDateAdapter extends DateAdapter<Date, string> {
 
   private shiftMonths(date: Date, months: number): Date {
     const civil = this.civil(date);
-    if (!civil) {
+    if (!civil || !Number.isInteger(months)) {
       return this.invalid();
     }
 
     const next = addCivilMonths(civil, months, (year, month) => this.monthLength(year, month));
-    return this.fromCivil(next) ?? this.invalid();
+    return this.fromCivil(next) ?? this.tableEdge(months < 0);
+  }
+
+  /**
+   * The first or last day of the Umm al-Qura table, so Material can clamp a shift past it
+   * to its min and max instead of holding an invalid active date.
+   */
+  private tableEdge(back: boolean): Date {
+    if (back) {
+      return umalquraToUtcNoon(UMALQURA_MIN_YEAR, 1, 1)!;
+    }
+
+    const lastMonth = umalquraMonthLength(UMALQURA_MAX_YEAR, 12)!;
+    return umalquraToUtcNoon(UMALQURA_MAX_YEAR, 12, lastMonth)!;
   }
 
   private parseText(text: string): Date {
