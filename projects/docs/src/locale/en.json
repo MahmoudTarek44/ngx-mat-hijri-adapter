@@ -357,7 +357,7 @@
     "switchTail": "do.",
     "monthsHeading": "Month indexing",
     "monthsBody": "Both adapters follow Material's 0-based months. The calendar helpers on the main entry are 1-based.",
-    "monthsMid": "throws for a month outside 0–11, a day outside that month, or an Umm al-Qura year outside 1300–1599. Adding months clamps to the last valid day. Adding a year or month that leaves AH 1300–1599 returns an invalid date.",
+    "monthsMid": "throws for a month outside 0–11 or a day outside that month. An Umm al-Qura year outside 1300–1599 returns an invalid date, so Material's year view can list the years around the table. Adding months clamps to the last valid day. Adding a year or month that leaves AH 1300–1599 returns an invalid date.",
     "time": "Time methods are not implemented.",
     "nativePage": "This provider is an alternative for a plain mat-datepicker that stores a Date. The restrictions, and the live examples, are on the"
   },
@@ -579,7 +579,7 @@
     "monthsIs": "is 1 Ramadan. The calendar helpers are 1-based:",
     "monthsSame": "is the same day.",
     "invalid": "Invalid dates throw",
-    "invalidBody": "Formatting or converting an invalid date throws, and so does creating a date outside AH 1300–1599. Parsing typed text does not throw: unreadable or out-of-range text returns an invalid date instead.",
+    "invalidBody": "Formatting or converting an invalid date throws. The adapter's createDate returns an invalid date for a year outside AH 1300–1599. Parsing typed text does not throw: unreadable or out-of-range text returns an invalid date instead.",
     "locale": "Locale never picks the calendar",
     "localeBody": "does not select the Hijri calendar and",
     "localeEnd": "does not select Gregorian. Always set",

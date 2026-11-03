@@ -23,6 +23,8 @@ import {
 } from '../formats/format-calendar-date';
 
 const invalidDates = new WeakSet<CalendarDate>();
+/** Years that `createDate` was asked for outside the Umm al-Qura table, keyed by the invalid date. */
+const outOfRangeYears = new WeakMap<CalendarDate, number>();
 
 const NUMERIC_DATE = /^(\d{1,4})([./-])(\d{1,2})\2(\d{1,4})$/;
 const NAMED_DATE = /^(\d{1,2})[\s,،]+(.+?)[\s,،]+(\d{1,4})$/;
@@ -122,7 +124,7 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
   }
 
   override getYearName(date: CalendarDate): string {
-    return formatNumber(this.getYear(date), this.locale);
+    return formatNumber(outOfRangeYears.get(date) ?? this.getYear(date), this.locale);
   }
 
   override getFirstDayOfWeek(): number {
@@ -147,6 +149,10 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
     return createCalendarDate(this.calendarId, converted.year, converted.month, converted.day);
   }
 
+  /**
+   * A Umm al-Qura year outside the table returns an invalid date that keeps its year name,
+   * because Material's year view creates a date for every year on the page.
+   */
   override createDate(year: number, month: number, date: number): CalendarDate {
     if (month < 0 || month > 11) {
       throw new Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
@@ -160,7 +166,9 @@ export class HijriDateAdapter extends DateAdapter<CalendarDate, string> {
       return createCalendarDate(this.calendarId, year, month + 1, date);
     } catch (error) {
       if (error instanceof UmalquraDateRangeError) {
-        throw error;
+        const invalid = this.invalid();
+        outOfRangeYears.set(invalid, year);
+        return invalid;
       }
 
       throw new Error(`Invalid date "${date}" for month with index "${month}".`);

@@ -6,7 +6,6 @@ import {
   CalendarLocale,
   UMALQURA_MAX_YEAR,
   UMALQURA_MIN_YEAR,
-  UmalquraDateRangeError,
   type SupportedCalendar,
 } from 'ngx-mat-hijri-adapter';
 
@@ -26,6 +25,8 @@ import {
 const NUMERIC_DATE = /^(\d{1,4})([./-])(\d{1,2})\2(\d{1,4})$/;
 const NAMED_DATE = /^(\d{1,2})[\s,،]+(.+?)[\s,،]+(\d{1,4})$/;
 const ISO_DATE = /^(\d{4})-(\d{2})-(\d{2})$/;
+/** Years that `createDate` was asked for outside the Umm al-Qura table, keyed by the invalid date. */
+const outOfRangeYears = new WeakMap<Date, number>();
 
 /**
  * Material date adapter for a JavaScript `Date`.
@@ -144,7 +145,7 @@ export class NativeHijriDateAdapter extends DateAdapter<Date, string> {
   }
 
   override getYearName(date: Date): string {
-    return this.formatNumber(this.getYear(date));
+    return this.formatNumber(outOfRangeYears.get(date) ?? this.getYear(date));
   }
 
   override getFirstDayOfWeek(): number {
@@ -169,6 +170,10 @@ export class NativeHijriDateAdapter extends DateAdapter<Date, string> {
     return this.fromCivil(this.civil(date)) ?? this.invalid();
   }
 
+  /**
+   * A Umm al-Qura year outside the table returns an invalid date that keeps its year name,
+   * because Material's year view creates a date for every year on the page.
+   */
   override createDate(year: number, month: number, date: number): Date {
     if (!Number.isInteger(month) || month < 0 || month > 11) {
       throw new Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
@@ -182,7 +187,9 @@ export class NativeHijriDateAdapter extends DateAdapter<Date, string> {
       this.calendarId === CalendarCode.umalqura &&
       (!Number.isInteger(year) || year < UMALQURA_MIN_YEAR || year > UMALQURA_MAX_YEAR)
     ) {
-      throw new UmalquraDateRangeError(year);
+      const invalid = this.invalid();
+      outOfRangeYears.set(invalid, year);
+      return invalid;
     }
 
     const instant = this.fromParts(year, month + 1, date);
