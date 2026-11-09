@@ -1,6 +1,11 @@
+import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
-import { UmalquraDateRangeError, createCalendarDate } from '../calendar/calendar-date';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import { MatCalendar } from '@angular/material/datepicker';
+import type { CalendarDate } from '@internationalized/date';
+
+import { createCalendarDate } from '../calendar/calendar-date';
 import { HIJRI_DATE_FORMATS } from '../formats/date-formats';
 import { HijriDateAdapter } from './hijri-date-adapter';
 import {
@@ -26,6 +31,59 @@ function adapter(options: HijriDateAdapterOptions = {}): HijriDateAdapter {
   });
 
   return TestBed.inject(HijriDateAdapter);
+}
+
+@Component({
+  imports: [MatCalendar],
+  template: `
+    <mat-calendar
+      startView="multi-year"
+      [startAt]="startAt()"
+      [minDate]="min()"
+      [maxDate]="max()"
+    />
+  `,
+})
+class MultiYearHost {
+  readonly startAt = signal<CalendarDate | null>(null);
+  readonly min = signal<CalendarDate | null>(null);
+  readonly max = signal<CalendarDate | null>(null);
+}
+
+async function multiYearView(
+  startAt: CalendarDate,
+  bounds: { min?: CalendarDate; max?: CalendarDate; previous?: number } = {},
+) {
+  TestBed.resetTestingModule();
+  TestBed.configureTestingModule({
+    providers: [
+      { provide: DateAdapter, useClass: HijriDateAdapter },
+      { provide: MAT_DATE_FORMATS, useValue: HIJRI_DATE_FORMATS },
+      {
+        provide: HIJRI_DATE_ADAPTER_OPTIONS,
+        useValue: { calendar: 'islamic-umalqura', locale: 'en-US', timeZone: 'UTC' },
+      },
+    ],
+  });
+  const fixture = TestBed.createComponent(MultiYearHost);
+  fixture.componentInstance.startAt.set(startAt);
+  fixture.componentInstance.min.set(bounds.min ?? null);
+  fixture.componentInstance.max.set(bounds.max ?? null);
+  await fixture.whenStable();
+
+  const element: HTMLElement = fixture.nativeElement;
+  for (let i = 0; i < (bounds.previous ?? 0); i++) {
+    element.querySelector<HTMLButtonElement>('.mat-calendar-previous-button')?.click();
+    await fixture.whenStable();
+  }
+  const cells = Array.from(element.querySelectorAll<HTMLElement>('.mat-calendar-body-cell'));
+  return {
+    period: element.querySelector('.mat-calendar-period-button')?.textContent?.trim(),
+    years: cells.map((cell) => cell.textContent?.trim()),
+    enabled: cells
+      .filter((cell) => cell.getAttribute('aria-disabled') !== 'true')
+      .map((cell) => cell.textContent?.trim()),
+  };
 }
 
 describe('HijriDateAdapter', () => {
@@ -176,11 +234,49 @@ describe('HijriDateAdapter', () => {
     expect(dates.getDate(shawwal)).toBe(29);
     expect(dates.getMonth(nextDay)).toBe(9);
     expect(dates.getDate(nextDay)).toBe(1);
-    expect(() => dates.createDate(1600, 0, 1)).toThrow(UmalquraDateRangeError);
-    expect(() => dates.createDate(1299, 0, 1)).toThrow(UmalquraDateRangeError);
-    expect(dates.isValid(dates.addCalendarYears(dates.createDate(1599, 0, 1), 1))).toBe(false);
+    expect(dates.isValid(dates.createDate(1600, 0, 1))).toBe(false);
+    expect(dates.isValid(dates.createDate(1299, 0, 1))).toBe(false);
+    expect(dates.getYearName(dates.createDate(1299, 0, 1))).toBe('1299');
+    const lastDay = dates.addCalendarYears(dates.createDate(1599, 0, 1), 1);
+    const firstDay = dates.addCalendarMonths(dates.createDate(1300, 5, 1), -12);
+    expect(dates.toIso8601(lastDay)).toBe('1599-12-30');
+    expect(dates.toIso8601(firstDay)).toBe('1300-01-01');
+    expect(dates.toIso8601(dates.addCalendarDays(dates.createDate(1300, 0, 1), -1))).toBe(
+      '1300-01-01',
+    );
     expect(() => dates.createDate(1445, 12, 1)).toThrow(/Month index/);
     expect(() => dates.createDate(1445, 9, 30)).toThrow(/Invalid date/);
+  });
+
+  it('shows the first page of years with the years before the table disabled', async () => {
+    const view = await multiYearView(createCalendarDate('islamic-umalqura', 1300, 1, 1), {
+      min: createCalendarDate('islamic-umalqura', 1300, 1, 1),
+      max: createCalendarDate('islamic-umalqura', 1599, 12, 29),
+    });
+
+    expect(view.period).toBe('1288 – 1311');
+    expect(view.years[0]).toBe('1288');
+    expect(view.enabled[0]).toBe('1300');
+    expect(view.enabled).toHaveLength(12);
+  });
+
+  it('stops at the first page of years when previous passes the table', async () => {
+    const dates = adapter();
+    const view = await multiYearView(createCalendarDate('islamic-umalqura', 1440, 1, 1), {
+      min: createCalendarDate('islamic-umalqura', 1300, 1, 1),
+      max: createCalendarDate('islamic-umalqura', 1599, 12, 29),
+      previous: 6,
+    });
+
+    expect(view.period).toBe('1288 – 1311');
+    expect(view.enabled[0]).toBe('1300');
+  });
+
+  it('shows the last page of years in a calendar without bounds', async () => {
+    const view = await multiYearView(createCalendarDate('islamic-umalqura', 1590, 1, 1));
+
+    expect(view.period).toBe('1584 – 1607');
+    expect(view.years.at(-1)).toBe('1607');
   });
 
   it('deserializes only an ISO date in the adapter calendar', () => {

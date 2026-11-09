@@ -6,7 +6,6 @@ import {
   CalendarLocale,
   UMALQURA_MAX_YEAR,
   UMALQURA_MIN_YEAR,
-  UmalquraDateRangeError,
   type SupportedCalendar,
 } from 'ngx-mat-hijri-adapter';
 
@@ -26,6 +25,8 @@ import {
 const NUMERIC_DATE = /^(\d{1,4})([./-])(\d{1,2})\2(\d{1,4})$/;
 const NAMED_DATE = /^(\d{1,2})[\s,،]+(.+?)[\s,،]+(\d{1,4})$/;
 const ISO_DATE = /^(\d{4})-(\d{2})-(\d{2})$/;
+/** Years that `createDate` was asked for outside the Umm al-Qura table, keyed by the invalid date. */
+const outOfRangeYears = new WeakMap<Date, number>();
 
 /**
  * Material date adapter for a JavaScript `Date`.
@@ -144,7 +145,7 @@ export class NativeHijriDateAdapter extends DateAdapter<Date, string> {
   }
 
   override getYearName(date: Date): string {
-    return this.formatNumber(this.getYear(date));
+    return this.formatNumber(outOfRangeYears.get(date) ?? this.getYear(date));
   }
 
   override getFirstDayOfWeek(): number {
@@ -169,6 +170,10 @@ export class NativeHijriDateAdapter extends DateAdapter<Date, string> {
     return this.fromCivil(this.civil(date)) ?? this.invalid();
   }
 
+  /**
+   * A Umm al-Qura year outside the table returns an invalid date that keeps its year name,
+   * because Material's year view creates a date for every year on the page.
+   */
   override createDate(year: number, month: number, date: number): Date {
     if (!Number.isInteger(month) || month < 0 || month > 11) {
       throw new Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
@@ -182,7 +187,9 @@ export class NativeHijriDateAdapter extends DateAdapter<Date, string> {
       this.calendarId === CalendarCode.umalqura &&
       (!Number.isInteger(year) || year < UMALQURA_MIN_YEAR || year > UMALQURA_MAX_YEAR)
     ) {
-      throw new UmalquraDateRangeError(year);
+      const invalid = this.invalid();
+      outOfRangeYears.set(invalid, year);
+      return invalid;
     }
 
     const instant = this.fromParts(year, month + 1, date);
@@ -272,7 +279,11 @@ export class NativeHijriDateAdapter extends DateAdapter<Date, string> {
     }
 
     const next = addUtcDays(date, days);
-    return next && this.civil(next) ? next : this.invalid();
+    if (!next) {
+      return this.invalid();
+    }
+
+    return this.civil(next) ? next : this.tableEdge(days < 0);
   }
 
   /** `YYYY-MM-DD` in this adapter's calendar, with ASCII digits. This is not a Gregorian conversion. */
@@ -362,12 +373,25 @@ export class NativeHijriDateAdapter extends DateAdapter<Date, string> {
 
   private shiftMonths(date: Date, months: number): Date {
     const civil = this.civil(date);
-    if (!civil) {
+    if (!civil || !Number.isInteger(months)) {
       return this.invalid();
     }
 
     const next = addCivilMonths(civil, months, (year, month) => this.monthLength(year, month));
-    return this.fromCivil(next) ?? this.invalid();
+    return this.fromCivil(next) ?? this.tableEdge(months < 0);
+  }
+
+  /**
+   * The first or last day of the Umm al-Qura table, so Material can clamp a shift past it
+   * to its min and max instead of holding an invalid active date.
+   */
+  private tableEdge(back: boolean): Date {
+    if (back) {
+      return umalquraToUtcNoon(UMALQURA_MIN_YEAR, 1, 1)!;
+    }
+
+    const lastMonth = umalquraMonthLength(UMALQURA_MAX_YEAR, 12)!;
+    return umalquraToUtcNoon(UMALQURA_MAX_YEAR, 12, lastMonth)!;
   }
 
   private parseText(text: string): Date {

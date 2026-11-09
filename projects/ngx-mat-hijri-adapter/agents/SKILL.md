@@ -74,4 +74,4 @@ The package name for the Gregorian calendar is `gregorian`. A `CalendarDate` in 
 
 `HijriDateAdapter.createDate` uses 0-based months, matching Material. `createDate(1445, 8, 1)` is 1 Ramadan 1445. `createCalendarDate` uses 1-based months. `createCalendarDate('islamic-umalqura', 1445, 9, 1)` is that same day.
 
-Umm al-Qura dates stay inside AH 1300–1599. `createDate` outside that range throws. Adding a year or month past the table returns an invalid date.
+Umm al-Qura dates stay inside AH 1300–1599. `createDate` outside that range returns an invalid date, so Material's year view can list the years around the table. `createCalendarDate` outside that range throws `UmalquraDateRangeError`. Adding years, months, or days past the table stops at its first or last day.
