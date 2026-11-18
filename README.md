@@ -29,7 +29,7 @@
 
 ## Status and installation
 
-Version 1.0.0-beta.0 is on npm under the `beta` tag. Stable 1.0.0 will be the `latest` release. Until then, install the beta by name. Add it to an Angular Material app:
+Version 1.0.0-beta.1 is on npm under the `beta` tag. Stable 1.0.0 will be the `latest` release. Until then, install the beta by name. Add it to an Angular Material app:
 
 ```bash
 ng add ngx-mat-hijri-adapter@beta

@@ -5,6 +5,32 @@ All notable changes to ngx-mat-hijri-adapter will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0-beta.1] - 2026-11-18
+
+### Multi-year view at the table edges
+
+This beta stays on the `beta` tag. Install it with `ng add ngx-mat-hijri-adapter@beta` or `npm install ngx-mat-hijri-adapter@beta @internationalized/date`. Ready-made fields store a `CalendarDate`. `ngx-mat-hijri-adapter/native` remains the `Date` alternative for a plain `mat-datepicker`. Stable 1.0.0 will take the `latest` tag.
+
+#### Changes by Commit
+
+| Commit    | Type   | Description                                                                                                                          |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `6e1270c` | 🐛 Fix | **Multi-year view**: Years outside AH 1300–1599 no longer throw, and a shift past the table stops on its first or last day          |
+
+### 📝 Summary of Changes
+
+#### 🐛 Fixed
+
+- **Multi-year view**: `createDate` for an Umm al-Qura year outside AH 1300–1599 returns an invalid date that still reports that year, so Material's year view can list the years around the table. Adding years, months, or days past the table stops at its first or last day, so Material can clamp to min and max
+
+---
+
+**Version**: 1.0.0-beta.1  
+**Release Date**: November 18, 2026  
+**Maintained by**: Mahmoud
+
+---
+
 ## [1.0.0-beta.0] - 2026-10-31
 
 ### First npm beta
@@ -512,6 +538,7 @@ First release. One Angular Material date adapter for the Gregorian and Umm al-Qu
 
 ---
 
+[1.0.0-beta.1]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/1.0.0-beta.1
 [1.0.0-beta.0]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/1.0.0-beta.0
 [0.4.4]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.4
 [0.4.3]: https://github.com/MahmoudTarek44/ngx-mat-hijri-adapter/releases/tag/0.4.3

@@ -739,7 +739,7 @@
       },
       "stable": {
         "title": "Stable 1.0.0 release",
-        "detail": "Still ahead. 1.0.0-beta.0 is on npm under the beta tag. The stable release moves the latest tag to 1.0.0."
+        "detail": "Still ahead. 1.0.0-beta.1 is on npm under the beta tag. The stable release moves the latest tag to 1.0.0."
       },
       "migrations": {
         "title": "ng update migrations",

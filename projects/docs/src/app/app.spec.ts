@@ -22,7 +22,7 @@ describe('App', () => {
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.querySelector('[data-version]')?.textContent?.trim()).toBe('1.0.0-beta.0');
+    expect(compiled.querySelector('[data-version]')?.textContent?.trim()).toBe('1.0.0-beta.1');
     expect(compiled.querySelector('[data-release-banner]')).toBeNull();
     const links = Array.from(compiled.querySelectorAll('nav a')).map((a) => a.textContent?.trim());
     expect(links).toEqual(['Docs', 'Playground', 'Examples']);

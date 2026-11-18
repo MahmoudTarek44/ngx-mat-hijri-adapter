@@ -739,7 +739,7 @@
       },
       "stable": {
         "title": "إصدار 1.0.0 المستقر",
-        "detail": "ما زال قادمًا. الإصدار 1.0.0-beta.0 منشور على npm تحت tag باسم beta. الإصدار المستقر ينقل tag الـ latest إلى 1.0.0."
+        "detail": "ما زال قادمًا. الإصدار 1.0.0-beta.1 منشور على npm تحت tag باسم beta. الإصدار المستقر ينقل tag الـ latest إلى 1.0.0."
       },
       "migrations": {
         "title": "migrations لـ ng update",
